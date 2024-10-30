@@ -1,0 +1,21 @@
+FROM node:18
+
+WORKDIR /usr/app
+
+COPY package*.json ./
+
+RUN echo "before copy[1]"
+RUN ls -la /usr/app
+COPY . .
+
+# Add a step to remove node_modules if it was accidentally copied
+RUN rm -rf node_modules
+
+RUN echo "after copy[2]"
+RUN ls -la /usr/app
+RUN npm ci
+
+RUN echo "after npm ci[3]"
+RUN ls -la /usr/app
+CMD ["npm", "run", "develop"]
+RUN echo "run is done"
