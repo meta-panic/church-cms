@@ -4,18 +4,21 @@ WORKDIR /usr/app
 
 COPY package*.json ./
 
-RUN echo "before copy[1]"
+RUN echo "ls -la"
 RUN ls -la /usr/app
+RUN echo "COPY . ."
 COPY . .
 
 # Add a step to remove node_modules if it was accidentally copied
+RUN echo "rm -rf node_modules"
 RUN rm -rf node_modules
 
-RUN echo "after copy[2]"
+RUN echo "ls -la"
 RUN ls -la /usr/app
 RUN npm ci
 
-RUN echo "after npm ci[3]"
+RUN echo "ls -la"
 RUN ls -la /usr/app
 
-CMD ["npm", "run", "develop"]
+RUN bash -c "chmod 777 run.sh;"
+CMD ./run.sh

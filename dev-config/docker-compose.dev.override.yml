@@ -1,0 +1,6 @@
+version: '3.8'
+
+services:
+  cms:
+    volumes:
+      - /mnt/c/Users/Rita/projects/pets/church/strapi-2/strapi-church-cms/cms/src:/usr/app/src
