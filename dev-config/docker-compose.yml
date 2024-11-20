@@ -21,6 +21,8 @@ services:
       DATABASE_PORT: ${DATABASE_PORT}
       DATABASE_SSL: "false"
       NODE_ENV: ${NODE_ENV}
+    volumes:
+      - photos:/usr/app/public/uploads
     networks:
       - strapi
   db:
@@ -41,3 +43,4 @@ networks:
   strapi:
 volumes:
   db:
+  photos:
