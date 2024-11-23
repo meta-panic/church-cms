@@ -22,7 +22,7 @@ services:
       DATABASE_SSL: "false"
       NODE_ENV: ${NODE_ENV}
     volumes:
-      - photos:/usr/app/public/uploads
+      - photos:/usr/app/public
     networks:
       - strapi
   db:
