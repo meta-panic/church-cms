@@ -2,6 +2,9 @@ FROM node:18
 
 WORKDIR /usr/app
 
+# For temp files e.g. video thumbnails
+RUN mkdir -p /usr/app/tmp
+
 COPY package*.json ./
 
 RUN echo "ls -la"

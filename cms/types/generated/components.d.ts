@@ -1,5 +1,18 @@
 import type { Struct, Schema } from '@strapi/strapi';
 
+export interface SharedVkVideo extends Struct.ComponentSchema {
+  collectionName: 'components_shared_vk_videos';
+  info: {
+    displayName: 'vk-video';
+    icon: 'alien';
+    description: '';
+  };
+  attributes: {
+    link: Schema.Attribute.String & Schema.Attribute.Required;
+    thumbnail: Schema.Attribute.Media<'images'>;
+  };
+}
+
 export interface SharedSlider extends Struct.ComponentSchema {
   collectionName: 'components_shared_sliders';
   info: {
@@ -65,6 +78,7 @@ export interface SharedMedia extends Struct.ComponentSchema {
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
+      'shared.vk-video': SharedVkVideo;
       'shared.slider': SharedSlider;
       'shared.seo': SharedSeo;
       'shared.rich-text': SharedRichText;
