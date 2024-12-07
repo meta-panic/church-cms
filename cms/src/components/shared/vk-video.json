@@ -1,0 +1,24 @@
+{
+  "collectionName": "components_shared_vk_videos",
+  "info": {
+    "displayName": "vk-video",
+    "icon": "alien",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "link": {
+      "type": "string",
+      "required": true,
+      "regex": "https:\\/\\/vk\\.com\\/(?:video-\\d+_\\d+|exb_nsk\\?z=clip-\\d+_\\d+)"
+    },
+    "thumbnail": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    }
+  }
+}

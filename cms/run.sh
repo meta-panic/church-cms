@@ -6,7 +6,7 @@ echo $NODE_ENV
 if [ "$NODE_ENV" == "develop" ]; then
     echo "Running in development mode..."
     npm run build
-    npm run develop
+    npm run develop:watch
 elif [ "$NODE_ENV" == "prod" ]; then
     echo "Running in production mode..."
     npm run build

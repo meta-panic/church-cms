@@ -2,9 +2,15 @@
   "compilerOptions": {
     "module": "CommonJS",
     "moduleResolution": "Node",
-    "lib": ["ES2020"],
+    "lib": [
+      "ES2020"
+    ],
     "target": "ES2019",
-    "strict": false,
+    "types": [
+      "node"
+    ],
+    "strict": true,
+    "noImplicitAny": true, // Specifically disallows implicit any
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "incremental": true,
@@ -13,9 +19,21 @@
     "noEmitOnError": true,
     "noImplicitThis": true,
     "outDir": "dist",
-    "rootDir": "."
+    "rootDir": ".",
+    "typeRoots": [
+      "./types",
+      "./node_modules/@types"
+    ],
+    "baseUrl": "./",
+    "paths": {
+      "*": [
+        "src/types/*"
+      ]
+    }
   },
   "include": [
+    "src/**/*",
+    "types/**/*.d.ts",
     // Include root files
     "./",
     // Include all ts files
@@ -23,21 +41,22 @@
     // Include all js files
     "./**/*.js",
     // Force the JSON files in the src folder to be included
-    "src/**/*.json"
+    "src/**/*.json",
   ],
-
   "exclude": [
     "node_modules/",
     "build/",
     "dist/",
     ".cache/",
     ".tmp/",
-
     // Do not include admin files in the server compilation
     "src/admin/",
     // Do not include test files
     "**/*.test.*",
     // Do not include plugins in the server compilation
     "src/plugins/**"
-  ]
+  ],
+  "rules": {
+    "@typescript-eslint/no-explicit-any": "error"
+  }
 }
