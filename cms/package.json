@@ -7,7 +7,9 @@
     "build": "strapi build",
     "deploy": "strapi deploy",
     "develop": "strapi develop",
+    "develop:watch": "npm run develop -- --watch-admin",
     "seed:example": "node ./scripts/seed.js",
+    "start:vk-scrapping": "npx ts-node ./src/scrapeVKThumbnail.ts",
     "start": "strapi start",
     "strapi": "strapi",
     "app:version": "node ./scripts/getVersion.js"
@@ -16,7 +18,9 @@
     "@strapi/plugin-cloud": "5.1.0",
     "@strapi/plugin-users-permissions": "5.1.0",
     "@strapi/strapi": "5.1.0",
-    "fs-extra": "^10.0.0",
+    "cheerio": "^1.0.0",
+    "fs-extra": "^10.1.0",
+    "mime": "^2.6.0",
     "mime-types": "^2.1.27",
     "pg": "8.8.0",
     "react": "^18.0.0",
@@ -25,6 +29,7 @@
     "styled-components": "^6.0.0"
   },
   "devDependencies": {
+    "@types/fs-extra": "^11.0.4",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
