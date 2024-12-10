@@ -9,8 +9,7 @@
   "attributes": {
     "link": {
       "type": "string",
-      "required": true,
-      "regex": "https:\\/\\/vk\\.com\\/(?:video-\\d+_\\d+|exb_nsk\\?z=clip-\\d+_\\d+)"
+      "required": true
     },
     "thumbnail": {
       "type": "media",

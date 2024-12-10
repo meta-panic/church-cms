@@ -1,13 +1,12 @@
 import { Core } from "@strapi/strapi";
 import type { Event } from '@strapi/database/dist/lifecycles';
-
-import path from 'path';
-const { ApplicationError } = require("@strapi/utils").errors;
+import { errors } from '@strapi/utils'
 
 import { VKScrapeService } from "../services/vk-scrapper.interface";
 import { Folder, StrapiMediaService, isFolder } from "../services/strapi-media.interface";
 import { downloadFile } from "../utils/downloadFIle";
-import { getTimestamp } from "../utils/getTimestamp";
+import { validateLink } from "./validators";
+import { assertLinkField, areLinksEqual, generateThumbnailName, hasLink, hasThumbnail } from "./helpers";
 
 const VIDEO_THUMBNAILS_SUBFOLDER = 'video_thumbnails';
 
@@ -16,37 +15,57 @@ export default (
   vkScrapeService: VKScrapeService,
   strapiMediaService: StrapiMediaService,
 ) => {
+
   strapi.db.lifecycles.subscribe({
     models: ["shared.vk-video"],
     async beforeCreate(event) {
+      assertLinkField(event.params.data);
+      validateLink(event.params.data.link.toString());
       try {
         await proccessVideoThumbnail(event);
       } catch (error) {
         console.error('Error in beforeUpdate hook:', error);
-        throw new ApplicationError(`Failed to process VK video update: ${error}`);
+        throw new errors.ApplicationError(`Failed to process VK video update: ${error}`);
       }
     },
     async beforeUpdate(event) {
-      try {
-        if (hasThumbnail(event.params.data)) {
-          console.info(`The component already has a thumbnail set`)
-          return;
-        }
+      assertLinkField(event.params.data);
+      validateLink(event.params.data.link.toString());
 
+      try {
         const currentComponent = await getComponentById(event.params.where.id);
 
-        // The current component has a thumbnail, but event.params.data.thumbnail is null
-        // Indicating the thumbnail was removed
-        // Therefore, the corresponding media file needs to be deleted
-        if (hasThumbnail(currentComponent)) {
-          await strapiMediaService.deleteFile(currentComponent.thumbnail.id);
-          return;
-        }
+        console.log('event.params.data - ', event.params.data);
+        console.log('currentComponent - ', currentComponent);
 
-        await proccessVideoThumbnail(event);
+        switch (getUpdateType(currentComponent, event)) {
+          case 'NO_UPDATE_NEEDED':
+            console.info('The component already has the thumbnail set');
+            return;
+
+          case 'DELETE_THUMBNAIL':
+            console.error('Thumbnail file was manually deleted');
+            await strapiMediaService.deleteFile(currentComponent.thumbnail.id);
+            return;
+
+          case 'UPDATE_THUMBNAIL':
+            console.error('Thumbnail will be updated');
+            await strapiMediaService.deleteFile(currentComponent.thumbnail.id);
+            await proccessVideoThumbnail(event);
+            return;
+
+          case 'SET_THUMBNAIL':
+            console.error('Thumbnail will be set');
+            await proccessVideoThumbnail(event);
+            return;
+
+          default:
+            console.log('No action needed');
+        }
+        console.log('nothing')
       } catch (error) {
         console.error('Error in beforeUpdate hook:', error);
-        throw new ApplicationError(`Failed to process VK video update: ${error}`);
+        throw new errors.ApplicationError(`Failed to process VK video update: ${error}`);
       }
     },
     async beforeDelete(event) {
@@ -58,8 +77,8 @@ export default (
     }
   });
 
+
   async function proccessVideoThumbnail(event: Event) {
-    assertLinkField(event.params.data);
     const thumbnailUrl: URL | undefined = await vkScrapeService.scrapeVKThumbnail(event.params.data.link);
 
     if (!thumbnailUrl) {
@@ -138,66 +157,29 @@ export default (
 }
 
 
-function assertLinkField(data: any): asserts data is { link: URL } {
-  if (!isLinkFieldValid(data)) {
-    throw new ApplicationError("Invalid or missing 'link' field");
+function getUpdateType(currentComponent: unknown, event: Event) {
+  const newComponent = event.params.data;
+
+  if (hasThumbnail(currentComponent) && hasLink(currentComponent) && hasThumbnail(newComponent)
+    && areLinksEqual(currentComponent.link, String(newComponent.link))) {
+    console.log('NO_UPDATE_NEEDED');
+    return 'NO_UPDATE_NEEDED';
   }
-}
-
-function isLinkFieldValid(data: any): boolean {
-  if (!data || typeof data !== "object") return false;
-  if (!("link" in data)) return false; // Check if "link" exists
-
-  const linkValue = data.link;
-
-  // Validate the "link" is a URL
-  return isValidURL(linkValue);
-}
-
-type StrapiImage = {
-  id: number;
-  documentId: string;
-  name: string;
-  alternativeText: string | null;
-  ext: string;
-}
-
-function isValidURL(value: any): value is URL {
-  try {
-    return value instanceof URL || new URL(value) !== undefined;
-  } catch {
-    return false;
+  if (hasThumbnail(currentComponent) && !hasThumbnail(newComponent)) {
+    console.log('DELETE_THUMBNAIL');
+    return 'DELETE_THUMBNAIL';
   }
-}
-
-function hasThumbnail(value: unknown): value is { thumbnail: StrapiImage } {
-  return (
-    !!value &&
-    typeof value === 'object' &&
-    'thumbnail' in value &&
-    !!value.thumbnail &&
-    typeof value.thumbnail === 'object' &&
-    'id' in value.thumbnail
-  );
-}
-
-function generateThumbnailName(imageUrl: URL): string {
-  console.log(`generateFileName imageUrl: ${imageUrl} `)
-
-  if (imageUrl?.pathname) {
-    return path.basename(imageUrl.pathname);
+  if (hasThumbnail(currentComponent) && hasLink(currentComponent)
+    && !areLinksEqual(currentComponent.link, newComponent.link)
+    && hasThumbnail(newComponent)) {
+    console.log('UPDATE_THUMBNAIL');
+    return 'UPDATE_THUMBNAIL';
   }
-
-  const { year, month, day, hours, minutes, seconds } = getTimestamp();
-  return `videothumbnail_${year}-${month}-${day}_${hours}-${minutes}-${seconds}.${assumeFileExtension(imageUrl)}`;
-}
-
-
-function assumeFileExtension(imageUrl: URL): 'png' | 'webp' {
-  const isWebp = imageUrl.toString().includes("type=39");
-
-  if (isWebp) return "webp";
-
-  return "png";
-}
+  if (!hasThumbnail(currentComponent) && hasLink(newComponent)) {
+    console.log('SET_THUMBNAIL');
+    return 'SET_THUMBNAIL';
+  }
+  console.log('NO_ACTION');
+  return 'NO_ACTION';
+};
 
