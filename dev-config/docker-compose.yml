@@ -5,6 +5,8 @@ services:
     build:
       context: ../cms
       dockerfile: ../dev-config/Dockerfile.cms
+      tags:
+        - b80ow4gcgs4k44g4ck4kgcow-cms:SHA_${SOURCE_COMMIT}
     ports:
       - "127.0.0.1:1337:1337"
     environment:
