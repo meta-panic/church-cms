@@ -7,6 +7,12 @@ services:
         - b80ow4gcgs4k44g4ck4kgcow-cms:SHA_${SOURCE_COMMIT}
     ports:
       - "127.0.0.1:1337:1337"
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:1337/_health" ]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
     environment:
       APP_KEYS: ${APP_KEYS}
       API_TOKEN_SALT: ${API_TOKEN_SALT}
