@@ -7,6 +7,12 @@ services:
         - b80ow4gcgs4k44g4ck4kgcow-cms:SHA_${SOURCE_COMMIT}
     ports:
       - "127.0.0.1:1337:1337"
+    healthcheck:
+      test: [ "CMD-SHELL", "curl -f http://localhost:1337/_health || exit 1" ]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
     environment:
       APP_KEYS: ${APP_KEYS}
       API_TOKEN_SALT: ${API_TOKEN_SALT}
@@ -27,6 +33,12 @@ services:
       - strapi
   db:
     image: postgres:14.1-alpine
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U ${DATABASE_USERNAME} -d ${DATABASE_NAME}" ]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
     restart: always
     # ports:
     #   - "5432:5432"
