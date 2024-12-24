@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_shared_addresses",
+  "info": {
+    "displayName": "address",
+    "icon": "earth"
+  },
+  "options": {},
+  "attributes": {
+    "city": {
+      "type": "string",
+      "default": "Невинномысск",
+      "required": true
+    },
+    "street": {
+      "type": "string",
+      "required": true
+    },
+    "building": {
+      "type": "string"
+    }
+  }
+}

@@ -12,24 +12,20 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "siteName": {
+    "telegram": {
       "type": "string",
       "required": true
     },
-    "favicon": {
-      "type": "media",
-      "multiple": false,
-      "required": false,
-      "allowedTypes": ["images", "files", "videos"]
+    "phone": {
+      "type": "string"
     },
-    "siteDescription": {
-      "type": "text",
-      "required": true
+    "email": {
+      "type": "string"
     },
-    "defaultSeo": {
+    "PrimalBuilding": {
       "type": "component",
       "repeatable": false,
-      "component": "shared.seo"
+      "component": "shared.address"
     }
   }
 }
