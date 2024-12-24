@@ -54,7 +54,8 @@
     // Do not include test files
     "**/*.test.*",
     // Do not include plugins in the server compilation
-    "src/plugins/**"
+    "src/plugins/**",
+    "types/generated/**" // read: https://github.com/strapi/strapi/issues/18664#issuecomment-2509743151
   ],
   "rules": {
     "@typescript-eslint/no-explicit-any": "error"
