@@ -1,0 +1,36 @@
+{
+  "kind": "collectionType",
+  "collectionName": "page_landings",
+  "info": {
+    "singularName": "page-landing",
+    "pluralName": "page-landings",
+    "displayName": "Page_landing",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "About_us": {
+      "type": "component",
+      "repeatable": false,
+      "component": "content-blocks.info-block"
+    },
+    "How_to_become_a_christian": {
+      "type": "component",
+      "repeatable": false,
+      "component": "content-blocks.info-block"
+    },
+    "Events": {
+      "type": "component",
+      "repeatable": true,
+      "component": "content-blocks.event"
+    },
+    "Hero_header": {
+      "type": "component",
+      "repeatable": false,
+      "component": "content-blocks.info-block"
+    }
+  }
+}

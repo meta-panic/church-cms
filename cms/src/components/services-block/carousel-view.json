@@ -1,0 +1,27 @@
+{
+  "collectionName": "components_services_block_carousel_views",
+  "info": {
+    "displayName": "Carousel_view",
+    "icon": "medium"
+  },
+  "options": {},
+  "attributes": {
+    "Carousel_service_name": {
+      "type": "string",
+      "required": true
+    },
+    "Carousel_service_image": {
+      "allowedTypes": [
+        "images",
+        "files"
+      ],
+      "type": "media",
+      "multiple": false,
+      "required": true
+    },
+    "Carousel_service_description": {
+      "type": "text",
+      "required": true
+    }
+  }
+}

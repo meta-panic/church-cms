@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "services",
+  "info": {
+    "singularName": "service",
+    "pluralName": "services",
+    "displayName": "Services",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Header": {
+      "type": "component",
+      "repeatable": false,
+      "component": "services-block.header",
+      "required": true
+    },
+    "Landing_page_carousel_view": {
+      "type": "component",
+      "repeatable": false,
+      "component": "services-block.carousel-view"
+    }
+  }
+}

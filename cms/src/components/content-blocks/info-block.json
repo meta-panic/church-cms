@@ -1,0 +1,30 @@
+{
+  "collectionName": "components_content_blocks_info_blocks",
+  "info": {
+    "displayName": "Info block",
+    "icon": "apps",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "Title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.rich-text"
+    },
+    "Button": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.button"
+    },
+    "Video_link": {
+      "displayName": "Embedded_video",
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.embedded-video"
+    }
+  }
+}
