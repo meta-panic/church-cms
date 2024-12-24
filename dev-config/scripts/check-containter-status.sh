@@ -11,6 +11,25 @@ STATUS_FILE_CMS="$(dirname "$0")/cms_status.txt"
 STATUS_FILE_DB="$(dirname "$0")/db_status.txt"
 LOG_FILE="/home/rita/container_statuses/cron.log"
 
+LOG_FILE_LIMIT=$((1 * 1024 * 1024))  # Set to 1MB
+
+# Truncate log file if it exceeds the size limit
+truncate_log_file() {
+    if [ -f "$LOG_FILE" ]; then
+        local file_size
+        file_size=$(stat -c%s "$LOG_FILE") # Get file size in bytes
+        
+        if [ "$file_size" -gt "$LOG_FILE_LIMIT" ]; then
+            echo "[$(date '+%Y-%m-%d %H:%M:%S')] Log file size ($file_size bytes) exceeded $LOG_FILE_LIMIT bytes. Truncating..." >> "$LOG_FILE"
+            tail -c $((LOG_FILE_LIMIT / 2)) "$LOG_FILE" > "${LOG_FILE}.tmp" && mv "${LOG_FILE}.tmp" "$LOG_FILE"
+            echo "[$(date '+%Y-%m-%d %H:%M:%S')] Log file truncated to half the limit." >> "$LOG_FILE"
+        fi
+    fi
+}
+
+# Call the truncate function before appending new logs
+truncate_log_file
+
 # Function to make Telegram API request
 make_telegram_request() {
     local message="$1"
@@ -85,7 +104,7 @@ check_container() {
         
         case "$health_status" in
             "healthy")
-                current_status="running"
+                current_status="healthy"
                 ;;
             "unhealthy")
                 current_status="unhealthy"
