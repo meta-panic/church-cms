@@ -5,8 +5,8 @@
   "description": "A Strapi application",
   "scripts": {
     "build": "strapi build",
-    "bru-local": "bru run --env local-environment",
-    "bru-prod": "bru run --env prod-environment",
+    "bru-local": "cd tests/bruno-cms-collection/ && bru run --env local-environment",
+    "bru-prod": "cd tests/bruno-cms-collection/ && bru run --env prod-environment",
     "deploy": "strapi deploy",
     "develop": "strapi develop",
     "develop:watch": "npm run develop -- --watch-admin",

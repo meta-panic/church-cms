@@ -29,10 +29,7 @@ check_health() {
 # Function to run tests based on environment
 run_tests() {
     echo "Running tests in $NODE_ENV mode..."
-    pwd
     cd $API_COLLECTION_PATH
-    pwd
-
     
     if [ "$NODE_ENV" == "development" ]; then
         npm run bru-local
