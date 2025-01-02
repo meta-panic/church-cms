@@ -2,10 +2,29 @@
 
 # Constants
 HEALTH_CHECK_URL="http://localhost:1337/_health"
-API_COLLECTION_PATH="../bruno-church-api-collection"
-WAIT_FOR_START=20
+API_COLLECTION_PATH="tests/bruno-cms-collection/"
+WAIT_FOR_START=30
 MAX_RETRIES=30
-RETRY_INTERVAL=4
+RETRY_INTERVAL=5
+
+# Function to check health container
+check_health() {
+    local retry_count=0
+    
+    while [ $retry_count -lt $MAX_RETRIES ]; do
+        if curl -f $HEALTH_CHECK_URL &>/dev/null; then
+            echo "Health check passed"
+            return 0
+        fi
+        
+        echo "Waiting for container to be healthy... (Attempt $((retry_count + 1))/$MAX_RETRIES)"
+        sleep $RETRY_INTERVAL
+        retry_count=$((retry_count + 1))
+    done
+    
+    echo "Health check failed after $MAX_RETRIES attempts"
+    return 1
+}
 
 # Function to run tests based on environment
 run_tests() {
@@ -22,30 +41,11 @@ run_tests() {
     fi
 }
 
-# Function to check health container
-check_health() {
-    local retry_count=0
-    
-    while [ $retry_count -lt $MAX_RETRIES ]; do
-        if curl -f $HEALTH_CHECK_URL &>/dev/null; then
-            echo "Health check passed"
-            return 0
-        fi
-        
-        echo "Waiting for service to be healthy... (Attempt $((retry_count + 1))/$MAX_RETRIES)"
-        sleep $RETRY_INTERVAL
-        retry_count=$((retry_count + 1))
-    done
-    
-    echo "Health check failed after $MAX_RETRIES attempts"
-    return 1
-}
-
 # Main execution
 echo "Current NODE_ENV: $NODE_ENV"
 
 if [ "$1" == "docker" ]; then
-    echo "Docker mode detected, performing health check..."
+    echo "Docker mode detected, performing health check after $WAIT_FOR_START seconds..."
     sleep $WAIT_FOR_START
     if check_health; then
         run_tests
