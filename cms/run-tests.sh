@@ -29,12 +29,15 @@ check_health() {
 # Function to run tests based on environment
 run_tests() {
     echo "Running tests in $NODE_ENV mode..."
+    pwd
     cd $API_COLLECTION_PATH
+    pwd
+
     
     if [ "$NODE_ENV" == "development" ]; then
-        bru run --env local-environment
+        npm run bru-local
     elif [ "$NODE_ENV" == "production" ]; then
-        bru run --env prod-environment
+        npm run bru-prod
     else
         echo "NODE_ENV is not set or has an invalid value. Please set it to 'development' or 'production'."
         exit 1
