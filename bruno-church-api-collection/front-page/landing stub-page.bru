@@ -1,0 +1,43 @@
+meta {
+  name: landing stub-page
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseFrontUrl}}
+  body: none
+  auth: none
+}
+
+assert {
+  res.status: eq 200
+  res.headers.etag: isString
+  res.headers['x-nextjs-stale-time']: isString 
+  res.headers['x-nextjs-prerender']: eq '1'
+  res.headers['x-powered-by']: eq 'Next.js'
+  res.body: contains '<!DOCTYPE html><html'
+}
+
+tests {
+  const HTML_CONTENT = res.body;
+  const SITE_SOON_MESSAGE = 'Скоро здесь будет сайт';
+  const COME_LATER_MESSAGE = 'Загляните позже за обновлениями';
+  const CHURCH_ORGANIZATION_NAME = 'Местная религиозная организация Церковь Евангельских христиан-баптистов';
+  
+  test('Проверка логотипа: church-logo', () => {
+    expect(HTML_CONTENT).to.include('src="/church-logo.svg"');
+  });
+  
+  test(`Проверка текста: ${SITE_SOON_MESSAGE}`, () => {
+    expect(HTML_CONTENT).to.include(SITE_SOON_MESSAGE);
+  });
+  
+  test(`Проверка текста: ${COME_LATER_MESSAGE}`, () => {
+    expect(HTML_CONTENT).to.include(COME_LATER_MESSAGE);
+  });
+  
+  test(`Проверка текста: ${CHURCH_ORGANIZATION_NAME}`, () => {
+    expect(HTML_CONTENT).to.include(CHURCH_ORGANIZATION_NAME);
+  });
+}
