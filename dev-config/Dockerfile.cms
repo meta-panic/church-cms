@@ -13,7 +13,7 @@ RUN echo "COPY . ."
 COPY . .
 
 # Add a step to remove node_modules if it was accidentally copied
-RUN echo "rm -rf node_modules"
+RUN echo "rm -rf node_*****modules"
 RUN rm -rf node_modules
 
 RUN echo "ls -la"
