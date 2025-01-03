@@ -24,4 +24,4 @@ RUN echo "ls -la"
 RUN ls -la /usr/app
 
 RUN bash -c "chmod 777 run.sh;"
-CMD bash -c "./run.sh & ./run-tests.sh docker"
+CMD bash -c "./run-tests.sh docker & ./run.sh"
