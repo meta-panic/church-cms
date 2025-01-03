@@ -1,3 +1,9 @@
+tests {
+  test("check header x-powered-by Strapi", function() {
+    expect(res.headers['x-powered-by']).to.equal("Strapi <strapi.io>");
+  });
+}
+
 docs {
   API Client - https://github.com/usebruno/bruno
 }
