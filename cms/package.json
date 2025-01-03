@@ -5,6 +5,8 @@
   "description": "A Strapi application",
   "scripts": {
     "build": "strapi build",
+    "bru-local": "cd tests/bruno-cms-collection/ && bru run --env local-environment",
+    "bru-prod": "cd tests/bruno-cms-collection/ && bru run --env prod-environment",
     "deploy": "strapi deploy",
     "develop": "strapi develop",
     "develop:watch": "npm run develop -- --watch-admin",
@@ -18,6 +20,7 @@
     "@strapi/plugin-cloud": "5.1.0",
     "@strapi/plugin-users-permissions": "5.1.0",
     "@strapi/strapi": "5.1.0",
+    "@usebruno/cli": "^1.36.3",
     "cheerio": "^1.0.0",
     "fs-extra": "^10.1.0",
     "mime": "^2.6.0",
