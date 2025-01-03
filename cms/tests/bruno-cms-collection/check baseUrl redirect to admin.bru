@@ -1,7 +1,7 @@
 meta {
   name: check baseUrl redirect to admin
   type: http
-  seq: 1
+  seq: 2
 }
 
 get {
@@ -19,7 +19,7 @@ script:pre-request {
 }
 
 tests {
-  test("check baseUrl redirect to /admin", function() {
+  test(`check baseUrl redirect to /admin`, function() {
     expect(res.headers.location).to.equal("/admin");
   });
   

@@ -1,7 +1,7 @@
 meta {
   name: admin-init
   type: http
-  seq: 2
+  seq: 3
 }
 
 get {
@@ -12,7 +12,7 @@ get {
 
 assert {
   res.status: eq 200
-  res.body.data.uuid: isString 
+  res.body.data.uuid: isString
   res.body.data.hasAdmin: isTruthy true
 }
 
