@@ -14,3 +14,7 @@ checkConsoleErrors();
 test('has title', async ({ page }) => {
   await expect(page.getByRole('heading', {name: PAGE_DATA.headerText})).toBeVisible();
 });
+
+test('should match snapshot', async ({ page }) => {
+  await expect(await page.screenshot()).toMatchSnapshot('stub-page-snapshot.png');
+});

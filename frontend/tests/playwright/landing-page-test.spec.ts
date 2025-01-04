@@ -46,3 +46,7 @@ test.skip('check elements on landing page', {
     await expect(page.getByText(PAGE_DATA.headingOurServicesText)).toBeVisible();
   });
 });
+
+test.skip('should match snapshot', async ({ page }) => {
+  await expect(await page.screenshot()).toMatchSnapshot('landing-page-snapshot.png');
+});
