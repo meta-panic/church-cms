@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { Greet } from "./components/greet";
 
 export default function Home() {
   return (
@@ -11,6 +12,7 @@ export default function Home() {
       fontFamily: 'Arial, sans-serif',
       backgroundColor: '#f4f4f4',
     }}>
+      <Greet></Greet>
       <Image
         src="/church-logo.svg"
         alt="Логотип церкви"
