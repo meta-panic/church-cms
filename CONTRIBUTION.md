@@ -13,6 +13,7 @@ All branch names must follow a consistent pattern to clearly indicate their purp
 * **`build/*`:** For changes in build components like build tool, ci pipeline, dependencies. Example: `build/update-deploy-scripts`
 * **`ops/*`:** For changes that affect operational components like infrastructure, deployment, backup, recovery. Example: `ops/backup-utils`
 * **`docs/*`:** For branches that affect documentation only. Example: `docs/update-contrubution`
+* **`security/*`:** For branches addressing security improvements or issues. Example: `security/add-dotenv-secrets`
 * **`chore/*`:** For tasks that don't directly affect the codebase (e.g., build process updates, dependency updates). Example: `chore/update-dependencies`
 
 
@@ -41,6 +42,7 @@ Where:
     * `refactor`: A code change that neither fixes a bug nor adds a feature.
     * `test`: Adding missing tests or refactoring existing tests.
     * `build`: Add command in build script.
+    * `security`: Changes aimed at improving or resolving security-related issues.
     * `chore`: Changes to the build process or auxiliary tools and libraries.
 
 
@@ -58,6 +60,7 @@ Where:
 * `style: Fix formatting inconsistencies`
 * `refactor(database): Improve database query performance`
 * `test(api): Add unit tests for API endpoints`
+* `security(env): Mask sensitive information in dotenv file`
 * `chore: Update Node.js version`
 
 
