@@ -8,7 +8,7 @@ services:
     #  - "9229:9229" # Node.js debugging port
     # command: "node --inspect=0.0.0.0:9229 --enable-source-maps --no-deprecation node_modules/.bin/strapi develop -- --watch-admin"
     volumes:
-      - /mnt/c/Users/Rita/projects/pets/church/strapi-2/strapi-church-cms/cms/src:/usr/app/src
+      - ${DEV_CMS_SRC_PATH}:/usr/app/src
   frontend:
     build:
       context: ../frontend
@@ -18,4 +18,4 @@ services:
       - CHOKIDAR_USEPOLLING=true
       - WATCHPACK_POLLING=true
     volumes:
-      - /mnt/c/Users/Rita/projects/pets/church/strapi-2/strapi-church-cms/frontend/src:/app/src
+      - ${DEV_FRONTEND_SRC_PATH}:/app/src
