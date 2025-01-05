@@ -1,5 +1,6 @@
 services:
   frontend:
+    tty: true
     build:
       context: ../frontend
       dockerfile: ../dev-config/Dockerfile.frontend.prod
