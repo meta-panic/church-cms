@@ -1,4 +1,4 @@
-import React, { createContext, ReactNode, } from 'react';
+import React, { createContext, ReactNode } from 'react';
 import classNames from 'classnames';
 import styles from './ColorBlock.module.css';
 

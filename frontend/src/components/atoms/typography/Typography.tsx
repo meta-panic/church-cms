@@ -5,7 +5,6 @@ import styles from "./Typography.module.css";
 import { TypographyTag } from "@/components/types";
 
 
-
 interface BaseTypographyProps {
   tag: TypographyTag;
   children: React.ReactNode;
@@ -45,7 +44,7 @@ const Typography: FC<TypographyProps> = ({
     {
       [styles["typography--bold"]]: tag === "body" && props?.bold,
     },
-    className
+    className,
   );
 
   return (
@@ -56,6 +55,6 @@ const Typography: FC<TypographyProps> = ({
     </Component>
   );
 
-}
+};
 
 export default Typography;
