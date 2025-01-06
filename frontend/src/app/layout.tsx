@@ -11,7 +11,7 @@ const bebas = localFont({
 const ralewayRegular = localFont({
   weight: '500',
   variable: '--font-raleway-regular',
-  src: '../../public/fonts/Raleway-Regular.ttf',
+  src: '../../public/fonts/Raleway-regular.ttf',
   display: 'swap',
 });
 const ralewayItalic = localFont({
@@ -32,8 +32,8 @@ export const metadata: Metadata = {
   title: "Дом молитвы",
   description: "Церковь Евангельских христиан-баптистов",
   icons: {
-    icon: { url: '/favicon.png' }
-  }
+    icon: { url: '/favicon.png' },
+  },
 };
 
 export default async function RootLayout({

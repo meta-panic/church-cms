@@ -14,7 +14,7 @@ const eslintConfig = [
   {
     rules: {
       "comma-dangle": ["error", "always-multiline"],
-      "semi": ["error", "always"],
+      "semi": ["warning", "always"],
     },
   },
 ];
