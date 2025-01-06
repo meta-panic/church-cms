@@ -6,9 +6,9 @@ echo $NODE_ENV
 if [ "$NODE_ENV" == "development" ]; then
     echo "Running in development mode..."
     npm run dev
-# elif [ "$NODE_ENV" == "production" ]; then ## --> for production use Dockerfile.frontend.prod
-#     echo "Running in production mode..."
-#     npm run prod
+elif [ "$NODE_ENV" == "production" ]; then
+    echo "Running in production mode..."
+    node server.js
 else
     echo "NODE_ENV is not set or has an invalid value. Please set it to 'development' or 'production'."
     exit 1

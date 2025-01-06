@@ -29,7 +29,7 @@ RUN npm run build
 # Production image, copy all the files and run next
 FROM base AS runner
 WORKDIR /app
-RUN apk add --no-cache bash
+RUN apk add --no-cache bash curl
 
 # Uncomment the following line in case you want to disable telemetry during runtime.
 # ENV NEXT_TELEMETRY_DISABLED=1
@@ -44,8 +44,15 @@ COPY --from=builder /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
+COPY tests ./tests
+COPY run.sh ./
+COPY run-tests.sh ./
+
+RUN chmod +x ./run.sh
+RUN chmod +x ./run-tests.sh
+
 USER nextjs
 
 RUN ls -la /app
 
-CMD ["node", "server.js"]
+CMD bash -c "./run-tests.sh docker & ./run.sh"
