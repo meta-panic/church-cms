@@ -1,56 +1,53 @@
 import Image from "next/image";
 
-export default function Home() {
-  return (
-    <div style={{
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center',
-      height: '100vh',
-      fontFamily: 'Arial, sans-serif',
-      backgroundColor: '#f4f4f4',
-    }}>
-      <Image
-        src="/church-logo.svg"
-        alt="Логотип церкви"
-        width={208}
-        height={96}
-        style={{ marginBottom: '1.5rem' }}
-      />
-      <h1 style={{
-        fontSize: '2.5em',
-        textAlign: 'center',
-        color: '#333',
-        marginBottom: '0.5rem',
-      }}>Скоро здесь будет сайт</h1>
-      <p style={{
-        fontSize: '1.2em',
-        textAlign: 'center',
-        color: '#555',
-      }}>Загляните позже за обновлениями</p>
-      <p style={{
-        fontSize: '0.8em',
-        textAlign: 'center',
-        color: '#555',
-        marginTop: '2rem',
-      }}>
-        Местная религиозная организация Церковь Евангельских христиан-баптистов
-      </p>
-      <p style={{
-        fontSize: '0.8em',
-        textAlign: 'center',
-        color: '#555',
-      }}>
-        г. Невинномысск Ставропольского края
-      </p>
-      <p style={{
-        fontSize: '0.8em',
-        textAlign: 'center',
-        color: '#555',
-      }}>
-        ИНН 2631020933 / КПП 263101001
-      </p>
-    </div>
+import "../styles/reset.css";
+import "../styles/colours.css";
+import "../styles/semantic.css";
+import "../styles/sizes.css";
+import "../styles/globals.css";
+
+import Typography from "@/components/atoms/typography/Typography";
+import { isDebug } from "@/utils/isDebug";
+
+
+const Stub = () => {
+  return (<div style={{
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: '100vh',
+    fontFamily: 'Arial, sans-serif',
+    backgroundColor: '#f4f4f4',
+  }}
+  >
+    <Image
+      src="/church-logo.svg"
+      alt="Логотип церкви"
+      width={208}
+      height={96}
+      style={{ marginBottom: '1.5rem' }}
+    />
+    <Typography tag="H1">Скоро здесь будет сайт</Typography>
+    <Typography tag="body">Загляните позже за обновлениями</Typography>
+
+    <br />
+    <br />
+    <Typography tag="body-mini">Местная религиозная организация Церковь Евангельских христиан-баптистов</Typography>
+    <Typography tag="body-mini">г. Невинномысск Ставропольского края</Typography>
+    <Typography tag="body-mini">ИНН 2631020933 / КПП 263101001</Typography>
+  </div >
   );
+};
+
+export default async function Home() {
+  const isDebugMode = await isDebug();
+
+  if (!isDebugMode) {
+    console.log("Runnin in prod mode");
+    return <Stub />;
+  }
+
+  console.log("Runnin in debug mode");
+  return (<div>test</div>);
 }
