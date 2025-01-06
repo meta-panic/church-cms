@@ -1,6 +1,6 @@
 import { isDebug } from "@/utils/isDebug";
 import type { Metadata } from "next";
-import localFont from 'next/font/local'
+import localFont from 'next/font/local';
 
 const bebas = localFont({
   weight: '500',
@@ -31,6 +31,9 @@ const ralewaySemiBold = localFont({
 export const metadata: Metadata = {
   title: "Дом молитвы",
   description: "Церковь Евангельских христиан-баптистов",
+  icons: {
+    icon: { url: '/favicon.png' }
+  }
 };
 
 export default async function RootLayout({
