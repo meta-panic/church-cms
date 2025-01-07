@@ -11,6 +11,8 @@ export const PAGE_DATA = {
   headingOurServicesText: 'Наши служения'
 };
 
+let response: any;
+
 test.beforeEach(async ({ page }) => {
 
   const browserContext = page.context();
@@ -27,13 +29,30 @@ test.beforeEach(async ({ page }) => {
     },
   ]);
 
-  await page.goto('/');
+  response = await page.goto('/');
 });
 
 checkConsoleErrors();
 
-test('check elements on test landing page', async ({ page }) => {
+test('check headers on landing page', async ({ page }) => {
+  test.slow();
+    
+  if (response) {
+    const headers = response.headers();
+    
+    expect.soft(response.status()).toBe(200);
+    expect.soft(headers['etag']).toBeInstanceOf(String);
+    expect.soft(headers['x-nextjs-stale-time']).toBeInstanceOf(String);
+    expect.soft(headers['x-nextjs-prerender']).toBe('1');
+    expect.soft(headers['x-powered-by']).toBe('Next.js');
+    expect.soft(headers['cache-control']).toBe('s-maxage=31536000');
+    expect.soft(headers['transfer-encoding']).toBe('chunked');
+  } else {
+    throw new Error('No HTTP response received');
+  }
+});
 
+test('check elements on test landing page', async ({ page }) => {
   await test.step('check heading: header', async () => {
     await expect(page.locator('xpath=//header[text()="header"]')).toBeVisible();
   });
