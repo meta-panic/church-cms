@@ -48,10 +48,10 @@ run_tests() {
     cd $API_COLLECTION_PATH
     
     if [ "$NODE_ENV" == "development" ]; then
-        npm run bru-local
+        bru run --env local-environment
       # npx playwright test
     elif [ "$NODE_ENV" == "production" ]; then
-        npm run bru-prod
+        bru run --env local-environment # because containers use localhost
     else
         echo "NODE_ENV is not set or has an invalid value. Please set it to 'development' or 'production'."
         exit 1
