@@ -12,10 +12,40 @@ export const PAGE_DATA = {
 };
 
 test.beforeEach(async ({ page }) => {
+
+  const browserContext = page.context();
+  browserContext.addCookies([
+    {
+      name: 'debugCookie',
+      value: 'true',
+      domain: 'localhost',
+      path: '/',
+      expires: -1,
+      httpOnly: true,
+      secure: false,
+      sameSite: 'Lax',
+    },
+  ]);
+
   await page.goto('/');
 });
 
-// checkConsoleErrors(); // uncomment when the page will be ready for test
+checkConsoleErrors();
+
+test('check elements on test landing page', async ({ page }) => {
+
+  await test.step('check heading: header', async () => {
+    await expect(page.locator('xpath=//header[text()="header"]')).toBeVisible();
+  });
+
+  await test.step('check div: test', async () => {
+    await expect(page.locator('xpath=//div[text()="test"]')).toBeVisible();
+  });
+
+  await test.step('check footer: footer', async () => {
+    await expect(page.locator('xpath=//footer[text()="footer"]')).toBeVisible();
+  });
+});
 
 test.skip('check elements on landing page', {
   tag: '@draft'
@@ -47,6 +77,6 @@ test.skip('check elements on landing page', {
   });
 });
 
-test.skip('should match snapshot', async ({ page }) => {
+test('should match snapshot', async ({ page }) => {
   await expect(await page.screenshot()).toMatchSnapshot('landing-page-snapshot.png');
 });
