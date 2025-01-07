@@ -37,6 +37,7 @@ Where:
 * **`<type>`:**  One of the following types:
     * `feat`: A new feature for the user.
     * `fix`: A bug fix for the user.
+    * `hotfix`: A 🔥hot🔥 fix.
     * `docs`: Changes to the documentation.
     * `style`: Changes that don't affect the functionality (e.g., formatting, whitespace).
     * `refactor`: A code change that neither fixes a bug nor adds a feature.
