@@ -51,7 +51,7 @@ run_tests() {
         bru run --env local-environment
       # npx playwright test
     elif [ "$NODE_ENV" == "production" ]; then
-        bru run --env local-environment # because containers use localhost
+        NODE_OPTIONS=--dns-result-order=ipv4first npx -y --package @usebruno/cli bru run --env local-environment # because containers use localhost
     else
         echo "NODE_ENV is not set or has an invalid value. Please set it to 'development' or 'production'."
         exit 1
