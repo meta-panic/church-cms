@@ -1,0 +1,26 @@
+meta {
+  name: check baseUrl redirect to admin
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{baseStrapiAdminUrl}}
+  body: none
+  auth: none
+}
+
+assert {
+  res.status: eq 302
+}
+
+script:pre-request {
+  req.setMaxRedirects(0);
+}
+
+tests {
+  test(`check baseUrl redirect to /admin`, function() {
+    expect(res.headers.location).to.equal("/admin");
+  });
+  
+}

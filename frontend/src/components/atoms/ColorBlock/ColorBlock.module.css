@@ -1,0 +1,8 @@
+.dark-block {
+  --default-text: var(--common-light-100);
+  --default-components-link-fg: #f8f6f7;
+  --hover-text: var(--common-light-100);
+  --hover-components-link-fg: #f8f6f7;
+  --active-text-ondark: var(--common-light-100);
+  --active-components-link-fg: #f8f6f7;
+}

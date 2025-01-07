@@ -1,0 +1,21 @@
+meta {
+  name: admin-init
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{baseStrapiAdminUrl}}/admin/init
+  body: none
+  auth: none
+}
+
+assert {
+  res.status: eq 200
+  res.body.data.uuid: isString
+  res.body.data.hasAdmin: isTruthy true
+}
+
+script:pre-request {
+  req.setMaxRedirects(0);
+}

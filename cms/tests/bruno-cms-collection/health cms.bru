@@ -1,0 +1,16 @@
+meta {
+  name: health cms
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseStrapiAdminUrl}}/_health
+  body: none
+  auth: none
+}
+
+assert {
+  res.status: eq 204
+  res.headers.strapi: eq 'You are so French!'
+}

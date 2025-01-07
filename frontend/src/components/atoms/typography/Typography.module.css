@@ -1,0 +1,61 @@
+.typography {
+  margin: 0;
+  padding: 0;
+  color: var(--default-text);
+  font-feature-settings: 'lnum' 1;
+}
+
+/* Headings */
+.typography--h1 {
+  font-size: var(--font-font-size-h1-font-size);
+  font-weight: 500;
+  line-height: var(--font-line-heigh-h1);
+  font-family: var(--font-bebas-regular);
+}
+
+.typography--h2 {
+  font-size: var(--font-font-size-h2-font-size);
+  font-weight: 500;
+  line-height: var(--font-line-heigh-h2);
+  font-family: var(--font-bebas-regular);
+}
+
+.typography--h3 {
+  font-size: var(--font-font-size-h3-font-size);
+  font-weight: 500;
+  line-height: var(--font-line-heigh-h3);
+  font-family: var(--font-bebas-regular);
+}
+
+/* Body */
+.typography--body {
+  font-size: var(--font-font-size-body-font-size);
+  line-height: var(--font-line-heigh-body);
+  font-family: var(--font-raleway-regular);
+}
+
+.typography--body-mini {
+  font-size: var(--font-font-size-body-mini-font-size);
+  line-height: var(--font-line-heigh-body-mini);
+  font-family: var(--font-raleway-regular);
+}
+
+.typography--bold {
+  font-weight: 600;
+  font-family: var(--font-raleway-semobold);
+}
+
+
+/* Quotes */
+.typography--quote {
+  font-style: italic;
+  font-family: var(--font-raleway-italic);
+}
+
+/* Header */
+.typography--header {
+  font-size: var(--font-font-size-body-font-size);
+  font-weight: bold;
+  line-height: var(--font-line-heigh-header);
+  font-family: var(--font-raleway-regular);
+}
