@@ -1,5 +1,6 @@
 services:
   frontend:
+    tty: true
     build:
       context: ../frontend
       dockerfile: ../dev-config/Dockerfile.frontend.prod
@@ -11,6 +12,8 @@ services:
       HOSTNAME: ${FRONTEND_HOSTNAME}
       NEXT_PUBLIC_BACKEND_URL: ${NEXT_PUBLIC_BACKEND_URL}
       NODE_ENV: ${NODE_ENV}
+      PROD_FRONT_URL: ${PROD_FRONT_URL}
+      PROD_STRAPI_URL: ${PROD_STRAPI_URL}
     networks:
       - strapi
   cms:
@@ -42,6 +45,8 @@ services:
       DATABASE_PORT: ${DATABASE_PORT}
       DATABASE_SSL: "false"
       NODE_ENV: ${NODE_ENV}
+      PROD_FRONT_URL: ${PROD_FRONT_URL}
+      PROD_STRAPI_URL: ${PROD_STRAPI_URL}
     volumes:
       - photos:/usr/app/public
     networks:

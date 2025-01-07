@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "bru-local": "cd tests/bruno-frontend-collection/ && bru run --env local-environment",
+    "bru-prod": "cd tests/bruno-frontend-collection/ && bru run --env prod-environment"
   },
   "dependencies": {
     "classnames": "^2.5.1",
