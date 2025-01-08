@@ -1,4 +1,4 @@
-import { test, checkConsoleErrors } from './baseTest';
+import { test, checkConsoleErrors, checkBaseElements } from './baseTest';
 import { expect } from '@playwright/test';
 
 export const PAGE_DATA = {
@@ -33,6 +33,8 @@ test.beforeEach(async ({ page }) => {
 });
 
 checkConsoleErrors();
+
+checkBaseElements();
 
 test('check headers on landing page', async ({ page }) => {
   test.slow();
