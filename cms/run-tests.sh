@@ -34,7 +34,7 @@ run_tests() {
     if [ "$NODE_ENV" == "development" ]; then
         npm run bru-local
     elif [ "$NODE_ENV" == "production" ]; then
-        npm run bru-prod
+        npm run bru-local # because containers use localhost
     else
         echo "NODE_ENV is not set or has an invalid value. Please set it to 'development' or 'production'."
         exit 1

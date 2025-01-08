@@ -44,10 +44,10 @@ export default async function Home() {
   const isDebugMode = await isDebug();
 
   if (!isDebugMode) {
-    console.log("Runnin in prod mode");
+    console.log("Debug: Not running in debug mode");
     return <Stub />;
   }
 
-  console.log("Runnin in debug mode");
+  console.log("Debug: Running in debug mode");
   return (<div>test</div>);
 }
