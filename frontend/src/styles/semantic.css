@@ -24,7 +24,7 @@
   --hover-components-cart-border: var(--common-dark-800);
 
   --hover-text-brand: var(--brand-800);
-
+  --hover-navigation-item: var(--accent-400);
 
   --active-components-button-outlined-br: var(--common-light-100);
 
@@ -45,6 +45,6 @@
   --default-components-link-fg: #547478;
   --hover-text: var(--common-dark-900);
   --hover-components-link-fg: #4b5e60;
-  --active-text-onlight: var(--common-dark-900);
+  --active-text: var(--common-dark-900);
   --active-components-link-fg: #596e71;
 }

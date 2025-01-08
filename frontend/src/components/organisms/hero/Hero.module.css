@@ -1,0 +1,13 @@
+.imageWrapper {
+  z-index: -1;
+  flex-direction: column;
+}
+
+.heroContent {
+  top: 86px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+}

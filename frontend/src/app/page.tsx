@@ -8,6 +8,12 @@ import "../styles/globals.css";
 
 import Typography from "@/components/atoms/typography/Typography";
 import { isDebug } from "@/utils/isDebug";
+import { Hero } from "@/components/organisms/hero/Hero";
+
+import cx from 'classnames';
+
+import styles from './page.module.css';
+import Section from "@/components/atoms/section/Section";
 
 
 const Stub = () => {
@@ -49,5 +55,19 @@ export default async function Home() {
   }
 
   console.log("Debug: Running in debug mode");
-  return (<div>test</div>);
+  return (
+    <>
+      <Section className={styles.heroWrapper}>
+        <Hero />
+      </Section>
+
+      <section className={styles.section}>
+        <div style={{ backgroundColor: "red" }}>section-1</div>
+      </section>
+
+      <section className={styles.section}>
+        <div style={{ backgroundColor: "red", color: 'green' }}>section-2</div>
+      </section>
+    </>
+  );
 }

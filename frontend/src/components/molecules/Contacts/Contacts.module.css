@@ -1,0 +1,5 @@
+.socials {
+  display: flex;
+  height: fit-content;
+  gap: var(--spacing-xs);
+}
