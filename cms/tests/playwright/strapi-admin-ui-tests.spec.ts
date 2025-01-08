@@ -1,4 +1,5 @@
-import { test, expect } from '@playwright/test';
+import { test, checkConsoleErrors } from './baseTest';
+import { expect } from '@playwright/test';
 
 export const TEST_USERS = {
   adminUser: {
@@ -10,6 +11,8 @@ export const TEST_USERS = {
 test.beforeEach(async ({ page }) => {
   await page.goto('/');
 });
+
+checkConsoleErrors();
 
 test('unauthorized redirect from localhost:1337 to /admin/auth/login', async ({ page }) => {
   await expect(page).toHaveURL('http://localhost:1337/admin/auth/login');

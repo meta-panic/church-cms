@@ -1,10 +1,5 @@
 import { test as base, expect, Page } from '@playwright/test';
 
-export const PAGE_BASE_DATA = {
-  pageTitleText: 'Дом молитвы',
-  pageMetaDescriptionText: 'Церковь Евангельских христиан-баптистов',
-};
-
 type CustomFixtures = {
   page: Page;
   consoleErrors: string[];
@@ -47,21 +42,5 @@ export const checkConsoleErrors = () => {
   test('check console errors', async ({ consoleErrors, page }) => {
     await page.waitForLoadState('networkidle');
     expect(consoleErrors, 'Found errors on the page').toHaveLength(0);
-  });
-};
-
-// Check base elements on pages
-export const checkBaseElements = () => {
-  test('check base elements', async ({ page }) => {
-    // Wait for the page to load completely
-    await page.waitForLoadState('networkidle');
-
-    // Check the page title
-    const pageTitle = await page.title();
-    expect(pageTitle).toBe(PAGE_BASE_DATA.pageTitleText);
-
-    // Check the meta description
-    const metaDescription = await page.getAttribute('meta[name="description"]', 'content');
-    expect(metaDescription).toBe(PAGE_BASE_DATA.pageMetaDescriptionText);
   });
 };
