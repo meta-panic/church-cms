@@ -32,6 +32,7 @@
     "styled-components": "^6.0.0"
   },
   "devDependencies": {
+    "@playwright/test": "^1.49.1",
     "@types/fs-extra": "^11.0.4",
     "@types/node": "^20",
     "@types/react": "^18",
