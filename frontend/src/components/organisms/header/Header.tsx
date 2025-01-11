@@ -1,11 +1,11 @@
 "use client";
-import React, { useEffect, useState } from 'react';
-import styles from './Header.module.css';
+import React, { useEffect, useState } from "react";
+import styles from "./Header.module.css";
 
 import cx from "classnames";
-import { usePathname } from 'next/navigation';
-import { PresentationHeader } from './PresentationHeader';
-import { NavItem, SlimHeader } from './SlimHeader';
+import { usePathname } from "next/navigation";
+import { PresentationHeader } from "./PresentationHeader";
+import { NavItem, SlimHeader } from "./SlimHeader";
 
 interface HeaderProps {
   className?: string;
@@ -14,7 +14,7 @@ interface HeaderProps {
 
 
 
-export const Header: React.FC<HeaderProps> = ({ navItems, className }) => {
+export const Header: React.FC<HeaderProps> = ({ navItems }) => {
   const [isPageScrolled, setIsPageScrolled] = useState(false);
 
   useEffect(() => {
@@ -31,7 +31,7 @@ export const Header: React.FC<HeaderProps> = ({ navItems, className }) => {
 
   return (
     <header className={cx(styles.headerWrapper, { [styles.sticky]: isPageScrolled })}>
-      {isPageScrolled || pathname !== '/'
+      {isPageScrolled || pathname !== "/"
         ? <SlimHeader navItems={navItems} />
         : <PresentationHeader navItems={navItems} />
       }

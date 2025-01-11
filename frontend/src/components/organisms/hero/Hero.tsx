@@ -5,10 +5,9 @@ import srcBackgroundHeroImage from '../../../../public/background.jpg';
 import styles from './Hero.module.css';
 
 
-interface HeroProps {
-}
 
-export const Hero: React.FC<HeroProps> = ({ }) => {
+
+export const Hero: React.FC = ({ }) => {
   return (
     <>
       <div className={styles.imageWrapper}>

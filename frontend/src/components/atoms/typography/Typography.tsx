@@ -1,7 +1,6 @@
 import React, { FC, JSX } from "react";
 import classNames from "classnames";
 
-import { BlockColorProvider } from './ColorBlock/ColorBlock';
 import styles from "./Typography.module.css";
 import { TypographyTag } from "@/components/types";
 
@@ -10,7 +9,7 @@ interface BaseTypographyProps {
   tag: TypographyTag;
   children: React.ReactNode;
   className?: string;
-  isColoredBlock?: boolean;
+  blockIs?: "ligth" | "dark";
 }
 
 interface BodyTypographyProps extends BaseTypographyProps {
@@ -50,8 +49,8 @@ const Typography: FC<TypographyProps> = ({
   const Tag = tagMap[tag];
   const Component = () => (<Tag className={classes}>{props.children}</Tag >);
 
-  if (props.isColoredBlock) {
-    return <BlockColorProvider blockColor={"dark"}><Component /></BlockColorProvider>;
+  if (props.blockIs === "dark") {
+    return <div className="darkBlock"><Component /></div>;
   }
 
   return <Component />;

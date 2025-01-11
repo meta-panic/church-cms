@@ -1,13 +1,14 @@
 "use client";
-import React, { useEffect, useState } from 'react';
-import styles from './SlimHeader.module.css';
-import Typography from '@/components/atoms/typography/Typography';
+import React from "react";
+import styles from "./SlimHeader.module.css";
+import commonStyles from "./Header.module.css";
+import Typography from "@/components/atoms/typography/Typography";
 
 import cx from "classnames";
 
-import { Navigation } from './Navigation';
-import { Contacts } from '@/components/molecules/Contacts/Contacts';
-import Section from '@/components/atoms/section/Section';
+import { Navigation } from "./Navigation";
+import { Contacts } from "@/components/molecules/Contacts/Contacts";
+import Section from "@/components/atoms/section/Section";
 
 export type NavItem = {
   href: string;
@@ -24,7 +25,7 @@ export const SlimHeader: React.FC<SlimHeaderProps> = ({ navItems }) => {
     <div >
       <Section className={styles.slimHeaderWrapper}>
         <div className={styles.slimHeader}>
-          <div className={styles.onlyDesktop}>
+          <div className={commonStyles.onlyDesktop}>
             <Navigation
               itemsInfo={navItems}
               renderItem={(text) => {
@@ -38,12 +39,12 @@ export const SlimHeader: React.FC<SlimHeaderProps> = ({ navItems }) => {
             />
           </div>
 
-          <div className={cx(styles.contacts, styles.onlyDesktop)}>
+          <div className={cx(styles.contacts, commonStyles.onlyDesktop)}>
             <Contacts
-              instagram={'https://www.instagram.com/'}
-              telegram={''}
-              vk={''}
-              youtube={''}
+              instagram={"https://www.instagram.com/"}
+              telegram={""}
+              vk={""}
+              youtube={""}
               renderIcon={(logo) => {
                 return <div className={cx(styles.navigatonItem)}>{logo}</div>;
               }}

@@ -44,3 +44,25 @@
 .hide {
   display: none;
 }
+
+/* desktop layout */
+.onlyDesktop {
+  display: none;
+}
+
+@media screen and (min-width: 1280px) {
+  .onlyDesktop {
+    display: flex;
+  }
+}
+
+/* all layouts but desktop */
+.notDesktop {
+  display: none;
+}
+
+@media screen and (max-width: 1279px) {
+  .notDesktop {
+    display: flex;
+  }
+}

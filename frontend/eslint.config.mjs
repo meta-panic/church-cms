@@ -10,11 +10,26 @@ const compat = new FlatCompat({
 });
 
 const eslintConfig = [
-  ...compat.extends("next/core-web-vitals", "next/typescript"),
+  ...compat.extends(
+    "next/core-web-vitals",
+    "next/typescript",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:jsx-a11y/recommended",
+  ),
   {
     rules: {
       "comma-dangle": ["error", "always-multiline"],
       "semi": ["warn", "always"],
+      "quotes": ["error", "double"], // Enforce single quotes
+      "@typescript-eslint/no-unused-vars": "warn", // Warn on unused variables
+      "no-console": "warn", // Warn on console.log statements
+      "react/jsx-uses-react": "off", // Disable React import check (Next.js handles it)
+      "react/react-in-jsx-scope": "off", // Disable React import check (Next.js handles it)
+      "jsx-a11y/alt-text": "warn", // Warn on missing alt text for images
+      "jsx-a11y/anchor-is-valid": "warn", // Warn on invalid anchor tags
+      "jsx-a11y/aria-props": "warn", // Warn on invalid ARIA attributes
+      "jsx-a11y/heading-has-content": "warn", // Warn on empty headings
+      "jsx-a11y/no-redundant-roles": "warn", // Warn on redundant ARIA roles
     },
   },
 ];

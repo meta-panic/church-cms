@@ -1,36 +1,37 @@
 import Header from "@/components/organisms/header";
 import { isDebug } from "@/utils/isDebug";
 import type { Metadata } from "next";
-import localFont from 'next/font/local';
-import cx from 'classnames';
+import localFont from "next/font/local";
+import cx from "classnames";
 
-import layoutStyles from './layout.module.css';
-import pageStyles from './page.module.css';
+import layoutStyles from "./layout.module.css";
+import pageStyles from "./page.module.css";
 import { NavItem } from "@/components/organisms/header";
+import Section from "@/components/atoms/section/Section";
 
 const bebas = localFont({
-  weight: '500',
-  variable: '--font-bebas-regular',
-  src: '../../public/fonts/BebasNeue-Regular.ttf',
-  display: 'swap',
+  weight: "500",
+  variable: "--font-bebas-regular",
+  src: "../../public/fonts/BebasNeue-Regular.ttf",
+  display: "swap",
 });
 const ralewayRegular = localFont({
-  weight: '500',
-  variable: '--font-raleway-regular',
-  src: '../../public/fonts/Raleway-regular.ttf',
-  display: 'swap',
+  weight: "500",
+  variable: "--font-raleway-regular",
+  src: "../../public/fonts/Raleway-regular.ttf",
+  display: "swap",
 });
 const ralewayItalic = localFont({
-  weight: '500',
-  variable: '--font-raleway-italic',
-  src: '../../public/fonts/Raleway-Italic-VariableFont_wght.ttf',
-  display: 'swap',
+  weight: "500",
+  variable: "--font-raleway-italic",
+  src: "../../public/fonts/Raleway-Italic-VariableFont_wght.ttf",
+  display: "swap",
 });
 const ralewaySemiBold = localFont({
-  weight: '500',
-  variable: '--font-raleway-semobold',
-  src: '../../public/fonts/Raleway-semi-bold.ttf',
-  display: 'swap',
+  weight: "500",
+  variable: "--font-raleway-semobold",
+  src: "../../public/fonts/Raleway-semi-bold.ttf",
+  display: "swap",
 });
 
 
@@ -38,7 +39,7 @@ export const metadata: Metadata = {
   title: "Дом молитвы",
   description: "Церковь Евангельских христиан-баптистов",
   icons: {
-    icon: { url: '/favicon.png' },
+    icon: { url: "/favicon.png" },
   },
 };
 
@@ -77,9 +78,12 @@ export default async function RootLayout({
 
           {children}
 
-          <section className={cx(pageStyles.section, layoutStyles.footer)}>
-            <footer>footer</footer>
-          </section>
+          <footer className={cx(layoutStyles.footer)}>
+            <Section>
+              <div style={{ backgroundColor: "gray" }}>
+                Footer content
+              </div></Section>
+          </footer>
 
         </div>
       </body>

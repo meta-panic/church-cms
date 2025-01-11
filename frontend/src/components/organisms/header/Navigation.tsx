@@ -1,11 +1,11 @@
 "use client";
-import React from 'react';
-import cx from 'classnames';
-import { usePathname } from 'next/navigation';
-import Link from 'next/link';
+import React from "react";
+import cx from "classnames";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
 
-import styles from './Navigation.module.css';
-import { NavItem } from './PresentationHeader';
+import styles from "./Navigation.module.css";
+import { NavItem } from ".";
 
 
 type RenderProp<T extends string> = (text: T) => React.ReactNode;

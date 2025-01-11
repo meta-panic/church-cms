@@ -10,21 +10,20 @@ import Typography from "@/components/atoms/typography/Typography";
 import { isDebug } from "@/utils/isDebug";
 import { Hero } from "@/components/organisms/hero/Hero";
 
-import cx from 'classnames';
 
-import styles from './page.module.css';
+import styles from "./page.module.css";
 import Section from "@/components/atoms/section/Section";
 
 
 const Stub = () => {
   return (<div style={{
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: '100vh',
-    fontFamily: 'Arial, sans-serif',
-    backgroundColor: '#f4f4f4',
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    height: "100vh",
+    fontFamily: "Arial, sans-serif",
+    backgroundColor: "#f4f4f4",
   }}
   >
     <Image
@@ -32,7 +31,7 @@ const Stub = () => {
       alt="Логотип церкви"
       width={208}
       height={96}
-      style={{ marginBottom: '1.5rem' }}
+      style={{ marginBottom: "1.5rem" }}
     />
     <Typography tag="H1">Скоро здесь будет сайт</Typography>
     <Typography tag="body">Загляните позже за обновлениями</Typography>
@@ -66,7 +65,7 @@ export default async function Home() {
       </section>
 
       <section className={styles.section}>
-        <div style={{ backgroundColor: "red", color: 'green' }}>section-2</div>
+        <div style={{ backgroundColor: "red", color: "green" }}>section-2</div>
       </section>
     </>
   );

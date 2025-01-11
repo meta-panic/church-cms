@@ -1,7 +1,7 @@
-import { FC } from 'react';
-import cx from 'classnames';
+import { FC } from "react";
+import cx from "classnames";
 
-import styles from './Section.module.css';
+import styles from "./Section.module.css";
 
 interface SectionProps {
   children: React.ReactNode;

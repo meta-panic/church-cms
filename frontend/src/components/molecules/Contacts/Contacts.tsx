@@ -1,11 +1,10 @@
 import React from 'react';
-import cx from 'classnames';
 import styles from './Contacts.module.css';
 
-import InstagramLogo from '../../../../public/icons/socials/instagram.svg';
-import TgLogo from '../../../../public/icons/socials/tg.svg';
-import VkLogo from '../../../../public/icons/socials/vk.svg';
-import YoutubeLogo from '../../../../public/icons/socials/youtube.svg';
+import InstagramIcon from '../../../../public/icons/socials/instagram.svg';
+import TgIcon from '../../../../public/icons/socials/tg.svg';
+import VkIcon from '../../../../public/icons/socials/vk.svg';
+import YoutubeIcon from '../../../../public/icons/socials/youtube.svg';
 
 type RenderProp<T> = (text: T) => React.ReactNode;
 
@@ -22,22 +21,22 @@ interface ContactsProps {
 export const Contacts: React.FC<ContactsProps> = ({ instagram, telegram, vk, youtube, renderIcon }) => {
   const socialLinks = [
     {
-      logo: <TgLogo />,
+      logo: <TgIcon />,
       link: telegram,
       name: 'telegram',
     },
     {
-      logo: <InstagramLogo />,
+      logo: <InstagramIcon />,
       link: instagram,
       name: 'instagram',
     },
     {
-      logo: <VkLogo />,
+      logo: <VkIcon />,
       link: vk,
       name: 'vk',
     },
     {
-      logo: <YoutubeLogo />,
+      logo: <YoutubeIcon />,
       link: youtube,
       name: 'youtube',
     },
