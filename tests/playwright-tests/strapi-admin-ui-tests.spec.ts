@@ -9,20 +9,20 @@ export const TEST_USERS = {
 };
 
 test.beforeEach(async ({ page }) => {
-  await page.goto('http://localhost:1337');
+  await page.goto('http://cms:1337'); // url for docker container
 });
 
 checkConsoleErrors();
 
 test('unauthorized redirect from localhost:1337 to /admin/auth/login', async ({ page }) => {
-  await expect(page).toHaveURL('http://localhost:1337/admin/auth/login');
+  await expect(page).toHaveURL('http://cms:1337/admin/auth/login');
 });
 
 test.skip('register admin-user to strapi-admin', async ({ page }) => {
   checkTestUserCredentialsExist();
 
   await test.step('Check unauthorized redirect to /auth/register-admin', async () => {
-    await expect(page).toHaveURL('http://localhost:1337/admin/auth/register-admin');
+    await expect(page).toHaveURL('http://cms:1337/admin/auth/register-admin');
   });
 
   await test.step('Fill registration-form fields', async () => {

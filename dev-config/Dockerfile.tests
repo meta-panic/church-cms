@@ -28,4 +28,4 @@ RUN echo "ls -la"
 RUN ls -la /tests
 
 RUN bash -c "chmod +x run-tests.sh;"
-CMD bash -c "./run-tests.sh "
+CMD bash -c "./run-tests.sh docker"
