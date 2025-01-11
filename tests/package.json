@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {},
   "dependencies": {
-    "@usebruno/cli": "^1.36.3"
+    "@usebruno/cli": "^1.38.3"
   },
   "devDependencies": {
     "@playwright/test": "^1.49.1",
