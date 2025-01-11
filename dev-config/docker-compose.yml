@@ -70,7 +70,18 @@ services:
       - db:/var/lib/postgresql/data
     networks:
       - strapi
-
+  tests:
+    tty: true
+    build:
+      context: ../tests
+      dockerfile: ../dev-config/Dockerfile.tests
+    environment:
+      NODE_ENV: ${NODE_ENV}
+      PROD_FRONT_URL: ${PROD_FRONT_URL}
+      PROD_STRAPI_URL: ${PROD_STRAPI_URL}
+    networks:
+      - strapi
+      
 networks:
   strapi:
 volumes:
