@@ -13,14 +13,14 @@ export const PAGE_DATA = {
 
 let response: any;
 
-test.beforeEach(async ({ page }) => {
+test.beforeEach(async ({ page, cookieDomain }) => {
 
   const browserContext = page.context();
   browserContext.addCookies([
     {
       name: 'debugCookie',
       value: 'true',
-      domain: 'localhost',
+      domain: cookieDomain,
       path: '/',
       expires: -1,
       httpOnly: true,

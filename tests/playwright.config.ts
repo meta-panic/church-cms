@@ -36,9 +36,25 @@ export default defineConfig({
   /* Configure projects for major browsers */
   projects: [
     {
-      name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      name: 'local',
+      use: {
+        baseURL: 'http://localhost:3000',
+        cookieDomain: 'localhost',
+        strapiURL: 'http://localhost:1337',
+      }
     },
+    {
+      name: 'docker',
+      use: {
+        baseURL: 'http://frontend:3000',
+        cookieDomain: 'frontend',
+        strapiURL: 'http://cms:1337',
+      }
+    },
+    // {
+    //   name: 'chromium',
+    //   use: { ...devices['Desktop Chrome'] },
+    // },
 
     // {
     //   name: 'firefox',

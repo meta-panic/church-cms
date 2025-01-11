@@ -73,17 +73,17 @@ run_frontend_tests() {
         echo "Running frontend tests in docker mode..."
         bru run $BRUNO_FRONTEND_COLLECTION --env docker-environment
         cd ../
-        npx playwright test --grep-invert $PLAYWRIGHT_STRAPI_TEST --config=playwright.docker-config.ts
+        npx playwright test --grep-invert $PLAYWRIGHT_STRAPI_TEST --project=docker
     elif [ "$NODE_ENV" == "development" ]; then
         echo "Running frontend tests in $NODE_ENV mode..."
         bru run $BRUNO_FRONTEND_COLLECTION --env local-environment
         cd ../
-        npx playwright test --grep-invert $PLAYWRIGHT_STRAPI_TEST
+        npx playwright test --grep-invert $PLAYWRIGHT_STRAPI_TEST --project=local
     elif [ "$NODE_ENV" == "production" ]; then
         echo "Running frontend tests in $NODE_ENV mode..."
         NODE_OPTIONS=--dns-result-order=ipv4first npx -y --package @usebruno/cli bru run $BRUNO_FRONTEND_COLLECTION --env local-environment # because containers use localhost
         cd ../
-        npx playwright test --grep-invert $PLAYWRIGHT_STRAPI_TEST --config=playwright.docker-config.ts
+        npx playwright test --grep-invert $PLAYWRIGHT_STRAPI_TEST --project=docker
     else
         echo "NODE_ENV is not set or has an invalid value. Please set it to 'development' or 'production'."
         exit 1
@@ -98,17 +98,17 @@ run_cms_tests() {
         echo "Running cms tests in docker mode..."
         bru run $BRUNO_CMS_COLLECTION --env docker-environment
         cd ../
-        npx playwright test $PLAYWRIGHT_STRAPI_TEST --config=playwright.docker-config.ts
+        npx playwright test $PLAYWRIGHT_STRAPI_TEST --project=docker
     elif [ "$NODE_ENV" == "development" ]; then
         echo "Running cms tests in $NODE_ENV mode..."
         bru run $BRUNO_CMS_COLLECTION --env local-environment
         cd ../
-        npx playwright test $PLAYWRIGHT_STRAPI_TEST
+        npx playwright test $PLAYWRIGHT_STRAPI_TEST --project=local
     elif [ "$NODE_ENV" == "production" ]; then
         echo "Running cms tests in $NODE_ENV mode..."
         NODE_OPTIONS=--dns-result-order=ipv4first npx -y --package @usebruno/cli bru run $BRUNO_CMS_COLLECTION --env local-environment # because containers use localhost
         cd ../
-        npx playwright test $PLAYWRIGHT_STRAPI_TEST --config=playwright.docker-config.ts
+        npx playwright test $PLAYWRIGHT_STRAPI_TEST --project=docker
     else
         echo "NODE_ENV is not set or has an invalid value. Please set it to 'development' or 'production'."
         exit 1
