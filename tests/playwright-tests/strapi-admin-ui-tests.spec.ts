@@ -9,7 +9,7 @@ export const TEST_USERS = {
 };
 
 test.beforeEach(async ({ page }) => {
-  await page.goto('/');
+  await page.goto('http://localhost:1337');
 });
 
 checkConsoleErrors();
