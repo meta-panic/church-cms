@@ -6,4 +6,4 @@ cd bruno-tests
 bru run --env docker-environment
 
 cd ../
-npx playwright test
+npx playwright test --config=playwright.docker-config.ts

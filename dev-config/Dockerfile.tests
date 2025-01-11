@@ -21,10 +21,11 @@ RUN ls -la /tests
 RUN npm ci
 
 RUN npm install -g @usebruno/cli@1.38.3
-RUN npx playwright install && npx playwright install-deps 
+# install only chrome for now to reduce image size
+RUN npx npx playwright install --only-shell --with-deps chromium
 
 RUN echo "ls -la"
 RUN ls -la /tests
 
 RUN bash -c "chmod +x run-tests.sh;"
-CMD bash -c "./run-tests.sh"
+CMD bash -c "./run-tests.sh "
