@@ -1,11 +1,11 @@
 
-import React, { FC, PropsWithChildren } from 'react';
-import NextLink from 'next/link';
+import React, { FC, PropsWithChildren } from "react";
+import NextLink from "next/link";
 import classNames from "classnames";
 
 import styles from "./Link.module.css";
-import Typography from '../typography/Typography';
-import { TypographyTag } from '@/components/types';
+import Typography from "../typography/Typography";
+import { TypographyTag } from "@/components/types";
 
 type LinkProps =
   | {
@@ -24,7 +24,7 @@ const Link: FC<PropsWithChildren<LinkProps> & { tag?: TypographyTag; }> = ({
   href,
   target,
   children,
-  tag = 'body',
+  tag = "body",
 }) => {
   const classes = classNames(
     styles.link,
@@ -34,7 +34,7 @@ const Link: FC<PropsWithChildren<LinkProps> & { tag?: TypographyTag; }> = ({
     // Internal link using next/link
     return (
       <NextLink href={to} target={target || "_self"} >
-        <Typography tag={tag || 'body'}>
+        <Typography tag={tag || "body"}>
           <span className={classes}>{children}</span>
         </Typography>
       </NextLink>
@@ -45,7 +45,7 @@ const Link: FC<PropsWithChildren<LinkProps> & { tag?: TypographyTag; }> = ({
     // External link
     return (
       <a href={href} target={target || "_blank"} className={styles.link}>
-        <Typography tag={tag || 'body'}>
+        <Typography tag={tag || "body"}>
           <span className={classes}>{children}</span>
         </Typography>
       </a>

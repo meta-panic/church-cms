@@ -1,8 +1,8 @@
-import React from 'react';
+import React from "react";
 import Image from "next/image";
 
-import srcBackgroundHeroImage from '../../../../public/background.jpg';
-import styles from './Hero.module.css';
+import srcBackgroundHeroImage from "../../../../public/background.jpg";
+import styles from "./Hero.module.css";
 
 
 
@@ -19,7 +19,7 @@ export const Hero: React.FC = ({ }) => {
           objectPosition="center"
           alt="chapel under starry sky"
           style={{
-            objectPosition: '50% 60%',
+            objectPosition: "50% 60%",
           }}
         />
       </div>

@@ -1,4 +1,4 @@
-import { Header } from './Header';
+import { Header } from "./Header";
 
 export type NavItem = {
   href: string;

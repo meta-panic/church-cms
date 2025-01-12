@@ -1,10 +1,10 @@
-import React from 'react';
-import styles from './Contacts.module.css';
+import React from "react";
+import styles from "./Contacts.module.css";
 
-import InstagramIcon from '../../../../public/icons/socials/instagram.svg';
-import TgIcon from '../../../../public/icons/socials/tg.svg';
-import VkIcon from '../../../../public/icons/socials/vk.svg';
-import YoutubeIcon from '../../../../public/icons/socials/youtube.svg';
+import InstagramIcon from "../../../../public/icons/socials/instagram.svg";
+import TgIcon from "../../../../public/icons/socials/tg.svg";
+import VkIcon from "../../../../public/icons/socials/vk.svg";
+import YoutubeIcon from "../../../../public/icons/socials/youtube.svg";
 
 type RenderProp<T> = (text: T) => React.ReactNode;
 
@@ -23,22 +23,22 @@ export const Contacts: React.FC<ContactsProps> = ({ instagram, telegram, vk, you
     {
       logo: <TgIcon />,
       link: telegram,
-      name: 'telegram',
+      name: "telegram",
     },
     {
       logo: <InstagramIcon />,
       link: instagram,
-      name: 'instagram',
+      name: "instagram",
     },
     {
       logo: <VkIcon />,
       link: vk,
-      name: 'vk',
+      name: "vk",
     },
     {
       logo: <YoutubeIcon />,
       link: youtube,
-      name: 'youtube',
+      name: "youtube",
     },
   ];
 

@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "lint:fix": "next lint --fix",
     "bru-local": "cd tests/bruno-frontend-collection/ && bru run --env local-environment",
     "bru-prod": "cd tests/bruno-frontend-collection/ && bru run --env prod-environment"
   },
