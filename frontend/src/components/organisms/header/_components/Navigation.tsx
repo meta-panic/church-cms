@@ -1,7 +1,6 @@
 "use client";
 import React, { useCallback } from "react";
-import cx from "classnames";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 import { WithPopup } from "@/components/atoms/withPopup/WithPopup";
@@ -26,7 +25,6 @@ interface NavigationProps {
 }
 
 export const Navigation: React.FC<NavigationProps> = ({ renderItem, items }) => {
-  const pathname = usePathname();
   const router = useRouter();
 
   const handleNavigation = useCallback((href: EXISTING_URLS | EXISTING_ANCORNS) => {
@@ -47,7 +45,7 @@ export const Navigation: React.FC<NavigationProps> = ({ renderItem, items }) => 
           return (<li className={styles.navigationItem} key={item.text}>
             <WithPopup
               content={
-                <ul className={styles.innerNavigationList}>
+                <ul>
                   {item.innerItems.map((innerItem) => (
                     <li
                       onClick={() => handleNavigation(innerItem.href)}
@@ -68,10 +66,7 @@ export const Navigation: React.FC<NavigationProps> = ({ renderItem, items }) => 
           return (<Link
             key={item.href || item.text}
             href={item.href}
-            className={cx(
-              styles.navigationItem,
-              pathname === item.href ? "font-bold mr-4" : "text-blue-500 mr-4",
-            )}
+            className={styles.navigationItem}
           >
             {renderItem(item.text)}
           </Link>);
