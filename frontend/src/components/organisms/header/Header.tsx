@@ -1,40 +1,35 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import styles from "./Header.module.css";
-
+import React from "react";
 import cx from "classnames";
 import { usePathname } from "next/navigation";
-import { PresentationHeader } from "./PresentationHeader";
-import { NavItem, SlimHeader } from "./SlimHeader";
+
+import type { NavItemDesktop, NavItemMobile } from "@/configuration/navigation";
+import { BREAKPOINTS, useMediaQuery } from "@/hooks/useMediaQuery";
+import { DesktopHeader } from "./variants/DesktopHeader";
+import { MobileHeader } from "./variants/MobileHeader";
+import ClientOnly from "./_components/ClientOnly";
+
+import styles from "./Header.module.css";
+
 
 interface HeaderProps {
-  className?: string;
-  navItems: NavItem[]
+  navItemsDesktop: NavItemDesktop[];
+  navItemsMobile: NavItemMobile[];
 }
 
-
-
-export const Header: React.FC<HeaderProps> = ({ navItems }) => {
-  const [isPageScrolled, setIsPageScrolled] = useState(false);
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      window.addEventListener("scroll", windowScroll);
-    }
-    window.scrollTo(0, 0);
-  }, []);
-
-  function windowScroll() {
-    setIsPageScrolled(document.body.scrollTop >= 38 || document.documentElement.scrollTop >= 38);
-  }
+export const Header: React.FC<HeaderProps> = ({ navItemsDesktop, navItemsMobile }) => {
+  const isDesktop = useMediaQuery(BREAKPOINTS.desktop);
   const pathname = usePathname();
+  const isHomePage = pathname === "/";
+  const showDesktopVariant = isDesktop && isHomePage;
+
 
   return (
-    <header className={cx(styles.headerWrapper, { [styles.sticky]: isPageScrolled })}>
-      {isPageScrolled || pathname !== "/"
-        ? <SlimHeader navItems={navItems} />
-        : <PresentationHeader navItems={navItems} />
-      }
-    </header >
+    <header className={cx(styles.headerWrapper)}>
+      <ClientOnly>
+        {showDesktopVariant && <DesktopHeader navItems={navItemsDesktop} />}
+        {!showDesktopVariant && <MobileHeader navItems={navItemsMobile} />}
+      </ClientOnly>
+    </header>
   );
 };

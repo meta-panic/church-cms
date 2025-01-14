@@ -1,13 +1,19 @@
 import Header from "@/components/organisms/header";
 import { isDebug } from "@/utils/isDebug";
-import type { Metadata } from "next";
 import localFont from "next/font/local";
 import cx from "classnames";
 
 import layoutStyles from "./layout.module.css";
 import pageStyles from "./page.module.css";
-import { NavItem } from "@/components/organisms/header";
 import Section from "@/components/atoms/section/Section";
+import { navItemsDesktop, navItemsMobileAndTablet } from "@/configuration/navigation";
+import Stub from "@/components/organisms/stub/Stub";
+
+import "../styles/reset.css";
+import "../styles/colours.css";
+import "../styles/semantic.css";
+import "../styles/sizes.css";
+import "../styles/globals.css";
 
 const bebas = localFont({
   weight: "500",
@@ -35,21 +41,7 @@ const ralewaySemiBold = localFont({
 });
 
 
-export const metadata: Metadata = {
-  title: "Дом молитвы",
-  description: "Церковь Евангельских христиан-баптистов",
-  icons: {
-    icon: { url: "/favicon.png" },
-  },
-};
 
-const navItems: NavItem[] = [
-  { href: "/history", text: "О нас" },
-  { href: "/how-to-become-a-cristian", text: "Как стать христианином" },
-  { href: "/piblic-service", text: "Проповеди" },
-  { href: "/#services", text: "Служения" },
-  { href: "/#footer", text: "Контакты" },
-];
 
 export default async function RootLayout({
   children,
@@ -58,23 +50,27 @@ export default async function RootLayout({
 }>) {
   const isDevelopment = await isDebug();
 
+
   if (!isDevelopment) {
     return (
       <html lang="ru">
         <body className={`${bebas.variable} ${ralewayRegular.variable} ${ralewayItalic.variable} ${ralewaySemiBold.variable}`}>
-          {children}
+          <Stub />
         </body>
       </html>
     );
   }
-
 
   return (
     <html lang="ru">
       <body className={`${bebas.variable} ${ralewayRegular.variable} ${ralewayItalic.variable} ${ralewaySemiBold.variable}`}>
         <div className={pageStyles.layoutContainer}>
 
-          <Header navItems={navItems} className={pageStyles.section} />
+          <Header
+            navItemsDesktop={navItemsDesktop}
+            navItemsMobile={navItemsMobileAndTablet}
+            className={pageStyles.section}
+          />
 
           {children}
 

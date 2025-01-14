@@ -1,0 +1,90 @@
+"use client";
+import React, { useCallback } from "react";
+import cx from "classnames";
+import { usePathname, useRouter } from "next/navigation";
+import Link from "next/link";
+
+import { WithPopup } from "@/components/atoms/withPopup/WithPopup";
+import { EXISTING_URLS, EXISTING_ANCORNS } from "@/configuration/navigation";
+
+import styles from "./Navigation.module.css";
+
+
+export interface RegularItem {
+  href: EXISTING_URLS | EXISTING_ANCORNS;
+  text: string;
+}
+
+export interface DropdownItem {
+  text: string;
+  innerItems: RegularItem[]
+}
+
+interface NavigationProps {
+  items: (RegularItem | DropdownItem)[];
+  renderItem: RenderProp<string>;
+}
+
+export const Navigation: React.FC<NavigationProps> = ({ renderItem, items }) => {
+  const pathname = usePathname();
+  const router = useRouter();
+
+  const handleNavigation = useCallback((href: EXISTING_URLS | EXISTING_ANCORNS) => {
+    if (href.startsWith("#")) {
+      // Handle anchor navigation
+      const element = document.querySelector(href);
+      element?.scrollIntoView({ behavior: "smooth" });
+    } else {
+      // Handle page navigation
+      router.push(href);
+    }
+  }, [router]);
+
+  return (
+    <nav className={styles.navigation}>
+      {items.map((item) => {
+        if (isDropdownItem(item)) {
+          return (<li className={styles.navigationItem} key={item.text}>
+            <WithPopup
+              content={
+                <ul className={styles.innerNavigationList}>
+                  {item.innerItems.map((innerItem) => (
+                    <li
+                      onClick={() => handleNavigation(innerItem.href)}
+                      key={innerItem.text}
+                      className={styles.navigationItem}
+                    >
+                      {innerItem.text}
+                    </li>
+                  ))}
+                </ul>
+              }
+            >
+              {renderItem(item.text)}
+            </WithPopup>
+          </li>);
+        }
+        if (isRegularItem(item)) {
+          return (<Link
+            key={item.href || item.text}
+            href={item.href}
+            className={cx(
+              styles.navigationItem,
+              pathname === item.href ? "font-bold mr-4" : "text-blue-500 mr-4",
+            )}
+          >
+            {renderItem(item.text)}
+          </Link>);
+        }
+      })}
+    </nav>
+  );
+};
+
+function isRegularItem(item: unknown): item is RegularItem {
+  return typeof item === "object" && item !== null && "href" in item && "text" in item;
+}
+function isDropdownItem(item: unknown): item is DropdownItem {
+  return typeof item === "object" && item !== null && "text" in item && "innerItems" in item;
+}
+type RenderProp<T extends string> = (text: T) => React.ReactNode;

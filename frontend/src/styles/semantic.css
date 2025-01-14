@@ -56,4 +56,5 @@
   --hover-components-link-fg: #f8f6f7;
   --active-text-ondark: var(--common-light-100);
   --active-components-link-fg: #f8f6f7;
+  --hover-navigation-item: var(--accent-400);
 }

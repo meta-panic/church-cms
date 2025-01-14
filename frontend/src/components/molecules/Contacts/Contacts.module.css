@@ -3,3 +3,9 @@
   height: fit-content;
   gap: var(--spacing-xs);
 }
+
+@media screen and (max-width: 1279px) {
+  .socials {
+    gap: 4px;
+  }
+}

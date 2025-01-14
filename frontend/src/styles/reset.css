@@ -136,3 +136,19 @@ a {
   color: inherit;
   text-decoration: none;
 }
+
+/* Reset list styles */
+li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+li::marker {
+  content: none;
+  display: none;
+}
+
+li {
+  list-style-type: none;
+}

@@ -2,9 +2,6 @@
   z-index: 30;
 }
 
-.churchLogo {
-  color: var(--common-light-100);
-}
 
 .onlyDesktop {
   display: none;
@@ -34,13 +31,6 @@
   color: var(--hover-navigation-item);
 }
 
-.sticky {
-  position: fixed;
-  top: 0;
-  padding-top: 0;
-  justify-content: center;
-}
-
 .hide {
   display: none;
 }
@@ -63,6 +53,17 @@
 
 @media screen and (max-width: 1279px) {
   .notDesktop {
+    display: flex;
+  }
+}
+
+/* all layouts but mobile */
+.notMobile {
+  display: none;
+}
+
+@media screen and (min-width: 641px) {
+  .notMobile {
     display: flex;
   }
 }

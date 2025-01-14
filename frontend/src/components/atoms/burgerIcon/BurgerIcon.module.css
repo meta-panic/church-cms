@@ -1,33 +1,34 @@
 .burger {
   display: block;
 
-  width: 30px;
-  height: 24px;
+  width: 24px;
+  height: 20px;
   cursor: pointer;
   position: relative;
 }
 
 .burger-line {
   height: 3px;
+
+  background-color: currentColor;
   width: 100%;
   backface-visibility: hidden;
   position: absolute;
-  background-color: var(--default-text);
   outline: 1px solid transparent;
   transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
 .burger .line2 {
-  top: 10px;
+  top: 8px;
 }
 
 .burger .line3 {
-  top: 20px;
+  top: 16px;
 }
 
 /* First line animation */
 .burger.open .line1 {
-  transform: translateY(10px) rotate(45deg);
+  transform: translateY(8px) rotate(45deg);
 }
 
 /* Second line animation */
@@ -37,5 +38,5 @@
 
 /* Third line animation */
 .burger.open .line3 {
-  transform: translateY(-10px) rotate(-45deg);
+  transform: translateY(-8px) rotate(-45deg);
 }

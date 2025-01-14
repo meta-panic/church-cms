@@ -1,24 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "./BurgerIcon.module.css";
 import cx from "classnames";
 
 interface BurgerIconProps {
-  onClick: (isOpen: boolean) => void;
+  isOpen: boolean;
   blockIs?: "ligth" | "dark";
 }
 
-const BurgerIcon: React.FC<BurgerIconProps> = ({ onClick, ...props }) => {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-
-  const toggleMenu = () => {
-    setIsOpen((prev) => !prev);
-    if (onClick) onClick(!isOpen);
-  };
-
+const BurgerIcon: React.FC<BurgerIconProps> = ({ isOpen, ...props }) => {
   return (
     <div
       className={cx(styles.burger, { [styles.open]: isOpen, "darkBlock": props.blockIs === "dark" })}
-      onClick={toggleMenu}
       aria-label={isOpen ? "Close Menu" : "Open Menu"}
       tabIndex={0}
     >

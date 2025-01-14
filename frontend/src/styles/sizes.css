@@ -1,5 +1,6 @@
 /* Mobile-specific variables */
 :root {
+  --current-size: "mobile";
   --button-border-radious: 4px;
   --font-font-size-h1-font-size: 36px;
   --font-font-size-h2-font-size: 32px;
@@ -32,6 +33,7 @@
 /* Tabler-specific variables */
 @media (min-width: 641px) {
   :root {
+    --current-size: "tablet";
     --button-border-radious: 4px;
     --font-font-size-h1-font-size: 48px;
     --font-font-size-h2-font-size: 40px;
@@ -64,6 +66,7 @@
 /* Desktop-specific variables */
 @media (min-width: 1280px) {
   :root {
+    --current-size: "desktop";
     --button-border-radious: 4px;
     --font-font-size-h1-font-size: 54px;
     --font-font-size-h2-font-size: 50px;

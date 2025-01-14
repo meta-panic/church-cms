@@ -49,9 +49,6 @@ const Typography: FC<TypographyProps> = ({
   const Tag = tagMap[tag];
   const Component = () => (<Tag className={classes}>{props.children}</Tag >);
 
-  if (props.blockIs === "dark") {
-    return <div className="darkBlock"><Component /></div>;
-  }
 
   return <Component />;
 };
