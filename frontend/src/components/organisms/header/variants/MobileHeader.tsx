@@ -1,5 +1,5 @@
 "use client";
-import React, { useCallback, useEffect, useState } from "react";
+import React from "react";
 
 import cx from "classnames";
 
@@ -10,13 +10,13 @@ import styles from "./MobileHeader.module.css";
 import { BurgerButton } from "@/components/molecules/BurgerButton/BurgerButton";
 import { isPresentation } from "./utils";
 import ChurchLogo from "../../../../../public/church-logo.svg";
-import { HeaderStyleWrapper } from "./HeaderStyleWrapper";
+import { HeaderStyleWrapper } from "../_components/HeaderStyleWrapper";
 import { Navigation, RegularItem } from "../_components/Navigation";
 import Typography from "@/components/atoms/typography/Typography";
 import { HeaderType } from "./variants";
 import { BREAKPOINTS, useMediaQuery } from "@/hooks/useMediaQuery";
 import { Contacts } from "@/components/molecules/Contacts/Contacts";
-import MobileMenu from "../_components/MobileMenu";
+import WithMobileMenu from "../_components/WithMobileMenu";
 
 
 interface MobileHeaderProps {
@@ -30,23 +30,7 @@ export const MobileHeader: React.FC<MobileHeaderProps> = ({
   const headerType = isPageScrolled ? "slim" : "presentation";
   const isTablet = useMediaQuery(BREAKPOINTS.tablet);
   const showContacts = isTablet && headerType === "slim";
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const handleToggleMenu = useCallback(() => {
-    setIsMobileMenuOpen(prev => !prev);
-  }, []);
-
-  useEffect(() => {
-    if (isMobileMenuOpen) {
-      document.body.classList.add("fullPopupOpen");
-    } else {
-      document.body.classList.remove("fullPopupOpen");
-    }
-
-    return () => {
-      document.body.classList.remove("fullPopupOpen");
-    };
-  }, [isMobileMenuOpen]);
 
   return (
     <HeaderStyleWrapper headerType={headerType}>
@@ -75,26 +59,23 @@ export const MobileHeader: React.FC<MobileHeaderProps> = ({
             </Typography>;
           }} />
 
-        <div className={
-          cx(styles.burgerWrapper, {
-            [`lightBlock ${styles.burgerOverlay}`]: isMobileMenuOpen,
-          })}>
-          <div style={{ zIndex: 101 }}>
-            <BurgerButton
-              isOpen={isMobileMenuOpen}
-              onToggle={handleToggleMenu}
-              blockIs={isMobileMenuOpen ? "ligth" : "dark"}
-            />
-          </div>
-          {isMobileMenuOpen && <MobileMenu
-            items={navItems}
-            onClose={function (): void {
-              throw new Error("Function not implemented.");
-            }}
-            isOpen={isMobileMenuOpen}
-          />}
+        <WithMobileMenu
+          items={navItems}
+          renderButtonComponent={({ isOpen, onToggle }) => {
+            return (
+              <div className={
+                cx(styles.burgerWrapper, {
+                  [`lightBlock ${styles.burgerOverlay}`]: isOpen,
+                })}>
+                <BurgerButton
+                  isOpen={isOpen}
+                  onToggle={onToggle}
+                />
+              </div>
+            );
+          }}
+        />
 
-        </div>
       </div>
     </HeaderStyleWrapper>
   );

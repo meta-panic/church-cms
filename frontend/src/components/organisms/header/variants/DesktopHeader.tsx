@@ -12,7 +12,7 @@ import { NavItemDesktop } from "@/configuration/navigation";
 import { useScroll } from "@/hooks/useScroll";
 
 import styles from "./DesktopHeader.module.css";
-import { HeaderStyleWrapper } from "./HeaderStyleWrapper";
+import { HeaderStyleWrapper } from "../_components/HeaderStyleWrapper";
 import { isPresentation } from "./utils";
 import { HeaderType } from "./variants";
 

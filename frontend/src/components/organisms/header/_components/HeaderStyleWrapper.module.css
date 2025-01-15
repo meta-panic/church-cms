@@ -8,8 +8,7 @@
 }
 
 .slimHeaderWrapper {
-  opacity: 0.85;
-  background-color: var(--common-light-0);
+  background-color: var(--default-surface-light-transparent);
   height: 42px;
   align-items: center;
   z-index: 20;

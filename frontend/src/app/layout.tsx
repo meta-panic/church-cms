@@ -63,13 +63,12 @@ export default async function RootLayout({
 
   return (
     <html lang="ru">
-      <body className={`${bebas.variable} ${ralewayRegular.variable} ${ralewayItalic.variable} ${ralewaySemiBold.variable}`}>
+      <body className={`${bebas.variable} ${ralewayRegular.variable} ${ralewayItalic.variable} ${ralewaySemiBold.variable} lightBlock`}>
         <div className={pageStyles.layoutContainer}>
 
           <Header
             navItemsDesktop={navItemsDesktop}
             navItemsMobile={navItemsMobileAndTablet}
-            className={pageStyles.section}
           />
 
           {children}

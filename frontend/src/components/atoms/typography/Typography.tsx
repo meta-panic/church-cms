@@ -9,7 +9,6 @@ interface BaseTypographyProps {
   tag: TypographyTag;
   children: React.ReactNode;
   className?: string;
-  blockIs?: "ligth" | "dark";
 }
 
 interface BodyTypographyProps extends BaseTypographyProps {

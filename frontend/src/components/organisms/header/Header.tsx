@@ -24,6 +24,8 @@ export const Header: React.FC<HeaderProps> = ({ navItemsDesktop, navItemsMobile 
   const showDesktopVariant = isDesktop && isHomePage;
 
 
+
+
   return (
     <header className={cx(styles.headerWrapper)}>
       <ClientOnly>

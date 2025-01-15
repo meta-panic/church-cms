@@ -3,6 +3,8 @@ import React from "react";
 import cx from "classnames";
 import { RegularItem } from "../_components/Navigation";
 import styles from "./MobileMenu.module.css"; // Ensure this CSS file is updated
+import Link from "next/link";
+import Typography from "@/components/atoms/typography/Typography";
 
 interface MobileMenuProps {
   items: RegularItem[];
@@ -18,9 +20,13 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ items, onClose, isOpen }) => {
         <ul>
           {items.map((item) => (
             <li key={item.href} onClick={onClose}>
-              <a href={item.href} className={styles.menuItem}>
-                {item.text}
-              </a>
+              <Link
+                key={item.href || item.text}
+                href={item.href}
+                className={styles.menuItem}
+              >
+                <Typography tag="H2">{item.text}</Typography>
+              </Link>
             </li>
           ))}
         </ul>

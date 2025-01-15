@@ -26,7 +26,7 @@ section {
   /* Include padding and border in width */
 }
 
-.fullPopupOpen {
+.do-not-scroll {
   overflow: hidden;
   height: 100vh;
 }

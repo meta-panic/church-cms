@@ -4,13 +4,12 @@ import cx from "classnames";
 
 interface BurgerIconProps {
   isOpen: boolean;
-  blockIs?: "ligth" | "dark";
 }
 
-const BurgerIcon: React.FC<BurgerIconProps> = ({ isOpen, ...props }) => {
+const BurgerIcon: React.FC<BurgerIconProps> = ({ isOpen }) => {
   return (
     <div
-      className={cx(styles.burger, { [styles.open]: isOpen, "darkBlock": props.blockIs === "dark" })}
+      className={cx(styles.burger, { [styles.open]: isOpen })}
       aria-label={isOpen ? "Close Menu" : "Open Menu"}
       tabIndex={0}
     >

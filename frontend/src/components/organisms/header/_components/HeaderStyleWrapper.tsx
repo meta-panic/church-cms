@@ -4,7 +4,7 @@ import React, { JSX } from "react";
 import cx from "classnames";
 import Section from "@/components/atoms/section/Section";
 import styles from "./HeaderStyleWrapper.module.css";
-import { HeaderType } from "./variants";
+import { HeaderType } from "../variants/variants";
 
 
 interface HeaderStyleWrapperProps {
