@@ -9,7 +9,7 @@ import styles from "./BurgerButton.module.css";
 
 
 interface BurgerButtonProps {
-  blockIs: "ligth" | "dark";
+  blockIs?: "ligth" | "dark";
   isOpen: boolean;
   onToggle: () => void;
 }

@@ -9,10 +9,16 @@
 .burgerWrapper {
   color: var(--default-text);
   display: flex;
+  z-index: 101;
 }
 
 .burgerWrapper:hover {
   color: var(--hover-navigation-item);
+}
+
+.burgerOverlay {
+  position: sticky;
+  color: var(--default-text);
 }
 
 .navItem {

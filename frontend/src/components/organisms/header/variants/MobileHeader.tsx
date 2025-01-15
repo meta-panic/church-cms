@@ -1,5 +1,5 @@
 "use client";
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 
 import cx from "classnames";
 
@@ -16,6 +16,7 @@ import Typography from "@/components/atoms/typography/Typography";
 import { HeaderType } from "./variants";
 import { BREAKPOINTS, useMediaQuery } from "@/hooks/useMediaQuery";
 import { Contacts } from "@/components/molecules/Contacts/Contacts";
+import MobileMenu from "../_components/MobileMenu";
 
 
 interface MobileHeaderProps {
@@ -34,6 +35,18 @@ export const MobileHeader: React.FC<MobileHeaderProps> = ({
   const handleToggleMenu = useCallback(() => {
     setIsMobileMenuOpen(prev => !prev);
   }, []);
+
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.classList.add("fullPopupOpen");
+    } else {
+      document.body.classList.remove("fullPopupOpen");
+    }
+
+    return () => {
+      document.body.classList.remove("fullPopupOpen");
+    };
+  }, [isMobileMenuOpen]);
 
   return (
     <HeaderStyleWrapper headerType={headerType}>
@@ -62,14 +75,26 @@ export const MobileHeader: React.FC<MobileHeaderProps> = ({
             </Typography>;
           }} />
 
-        <div className={styles.burgerWrapper}>
-          <BurgerButton
+        <div className={
+          cx(styles.burgerWrapper, {
+            [`lightBlock ${styles.burgerOverlay}`]: isMobileMenuOpen,
+          })}>
+          <div style={{ zIndex: 101 }}>
+            <BurgerButton
+              isOpen={isMobileMenuOpen}
+              onToggle={handleToggleMenu}
+              blockIs={isMobileMenuOpen ? "ligth" : "dark"}
+            />
+          </div>
+          {isMobileMenuOpen && <MobileMenu
+            items={navItems}
+            onClose={function (): void {
+              throw new Error("Function not implemented.");
+            }}
             isOpen={isMobileMenuOpen}
-            blockIs={"ligth"}
-            onToggle={handleToggleMenu}
-          />
-        </div>
+          />}
 
+        </div>
       </div>
     </HeaderStyleWrapper>
   );
