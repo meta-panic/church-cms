@@ -25,6 +25,7 @@ const eslintConfig = [
       "no-console": "warn", // Warn on console.log statements
       "react/jsx-uses-react": "off", // Disable React import check (Next.js handles it)
       "react/react-in-jsx-scope": "off", // Disable React import check (Next.js handles it)
+      "eol-last": ["error", "always"],
     },
   },
 ];
