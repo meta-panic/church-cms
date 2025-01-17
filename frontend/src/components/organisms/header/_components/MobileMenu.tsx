@@ -15,21 +15,33 @@ interface MobileMenuProps {
 const MobileMenu: React.FC<MobileMenuProps> = ({ items, onClose, isOpen }) => {
   return (
     <div className={cx(styles.mobileMenu, { [styles.open]: isOpen })}>
-      <div className={styles.overlay} onClick={onClose} />
+      <div className={styles.overlay} onClick={onClose} onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          onClose();
+        }
+      }}
+        tabIndex={0}
+        role="button"
+        aria-label="Close menu"
+      />
       <nav className={styles.menuContent}>
         <ul>
           {items.map((item) => (
-            <li key={item.href} onClick={onClose}>
+            <li key={item.href}>
               <Link
+                onClick={onClose}
                 key={item.href || item.text}
                 href={item.href}
-                className={styles.menuItem}
+                className={cx(styles.item, styles.menuItem)}
               >
                 <Typography tag="H2">{item.text}</Typography>
               </Link>
             </li>
           ))}
+          <li className={styles.item}><Typography tag="H2">†</Typography></li>
         </ul>
+
       </nav>
     </div>
   );

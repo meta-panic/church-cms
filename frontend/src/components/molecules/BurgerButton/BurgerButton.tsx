@@ -10,12 +10,26 @@ import styles from "./BurgerButton.module.css";
 
 interface BurgerButtonProps {
   isOpen: boolean;
-  onToggle: () => void;
+  onToggle?: () => void;
 }
 
 export const BurgerButton: React.FC<BurgerButtonProps> = ({ isOpen, onToggle }) => {
   return (
-    <div className={cx(styles.menuButtonContainer)} onClick={onToggle}>
+    <div
+      role="button"
+      onKeyDown={(e) => {
+        if (!onToggle) {
+          return;
+        }
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          onToggle();
+        }
+      }}
+      tabIndex={0}
+      className={cx(styles.menuButtonContainer)}
+      onClick={onToggle}
+    >
       <div className={cx(
         styles.menuButtonLabel,
         { [styles.hidden]: isOpen },

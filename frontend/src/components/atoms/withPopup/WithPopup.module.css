@@ -7,15 +7,13 @@
   position: absolute;
   z-index: 1000;
   min-width: 200px;
-  background-color: var(--common-light-100);
-  border-radius: 4px;
+  border-radius: var(--card-border-radious);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-  padding: var(--spacing-xs);
 }
 
 .position-bottom-left {
   top: 100%;
-  left: 0;
+  left: 50%;
   margin-top: var(--spacing-xs);
 }
 

@@ -30,7 +30,20 @@ const MobileMenuHandler: React.FC<MobileMenuHandlerProps> = ({ items, renderButt
   return (
     <>
       <div className="burgerWrapper">
-        <div style={{ zIndex: 101 }}>
+        <div
+          tabIndex={0}
+          role="button"
+          aria-haspopup="true"
+          aria-expanded={isMobileMenuOpen}
+          onClick={handleToggleMenu}
+          style={{ zIndex: 101 }}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              handleToggleMenu();
+            }
+          }}
+        >
           {renderButtonComponent(
             { isOpen: isMobileMenuOpen, onToggle: handleToggleMenu },
           )}

@@ -11,7 +11,8 @@ const BurgerIcon: React.FC<BurgerIconProps> = ({ isOpen }) => {
     <div
       className={cx(styles.burger, { [styles.open]: isOpen })}
       aria-label={isOpen ? "Close Menu" : "Open Menu"}
-      tabIndex={0}
+      tabIndex={-1}
+      role="button"
     >
       <div className={cx(styles["burger-line"], [styles.line1])} />
       <div className={cx(styles["burger-line"], [styles.line2])} />

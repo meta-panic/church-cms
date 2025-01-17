@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 import { WithPopup } from "@/components/atoms/withPopup/WithPopup";
+import DropdownContent from "@/components/molecules/DropdownContent/DropdownContent";
 import { EXISTING_URLS, EXISTING_ANCORNS } from "@/configuration/navigation";
 
 import styles from "./Navigation.module.css";
@@ -45,17 +46,19 @@ export const Navigation: React.FC<NavigationProps> = ({ renderItem, items }) => 
           return (<li className={styles.navigationItem} key={item.text}>
             <WithPopup
               content={
-                <ul>
-                  {item.innerItems.map((innerItem) => (
-                    <li
-                      onClick={() => handleNavigation(innerItem.href)}
-                      key={innerItem.text}
+                <DropdownContent
+                  items={item.innerItems}
+                  onItemSelect={(item) => handleNavigation(item.href)}
+                  renderItem={(props) => {
+                    return (<Link
+                      href={props.href}
+                      onClick={() => handleNavigation(props.href)}
+                      key={props.text}
                       className={styles.navigationItem}
                     >
-                      {innerItem.text}
-                    </li>
-                  ))}
-                </ul>
+                      {props.text}
+                    </Link>);
+                  }} />
               }
             >
               {renderItem(item.text)}
@@ -72,7 +75,7 @@ export const Navigation: React.FC<NavigationProps> = ({ renderItem, items }) => 
           </Link>);
         }
       })}
-    </nav>
+    </nav >
   );
 };
 

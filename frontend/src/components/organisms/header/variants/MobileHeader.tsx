@@ -61,7 +61,7 @@ export const MobileHeader: React.FC<MobileHeaderProps> = ({
 
         <WithMobileMenu
           items={navItems}
-          renderButtonComponent={({ isOpen, onToggle }) => {
+          renderButtonComponent={({ isOpen }) => {
             return (
               <div className={
                 cx(styles.burgerWrapper, {
@@ -69,7 +69,7 @@ export const MobileHeader: React.FC<MobileHeaderProps> = ({
                 })}>
                 <BurgerButton
                   isOpen={isOpen}
-                  onToggle={onToggle}
+                  onToggle={() => { }}
                 />
               </div>
             );

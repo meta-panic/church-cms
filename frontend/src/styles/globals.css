@@ -30,3 +30,10 @@ section {
   overflow: hidden;
   height: 100vh;
 }
+
+:root {
+  /* Effect styles */
+  --shadow--xl: 0px 15px 30px rgba(0, 0, 0, 0.3);
+  --shadow--l: 0px 5px 20px rgba(0, 0, 0, 0.2);
+  --shadow--m: 2px -2px 30px rgba(0, 0, 0, 0.08);
+}

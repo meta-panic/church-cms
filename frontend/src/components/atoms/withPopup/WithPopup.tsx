@@ -24,6 +24,7 @@ export const WithPopup: React.FC<WithPopupProps> = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!closeOnClickOutside) return;
@@ -42,9 +43,13 @@ export const WithPopup: React.FC<WithPopupProps> = ({
     setIsOpen((prev) => !prev);
   };
 
-  const handleContentClick = () => {
-    if (closeOnSelect) {
+
+  const handleKeyDown = (event: React.KeyboardEvent) => {
+    if (event.key === "Escape") {
       setIsOpen(false);
+    } else if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      handleTriggerClick();
     }
   };
 
@@ -53,7 +58,15 @@ export const WithPopup: React.FC<WithPopupProps> = ({
       className={cx(styles.container)}
       ref={containerRef}
     >
-      <div onClick={handleTriggerClick}>
+      <div
+        onClick={handleTriggerClick}
+        onKeyDown={handleKeyDown}
+        tabIndex={0}
+        role="button"
+        aria-haspopup="true"
+        aria-expanded={isOpen}
+        ref={triggerRef}
+      >
         {children}
       </div>
       {isOpen && (
@@ -62,7 +75,6 @@ export const WithPopup: React.FC<WithPopupProps> = ({
             styles.content,
             styles[`position-${position}`],
           )}
-          onClick={handleContentClick}
         >
           {content}
         </div>

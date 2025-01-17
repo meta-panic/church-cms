@@ -27,6 +27,7 @@
   flex-direction: column;
   color: var(--default-text);
   transition: all 0.2s ease-in-out;
+  text-wrap: nowrap;
 }
 
 .navItem:hover {
