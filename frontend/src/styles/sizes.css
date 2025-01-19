@@ -1,38 +1,41 @@
 /* Mobile-specific variables */
-@media (min-width: 375px) {
-  :root {
-    --button-border-radious: 4px;
-    --font-font-size-h1-font-size: 36px;
-    --font-font-size-h2-font-size: 32px;
-    --font-font-size-h3-font-size: 24px;
-    --font-line-heigh-h1: 48px;
-    --font-line-heigh-h2: 40px;
-    --font-line-heigh-h3: 30px;
-    --font-line-heigh-body: 22px;
-    --font-line-heigh-button: 20px;
-    --font-font-size-body-font-size: 18px;
-    --font-font-size-button-font-size: 16px;
-    --spacing-xs: 6px;
-    --spacing-x: 10px;
-    --spacing-s: 14px;
-    --spacing-m: 16px;
-    --spacing-l: 20px;
-    --spacing-xl: 24px;
-    --spacing-2xl: 32px;
-    --spacing-3xl: 40px;
-    --button-min-width: 150px;
-    --max-text-column-width: 300px;
-    --button-max-width: 350px;
-    --spacing-4xl: 48px;
-    --font-line-heigh-header: 20px;
-    --font-font-size-body-mini-font-size: 12px;
-    --font-line-heigh-body-mini: 16px;
-  }
+:root {
+  --current-size: "mobile";
+  --card-border-radious: 4px;
+  --button-border-radious: 4px;
+  --font-font-size-h1-font-size: 36px;
+  --font-font-size-h2-font-size: 32px;
+  --font-font-size-h3-font-size: 24px;
+  --font-line-heigh-h1: 48px;
+  --font-line-heigh-h2: 40px;
+  --font-line-heigh-h3: 30px;
+  --font-line-heigh-body: 22px;
+  --font-line-heigh-button: 20px;
+  --font-font-size-body-font-size: 18px;
+  --font-font-size-button-font-size: 16px;
+  --spacing-xs: 6px;
+  --spacing-x: 10px;
+  --spacing-s: 14px;
+  --spacing-m: 16px;
+  --spacing-l: 20px;
+  --spacing-xl: 24px;
+  --spacing-2xl: 32px;
+  --spacing-3xl: 40px;
+  --button-min-width: 150px;
+  --max-text-column-width: 300px;
+  --button-max-width: 350px;
+  --spacing-4xl: 48px;
+  --font-line-heigh-header: 20px;
+  --font-font-size-body-mini-font-size: 12px;
+  --font-line-heigh-body-mini: 16px;
 }
+
 
 /* Tabler-specific variables */
 @media (min-width: 641px) {
   :root {
+    --current-size: "tablet";
+    --card-border-radious: 4px;
     --button-border-radious: 4px;
     --font-font-size-h1-font-size: 48px;
     --font-font-size-h2-font-size: 40px;
@@ -65,6 +68,8 @@
 /* Desktop-specific variables */
 @media (min-width: 1280px) {
   :root {
+    --current-size: "desktop";
+    --card-border-radious: 4px;
     --button-border-radious: 4px;
     --font-font-size-h1-font-size: 54px;
     --font-font-size-h2-font-size: 50px;

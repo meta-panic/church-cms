@@ -33,6 +33,7 @@
   },
   "devDependencies": {
     "@playwright/test": "^1.49.1",
+    "@strapi/plugin-graphql": "^5.8.0",
     "@types/fs-extra": "^11.0.4",
     "@types/node": "^20",
     "@types/react": "^18",

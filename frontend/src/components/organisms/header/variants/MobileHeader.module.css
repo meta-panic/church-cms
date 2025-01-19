@@ -1,0 +1,44 @@
+.headerContent {
+  display: flex;
+  justify-content: space-between;
+  align-self: center;
+  position: relative;
+  width: 100%;
+}
+
+.burgerWrapper {
+  color: var(--default-text);
+  display: flex;
+  z-index: 101;
+}
+
+.burgerWrapper:hover {
+  color: var(--hover-navigation-item);
+}
+
+.burgerOverlay {
+  position: sticky;
+  color: var(--default-text);
+}
+
+.navItem {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  color: var(--default-text);
+  transition: all 0.2s ease-in-out;
+  text-wrap: nowrap;
+}
+
+.navItem:hover {
+  color: var(--hover-navigation-item);
+}
+
+.contacts {
+  display: flex;
+  align-items: center;
+}
+
+.churchLogo {
+  color: var(--common-light-100);
+}
