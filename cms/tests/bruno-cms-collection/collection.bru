@@ -1,3 +1,7 @@
+headers {
+  Debug-Header: [0_o] Hello from bruno autotests
+}
+
 tests {
   test("check header x-powered-by Strapi", function() {
     expect(res.headers['x-powered-by']).to.equal("Strapi <strapi.io>");
