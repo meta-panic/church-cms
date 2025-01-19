@@ -1,22 +1,22 @@
-import { test, checkConsoleErrors, checkBaseElements } from './baseTest';
-import { expect } from '@playwright/test';
+import { test, checkConsoleErrors, checkBaseElements } from "./baseTest";
+import { expect } from "@playwright/test";
 
 export const PAGE_DATA = {
-  headerText: 'Скоро здесь будет сайт'
+  headerText: "Скоро здесь будет сайт",
 };
 
 test.beforeEach(async ({ page }) => {
-  await page.goto('/');
+  await page.goto("/");
 });
 
 checkConsoleErrors();
 
 checkBaseElements();
 
-test('has title', async ({ page }) => {
-  await expect(page.getByRole('heading', {name: PAGE_DATA.headerText})).toBeVisible();
+test("has title", async ({ page }) => {
+  await expect(page.getByRole("heading", { name: PAGE_DATA.headerText })).toBeVisible();
 });
 
-test('should match snapshot', async ({ page }) => {
-  await expect(await page.screenshot()).toMatchSnapshot('stub-page-snapshot.png');
+test("should match snapshot", async ({ page }) => {
+  await expect(await page.screenshot()).toMatchSnapshot("stub-page-snapshot.png");
 });

@@ -19,7 +19,6 @@ export const WithPopup: React.FC<WithPopupProps> = ({
   children,
   content,
   closeOnClickOutside = true,
-  closeOnSelect = true,
   position = "bottom-left",
 }) => {
   const [isOpen, setIsOpen] = useState(false);

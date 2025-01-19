@@ -28,6 +28,14 @@ const eslintConfig = [
       "eol-last": ["error", "always"],
     },
   },
+  {
+    // Add an overrides section to exclude the auto-generated file
+    files: ["**/src/types.ts"], // Specify the path to the auto-generated file
+    rules: {
+      "@typescript-eslint/no-explicit-any": "off",
+      "@typescript-eslint/no-empty-object-type": "off",
+    },
+  },
 ];
 
 export default eslintConfig;

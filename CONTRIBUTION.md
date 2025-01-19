@@ -58,7 +58,7 @@ Where:
 * `feat(auth): Add user authentication`
 * `fix(ui): Resolve button alignment issue`
 * `docs(readme): Update installation instructions`
-* `style: Fix formatting inconsistencies`
+* `style: Fix formatting inconsistencies and eslint fixes`
 * `refactor(database): Improve database query performance`
 * `test(api): Add unit tests for API endpoints`
 * `security(env): Mask sensitive information in dotenv file`
