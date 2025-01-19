@@ -1,0 +1,55 @@
+meta {
+  name: get page landing
+  type: http
+  seq: 8
+}
+
+get {
+  url: {{baseStrapiAdminUrl}}/content-manager/collection-types/api::page-landing.page-landing
+  body: none
+  auth: none
+}
+
+headers {
+  authorization: Bearer {{jwtToken}}
+  content-type: application/json
+  ~DNT: 1
+  ~Sec-GPC: 1
+  ~Sec-Fetch-Dest: empty
+  ~Sec-Fetch-Mode: cors
+  ~Sec-Fetch-Site: same-origin
+  ~User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:133.0) Gecko/20100101 Firefox/133.0
+  ~Accept: application/json
+  ~Priority: u=4
+}
+
+assert {
+  res.status: eq 200
+}
+
+tests {
+  const HERO_HEADER = 'Добро пожаловать\u2028в Дом молитвы';
+  const ABOUT_US = 'О нас';
+  const HOW_TO_BECOME_A_CHRISTIAN = 'Как стать христианином?';
+  const NEW_YEAR = 'Новый год!';
+  
+  test(`API response has title: ${HERO_HEADER}`, () => {
+    expect(res.body.results[0].Hero_header.Title).to.include(HERO_HEADER);
+  });
+  
+  test(`API response has heading: ${ABOUT_US}`, () => {
+    expect(res.body.results[0].About_us.Title).to.include(ABOUT_US);
+  });
+  
+  test(`API response has heading: ${HOW_TO_BECOME_A_CHRISTIAN}`, () => {
+    expect(res.body.results[0].How_to_become_a_christian.Title).to.include(HOW_TO_BECOME_A_CHRISTIAN);
+  });
+  
+  test(`API response has event: ${NEW_YEAR}`, () => {
+    expect(res.body.results[0].Events[0].Title).to.include(NEW_YEAR);
+  });
+  
+  test(`API response has status: published`, () => {
+    expect(res.body.results[0].status).to.include('published');
+  });
+}

@@ -1,0 +1,42 @@
+meta {
+  name: login admin
+  type: http
+  seq: 6
+}
+
+post {
+  url: {{baseStrapiAdminUrl}}/admin/login
+  body: json
+  auth: none
+}
+
+headers {
+  authorization: Bearer
+  content-type: application/json
+  Sec-Fetch-Mode: cors
+  Sec-Fetch-Site: same-origin
+  User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:133.0) Gecko/20100101 Firefox/133.0
+  Accept: application/json
+  Sec-Fetch-Dest: empty
+  Origin: http://localhost:1337
+  DNT: 1
+  Sec-GPC: 1
+  ~Connection: keep-alive
+  ~Priority: u=0
+}
+
+body:json {
+  {"email":"{{devAdminEmail}}","password":"{{devAdminPassword}}"}
+}
+
+assert {
+  res.status: eq 200
+  res.body.data.user.isActive: isTruthy
+  res.body.data.user.blocked: isFalsy
+  res.body.data.user.email: eq {{devAdminEmail}}
+  res.body.data.token: isString 
+}
+
+script:post-response {
+  bru.setEnvVar('jwtToken', res.body.data.token)
+}
