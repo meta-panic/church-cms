@@ -54,7 +54,7 @@ export default async function RootLayout({
   if (!isDevelopment) {
     return (
       <html lang="ru">
-        <body className={`${bebas.variable} ${ralewayRegular.variable} ${ralewayItalic.variable} ${ralewaySemiBold.variable}`}>
+        <body className={`${bebas.variable} ${ralewayRegular.variable} ${ralewayItalic.variable} ${ralewaySemiBold.variable} lightBlock`}>
           <Stub />
         </body>
       </html>

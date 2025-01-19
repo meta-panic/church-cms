@@ -10,8 +10,8 @@ body {
 
 body {
   color: var(--default-text);
-  /*background: var(--default-surface-light);*/
-  background: var(--accent-800);
+  background: var(--default-surface-light);
+  /*background: var(--accent-800);*/
   font-family: Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
