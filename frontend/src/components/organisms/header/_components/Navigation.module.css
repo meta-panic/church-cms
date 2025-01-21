@@ -1,10 +1,16 @@
 .navigation {
   display: flex;
   flex-direction: row;
-  gap: 12px;
+  gap: var(--spacing-xs);
   align-items: center;
 }
 
 .navigationItem {
   cursor: pointer;
+}
+
+@media (min-width: 1280px) {
+  .navigation {
+    gap: 12px;
+  }
 }

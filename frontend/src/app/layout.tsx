@@ -1,13 +1,4 @@
-import Header from "@/components/organisms/header";
-import { isDebug } from "@/utils/isDebug";
 import localFont from "next/font/local";
-import cx from "classnames";
-
-import layoutStyles from "./layout.module.css";
-import pageStyles from "./page.module.css";
-import Section from "@/components/atoms/section/Section";
-import { navItemsDesktop, navItemsMobileAndTablet } from "@/configuration/navigation";
-import Stub from "@/components/organisms/stub/Stub";
 
 import "../styles/reset.css";
 import "../styles/colours.css";
@@ -41,46 +32,18 @@ const ralewaySemiBold = localFont({
 });
 
 
-
-
 export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const isDevelopment = await isDebug();
-
-
-  if (!isDevelopment) {
-    return (
-      <html lang="ru">
-        <body className={`${bebas.variable} ${ralewayRegular.variable} ${ralewayItalic.variable} ${ralewaySemiBold.variable} lightBlock`}>
-          <Stub />
-        </body>
-      </html>
-    );
-  }
 
   return (
     <html lang="ru">
-      <body className={`${bebas.variable} ${ralewayRegular.variable} ${ralewayItalic.variable} ${ralewaySemiBold.variable} lightBlock`}>
-        <div className={pageStyles.layoutContainer}>
-
-          <Header
-            navItemsDesktop={navItemsDesktop}
-            navItemsMobile={navItemsMobileAndTablet}
-          />
-
-          {children}
-
-          <footer className={cx(layoutStyles.footer)}>
-            <Section>
-              <div style={{ backgroundColor: "gray" }}>
-                Footer content
-              </div></Section>
-          </footer>
-
-        </div>
+      <body
+        className={`${bebas.variable} ${ralewayRegular.variable} ${ralewayItalic.variable} ${ralewaySemiBold.variable} lightBlock`}
+      >
+        {children}
       </body>
     </html>
   );

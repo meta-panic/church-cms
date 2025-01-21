@@ -1,6 +1,9 @@
 services:
   frontend:
     tty: true
+    depends_on:
+      - cms
+      - db
     build:
       context: ../frontend
       dockerfile: ../dev-config/Dockerfile.frontend.prod
@@ -18,6 +21,8 @@ services:
       - strapi
   cms:
     tty: true
+    depends_on:
+      - db
     build:
       context: ../cms
       dockerfile: ../dev-config/Dockerfile.cms
