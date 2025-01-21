@@ -2,9 +2,9 @@ import Header from "@/components/organisms/header";
 import cx from "classnames";
 
 import layoutStyles from "./layout.module.css";
-import styles from "./layout.module.css";
 import Section from "@/components/atoms/section/Section";
 import { navItemsDesktop, navItemsMobileAndTablet } from "@/configuration/navigation";
+import { getContactsData } from "@/lib/fetchData";
 
 
 export default async function RootLayout({
@@ -13,8 +13,15 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
 
+  const contactData = await getContactsData();
+  console.log("contactData - ", contactData);
   return (
     <div>
+
+      {/* [for debbug] Hidden div with the current date and time */}
+      <div style={{ display: "none" }}>
+        {new Date().toString()}
+      </div>
 
       <Header
         navItemsDesktop={navItemsDesktop}
