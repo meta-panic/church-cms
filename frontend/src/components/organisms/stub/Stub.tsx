@@ -1,6 +1,5 @@
 import Image from "next/image";
 
-import Section from "@/components/atoms/section/Section";
 import Typography from "@/components/atoms/typography/Typography";
 
 import styles from "./Stub.module.css";

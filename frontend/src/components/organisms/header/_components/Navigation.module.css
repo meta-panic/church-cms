@@ -7,10 +7,11 @@
 
 .navigationItem {
   cursor: pointer;
+  text-shadow: inherit;
 }
 
 @media (min-width: 1280px) {
   .navigation {
-    gap: 12px;
+    gap: 16px;
   }
 }
