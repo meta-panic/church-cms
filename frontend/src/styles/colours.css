@@ -18,18 +18,31 @@
   --accent-700: #687a72;
   --accent-800: #5a6e64;
   --accent-900: #486054;
-  --common-transparent-0: #ffffff;
+
   --common-light-0: #ffffff;
   --brand-0: #eeeeee;
-  --common-transparent-100: #ffffff;
-  --common-transparent-200: #ffffff;
-  --common-transparent-300: #ffffff;
-  --common-transparent-400: #ffffff;
-  --common-transparent-500: #ffffff;
-  --common-transparent-600: #ffffff;
-  --common-transparent-700: #ffffff;
-  --common-transparent-800: #ffffff;
-  --common-transparent-900: #ffffff;
+
+  --common-transparent-0: rgba(255, 255, 255, 0);
+  --common-transparent-100: rgba(255, 255, 255, 0.1);
+  /* 10% opacity */
+  --common-transparent-200: rgba(255, 255, 255, 0.2);
+  /* 20% opacity */
+  --common-transparent-300: rgba(255, 255, 255, 0.3);
+  /* 30% opacity */
+  --common-transparent-400: rgba(255, 255, 255, 0.4);
+  /* 40% opacity */
+  --common-transparent-500: rgba(255, 255, 255, 0.5);
+  /* 50% opacity */
+  --common-transparent-600: rgba(255, 255, 255, 0.6);
+  /* 60% opacity */
+  --common-transparent-700: rgba(255, 255, 255, 0.7);
+  /* 70% opacity */
+  --common-transparent-800: rgba(255, 255, 255, 0.8);
+  /* 80% opacity */
+  --common-transparent-900: rgba(255, 255, 255, 0.9);
+  /* 90% opacity */
+
+
   --common-dark-900: #3d444a;
   --common-dark-800: #5f646a;
   --common-dark-700: #6d7175;
