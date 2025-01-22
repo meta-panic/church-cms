@@ -1,5 +1,5 @@
 export type NavItem = {
-  href: EXISTING_URLS | EXISTING_ANCORNS;
+  href: ExistingUrls | ExistingAncorns;
   text: string;
 };
 
@@ -12,14 +12,18 @@ export type NavItemMobile = NavItem & {
   showInPopup: boolean;
 }
 
-export type EXISTING_URLS = "/history"
-  | "/how-to-become-a-cristian"
-  | "/public-service"
-  | "/our-symbols"
-  | "/videos"
-  ;
+export const EXISTING_URLS = [
+  "/history",
+  "/how-to-become-a-cristian",
+  "/public-service",
+  "/our-symbols",
+  "/videos",
+  "/beta", // it is a root
+] as const;
 
-export type EXISTING_ANCORNS = "#services" | "#footer";
+export type ExistingUrls = typeof EXISTING_URLS[number];
+
+export type ExistingAncorns = "#services" | "#footer";
 
 export const navItemsDesktop: NavItemDesktop[] = [
   {

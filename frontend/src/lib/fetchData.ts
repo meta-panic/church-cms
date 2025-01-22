@@ -1,6 +1,6 @@
 import "server-only";
 import qs from "qs";
-import { PageLanding, Service, Global as ContactInfo } from "@/types";
+import { PageLanding, Service as DivineService, Global as ContactInfo } from "@/types";
 
 
 const landingPageQuery = qs.stringify(
@@ -65,32 +65,43 @@ const queryGlobal = qs.stringify(
 
 export async function getLandingPageData(): Promise<{
   landingInfo: PageLanding;
-  divineServices: Service;
-}> {
-  const NEXT_PUBLIC_BACKEND_URL = "cms:1337";
-  const landingInfo: PageLanding =
-    await fetch(`http://${NEXT_PUBLIC_BACKEND_URL}/api/page-landings?${landingPageQuery}`)
-      .then((res) => res.json());
+  divineServices: Record<string, DivineService>;
+} | undefined> {
+  const NEXT_PUBLIC_BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
+
+  try {
+    const landingInfo: { data: Record<string, PageLanding> } =
+      await fetch(`http://${NEXT_PUBLIC_BACKEND_URL}/api/page-landings?${landingPageQuery}`)
+        .then((res) => res.json());
 
 
-  const divineServices: Service =
-    await fetch(`http://${NEXT_PUBLIC_BACKEND_URL}/api/services?${divineServicesQuery}`)
-      .then((res) => res.json());
+    const divineServices: { data: Record<string, DivineService> } =
+      await fetch(`http://${NEXT_PUBLIC_BACKEND_URL}/api/services?${divineServicesQuery}`)
+        .then((res) => res.json());
 
-  return {
-    landingInfo,
-    divineServices,
-  };
+    return {
+      landingInfo: landingInfo.data["0"],
+      divineServices: divineServices.data,
+    };
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.error("Some error occured durign fetching data for a landing page - ", err);
+  }
 };
 
 
 
-export async function getContactsData(): Promise<ContactInfo> {
-  const NEXT_PUBLIC_BACKEND_URL = "cms:1337";
+export async function getContactsData(): Promise<ContactInfo | undefined> {
+  const NEXT_PUBLIC_BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 
-  const responce: { data: ContactInfo } =
-    await fetch(`http://${NEXT_PUBLIC_BACKEND_URL}/api/global?${queryGlobal}`)
-      .then((res) => res.json());
+  try {
+    const responce: { data: ContactInfo } =
+      await fetch(`http://${NEXT_PUBLIC_BACKEND_URL}/api/global?${queryGlobal}`)
+        .then((res) => res.json());
 
-  return responce.data;
+    return responce.data;
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.error("Some error occured durign fetching contact data - ", err);
+  }
 };

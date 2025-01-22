@@ -26,6 +26,8 @@ export async function GET(request: NextRequest) {
 
   if (path) {
     revalidatePath(path);
+    // eslint-disable-next-line no-console
+    console.info(`Path: "${path}" just got revalidated`);
     return Response.json({ revalidated: true, now: Date.now() });
   }
 
