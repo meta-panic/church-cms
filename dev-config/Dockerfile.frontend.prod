@@ -1,3 +1,5 @@
+ARG NEXT_PUBLIC_BACKEND_URL
+
 FROM node:18-alpine AS base
 
 # Install dependencies only when needed
@@ -12,6 +14,11 @@ RUN npm ci --include=optional sharp
 
 # Rebuild the source code only when needed
 FROM base AS builder
+
+# Copy environment variables to the build context
+ARG NEXT_PUBLIC_BACKEND_URL
+ENV NEXT_PUBLIC_BACKEND_URL=${NEXT_PUBLIC_BACKEND_URL}
+
 WORKDIR /app
 RUN apk add --no-cache bash # Install bash
 

@@ -1,5 +1,7 @@
 # syntax=docker.io/docker/dockerfile:1
 
+ARG NEXT_PUBLIC_BACKEND_URL
+
 FROM node:18-alpine
 
 WORKDIR /app
@@ -13,6 +15,9 @@ RUN npm install -g @usebruno/cli@1.38.1
 
 RUN npm ci --include=optional sharp
 
+# Copy environment variables to the build context
+ARG NEXT_PUBLIC_BACKEND_URL
+ENV NEXT_PUBLIC_BACKEND_URL=${NEXT_PUBLIC_BACKEND_URL}
 
 COPY src ./src
 COPY public ./public
