@@ -25,6 +25,7 @@ export const Hero: React.FC<HeroProps> = ({ src, content }) => {
           style={{
             objectPosition: "50% 60%",
           }}
+          className={styles.heroImage}
         />
       </div>
       <div className={styles.heroContent}>
