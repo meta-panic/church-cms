@@ -1,3 +1,4 @@
+"use client";
 import { StaticImageData } from "next/image";
 import cx from "classnames";
 
@@ -5,6 +6,9 @@ import { Hero } from "@/components/organisms/hero/Hero";
 import Section from "@/components/atoms/section/Section";
 import Typography from "@/components/atoms/typography/Typography";
 import { ComponentContentBlocksInfoBlock as HeroBlock } from "@/types";
+import Button from "@/components/atoms/Button/Button";
+import { BREAKPOINTS, useMediaQuery } from "@/hooks/useMediaQuery";
+import ClientOnly from "@/components/organisms/header/_components/ClientOnly";
 
 import styles from "./MainPage.module.css";
 
@@ -18,6 +22,8 @@ export const MainPage: React.FC<MainPageProps> = ({
   srcBackgroundHeroImage,
   heroData,
 }) => {
+  const isMobile = useMediaQuery(BREAKPOINTS.mobile);
+
   return (
     <>
       {
@@ -32,7 +38,16 @@ export const MainPage: React.FC<MainPageProps> = ({
                     return <div className={styles.text} key={description?.id}><Typography tag="body">{description?.body}</Typography><br /></div>;
                   })}
                 </div>
-                <button style={{ width: "200px" }}>{heroData.Button?.Button_text}</button>
+                <ClientOnly>
+                  <Button
+                    link="/internal-page"
+                    variant="ghost"
+                    text={heroData.Button?.Button_text || "Узнать больше"}
+                    on="onBrand"
+                    size="L"
+                    wide={!!isMobile}
+                  />
+                </ClientOnly>
               </div>
             </div>
           }

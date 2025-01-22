@@ -3,6 +3,9 @@
   --current-size: "mobile";
   --card-border-radious: 4px;
   --button-border-radious: 4px;
+  --button-border-size-default: 2px;
+  --button-border-size-active: 4px;
+
   --font-font-size-h1-font-size: 36px;
   --font-font-size-h2-font-size: 32px;
   --font-font-size-h3-font-size: 24px;
