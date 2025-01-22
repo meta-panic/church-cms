@@ -2,6 +2,7 @@ import React from "react";
 import cx from "classnames";
 
 import styles from "./Button.module.css";
+import Typography from "../typography/Typography";
 
 
 interface ButtonProps {
@@ -30,7 +31,7 @@ const Button: React.FC<ButtonProps> = ({ link, text, isActive, wide, variant = "
 
   return (
     <a href={link} className={classNames}>
-      {text}
+      <Typography tag="body">{text}</Typography>
     </a>
   );
 };

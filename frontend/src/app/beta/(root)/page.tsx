@@ -1,6 +1,5 @@
 import { Metadata } from "next";
 
-import srcBackgroundHeroImage from "/public/background.jpg";
 import { MainPage } from "@/components/templates/MainPage/MainPage";
 import { getLandingPageData } from "../../../lib/fetchData";
 
@@ -33,7 +32,7 @@ export default async function App() {
 
       <MainPage
         heroData={landingInfo.Hero_header!} // TODO: make the prop not optional
-        srcBackgroundHeroImage={srcBackgroundHeroImage}
+        aboutUs={landingInfo.About_us!} // TODO: make the prop not optional
       />
 
     </>
