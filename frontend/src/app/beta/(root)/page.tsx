@@ -1,4 +1,3 @@
-//export const dynamic = "force-static";
 import { Metadata } from "next";
 
 import srcBackgroundHeroImage from "/public/background.jpg";
@@ -16,9 +15,15 @@ export const metadata: Metadata = {
 
 
 export default async function App() {
-  const { landingInfo } = await getLandingPageData();
+  const data = await getLandingPageData();
 
-  console.log("landingInfo - ", landingInfo);
+  if (!data || !data?.landingInfo || !data?.divineServices) {
+    // not render any text till BE is availible and the static page is revalidated
+    return null;
+  }
+
+  const { landingInfo } = data;
+
   return (
     <>
       {/* [for debbug] Hidden div with the current date and time */}
@@ -27,6 +32,7 @@ export default async function App() {
       </div>
 
       <MainPage
+        heroData={landingInfo.Hero_header!} // TODO: make the prop not optional
         srcBackgroundHeroImage={srcBackgroundHeroImage}
       />
 
