@@ -1,13 +1,8 @@
-
-
-
-
-import { Hero } from "@/components/organisms/hero/Hero";
-
-
-import styles from "./page.module.css";
+//export const dynamic = "force-static";
 import { Metadata } from "next";
 
+import Section from "@/components/atoms/section/Section";
+import Stub from "@/components/organisms/stub/Stub";
 
 export const metadata: Metadata = {
   title: "Дом молитвы",
@@ -18,18 +13,11 @@ export const metadata: Metadata = {
 };
 
 
-export default async function Home() {
+export default async function App() {
   return (
-    <>
-      <Hero />
-
-      <section className={styles.section}>
-        <div style={{ backgroundColor: "red" }}>section-1</div>
-      </section>
-
-      <section className={styles.section}>
-        <div style={{ backgroundColor: "red", color: "green" }}>section-2</div>
-      </section>
-    </>
+    <Section>
+      <Stub />
+    </Section>
   );
 }
+

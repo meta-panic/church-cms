@@ -1,12 +1,15 @@
-import React from "react";
-import Image from "next/image";
+import React, { JSX } from "react";
+import Image, { StaticImageData } from "next/image";
 
-import srcBackgroundHeroImage from "../../../../public/background.jpg";
 import styles from "./Hero.module.css";
 import Section from "@/components/atoms/section/Section";
 
+interface HeroProps {
+  src: StaticImageData;
+  content: JSX.Element;
+}
 
-export const Hero: React.FC = ({ }) => {
+export const Hero: React.FC<HeroProps> = ({ src, content }) => {
   return (
     <div className={styles.heroWrapper}>
       <div className={styles.imageWrapper}>
@@ -14,7 +17,7 @@ export const Hero: React.FC = ({ }) => {
           priority
           loading="eager"
           placeholder="blur"
-          src={srcBackgroundHeroImage}
+          src={src}
           layout="fill"
           objectFit="cover"
           objectPosition="center"
@@ -22,10 +25,11 @@ export const Hero: React.FC = ({ }) => {
           style={{
             objectPosition: "50% 60%",
           }}
+          className={styles.heroImage}
         />
       </div>
       <div className={styles.heroContent}>
-        <Section className={styles.contentWrapper}><div>text text</div></Section>
+        <Section className={styles.contentWrapper}>{content}</Section>
       </div>
     </div>
   );

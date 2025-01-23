@@ -3,6 +3,18 @@
   flex-direction: column;
 }
 
+@media (max-width: 400px) {
+  .heroImage {
+    filter: blur(1px);
+  }
+}
+
+@media (max-width: 350px) {
+  .heroImage {
+    filter: blur(2px);
+  }
+}
+
 .heroContent {
   top: 86px;
   height: calc(100vh - 86px);

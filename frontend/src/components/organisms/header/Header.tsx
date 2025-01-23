@@ -8,6 +8,7 @@ import { BREAKPOINTS, useMediaQuery } from "@/hooks/useMediaQuery";
 import { DesktopHeader } from "./variants/DesktopHeader";
 import { MobileHeader } from "./variants/MobileHeader";
 import ClientOnly from "./_components/ClientOnly";
+import { isRootPath } from "@/utils/isRoot";
 
 import styles from "./Header.module.css";
 
@@ -20,7 +21,7 @@ interface HeaderProps {
 export const Header: React.FC<HeaderProps> = ({ navItemsDesktop, navItemsMobile }) => {
   const isDesktop = useMediaQuery(BREAKPOINTS.desktop);
   const pathname = usePathname();
-  const isHomePage = pathname === "/";
+  const isHomePage = isRootPath(pathname);
   const showDesktopVariant = isDesktop && isHomePage;
 
   return (
