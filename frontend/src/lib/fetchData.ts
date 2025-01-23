@@ -79,8 +79,10 @@ export async function getLandingPageData(): Promise<{
       await fetch(`http://${NEXT_PUBLIC_BACKEND_URL}/api/services?${divineServicesQuery}`)
         .then((res) => res.json());
 
+    console.log("landingInfo - ", landingInfo);
+    console.log("divineServices - ", divineServices);
     return {
-      landingInfo: landingInfo.data["0"],
+      landingInfo: landingInfo.data[0],
       divineServices: divineServices.data,
     };
   } catch (err) {

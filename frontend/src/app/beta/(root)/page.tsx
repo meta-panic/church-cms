@@ -25,7 +25,7 @@ export default async function App() {
 
   return (
     <>
-      {/* [for debbug] Hidden div with the current date and time */}
+      {/* [for debug] Hidden div with the current date and time */}
       <div style={{ display: "none" }}>
         {new Date().toString()}
       </div>
@@ -33,6 +33,7 @@ export default async function App() {
       <MainPage
         heroData={landingInfo.Hero_header!} // TODO: make the prop not optional
         aboutUs={landingInfo.About_us!} // TODO: make the prop not optional
+        HTBChristian={landingInfo.How_to_become_a_christian!} // TODO: make the prop not optional
       />
 
     </>

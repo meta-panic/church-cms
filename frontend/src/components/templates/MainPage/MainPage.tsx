@@ -1,22 +1,25 @@
 import { Hero } from "@/components/organisms/hero/Hero";
-import { AboutUs } from "@/components/organisms/aboutUs/AboutUs";
 import Section from "@/components/atoms/section/Section";
+import { MainHeroContent } from "./components/MainHeroContent";
+import { HowToBecomeAChristian } from "./components/HowToBecomeAChristian";
 import { ComponentContentBlocksInfoBlock } from "@/types";
 import srcBackgroundHeroImage from "/public/background.jpg";
 
 import styles from "./MainPage.module.css";
-import { MainHeroContent } from "./components/MainHeroContent";
+import { AboutUs } from "./components/AboutUs";
 
 
 interface MainPageProps {
   heroData: ComponentContentBlocksInfoBlock;
   aboutUs: ComponentContentBlocksInfoBlock;
+  HTBChristian: ComponentContentBlocksInfoBlock;
 }
 
 export const MainPage: React.FC<MainPageProps> = ({
-  heroData, aboutUs,
+  heroData, aboutUs, HTBChristian,
 }) => {
 
+  console.log("HTBChristian - ", HTBChristian);
   return (
     <>
       <Hero
@@ -33,8 +36,12 @@ export const MainPage: React.FC<MainPageProps> = ({
         <AboutUs aboutUs={aboutUs} />
       </Section>
 
-      <Section className={styles.section}>
-        <div style={{ backgroundColor: "red", color: "green" }}>section-2</div>
+      <Section className={styles.howToBecomeAChristianContainer}>
+        <HowToBecomeAChristian
+          title={HTBChristian.Title || "Как стать христианином?"}
+          description={HTBChristian.description}
+          button={HTBChristian.Button}
+        />
       </Section>
 
     </>
