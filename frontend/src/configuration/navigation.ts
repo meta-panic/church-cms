@@ -1,5 +1,5 @@
 export type NavItem = {
-  href: ExistingUrls | ExistingAncorns;
+  href: ExistingUrls | ExistingAnchors;
   text: string;
 };
 
@@ -23,7 +23,7 @@ export const EXISTING_URLS = [
 
 export type ExistingUrls = typeof EXISTING_URLS[number];
 
-export type ExistingAncorns = "#services" | "#footer";
+export type ExistingAnchors = "#services" | "#footer";
 
 export const navItemsDesktop: NavItemDesktop[] = [
   {

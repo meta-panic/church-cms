@@ -5,13 +5,13 @@ import Link from "next/link";
 
 import { WithPopup } from "@/components/atoms/withPopup/WithPopup";
 import DropdownContent from "@/components/molecules/DropdownContent/DropdownContent";
-import type { ExistingUrls, ExistingAncorns } from "@/configuration/navigation";
+import type { ExistingUrls, ExistingAnchors } from "@/configuration/navigation";
 
 import styles from "./Navigation.module.css";
 
 
 export interface RegularItem {
-  href: ExistingUrls | ExistingAncorns;
+  href: ExistingUrls | ExistingAnchors;
   text: string;
 }
 
@@ -28,7 +28,7 @@ interface NavigationProps {
 export const Navigation: React.FC<NavigationProps> = ({ renderItem, items }) => {
   const router = useRouter();
 
-  const handleNavigation = useCallback((href: ExistingUrls | ExistingAncorns) => {
+  const handleNavigation = useCallback((href: ExistingUrls | ExistingAnchors) => {
     if (href.startsWith("#")) {
       // Handle anchor navigation
       const element = document.querySelector(href);
