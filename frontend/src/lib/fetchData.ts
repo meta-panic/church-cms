@@ -79,13 +79,16 @@ export async function getLandingPageData(): Promise<{
       await fetch(`http://${NEXT_PUBLIC_BACKEND_URL}/api/services?${divineServicesQuery}`)
         .then((res) => res.json());
 
+    console.log("landingInfo - ", landingInfo);;
+    console.log("divineServices - ", divineServices);
+
     return {
-      landingInfo: landingInfo.data["0"],
+      landingInfo: landingInfo.data[0],
       divineServices: divineServices.data,
     };
   } catch (err) {
     // eslint-disable-next-line no-console
-    console.error("Some error occured durign fetching data for a landing page - ", err);
+    console.error("Some error occured during fetching data for a landing page - ", err);
   }
 };
 
@@ -102,6 +105,6 @@ export async function getContactsData(): Promise<ContactInfo | undefined> {
     return responce.data;
   } catch (err) {
     // eslint-disable-next-line no-console
-    console.error("Some error occured durign fetching contact data - ", err);
+    console.error("Some error occured during fetching contact data - ", err);
   }
 };
