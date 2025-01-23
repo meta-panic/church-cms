@@ -10,7 +10,7 @@
     "lint:fix": "next lint --fix",
     "bru-local": "cd tests/bruno-frontend-collection/ && bru run --env local-environment",
     "bru-prod": "cd tests/bruno-frontend-collection/ && bru run --env prod-environment",
-    "generate": "graphql-codegen"
+    "gen:be-types": "graphql-codegen"
   },
   "dependencies": {
     "classnames": "^2.5.1",

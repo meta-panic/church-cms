@@ -15,22 +15,26 @@
     "About_us": {
       "type": "component",
       "repeatable": false,
-      "component": "content-blocks.info-block"
+      "component": "content-blocks.info-block",
+      "required": true
     },
     "How_to_become_a_christian": {
       "type": "component",
       "repeatable": false,
-      "component": "content-blocks.info-block"
+      "component": "content-blocks.info-block",
+      "required": true
     },
     "Events": {
       "type": "component",
       "repeatable": true,
-      "component": "content-blocks.event"
+      "component": "content-blocks.event",
+      "required": true
     },
     "Hero_header": {
       "type": "component",
       "repeatable": false,
-      "component": "content-blocks.info-block"
+      "component": "content-blocks.info-block",
+      "required": true
     }
   }
 }

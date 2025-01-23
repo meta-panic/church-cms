@@ -223,6 +223,23 @@ type ComponentSharedSeo {
   shareImage: UploadFile
 }
 
+input ComponentSharedScheduleFiltersInput {
+  dayAndTime: StringFilterInput
+  and: [ComponentSharedScheduleFiltersInput]
+  or: [ComponentSharedScheduleFiltersInput]
+  not: ComponentSharedScheduleFiltersInput
+}
+
+input ComponentSharedScheduleInput {
+  id: ID
+  dayAndTime: String
+}
+
+type ComponentSharedSchedule {
+  id: ID!
+  dayAndTime: String!
+}
+
 input ComponentSharedRichTextFiltersInput {
   body: StringFilterInput
   and: [ComponentSharedRichTextFiltersInput]
@@ -694,6 +711,11 @@ input GlobalInput {
   phone: String
   email: String
   PrimalBuilding: ComponentSharedAddressInput
+  ok: String
+  vk: String
+  youtube: String
+  rutube: String
+  serviceSchedule: [ComponentSharedScheduleInput]
   publishedAt: DateTime
 }
 
@@ -703,6 +725,11 @@ type Global {
   phone: String
   email: String
   PrimalBuilding: ComponentSharedAddress
+  ok: String!
+  vk: String!
+  youtube: String!
+  rutube: String!
+  serviceSchedule(filters: ComponentSharedScheduleFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentSharedSchedule]
   createdAt: DateTime
   updatedAt: DateTime
   publishedAt: DateTime
@@ -732,10 +759,10 @@ input PageLandingInput {
 
 type PageLanding {
   documentId: ID!
-  About_us: ComponentContentBlocksInfoBlock
-  How_to_become_a_christian: ComponentContentBlocksInfoBlock
-  Events(filters: ComponentContentBlocksEventFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentContentBlocksEvent]
-  Hero_header: ComponentContentBlocksInfoBlock
+  About_us: ComponentContentBlocksInfoBlock!
+  How_to_become_a_christian: ComponentContentBlocksInfoBlock!
+  Events(filters: ComponentContentBlocksEventFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentContentBlocksEvent]!
+  Hero_header: ComponentContentBlocksInfoBlock!
   createdAt: DateTime
   updatedAt: DateTime
   publishedAt: DateTime
@@ -778,7 +805,7 @@ type ServiceEntityResponseCollection {
   pageInfo: Pagination!
 }
 
-union GenericMorph = ComponentSharedVkVideo | ComponentSharedSlider | ComponentSharedSeo | ComponentSharedRichText | ComponentSharedQuote | ComponentSharedMedia | ComponentSharedEmbeddedVideo | ComponentSharedButton | ComponentSharedAddress | ComponentServicesBlockHeader | ComponentServicesBlockCarouselView | ComponentContentBlocksInfoBlock | ComponentContentBlocksEvent | UploadFile | I18NLocale | ReviewWorkflowsWorkflow | ReviewWorkflowsWorkflowStage | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser | Global | PageLanding | Service
+union GenericMorph = ComponentSharedVkVideo | ComponentSharedSlider | ComponentSharedSeo | ComponentSharedSchedule | ComponentSharedRichText | ComponentSharedQuote | ComponentSharedMedia | ComponentSharedEmbeddedVideo | ComponentSharedButton | ComponentSharedAddress | ComponentServicesBlockHeader | ComponentServicesBlockCarouselView | ComponentContentBlocksInfoBlock | ComponentContentBlocksEvent | UploadFile | I18NLocale | ReviewWorkflowsWorkflow | ReviewWorkflowsWorkflowStage | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser | Global | PageLanding | Service
 
 input FileInfoInput {
   name: String

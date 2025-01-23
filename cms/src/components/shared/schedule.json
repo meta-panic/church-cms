@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_shared_schedules",
+  "info": {
+    "displayName": "schedule",
+    "icon": "apps",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "dayAndTime": {
+      "type": "string",
+      "regex": "^(Понедельник|Вторник|Среда|Четверг|Пятница|Суббота|Воскресенье) - ([01]\\d|2[0-3]):[0-5]\\d$",
+      "required": true
+    }
+  }
+}

@@ -26,6 +26,27 @@
       "type": "component",
       "repeatable": false,
       "component": "shared.address"
+    },
+    "ok": {
+      "type": "string",
+      "required": true
+    },
+    "vk": {
+      "type": "string",
+      "required": true
+    },
+    "youtube": {
+      "type": "string",
+      "required": true
+    },
+    "rutube": {
+      "type": "string",
+      "required": true
+    },
+    "serviceSchedule": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.schedule"
     }
   }
 }

@@ -1,33 +1,5 @@
 import type { Struct, Schema } from '@strapi/strapi';
 
-export interface ServicesBlockHeader extends Struct.ComponentSchema {
-  collectionName: 'components_services_block_headers';
-  info: {
-    displayName: 'Header';
-    icon: 'wheelchair';
-  };
-  attributes: {
-    Title: Schema.Attribute.String;
-    What_do_we_do: Schema.Attribute.Component<'shared.rich-text', true>;
-    How_do_we_do: Schema.Attribute.Component<'shared.rich-text', true>;
-  };
-}
-
-export interface ServicesBlockCarouselView extends Struct.ComponentSchema {
-  collectionName: 'components_services_block_carousel_views';
-  info: {
-    displayName: 'Carousel_view';
-    icon: 'medium';
-  };
-  attributes: {
-    Carousel_service_name: Schema.Attribute.String & Schema.Attribute.Required;
-    Carousel_service_image: Schema.Attribute.Media<'images' | 'files'> &
-      Schema.Attribute.Required;
-    Carousel_service_description: Schema.Attribute.Text &
-      Schema.Attribute.Required;
-  };
-}
-
 export interface SharedVkVideo extends Struct.ComponentSchema {
   collectionName: 'components_shared_vk_videos';
   info: {
@@ -65,6 +37,18 @@ export interface SharedSeo extends Struct.ComponentSchema {
     metaTitle: Schema.Attribute.String & Schema.Attribute.Required;
     metaDescription: Schema.Attribute.Text & Schema.Attribute.Required;
     shareImage: Schema.Attribute.Media<'images'>;
+  };
+}
+
+export interface SharedSchedule extends Struct.ComponentSchema {
+  collectionName: 'components_shared_schedules';
+  info: {
+    displayName: 'schedule';
+    icon: 'apps';
+    description: '';
+  };
+  attributes: {
+    dayAndTime: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
 
@@ -144,6 +128,34 @@ export interface SharedAddress extends Struct.ComponentSchema {
   };
 }
 
+export interface ServicesBlockHeader extends Struct.ComponentSchema {
+  collectionName: 'components_services_block_headers';
+  info: {
+    displayName: 'Header';
+    icon: 'wheelchair';
+  };
+  attributes: {
+    Title: Schema.Attribute.String;
+    What_do_we_do: Schema.Attribute.Component<'shared.rich-text', true>;
+    How_do_we_do: Schema.Attribute.Component<'shared.rich-text', true>;
+  };
+}
+
+export interface ServicesBlockCarouselView extends Struct.ComponentSchema {
+  collectionName: 'components_services_block_carousel_views';
+  info: {
+    displayName: 'Carousel_view';
+    icon: 'medium';
+  };
+  attributes: {
+    Carousel_service_name: Schema.Attribute.String & Schema.Attribute.Required;
+    Carousel_service_image: Schema.Attribute.Media<'images' | 'files'> &
+      Schema.Attribute.Required;
+    Carousel_service_description: Schema.Attribute.Text &
+      Schema.Attribute.Required;
+  };
+}
+
 export interface ContentBlocksInfoBlock extends Struct.ComponentSchema {
   collectionName: 'components_content_blocks_info_blocks';
   info: {
@@ -178,17 +190,18 @@ export interface ContentBlocksEvent extends Struct.ComponentSchema {
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
-      'services-block.header': ServicesBlockHeader;
-      'services-block.carousel-view': ServicesBlockCarouselView;
       'shared.vk-video': SharedVkVideo;
       'shared.slider': SharedSlider;
       'shared.seo': SharedSeo;
+      'shared.schedule': SharedSchedule;
       'shared.rich-text': SharedRichText;
       'shared.quote': SharedQuote;
       'shared.media': SharedMedia;
       'shared.embedded-video': SharedEmbeddedVideo;
       'shared.button': SharedButton;
       'shared.address': SharedAddress;
+      'services-block.header': ServicesBlockHeader;
+      'services-block.carousel-view': ServicesBlockCarouselView;
       'content-blocks.info-block': ContentBlocksInfoBlock;
       'content-blocks.event': ContentBlocksEvent;
     }
