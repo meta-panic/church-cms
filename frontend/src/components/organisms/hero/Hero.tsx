@@ -14,6 +14,7 @@ export const Hero: React.FC<HeroProps> = ({ src, content }) => {
     <div className={styles.heroWrapper}>
       <div className={styles.imageWrapper}>
         <Image
+          id="hero church background"
           priority
           loading="eager"
           placeholder="blur"
@@ -21,7 +22,7 @@ export const Hero: React.FC<HeroProps> = ({ src, content }) => {
           layout="fill"
           objectFit="cover"
           objectPosition="center"
-          alt="chapel under starry sky"
+          alt="Церковь с крестом на крыше на фоне ночного звездного неба"
           style={{
             objectPosition: "50% 60%",
           }}

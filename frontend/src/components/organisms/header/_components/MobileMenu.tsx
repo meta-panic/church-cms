@@ -1,10 +1,12 @@
 "use client";
 import React from "react";
 import cx from "classnames";
-import { RegularItem } from "../_components/Navigation";
-import styles from "./MobileMenu.module.css"; // Ensure this CSS file is updated
 import Link from "next/link";
+
+import { RegularItem } from "../_components/Navigation";
 import Typography from "@/components/atoms/typography/Typography";
+
+import styles from "./MobileMenu.module.css";
 
 interface MobileMenuProps {
   items: RegularItem[];
@@ -25,6 +27,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ items, onClose, isOpen }) => {
         role="button"
         aria-label="Close menu"
       />
+
       <nav className={styles.menuContent}>
         <ul>
           {items.map((item) => (
@@ -41,8 +44,8 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ items, onClose, isOpen }) => {
           ))}
           <li className={styles.item}><Typography tag="H2">†</Typography></li>
         </ul>
-
       </nav>
+
     </div>
   );
 };

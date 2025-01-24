@@ -1,6 +1,55 @@
 .container {
-  background-color: white;
-  max-width: 500px;
-  height: 400px;
+  display: flex;
+  height: 640px;
   width: 100%;
+  max-width: 500px;
+  border-radius: var(--card-border-radios) var(--card-border-radios) 0 0;
+  background-color: var(--default-surface-light);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+  padding: 0 var(--spacing-m) var(--spacing-l) var(--spacing-m);
+  flex-direction: column;
+
+  --pad-offset: var(--spacing-xl);
+  margin-top: var(--pad-offset);
+}
+
+.imageContainer {
+  display: flex;
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: var(--accent-300);
+  position: relative;
+  bottom: var(--pad-offset);
+  border-radius: var(--card-border-radios) var(--card-border-radios) 0 0;
+  padding: 0 var(--spacing-m);
+  padding-top: var(--spacing-3xl);
+  flex: 3;
+  box-shadow: var(--shadow--l);
+}
+
+.textContainer {
+  flex: 1;
+  color: var(--default-text);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-s);
+}
+
+.image {
+  position: relative;
+  width: 100%;
+  border-radius: var(--card-border-radios) var(--card-border-radios) 0 0;
+  overflow: hidden;
+}
+
+.title {
+  color: var(--brand-500);
+}
+
+.descriptions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
 }

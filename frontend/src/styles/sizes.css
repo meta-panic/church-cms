@@ -1,8 +1,9 @@
 /* Mobile-specific variables */
 :root {
   --current-size: "mobile";
-  --card-border-radious: 4px;
-  --button-border-radious: 4px;
+  --card-border-radios: 8px;
+  --popup-border-radios: 4px;
+  --button-border-radios: 4px;
   --button-border-size-default: 2px;
   --button-border-size-active: 4px;
 
@@ -38,8 +39,9 @@
 @media (min-width: 641px) {
   :root {
     --current-size: "tablet";
-    --card-border-radious: 4px;
-    --button-border-radious: 4px;
+    --card-border-radios: 8px;
+    --popup-border-radios: 4px;
+    --button-border-radios: 4px;
     --font-font-size-h1-font-size: 48px;
     --font-font-size-h2-font-size: 40px;
     --font-font-size-h3-font-size: 28px;
@@ -72,8 +74,9 @@
 @media (min-width: 1280px) {
   :root {
     --current-size: "desktop";
-    --card-border-radious: 4px;
-    --button-border-radious: 4px;
+    --card-border-radios: 8px;
+    --popup-border-radios: 4px;
+    --button-border-radios: 4px;
     --font-font-size-h1-font-size: 54px;
     --font-font-size-h2-font-size: 50px;
     --font-font-size-h3-font-size: 32px;

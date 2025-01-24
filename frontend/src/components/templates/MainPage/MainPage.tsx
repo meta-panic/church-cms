@@ -12,16 +12,19 @@ import { AboutUs } from "./components/AboutUs";
 interface MainPageProps {
   heroData: ComponentContentBlocksInfoBlock;
   aboutUs: ComponentContentBlocksInfoBlock;
-  HTBChristian: ComponentContentBlocksInfoBlock;
+  HTBChristian: {
+    blockInfo: ComponentContentBlocksInfoBlock,
+    phone: string,
+    telegram: string,
+  };
 }
 
 export const MainPage: React.FC<MainPageProps> = ({
   heroData, aboutUs, HTBChristian,
 }) => {
-
-  console.log("HTBChristian - ", HTBChristian);
   return (
     <>
+
       <Hero
         src={srcBackgroundHeroImage}
         content={
@@ -38,9 +41,11 @@ export const MainPage: React.FC<MainPageProps> = ({
 
       <Section className={styles.howToBecomeAChristianContainer}>
         <HowToBecomeAChristian
-          title={HTBChristian.Title || "Как стать христианином?"}
-          description={HTBChristian.description}
-          button={HTBChristian.Button}
+          title={HTBChristian.blockInfo.Title || "Как стать христианином?"}
+          description={HTBChristian.blockInfo.description}
+          button={HTBChristian.blockInfo.Button}
+          phone={HTBChristian.phone}
+          telegram={HTBChristian.telegram}
         />
       </Section>
 

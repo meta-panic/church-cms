@@ -1,17 +1,22 @@
 /* default link styles[on light] */
 .link {
   color: var(--default-components-link-fg);
-  text-decoration: underline;
   cursor: pointer;
   text-decoration: none;
   vertical-align: top;
+
+  font-size: var(--font-font-size-body-font-size);
+  line-height: var(--font-line-heigh-body);
+  font-family: var(--font-raleway-regular);
+
+  position: relative;
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  font-feature-settings: 'lnum' 1;
+  text-shadow: inherit;
 }
 
-.link {
-  position: relative;
-  opacity: 0.8;
-  transition: color .3s ease-in-out;
-}
 
 .link::before {
   content: '';
@@ -19,18 +24,19 @@
   bottom: -2px;
   width: 100%;
   height: 1px;
-  opacity: 0.5;
+  opacity: 1;
   background-color: var(--default-components-link-fg);
-  transition: opacity .5s ease-in-out;
+  transition: color .3s ease-in-out;
+  transition: opacity .3s ease-in-out;
 }
 
 .link:hover {
-  opacity: 1;
+  opacity: 0.8;
   color: var(--hover-components-link-fg);
 }
 
 .link:hover::before {
-  opacity: 1;
+  opacity: 0.8;
   background-color: var(--hover-components-link-fg);
 }
 

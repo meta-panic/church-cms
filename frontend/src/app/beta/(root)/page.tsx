@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 
 import { MainPage } from "@/components/templates/MainPage/MainPage";
-import { getLandingPageData } from "../../../lib/fetchData";
+import { getContactsData, getLandingPageData } from "../../../lib/fetchData";
 
 export const metadata: Metadata = {
   title: "Дом молитвы",
@@ -15,9 +15,10 @@ export const metadata: Metadata = {
 
 export default async function App() {
   const data = await getLandingPageData();
+  const contacts = await getContactsData();
 
-  if (!data || !data?.landingInfo || !data?.divineServices) {
-    // not render any text till BE is availible and the static page is revalidated
+  if (!data || !contacts || !data?.landingInfo || !data?.divineServices) {
+    // not render any text till BE is available and the static page is revalidated
     return null;
   }
 
@@ -31,9 +32,13 @@ export default async function App() {
       </div>
 
       <MainPage
-        heroData={landingInfo.Hero_header!} // TODO: make the prop not optional
-        aboutUs={landingInfo.About_us!} // TODO: make the prop not optional
-        HTBChristian={landingInfo.How_to_become_a_christian!} // TODO: make the prop not optional
+        heroData={landingInfo.Hero_header}
+        aboutUs={landingInfo.About_us}
+        HTBChristian={{
+          blockInfo: landingInfo.How_to_become_a_christian,
+          phone: contacts.phone,
+          telegram: contacts.telegram,
+        }}
       />
 
     </>

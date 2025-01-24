@@ -7,7 +7,7 @@
   position: absolute;
   z-index: 1000;
   min-width: 200px;
-  border-radius: var(--card-border-radious);
+  border-radius: var(--popup-border-radios);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 

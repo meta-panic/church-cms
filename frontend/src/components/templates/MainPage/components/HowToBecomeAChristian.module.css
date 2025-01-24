@@ -1,7 +1,8 @@
 .root {
   display: flex;
   justify-content: center;
-  padding: var(--spacing-3xl) 0;
+  padding-top: var(--spacing-3xl);
+  padding-bottom: var(--spacing-3xl);
   color: var(--default-text);
 }
 
@@ -24,6 +25,19 @@
   justify-content: center;
   width: 100%;
 }
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-m);
+}
+
+.passages {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-s);
+}
+
 
 /* tablet-min layout */
 @media screen and (min-width: 641px) {
