@@ -386,15 +386,15 @@ export type GenericMorph = ComponentContentBlocksEvent | ComponentContentBlocksI
 
 export type Global = {
   __typename?: "Global";
-  PrimalBuilding?: Maybe<ComponentSharedAddress>;
+  PrimalBuilding: ComponentSharedAddress;
   createdAt?: Maybe<Scalars["DateTime"]["output"]>;
   documentId: Scalars["ID"]["output"];
-  email?: Maybe<Scalars["String"]["output"]>;
+  email: Scalars["String"]["output"];
   ok: Scalars["String"]["output"];
-  phone?: Maybe<Scalars["String"]["output"]>;
+  phone: Scalars["String"]["output"];
   publishedAt?: Maybe<Scalars["DateTime"]["output"]>;
   rutube: Scalars["String"]["output"];
-  serviceSchedule?: Maybe<Array<Maybe<ComponentSharedSchedule>>>;
+  serviceSchedule: Array<Maybe<ComponentSharedSchedule>>;
   telegram: Scalars["String"]["output"];
   updatedAt?: Maybe<Scalars["DateTime"]["output"]>;
   vk: Scalars["String"]["output"];
@@ -1826,15 +1826,15 @@ export type GenericMorphResolvers<ContextType = any, ParentType extends Resolver
 };
 
 export type GlobalResolvers<ContextType = any, ParentType extends ResolversParentTypes["Global"] = ResolversParentTypes["Global"]> = {
-  PrimalBuilding?: Resolver<Maybe<ResolversTypes["ComponentSharedAddress"]>, ParentType, ContextType>;
+  PrimalBuilding?: Resolver<ResolversTypes["ComponentSharedAddress"], ParentType, ContextType>;
   createdAt?: Resolver<Maybe<ResolversTypes["DateTime"]>, ParentType, ContextType>;
   documentId?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
-  email?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  email?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   ok?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
-  phone?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  phone?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   publishedAt?: Resolver<Maybe<ResolversTypes["DateTime"]>, ParentType, ContextType>;
   rutube?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
-  serviceSchedule?: Resolver<Maybe<Array<Maybe<ResolversTypes["ComponentSharedSchedule"]>>>, ParentType, ContextType, RequireFields<GlobalServiceScheduleArgs, "pagination" | "sort">>;
+  serviceSchedule?: Resolver<Array<Maybe<ResolversTypes["ComponentSharedSchedule"]>>, ParentType, ContextType, RequireFields<GlobalServiceScheduleArgs, "pagination" | "sort">>;
   telegram?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   updatedAt?: Resolver<Maybe<ResolversTypes["DateTime"]>, ParentType, ContextType>;
   vk?: Resolver<ResolversTypes["String"], ParentType, ContextType>;

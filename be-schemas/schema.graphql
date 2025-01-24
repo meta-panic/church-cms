@@ -722,14 +722,14 @@ input GlobalInput {
 type Global {
   documentId: ID!
   telegram: String!
-  phone: String
-  email: String
-  PrimalBuilding: ComponentSharedAddress
+  phone: String!
+  email: String!
+  PrimalBuilding: ComponentSharedAddress!
   ok: String!
   vk: String!
   youtube: String!
   rutube: String!
-  serviceSchedule(filters: ComponentSharedScheduleFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentSharedSchedule]
+  serviceSchedule(filters: ComponentSharedScheduleFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentSharedSchedule]!
   createdAt: DateTime
   updatedAt: DateTime
   publishedAt: DateTime
