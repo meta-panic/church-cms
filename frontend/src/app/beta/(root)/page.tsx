@@ -15,9 +15,14 @@ export const metadata: Metadata = {
 
 export default async function App() {
   const data = await getLandingPageData();
-  const contacts = await getContactsData();
 
-  if (!data || !contacts || !data?.landingInfo || !data?.divineServices) {
+  if (!data || !data?.landingInfo || !data?.divineServices) {
+    // not render any text till BE is available and the static page is revalidated
+    return null;
+  }
+
+  const contacts = await getContactsData();
+  if (!contacts) {
     // not render any text till BE is available and the static page is revalidated
     return null;
   }
