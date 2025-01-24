@@ -37,3 +37,11 @@ section {
   --shadow--l: 0px 5px 20px rgba(0, 0, 0, 0.2);
   --shadow--m: 2px -2px 30px rgba(0, 0, 0, 0.08);
 }
+
+::-moz-selection {
+  background: var(--brand-400);
+}
+
+::selection {
+  background: var(--brand-400);
+}
