@@ -1,6 +1,6 @@
 .container {
   display: flex;
-  height: 640px;
+  height: 500px;
   width: 100%;
   max-width: 500px;
   border-radius: var(--card-border-radios) var(--card-border-radios) 0 0;
@@ -12,6 +12,19 @@
 
   --pad-offset: var(--spacing-xl);
   margin-top: var(--pad-offset);
+}
+
+/* tablet-min layout */
+@media screen and (min-width: 641px) {
+  .container {
+    height: 600px;
+  }
+}
+
+@media screen and (min-width: 899px) {
+  .container {
+    height: 640px;
+  }
 }
 
 .imageContainer {

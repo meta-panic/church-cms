@@ -1,44 +1,48 @@
 import { useState, useEffect } from "react";
 
-export function useMediaQuery(query: string): boolean | null {
-  // Default to false/true based on query for SSR
+type Sizes = typeof BREAKPOINTS[keyof typeof BREAKPOINTS][];
+
+export function useMediaQuery(queries: Sizes): boolean | null {
   const getInitialValue = () => {
-    // If we're in the browser, check the query
     if (typeof window !== "undefined") {
-      return window.matchMedia(query).matches;
+      return queries.some(query => window.matchMedia(query).matches);
     }
-    // For SSR, assume desktop if query is for desktop
-    return query.includes("min-width");
+
+    return queries.some(query => query.includes("min-width"));
   };
 
   const [matches, setMatches] = useState(getInitialValue);
 
   useEffect(() => {
-    // Ensure we're in the browser
     if (typeof window === "undefined") return;
 
-    const mediaQuery = window.matchMedia(query);
+    const mediaQueries = queries.map(query => window.matchMedia(query));
 
-    // Initial check
-    setMatches(mediaQuery.matches);
+    setMatches(mediaQueries.some(mediaQuery => mediaQuery.matches));
 
-    // Create event listener function
-    const handleChange = (event: MediaQueryListEvent) => {
-      setMatches(event.matches);
+    const handleChange = () => {
+      setMatches(mediaQueries.some(mediaQuery => mediaQuery.matches));
     };
 
-    // Modern browsers
-    mediaQuery.addEventListener("change", handleChange);
+    mediaQueries.forEach(mediaQuery => {
+      mediaQuery.addEventListener("change", handleChange);
+    });
 
-    // Cleanup
-    return () => mediaQuery.removeEventListener("change", handleChange);
-  }, [query]); // Re-run if query changes
+    return () => {
+      mediaQueries.forEach(mediaQuery => {
+        mediaQuery.removeEventListener("change", handleChange);
+      });
+    };
+  }, [queries]);
 
   return matches;
 }
 
+
 export const BREAKPOINTS = {
   mobile: "(max-width: 640px)",
   tablet: "(min-width: 641px) and (max-width: 1279px)",
+  tabletMin: "(min-width: 641px) and (max-width: 899px)",
+  tabletMax: "(min-width: 900px) and (max-width: 1279px)",
   desktop: "(min-width: 1280px)",
 } as const;

@@ -19,7 +19,7 @@ interface MainHeroContentProps {
 export const MainHeroContent: React.FC<MainHeroContentProps> = ({
   title, description, button,
 }) => {
-  const isMobile = useMediaQuery(BREAKPOINTS.mobile);
+  const isMobile = useMediaQuery([BREAKPOINTS.mobile]);
 
   return (
     <>

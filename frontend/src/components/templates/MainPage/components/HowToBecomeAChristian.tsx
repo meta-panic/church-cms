@@ -25,7 +25,7 @@ interface HowToBecomeAChristianProps {
 export const HowToBecomeAChristian: React.FC<HowToBecomeAChristianProps> = ({
   title, description, button, phone, telegram,
 }) => {
-  const isMobile = useMediaQuery(BREAKPOINTS.mobile);
+  const isSmall = useMediaQuery([BREAKPOINTS.mobile, BREAKPOINTS.tabletMin]);
 
   return (
     <div className={cx("darkBlock", styles.root)}>
@@ -52,7 +52,7 @@ export const HowToBecomeAChristian: React.FC<HowToBecomeAChristianProps> = ({
                   variant="ghost"
                   on="onBrand"
                   size="L"
-                  wide={!!isMobile}
+                  wide={!!isSmall}
                 />
               </div>
             </ClientOnly>

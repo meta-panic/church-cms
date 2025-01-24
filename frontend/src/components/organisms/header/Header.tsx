@@ -19,7 +19,7 @@ interface HeaderProps {
 }
 
 export const Header: React.FC<HeaderProps> = ({ navItemsDesktop, navItemsMobile }) => {
-  const isDesktop = useMediaQuery(BREAKPOINTS.desktop);
+  const isDesktop = useMediaQuery([BREAKPOINTS.desktop]);
   const pathname = usePathname();
   const isHomePage = isRootPath(pathname);
   const showDesktopVariant = isDesktop && isHomePage;
