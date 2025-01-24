@@ -311,8 +311,8 @@ input ComponentSharedButtonInput {
 
 type ComponentSharedButton {
   id: ID!
-  Button_text: String
-  Button_link: String
+  Button_text: String!
+  Button_link: String!
   isExternal: Boolean!
 }
 

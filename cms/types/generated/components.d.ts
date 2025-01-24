@@ -105,8 +105,8 @@ export interface SharedButton extends Struct.ComponentSchema {
     description: '';
   };
   attributes: {
-    Button_text: Schema.Attribute.String;
-    Button_link: Schema.Attribute.String;
+    Button_text: Schema.Attribute.String & Schema.Attribute.Required;
+    Button_link: Schema.Attribute.String & Schema.Attribute.Required;
     isExternal: Schema.Attribute.Boolean &
       Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<true>;

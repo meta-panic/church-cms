@@ -188,8 +188,8 @@ export type ComponentSharedAddressInput = {
 
 export type ComponentSharedButton = {
   __typename?: "ComponentSharedButton";
-  Button_link?: Maybe<Scalars["String"]["output"]>;
-  Button_text?: Maybe<Scalars["String"]["output"]>;
+  Button_link: Scalars["String"]["output"];
+  Button_text: Scalars["String"]["output"];
   id: Scalars["ID"]["output"];
   isExternal: Scalars["Boolean"]["output"];
 };
@@ -1753,8 +1753,8 @@ export type ComponentSharedAddressResolvers<ContextType = any, ParentType extend
 };
 
 export type ComponentSharedButtonResolvers<ContextType = any, ParentType extends ResolversParentTypes["ComponentSharedButton"] = ResolversParentTypes["ComponentSharedButton"]> = {
-  Button_link?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
-  Button_text?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  Button_link?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  Button_text?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
   isExternal?: Resolver<ResolversTypes["Boolean"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
