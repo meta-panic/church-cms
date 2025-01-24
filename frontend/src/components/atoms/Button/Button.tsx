@@ -1,8 +1,9 @@
 import React from "react";
 import cx from "classnames";
 
-import styles from "./Button.module.css";
 import Typography from "../typography/Typography";
+
+import styles from "./Button.module.css";
 
 
 interface ButtonProps {

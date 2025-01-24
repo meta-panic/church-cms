@@ -508,9 +508,16 @@ export interface ApiGlobalGlobal extends Struct.SingleTypeSchema {
   };
   attributes: {
     telegram: Schema.Attribute.String & Schema.Attribute.Required;
-    phone: Schema.Attribute.String;
-    email: Schema.Attribute.String;
-    PrimalBuilding: Schema.Attribute.Component<'shared.address', false>;
+    phone: Schema.Attribute.String & Schema.Attribute.Required;
+    email: Schema.Attribute.String & Schema.Attribute.Required;
+    PrimalBuilding: Schema.Attribute.Component<'shared.address', false> &
+      Schema.Attribute.Required;
+    ok: Schema.Attribute.String & Schema.Attribute.Required;
+    vk: Schema.Attribute.String & Schema.Attribute.Required;
+    youtube: Schema.Attribute.String & Schema.Attribute.Required;
+    rutube: Schema.Attribute.String & Schema.Attribute.Required;
+    serviceSchedule: Schema.Attribute.Component<'shared.schedule', true> &
+      Schema.Attribute.Required;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -539,13 +546,20 @@ export interface ApiPageLandingPageLanding extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    About_us: Schema.Attribute.Component<'content-blocks.info-block', false>;
+    About_us: Schema.Attribute.Component<'content-blocks.info-block', false> &
+      Schema.Attribute.Required;
     How_to_become_a_christian: Schema.Attribute.Component<
       'content-blocks.info-block',
       false
-    >;
-    Events: Schema.Attribute.Component<'content-blocks.event', true>;
-    Hero_header: Schema.Attribute.Component<'content-blocks.info-block', false>;
+    > &
+      Schema.Attribute.Required;
+    Events: Schema.Attribute.Component<'content-blocks.event', true> &
+      Schema.Attribute.Required;
+    Hero_header: Schema.Attribute.Component<
+      'content-blocks.info-block',
+      false
+    > &
+      Schema.Attribute.Required;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;

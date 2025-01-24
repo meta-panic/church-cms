@@ -28,7 +28,7 @@ export const MobileHeader: React.FC<MobileHeaderProps> = ({
 }) => {
   const isPageScrolled = useScroll({ threshold: 38 });
   const headerType = isPageScrolled ? "slim" : "presentation";
-  const isTablet = useMediaQuery(BREAKPOINTS.tablet);
+  const isTablet = useMediaQuery([BREAKPOINTS.tablet]);
   const showContacts = isTablet && headerType === "slim";
 
 
