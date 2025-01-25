@@ -12,7 +12,7 @@ import styles from "./MainHeroContent.module.css";
 
 interface MainHeroContentProps {
   title: string;
-  description: Maybe<ComponentSharedRichText>[];
+  description?: Maybe<Array<Maybe<ComponentSharedRichText>>>
   button?: Maybe<ComponentSharedButton>;
 }
 
