@@ -50,7 +50,8 @@ export const DesktopHeader: React.FC<DesktopHeaderProps> = ({
             telegram={""}
             vk={""}
             youtube={""}
-            renderIcon={(logo) => (<div className={cx(styles.navItem)}>{logo}</div>)}
+            whatsup={""}
+            renderIcon={({ defaultIcon }) => (<div className={cx(styles.navItem)}>{defaultIcon}</div>)}
           />
         </div>
 

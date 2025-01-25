@@ -44,7 +44,8 @@ export const MobileHeader: React.FC<MobileHeaderProps> = ({
             telegram={""}
             vk={""}
             youtube={""}
-            renderIcon={(logo) => (<div className={cx(styles.navItem)}>{logo}</div>)}
+            whatsup={""}
+            renderIcon={({ defaultIcon }) => (<div className={cx(styles.navItem)}>{defaultIcon}</div>)}
           />
         </div>}
 
