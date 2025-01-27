@@ -5,7 +5,7 @@ import { Contacts } from "@/components/molecules/Contacts/Contacts";
 import { Socials } from "@/components/types";
 
 import { getContacts } from "../MainPage";
-import InstagramIcon from "/public/icons/socials/outline/instagram.svg";
+import TaplinkIcon from "/public/icons/socials/outline/taplink.svg";
 import TgIcon from "/public/icons/socials/outline/tg.svg";
 import VkIcon from "/public/icons/socials/outline/vk.svg";
 import YoutubeIcon from "/public/icons/socials/outline/youtube.svg";
@@ -27,11 +27,11 @@ export const NoEventsStub: React.FC = () => {
       </div>
       <div className={styles.iconsContainer}>
         {contacts && <Contacts
-          instagram={""}  // TODO: add instagram
+          taplink={contacts.taplink}
           telegram={contacts.telegram}
           vk={contacts.vk}
           youtube={contacts.youtube}
-          whatsup={""} // TODO: add whatsup
+          whatsup={contacts.whatsup}
           renderIcon={({ defaultIcon, socialName }) => {
             const icon = getIcon(defaultIcon, socialName);
 
@@ -47,8 +47,8 @@ function getIcon(defaultIcon: JSX.Element, socialName: Socials): JSX.Element {
   let icon;
 
   switch (socialName) {
-    case "instagram":
-      icon = <InstagramIcon />;
+    case "taplink":
+      icon = <TaplinkIcon />;
       break;
     case "telegram":
       icon = <TgIcon />;

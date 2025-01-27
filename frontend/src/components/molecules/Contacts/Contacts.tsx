@@ -1,7 +1,7 @@
 import React, { JSX } from "react";
 import styles from "./Contacts.module.css";
 
-import InstagramIcon from "../../../../public/icons/socials/instagram.svg";
+import TaplinkIcon from "../../../../public/icons/socials/taplink.svg";
 import TgIcon from "../../../../public/icons/socials/tg.svg";
 import VkIcon from "../../../../public/icons/socials/vk.svg";
 import YoutubeIcon from "../../../../public/icons/socials/youtube.svg";
@@ -13,7 +13,7 @@ type RenderProp<T> = (props: T) => React.ReactNode;
 
 
 interface ContactsProps {
-  instagram: string;
+  taplink: string;
   telegram: string;
   vk: string;
   youtube: string;
@@ -21,17 +21,12 @@ interface ContactsProps {
   renderIcon: RenderProp<{ defaultIcon: React.JSX.Element, socialName: Socials }>;
 }
 
-export const Contacts: React.FC<ContactsProps> = ({ instagram, telegram, vk, youtube, whatsup, renderIcon }) => {
+export const Contacts: React.FC<ContactsProps> = ({ taplink, telegram, vk, youtube, whatsup, renderIcon }) => {
   const socialLinks: { logo: JSX.Element, link: string, name: Socials }[] = [
     {
       logo: <TgIcon />,
       link: telegram,
       name: "telegram",
-    },
-    {
-      logo: <InstagramIcon />,
-      link: instagram,
-      name: "instagram",
     },
     {
       logo: <VkIcon />,
@@ -47,6 +42,11 @@ export const Contacts: React.FC<ContactsProps> = ({ instagram, telegram, vk, you
       logo: <WhatsupIcon />,
       link: whatsup,
       name: "whatsup",
+    },
+    {
+      logo: <TaplinkIcon />,
+      link: taplink,
+      name: "taplink",
     },
   ];
 

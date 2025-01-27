@@ -13,12 +13,23 @@ import { isRootPath } from "@/utils/isRoot";
 import styles from "./Header.module.css";
 
 
+export type ContactsContextType = {
+  taplink: string;
+  telegram: string;
+  vk: string;
+  youtube: string;
+  whatsup: string;
+}
+
+export const ContactsContext = React.createContext<ContactsContextType | undefined>(undefined);
+
 interface HeaderProps {
   navItemsDesktop: NavItemDesktop[];
   navItemsMobile: NavItemMobile[];
+  contacts?: ContactsContextType;
 }
 
-export const Header: React.FC<HeaderProps> = ({ navItemsDesktop, navItemsMobile }) => {
+export const Header: React.FC<HeaderProps> = ({ navItemsDesktop, navItemsMobile, contacts }) => {
   const isDesktop = useMediaQuery([BREAKPOINTS.desktop]);
   const pathname = usePathname();
   const isHomePage = isRootPath(pathname);
@@ -26,10 +37,12 @@ export const Header: React.FC<HeaderProps> = ({ navItemsDesktop, navItemsMobile 
 
   return (
     <header className={cx(styles.headerWrapper)}>
-      <ClientOnly>
-        {showDesktopVariant && <DesktopHeader navItems={navItemsDesktop} />}
-        {!showDesktopVariant && <MobileHeader navItems={navItemsMobile} />}
-      </ClientOnly>
+      <ContactsContext.Provider value={contacts}>
+        <ClientOnly>
+          {showDesktopVariant && <DesktopHeader navItems={navItemsDesktop} />}
+          {!showDesktopVariant && <MobileHeader navItems={navItemsMobile} />}
+        </ClientOnly>
+      </ContactsContext.Provider>
     </header>
   );
 };
