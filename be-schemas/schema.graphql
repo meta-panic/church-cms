@@ -330,51 +330,6 @@ type ComponentSharedAddress {
   building: String
 }
 
-input ComponentServicesBlockHeaderFiltersInput {
-  Title: StringFilterInput
-  What_do_we_do: ComponentSharedRichTextFiltersInput
-  How_do_we_do: ComponentSharedRichTextFiltersInput
-  and: [ComponentServicesBlockHeaderFiltersInput]
-  or: [ComponentServicesBlockHeaderFiltersInput]
-  not: ComponentServicesBlockHeaderFiltersInput
-}
-
-input ComponentServicesBlockHeaderInput {
-  id: ID
-  Title: String
-  What_do_we_do: [ComponentSharedRichTextInput]
-  How_do_we_do: [ComponentSharedRichTextInput]
-}
-
-type ComponentServicesBlockHeader {
-  id: ID!
-  Title: String
-  What_do_we_do(filters: ComponentSharedRichTextFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentSharedRichText]
-  How_do_we_do(filters: ComponentSharedRichTextFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentSharedRichText]
-}
-
-input ComponentServicesBlockCarouselViewFiltersInput {
-  Carousel_service_name: StringFilterInput
-  Carousel_service_description: StringFilterInput
-  and: [ComponentServicesBlockCarouselViewFiltersInput]
-  or: [ComponentServicesBlockCarouselViewFiltersInput]
-  not: ComponentServicesBlockCarouselViewFiltersInput
-}
-
-input ComponentServicesBlockCarouselViewInput {
-  id: ID
-  Carousel_service_name: String
-  Carousel_service_image: ID
-  Carousel_service_description: String
-}
-
-type ComponentServicesBlockCarouselView {
-  id: ID!
-  Carousel_service_name: String!
-  Carousel_service_image: UploadFile!
-  Carousel_service_description: String!
-}
-
 input ComponentContentBlocksInfoBlockFiltersInput {
   Title: StringFilterInput
   description: ComponentSharedRichTextFiltersInput
@@ -428,6 +383,51 @@ type ComponentContentBlocksEvent {
   Description: JSON!
   Button: ComponentSharedButton
   Photo: ComponentSharedMedia
+}
+
+input ComponentServicesBlockHeaderFiltersInput {
+  Title: StringFilterInput
+  What_do_we_do: ComponentSharedRichTextFiltersInput
+  How_do_we_do: ComponentSharedRichTextFiltersInput
+  and: [ComponentServicesBlockHeaderFiltersInput]
+  or: [ComponentServicesBlockHeaderFiltersInput]
+  not: ComponentServicesBlockHeaderFiltersInput
+}
+
+input ComponentServicesBlockHeaderInput {
+  id: ID
+  Title: String
+  What_do_we_do: [ComponentSharedRichTextInput]
+  How_do_we_do: [ComponentSharedRichTextInput]
+}
+
+type ComponentServicesBlockHeader {
+  id: ID!
+  Title: String
+  What_do_we_do(filters: ComponentSharedRichTextFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentSharedRichText]
+  How_do_we_do(filters: ComponentSharedRichTextFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentSharedRichText]
+}
+
+input ComponentServicesBlockCarouselViewFiltersInput {
+  Carousel_service_name: StringFilterInput
+  Carousel_service_description: StringFilterInput
+  and: [ComponentServicesBlockCarouselViewFiltersInput]
+  or: [ComponentServicesBlockCarouselViewFiltersInput]
+  not: ComponentServicesBlockCarouselViewFiltersInput
+}
+
+input ComponentServicesBlockCarouselViewInput {
+  id: ID
+  Carousel_service_name: String
+  Carousel_service_image: ID
+  Carousel_service_description: String
+}
+
+type ComponentServicesBlockCarouselView {
+  id: ID!
+  Carousel_service_name: String!
+  Carousel_service_image: UploadFile!
+  Carousel_service_description: String!
 }
 
 input UploadFileFiltersInput {
@@ -717,6 +717,7 @@ input GlobalInput {
   rutube: String
   serviceSchedule: [ComponentSharedScheduleInput]
   taplink: String
+  whatsup: String
   publishedAt: DateTime
 }
 
@@ -732,6 +733,7 @@ type Global {
   rutube: String!
   serviceSchedule(filters: ComponentSharedScheduleFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentSharedSchedule]!
   taplink: String!
+  whatsup: String!
   createdAt: DateTime
   updatedAt: DateTime
   publishedAt: DateTime
@@ -807,7 +809,7 @@ type ServiceEntityResponseCollection {
   pageInfo: Pagination!
 }
 
-union GenericMorph = ComponentSharedVkVideo | ComponentSharedSlider | ComponentSharedSeo | ComponentSharedSchedule | ComponentSharedRichText | ComponentSharedQuote | ComponentSharedMedia | ComponentSharedEmbeddedVideo | ComponentSharedButton | ComponentSharedAddress | ComponentServicesBlockHeader | ComponentServicesBlockCarouselView | ComponentContentBlocksInfoBlock | ComponentContentBlocksEvent | UploadFile | I18NLocale | ReviewWorkflowsWorkflow | ReviewWorkflowsWorkflowStage | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser | Global | PageLanding | Service
+union GenericMorph = ComponentSharedVkVideo | ComponentSharedSlider | ComponentSharedSeo | ComponentSharedSchedule | ComponentSharedRichText | ComponentSharedQuote | ComponentSharedMedia | ComponentSharedEmbeddedVideo | ComponentSharedButton | ComponentSharedAddress | ComponentContentBlocksInfoBlock | ComponentContentBlocksEvent | ComponentServicesBlockHeader | ComponentServicesBlockCarouselView | UploadFile | I18NLocale | ReviewWorkflowsWorkflow | ReviewWorkflowsWorkflowStage | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser | Global | PageLanding | Service
 
 input FileInfoInput {
   name: String

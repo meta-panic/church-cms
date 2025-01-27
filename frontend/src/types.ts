@@ -399,6 +399,7 @@ export type Global = {
   telegram: Scalars["String"]["output"];
   updatedAt?: Maybe<Scalars["DateTime"]["output"]>;
   vk: Scalars["String"]["output"];
+  whatsup: Scalars["String"]["output"];
   youtube: Scalars["String"]["output"];
 };
 
@@ -420,6 +421,7 @@ export type GlobalInput = {
   taplink?: InputMaybe<Scalars["String"]["input"]>;
   telegram?: InputMaybe<Scalars["String"]["input"]>;
   vk?: InputMaybe<Scalars["String"]["input"]>;
+  whatsup?: InputMaybe<Scalars["String"]["input"]>;
   youtube?: InputMaybe<Scalars["String"]["input"]>;
 };
 
@@ -1841,6 +1843,7 @@ export type GlobalResolvers<ContextType = any, ParentType extends ResolversParen
   telegram?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   updatedAt?: Resolver<Maybe<ResolversTypes["DateTime"]>, ParentType, ContextType>;
   vk?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  whatsup?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   youtube?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
