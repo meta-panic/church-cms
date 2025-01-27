@@ -395,6 +395,7 @@ export type Global = {
   publishedAt?: Maybe<Scalars["DateTime"]["output"]>;
   rutube: Scalars["String"]["output"];
   serviceSchedule: Array<Maybe<ComponentSharedSchedule>>;
+  taplink: Scalars["String"]["output"];
   telegram: Scalars["String"]["output"];
   updatedAt?: Maybe<Scalars["DateTime"]["output"]>;
   vk: Scalars["String"]["output"];
@@ -416,6 +417,7 @@ export type GlobalInput = {
   publishedAt?: InputMaybe<Scalars["DateTime"]["input"]>;
   rutube?: InputMaybe<Scalars["String"]["input"]>;
   serviceSchedule?: InputMaybe<Array<InputMaybe<ComponentSharedScheduleInput>>>;
+  taplink?: InputMaybe<Scalars["String"]["input"]>;
   telegram?: InputMaybe<Scalars["String"]["input"]>;
   vk?: InputMaybe<Scalars["String"]["input"]>;
   youtube?: InputMaybe<Scalars["String"]["input"]>;
@@ -1835,6 +1837,7 @@ export type GlobalResolvers<ContextType = any, ParentType extends ResolversParen
   publishedAt?: Resolver<Maybe<ResolversTypes["DateTime"]>, ParentType, ContextType>;
   rutube?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   serviceSchedule?: Resolver<Array<Maybe<ResolversTypes["ComponentSharedSchedule"]>>, ParentType, ContextType, RequireFields<GlobalServiceScheduleArgs, "pagination" | "sort">>;
+  taplink?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   telegram?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   updatedAt?: Resolver<Maybe<ResolversTypes["DateTime"]>, ParentType, ContextType>;
   vk?: Resolver<ResolversTypes["String"], ParentType, ContextType>;

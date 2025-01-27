@@ -51,6 +51,10 @@
       "repeatable": true,
       "component": "shared.schedule",
       "required": true
+    },
+    "taplink": {
+      "type": "string",
+      "required": true
     }
   }
 }
