@@ -2,7 +2,6 @@ import React from "react";
 
 import { Hero } from "@/components/organisms/hero/Hero";
 import Section from "@/components/atoms/section/Section";
-import { hasValue } from "@/utils/notMaybe";
 import { AboutUs } from "./components/AboutUs";
 import { MainHeroContent } from "./components/MainHeroContent";
 import { HowToBecomeAChristian } from "./components/HowToBecomeAChristian";
@@ -14,10 +13,11 @@ import type {
   ComponentContentBlocksInfoBlock,
   Maybe,
 } from "@/types";
-
-import styles from "./MainPage.module.css";
 import { NoEventsStub } from "./components/NoEventsStub";
 import serverContext from "@/lib/serverContext";
+import { EventsSection } from "./components/EventsSection";
+
+import styles from "./MainPage.module.css";
 
 
 interface MainPageProps {
@@ -46,7 +46,7 @@ export const MainPage: React.FC<MainPageProps> = ({
         content={
           <MainHeroContent
             title={heroData.Title || "Добро пожаловать в дом молитвы"}
-            description={heroData.description} // TODO: make it obligatory
+            description={heroData.description}
             button={heroData.Button} />
         }
       />
@@ -64,7 +64,7 @@ export const MainPage: React.FC<MainPageProps> = ({
       </Section>
 
       <Section className={styles.events}>
-        {!hasValue(events) ? "there is events" : <NoEventsStub />}
+        {events.length > 0 ? <EventsSection events={events} /> : <NoEventsStub />}
       </Section>
 
     </>
