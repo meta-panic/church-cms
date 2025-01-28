@@ -15,6 +15,7 @@ import styles from "./DesktopHeader.module.css";
 import { HeaderStyleWrapper } from "../_components/HeaderStyleWrapper";
 import { isPresentation } from "./utils";
 import { HeaderType } from "./variants";
+import { ContactsContext, ContactsContextType } from "../Header";
 
 
 interface DesktopHeaderProps {
@@ -26,6 +27,7 @@ export const DesktopHeader: React.FC<DesktopHeaderProps> = ({
 }) => {
   const isPageScrolled = useScroll({ threshold: 38 });
   const headerType = isPageScrolled ? "slim" : "presentation";
+  const contacts = React.useContext(ContactsContext) as ContactsContextType;
 
   return (
     <HeaderStyleWrapper headerType={headerType}>
@@ -45,13 +47,11 @@ export const DesktopHeader: React.FC<DesktopHeaderProps> = ({
           }} />
 
         <div className={cx(styles.contacts)}>
-          <Contacts
-            instagram={"https://www.instagram.com/"}
-            telegram={""}
-            vk={""}
-            youtube={""}
-            renderIcon={(logo) => (<div className={cx(styles.navItem)}>{logo}</div>)}
-          />
+          {contacts &&
+            <Contacts {...contacts}
+              renderIcon={({ defaultIcon }) => (<div className={cx(styles.navItem)}>{defaultIcon}</div>)}
+            />
+          }
         </div>
 
       </div>

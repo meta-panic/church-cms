@@ -1,7 +1,7 @@
 import { Maybe } from "@/types";
 
 
-export function isNotMaybe<T>(value: Maybe<T> | undefined): value is T {
+export function hasValue<T>(value: Maybe<T> | undefined): value is T {
   if (value === null) {
     return false;
   }

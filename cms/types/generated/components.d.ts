@@ -81,6 +81,7 @@ export interface SharedMedia extends Struct.ComponentSchema {
   info: {
     displayName: 'Media';
     icon: 'file-video';
+    description: '';
   };
   attributes: {
     file: Schema.Attribute.Media<'images' | 'files' | 'videos'>;
@@ -179,11 +180,26 @@ export interface ContentBlocksEvent extends Struct.ComponentSchema {
     description: '';
   };
   attributes: {
-    Title: Schema.Attribute.String & Schema.Attribute.Required;
-    Date: Schema.Attribute.DateTime & Schema.Attribute.Required;
-    Description: Schema.Attribute.Blocks & Schema.Attribute.Required;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+    date: Schema.Attribute.DateTime & Schema.Attribute.Required;
     Button: Schema.Attribute.Component<'shared.button', false>;
-    Photo: Schema.Attribute.Component<'shared.media', false>;
+    image: Schema.Attribute.Component<'content-blocks.event-image', false> &
+      Schema.Attribute.Required;
+    description: Schema.Attribute.Text & Schema.Attribute.Required;
+    place: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface ContentBlocksEventImage extends Struct.ComponentSchema {
+  collectionName: 'components_content_blocks_event_images';
+  info: {
+    displayName: 'EventImage';
+    icon: 'alien';
+  };
+  attributes: {
+    isVertical: Schema.Attribute.Boolean;
+    eventImage: Schema.Attribute.Media<'files' | 'images'> &
+      Schema.Attribute.Required;
   };
 }
 
@@ -204,6 +220,7 @@ declare module '@strapi/strapi' {
       'services-block.carousel-view': ServicesBlockCarouselView;
       'content-blocks.info-block': ContentBlocksInfoBlock;
       'content-blocks.event': ContentBlocksEvent;
+      'content-blocks.event-image': ContentBlocksEventImage;
     }
   }
 }

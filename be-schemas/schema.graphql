@@ -263,17 +263,6 @@ type ComponentSharedQuote {
   body: String
 }
 
-input ComponentSharedMediaFiltersInput {
-  and: [ComponentSharedMediaFiltersInput]
-  or: [ComponentSharedMediaFiltersInput]
-  not: ComponentSharedMediaFiltersInput
-}
-
-input ComponentSharedMediaInput {
-  id: ID
-  file: ID
-}
-
 type ComponentSharedMedia {
   id: ID!
   file: UploadFile
@@ -402,11 +391,12 @@ type ComponentContentBlocksInfoBlock {
 }
 
 input ComponentContentBlocksEventFiltersInput {
-  Title: StringFilterInput
-  Date: DateTimeFilterInput
-  Description: JSONFilterInput
+  title: StringFilterInput
+  date: DateTimeFilterInput
   Button: ComponentSharedButtonFiltersInput
-  Photo: ComponentSharedMediaFiltersInput
+  image: ComponentContentBlocksEventImageFiltersInput
+  description: StringFilterInput
+  place: StringFilterInput
   and: [ComponentContentBlocksEventFiltersInput]
   or: [ComponentContentBlocksEventFiltersInput]
   not: ComponentContentBlocksEventFiltersInput
@@ -414,20 +404,41 @@ input ComponentContentBlocksEventFiltersInput {
 
 input ComponentContentBlocksEventInput {
   id: ID
-  Title: String
-  Date: DateTime
-  Description: JSON
+  title: String
+  date: DateTime
   Button: ComponentSharedButtonInput
-  Photo: ComponentSharedMediaInput
+  image: ComponentContentBlocksEventImageInput
+  description: String
+  place: String
 }
 
 type ComponentContentBlocksEvent {
   id: ID!
-  Title: String!
-  Date: DateTime!
-  Description: JSON!
+  title: String!
+  date: DateTime!
   Button: ComponentSharedButton
-  Photo: ComponentSharedMedia
+  image: ComponentContentBlocksEventImage!
+  description: String!
+  place: String!
+}
+
+input ComponentContentBlocksEventImageFiltersInput {
+  isVertical: BooleanFilterInput
+  and: [ComponentContentBlocksEventImageFiltersInput]
+  or: [ComponentContentBlocksEventImageFiltersInput]
+  not: ComponentContentBlocksEventImageFiltersInput
+}
+
+input ComponentContentBlocksEventImageInput {
+  id: ID
+  isVertical: Boolean
+  eventImage: ID
+}
+
+type ComponentContentBlocksEventImage {
+  id: ID!
+  isVertical: Boolean
+  eventImage: UploadFile!
 }
 
 input UploadFileFiltersInput {
@@ -716,6 +727,8 @@ input GlobalInput {
   youtube: String
   rutube: String
   serviceSchedule: [ComponentSharedScheduleInput]
+  taplink: String
+  whatsup: String
   publishedAt: DateTime
 }
 
@@ -730,6 +743,8 @@ type Global {
   youtube: String!
   rutube: String!
   serviceSchedule(filters: ComponentSharedScheduleFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentSharedSchedule]!
+  taplink: String!
+  whatsup: String!
   createdAt: DateTime
   updatedAt: DateTime
   publishedAt: DateTime
@@ -805,7 +820,976 @@ type ServiceEntityResponseCollection {
   pageInfo: Pagination!
 }
 
-union GenericMorph = ComponentSharedVkVideo | ComponentSharedSlider | ComponentSharedSeo | ComponentSharedSchedule | ComponentSharedRichText | ComponentSharedQuote | ComponentSharedMedia | ComponentSharedEmbeddedVideo | ComponentSharedButton | ComponentSharedAddress | ComponentServicesBlockHeader | ComponentServicesBlockCarouselView | ComponentContentBlocksInfoBlock | ComponentContentBlocksEvent | UploadFile | I18NLocale | ReviewWorkflowsWorkflow | ReviewWorkflowsWorkflowStage | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser | Global | PageLanding | Service
+union GenericMorph = ComponentSharedVkVideo | ComponentSharedSlider | ComponentSharedSeo | ComponentSharedSchedule | ComponentSharedRichText | ComponentSharedQuote | ComponentSharedMedia | ComponentSharedEmbeddedVideo | ComponentSharedButton | ComponentSharedAddress | ComponentServicesBlockHeader | ComponentServicesBlockCarouselView | ComponentContentBlocksInfoBlock | ComponentContentBlocksEvent | ComponentContentBlocksEventImage | UploadFile | I18NLocale | ReviewWorkflowsWorkflow | ReviewWorkflowsWorkflowStage | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser | Global | PageLanding | Service
+
+input FileInfoInput {
+  name: String
+  alternativeText: String
+  caption: String
+}
+
+type UsersPermissionsMe {
+  id: ID!
+  username: String!
+  email: String
+  confirmed: Boolean
+  blocked: Boolean
+  role: UsersPermissionsMeRole
+}
+
+type UsersPermissionsMeRole {
+  id: ID!
+  name: String!
+  description: String
+  type: String
+}
+
+input UsersPermissionsRegisterInput {
+  username: String!
+  email: String!
+  password: String!
+}
+
+input UsersPermissionsLoginInput {
+  identifier: String!
+  password: String!
+  provider: String! = "local"
+}
+
+type UsersPermissionsPasswordPayload {
+  ok: Boolean!
+}
+
+type UsersPermissionsLoginPayload {
+  jwt: String
+  user: UsersPermissionsMe!
+}
+
+type UsersPermissionsCreateRolePayload {
+  ok: Boolean!
+}
+
+type UsersPermissionsUpdateRolePayload {
+  ok: Boolean!
+}
+
+type UsersPermissionsDeleteRolePayload {
+  ok: Boolean!
+}
+
+input PaginationArg {
+  page: Int
+  pageSize: Int
+  start: Int
+  limit: Int
+}
+
+type Query {
+  uploadFile(documentId: ID!, status: PublicationStatus = PUBLISHED): UploadFile
+  uploadFiles_connection(filters: UploadFileFiltersInput, pagination: PaginationArg = {}, sort: [String] = [], status: PublicationStatus = PUBLISHED): UploadFileEntityResponseCollection
+  uploadFiles(filters: UploadFileFiltersInput, pagination: PaginationArg = {}, sort: [String] = [], status: PublicationStatus = PUBLISHED): [UploadFile]!
+  i18NLocale(documentId: ID!, status: PublicationStatus = PUBLISHED): I18NLocale
+  i18NLocales_connection(filters: I18NLocaleFiltersInput, pagination: PaginationArg = {}, sort: [String] = [], status: PublicationStatus = PUBLISHED): I18NLocaleEntityResponseCollection
+  i18NLocales(filters: I18NLocaleFiltersInput, pagination: PaginationArg = {}, sort: [String] = [], status: PublicationStatus = PUBLISHED): [I18NLocale]!
+  reviewWorkflowsWorkflow(documentId: ID!, status: PublicationStatus = PUBLISHED): ReviewWorkflowsWorkflow
+  reviewWorkflowsWorkflows_connection(filters: ReviewWorkflowsWorkflowFiltersInput, pagination: PaginationArg = {}, sort: [String] = [], status: PublicationStatus = PUBLISHED): ReviewWorkflowsWorkflowEntityResponseCollection
+  reviewWorkflowsWorkflows(filters: ReviewWorkflowsWorkflowFiltersInput, pagination: PaginationArg = {}, sort: [String] = [], status: PublicationStatus = PUBLISHED): [ReviewWorkflowsWorkflow]!
+  reviewWorkflowsWorkflowStage(documentId: ID!, status: PublicationStatus = PUBLISHED): ReviewWorkflowsWorkflowStage
+  reviewWorkflowsWorkflowStages_connection(filters: ReviewWorkflowsWorkflowStageFiltersInput, pagination: PaginationArg = {}, sort: [String] = [], status: PublicationStatus = PUBLISHED): ReviewWorkflowsWorkflowStageEntityResponseCollection
+  reviewWorkflowsWorkflowStages(filters: ReviewWorkflowsWorkflowStageFiltersInput, pagination: PaginationArg = {}, sort: [String] = [], status: PublicationStatus = PUBLISHED): [ReviewWorkflowsWorkflowStage]!
+  usersPermissionsRole(documentId: ID!, status: PublicationStatus = PUBLISHED): UsersPermissionsRole
+  usersPermissionsRoles_connection(filters: UsersPermissionsRoleFiltersInput, pagination: PaginationArg = {}, sort: [String] = [], status: PublicationStatus = PUBLISHED): UsersPermissionsRoleEntityResponseCollection
+  usersPermissionsRoles(filters: UsersPermissionsRoleFiltersInput, pagination: PaginationArg = {}, sort: [String] = [], status: PublicationStatus = PUBLISHED): [UsersPermissionsRole]!
+  usersPermissionsUser(documentId: ID!, status: PublicationStatus = PUBLISHED): UsersPermissionsUser
+  usersPermissionsUsers_connection(filters: UsersPermissionsUserFiltersInput, pagination: PaginationArg = {}, sort: [String] = [], status: PublicationStatus = PUBLISHED): UsersPermissionsUserEntityResponseCollection
+  usersPermissionsUsers(filters: UsersPermissionsUserFiltersInput, pagination: PaginationArg = {}, sort: [String] = [], status: PublicationStatus = PUBLISHED): [UsersPermissionsUser]!
+  global(status: PublicationStatus = PUBLISHED): Global
+  pageLanding(documentId: ID!, status: PublicationStatus = PUBLISHED): PageLanding
+  pageLandings_connection(filters: PageLandingFiltersInput, pagination: PaginationArg = {}, sort: [String] = [], status: PublicationStatus = PUBLISHED): PageLandingEntityResponseCollection
+  pageLandings(filters: PageLandingFiltersInput, pagination: PaginationArg = {}, sort: [String] = [], status: PublicationStatus = PUBLISHED): [PageLanding]!
+  service(documentId: ID!, status: PublicationStatus = PUBLISHED): Service
+  services_connection(filters: ServiceFiltersInput, pagination: PaginationArg = {}, sort: [String] = [], status: PublicationStatus = PUBLISHED): ServiceEntityResponseCollection
+  services(filters: ServiceFiltersInput, pagination: PaginationArg = {}, sort: [String] = [], status: PublicationStatus = PUBLISHED): [Service]!
+  me: UsersPermissionsMe
+}
+
+type Mutation {
+  createReviewWorkflowsWorkflow(status: PublicationStatus = PUBLISHED, data: ReviewWorkflowsWorkflowInput!): ReviewWorkflowsWorkflow
+  updateReviewWorkflowsWorkflow(documentId: ID!, status: PublicationStatus = PUBLISHED, data: ReviewWorkflowsWorkflowInput!): ReviewWorkflowsWorkflow
+  deleteReviewWorkflowsWorkflow(documentId: ID!): DeleteMutationResponse
+  createReviewWorkflowsWorkflowStage(status: PublicationStatus = PUBLISHED, data: ReviewWorkflowsWorkflowStageInput!): ReviewWorkflowsWorkflowStage
+  updateReviewWorkflowsWorkflowStage(documentId: ID!, status: PublicationStatus = PUBLISHED, data: ReviewWorkflowsWorkflowStageInput!): ReviewWorkflowsWorkflowStage
+  deleteReviewWorkflowsWorkflowStage(documentId: ID!): DeleteMutationResponse
+  updateGlobal(status: PublicationStatus = PUBLISHED, data: GlobalInput!): Global
+  deleteGlobal: DeleteMutationResponse
+  createPageLanding(status: PublicationStatus = PUBLISHED, data: PageLandingInput!): PageLanding
+  updatePageLanding(documentId: ID!, status: PublicationStatus = PUBLISHED, data: PageLandingInput!): PageLanding
+  deletePageLanding(documentId: ID!): DeleteMutationResponse
+  createService(status: PublicationStatus = PUBLISHED, data: ServiceInput!): Service
+  updateService(documentId: ID!, status: PublicationStatus = PUBLISHED, data: ServiceInput!): Service
+  deleteService(documentId: ID!): DeleteMutationResponse
+  updateUploadFile(id: ID!, info: FileInfoInput): UploadFile!
+  deleteUploadFile(id: ID!): UploadFile
+
+  """Create a new role"""
+  createUsersPermissionsRole(data: UsersPermissionsRoleInput!): UsersPermissionsCreateRolePayload
+
+  """Update an existing role"""
+  updateUsersPermissionsRole(id: ID!, data: UsersPermissionsRoleInput!): UsersPermissionsUpdateRolePayload
+
+  """Delete an existing role"""
+  deleteUsersPermissionsRole(id: ID!): UsersPermissionsDeleteRolePayload
+
+  """Create a new user"""
+  createUsersPermissionsUser(data: UsersPermissionsUserInput!): UsersPermissionsUserEntityResponse!
+
+  """Update an existing user"""
+  updateUsersPermissionsUser(id: ID!, data: UsersPermissionsUserInput!): UsersPermissionsUserEntityResponse!
+
+  """Delete an existing user"""
+  deleteUsersPermissionsUser(id: ID!): UsersPermissionsUserEntityResponse!
+  login(input: UsersPermissionsLoginInput!): UsersPermissionsLoginPayload!
+
+  """Register a user"""
+  register(input: UsersPermissionsRegisterInput!): UsersPermissionsLoginPayload!
+
+  """Request a reset password token"""
+  forgotPassword(email: String!): UsersPermissionsPasswordPayload
+
+  """
+  Reset user password. Confirm with a code (resetToken from forgotPassword)
+  """
+  resetPassword(password: String!, passwordConfirmation: String!, code: String!): UsersPermissionsLoginPayload
+
+  """Change user password. Confirm with the current password."""
+  changePassword(currentPassword: String!, password: String!, passwordConfirmation: String!): UsersPermissionsLoginPayload
+
+  """Confirm an email users email address"""
+  emailConfirmation(confirmation: String!): UsersPermissionsLoginPayload
+}
+"""
+Indicates exactly one field must be supplied and this field must not be `null`.
+"""
+directive @oneOf on INPUT_OBJECT
+
+"""
+The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+"""
+scalar JSON
+
+"""
+A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
+"""
+scalar DateTime
+
+type Pagination {
+  total: Int!
+  page: Int!
+  pageSize: Int!
+  pageCount: Int!
+}
+
+type DeleteMutationResponse {
+  documentId: ID!
+}
+
+enum PublicationStatus {
+  DRAFT
+  PUBLISHED
+}
+
+input IDFilterInput {
+  and: [ID]
+  or: [ID]
+  not: IDFilterInput
+  eq: ID
+  eqi: ID
+  ne: ID
+  nei: ID
+  startsWith: ID
+  endsWith: ID
+  contains: ID
+  notContains: ID
+  containsi: ID
+  notContainsi: ID
+  gt: ID
+  gte: ID
+  lt: ID
+  lte: ID
+  null: Boolean
+  notNull: Boolean
+  in: [ID]
+  notIn: [ID]
+  between: [ID]
+}
+
+input BooleanFilterInput {
+  and: [Boolean]
+  or: [Boolean]
+  not: BooleanFilterInput
+  eq: Boolean
+  eqi: Boolean
+  ne: Boolean
+  nei: Boolean
+  startsWith: Boolean
+  endsWith: Boolean
+  contains: Boolean
+  notContains: Boolean
+  containsi: Boolean
+  notContainsi: Boolean
+  gt: Boolean
+  gte: Boolean
+  lt: Boolean
+  lte: Boolean
+  null: Boolean
+  notNull: Boolean
+  in: [Boolean]
+  notIn: [Boolean]
+  between: [Boolean]
+}
+
+input StringFilterInput {
+  and: [String]
+  or: [String]
+  not: StringFilterInput
+  eq: String
+  eqi: String
+  ne: String
+  nei: String
+  startsWith: String
+  endsWith: String
+  contains: String
+  notContains: String
+  containsi: String
+  notContainsi: String
+  gt: String
+  gte: String
+  lt: String
+  lte: String
+  null: Boolean
+  notNull: Boolean
+  in: [String]
+  notIn: [String]
+  between: [String]
+}
+
+input IntFilterInput {
+  and: [Int]
+  or: [Int]
+  not: IntFilterInput
+  eq: Int
+  eqi: Int
+  ne: Int
+  nei: Int
+  startsWith: Int
+  endsWith: Int
+  contains: Int
+  notContains: Int
+  containsi: Int
+  notContainsi: Int
+  gt: Int
+  gte: Int
+  lt: Int
+  lte: Int
+  null: Boolean
+  notNull: Boolean
+  in: [Int]
+  notIn: [Int]
+  between: [Int]
+}
+
+input FloatFilterInput {
+  and: [Float]
+  or: [Float]
+  not: FloatFilterInput
+  eq: Float
+  eqi: Float
+  ne: Float
+  nei: Float
+  startsWith: Float
+  endsWith: Float
+  contains: Float
+  notContains: Float
+  containsi: Float
+  notContainsi: Float
+  gt: Float
+  gte: Float
+  lt: Float
+  lte: Float
+  null: Boolean
+  notNull: Boolean
+  in: [Float]
+  notIn: [Float]
+  between: [Float]
+}
+
+input DateTimeFilterInput {
+  and: [DateTime]
+  or: [DateTime]
+  not: DateTimeFilterInput
+  eq: DateTime
+  eqi: DateTime
+  ne: DateTime
+  nei: DateTime
+  startsWith: DateTime
+  endsWith: DateTime
+  contains: DateTime
+  notContains: DateTime
+  containsi: DateTime
+  notContainsi: DateTime
+  gt: DateTime
+  gte: DateTime
+  lt: DateTime
+  lte: DateTime
+  null: Boolean
+  notNull: Boolean
+  in: [DateTime]
+  notIn: [DateTime]
+  between: [DateTime]
+}
+
+input JSONFilterInput {
+  and: [JSON]
+  or: [JSON]
+  not: JSONFilterInput
+  eq: JSON
+  eqi: JSON
+  ne: JSON
+  nei: JSON
+  startsWith: JSON
+  endsWith: JSON
+  contains: JSON
+  notContains: JSON
+  containsi: JSON
+  notContainsi: JSON
+  gt: JSON
+  gte: JSON
+  lt: JSON
+  lte: JSON
+  null: Boolean
+  notNull: Boolean
+  in: [JSON]
+  notIn: [JSON]
+  between: [JSON]
+}
+
+type ComponentSharedVkVideo {
+  id: ID!
+  link: String!
+  thumbnail: UploadFile
+}
+
+type ComponentSharedSlider {
+  id: ID!
+  files_connection(filters: UploadFileFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): UploadFileRelationResponseCollection
+  files(filters: UploadFileFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [UploadFile]!
+}
+
+type ComponentSharedSeo {
+  id: ID!
+  metaTitle: String!
+  metaDescription: String!
+  shareImage: UploadFile
+}
+
+input ComponentSharedScheduleFiltersInput {
+  dayAndTime: StringFilterInput
+  and: [ComponentSharedScheduleFiltersInput]
+  or: [ComponentSharedScheduleFiltersInput]
+  not: ComponentSharedScheduleFiltersInput
+}
+
+input ComponentSharedScheduleInput {
+  id: ID
+  dayAndTime: String
+}
+
+type ComponentSharedSchedule {
+  id: ID!
+  dayAndTime: String!
+}
+
+input ComponentSharedRichTextFiltersInput {
+  body: StringFilterInput
+  and: [ComponentSharedRichTextFiltersInput]
+  or: [ComponentSharedRichTextFiltersInput]
+  not: ComponentSharedRichTextFiltersInput
+}
+
+input ComponentSharedRichTextInput {
+  id: ID
+  body: String
+}
+
+type ComponentSharedRichText {
+  id: ID!
+  body: String
+}
+
+type ComponentSharedQuote {
+  id: ID!
+  title: String
+  body: String
+}
+
+type ComponentSharedMedia {
+  id: ID!
+  file: UploadFile
+}
+
+input ComponentSharedEmbeddedVideoFiltersInput {
+  and: [ComponentSharedEmbeddedVideoFiltersInput]
+  or: [ComponentSharedEmbeddedVideoFiltersInput]
+  not: ComponentSharedEmbeddedVideoFiltersInput
+}
+
+input ComponentSharedEmbeddedVideoInput {
+  id: ID
+}
+
+type ComponentSharedEmbeddedVideo {
+  id: ID!
+}
+
+input ComponentSharedButtonFiltersInput {
+  Button_text: StringFilterInput
+  Button_link: StringFilterInput
+  isExternal: BooleanFilterInput
+  and: [ComponentSharedButtonFiltersInput]
+  or: [ComponentSharedButtonFiltersInput]
+  not: ComponentSharedButtonFiltersInput
+}
+
+input ComponentSharedButtonInput {
+  id: ID
+  Button_text: String
+  Button_link: String
+  isExternal: Boolean
+}
+
+type ComponentSharedButton {
+  id: ID!
+  Button_text: String!
+  Button_link: String!
+  isExternal: Boolean!
+}
+
+input ComponentSharedAddressInput {
+  id: ID
+  city: String
+  street: String
+  building: String
+}
+
+type ComponentSharedAddress {
+  id: ID!
+  city: String!
+  street: String!
+  building: String
+}
+
+input ComponentServicesBlockHeaderFiltersInput {
+  Title: StringFilterInput
+  What_do_we_do: ComponentSharedRichTextFiltersInput
+  How_do_we_do: ComponentSharedRichTextFiltersInput
+  and: [ComponentServicesBlockHeaderFiltersInput]
+  or: [ComponentServicesBlockHeaderFiltersInput]
+  not: ComponentServicesBlockHeaderFiltersInput
+}
+
+input ComponentServicesBlockHeaderInput {
+  id: ID
+  Title: String
+  What_do_we_do: [ComponentSharedRichTextInput]
+  How_do_we_do: [ComponentSharedRichTextInput]
+}
+
+type ComponentServicesBlockHeader {
+  id: ID!
+  Title: String
+  What_do_we_do(filters: ComponentSharedRichTextFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentSharedRichText]
+  How_do_we_do(filters: ComponentSharedRichTextFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentSharedRichText]
+}
+
+input ComponentServicesBlockCarouselViewFiltersInput {
+  Carousel_service_name: StringFilterInput
+  Carousel_service_description: StringFilterInput
+  and: [ComponentServicesBlockCarouselViewFiltersInput]
+  or: [ComponentServicesBlockCarouselViewFiltersInput]
+  not: ComponentServicesBlockCarouselViewFiltersInput
+}
+
+input ComponentServicesBlockCarouselViewInput {
+  id: ID
+  Carousel_service_name: String
+  Carousel_service_image: ID
+  Carousel_service_description: String
+}
+
+type ComponentServicesBlockCarouselView {
+  id: ID!
+  Carousel_service_name: String!
+  Carousel_service_image: UploadFile!
+  Carousel_service_description: String!
+}
+
+input ComponentContentBlocksInfoBlockFiltersInput {
+  Title: StringFilterInput
+  description: ComponentSharedRichTextFiltersInput
+  Button: ComponentSharedButtonFiltersInput
+  Video_link: ComponentSharedEmbeddedVideoFiltersInput
+  and: [ComponentContentBlocksInfoBlockFiltersInput]
+  or: [ComponentContentBlocksInfoBlockFiltersInput]
+  not: ComponentContentBlocksInfoBlockFiltersInput
+}
+
+input ComponentContentBlocksInfoBlockInput {
+  id: ID
+  Title: String
+  description: [ComponentSharedRichTextInput]
+  Button: ComponentSharedButtonInput
+  Video_link: ComponentSharedEmbeddedVideoInput
+}
+
+type ComponentContentBlocksInfoBlock {
+  id: ID!
+  Title: String
+  description(filters: ComponentSharedRichTextFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentSharedRichText]
+  Button: ComponentSharedButton
+  Video_link: ComponentSharedEmbeddedVideo
+}
+
+input ComponentContentBlocksEventFiltersInput {
+  title: StringFilterInput
+  date: DateTimeFilterInput
+  Button: ComponentSharedButtonFiltersInput
+  image: ComponentContentBlocksEventImageFiltersInput
+  description: StringFilterInput
+  place: StringFilterInput
+  and: [ComponentContentBlocksEventFiltersInput]
+  or: [ComponentContentBlocksEventFiltersInput]
+  not: ComponentContentBlocksEventFiltersInput
+}
+
+input ComponentContentBlocksEventInput {
+  id: ID
+  title: String
+  date: DateTime
+  Button: ComponentSharedButtonInput
+  image: ComponentContentBlocksEventImageInput
+  description: String
+  place: String
+}
+
+type ComponentContentBlocksEvent {
+  id: ID!
+  title: String!
+  date: DateTime!
+  Button: ComponentSharedButton
+  image: ComponentContentBlocksEventImage!
+  description: String!
+  place: String!
+}
+
+input ComponentContentBlocksEventImageFiltersInput {
+  isVertical: BooleanFilterInput
+  and: [ComponentContentBlocksEventImageFiltersInput]
+  or: [ComponentContentBlocksEventImageFiltersInput]
+  not: ComponentContentBlocksEventImageFiltersInput
+}
+
+input ComponentContentBlocksEventImageInput {
+  id: ID
+  isVertical: Boolean
+  eventImage: ID
+}
+
+type ComponentContentBlocksEventImage {
+  id: ID!
+  isVertical: Boolean
+  eventImage: UploadFile!
+}
+
+input UploadFileFiltersInput {
+  documentId: IDFilterInput
+  name: StringFilterInput
+  alternativeText: StringFilterInput
+  caption: StringFilterInput
+  width: IntFilterInput
+  height: IntFilterInput
+  formats: JSONFilterInput
+  hash: StringFilterInput
+  ext: StringFilterInput
+  mime: StringFilterInput
+  size: FloatFilterInput
+  url: StringFilterInput
+  previewUrl: StringFilterInput
+  provider: StringFilterInput
+  provider_metadata: JSONFilterInput
+  createdAt: DateTimeFilterInput
+  updatedAt: DateTimeFilterInput
+  publishedAt: DateTimeFilterInput
+  and: [UploadFileFiltersInput]
+  or: [UploadFileFiltersInput]
+  not: UploadFileFiltersInput
+}
+
+type UploadFile {
+  documentId: ID!
+  name: String!
+  alternativeText: String
+  caption: String
+  width: Int
+  height: Int
+  formats: JSON
+  hash: String!
+  ext: String
+  mime: String!
+  size: Float!
+  url: String!
+  previewUrl: String
+  provider: String!
+  provider_metadata: JSON
+  related: [GenericMorph]
+  createdAt: DateTime
+  updatedAt: DateTime
+  publishedAt: DateTime
+}
+
+type UploadFileEntityResponseCollection {
+  nodes: [UploadFile!]!
+  pageInfo: Pagination!
+}
+
+type UploadFileRelationResponseCollection {
+  nodes: [UploadFile!]!
+}
+
+input I18NLocaleFiltersInput {
+  documentId: IDFilterInput
+  name: StringFilterInput
+  code: StringFilterInput
+  createdAt: DateTimeFilterInput
+  updatedAt: DateTimeFilterInput
+  publishedAt: DateTimeFilterInput
+  and: [I18NLocaleFiltersInput]
+  or: [I18NLocaleFiltersInput]
+  not: I18NLocaleFiltersInput
+}
+
+type I18NLocale {
+  documentId: ID!
+  name: String
+  code: String
+  createdAt: DateTime
+  updatedAt: DateTime
+  publishedAt: DateTime
+}
+
+type I18NLocaleEntityResponseCollection {
+  nodes: [I18NLocale!]!
+  pageInfo: Pagination!
+}
+
+input ReviewWorkflowsWorkflowFiltersInput {
+  documentId: IDFilterInput
+  name: StringFilterInput
+  stages: ReviewWorkflowsWorkflowStageFiltersInput
+  contentTypes: JSONFilterInput
+  createdAt: DateTimeFilterInput
+  updatedAt: DateTimeFilterInput
+  publishedAt: DateTimeFilterInput
+  and: [ReviewWorkflowsWorkflowFiltersInput]
+  or: [ReviewWorkflowsWorkflowFiltersInput]
+  not: ReviewWorkflowsWorkflowFiltersInput
+}
+
+input ReviewWorkflowsWorkflowInput {
+  name: String
+  stages: [ID]
+  contentTypes: JSON
+  publishedAt: DateTime
+}
+
+type ReviewWorkflowsWorkflow {
+  documentId: ID!
+  name: String!
+  stages_connection(filters: ReviewWorkflowsWorkflowStageFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): ReviewWorkflowsWorkflowStageRelationResponseCollection
+  stages(filters: ReviewWorkflowsWorkflowStageFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ReviewWorkflowsWorkflowStage]!
+  contentTypes: JSON!
+  createdAt: DateTime
+  updatedAt: DateTime
+  publishedAt: DateTime
+}
+
+type ReviewWorkflowsWorkflowEntityResponseCollection {
+  nodes: [ReviewWorkflowsWorkflow!]!
+  pageInfo: Pagination!
+}
+
+input ReviewWorkflowsWorkflowStageFiltersInput {
+  documentId: IDFilterInput
+  name: StringFilterInput
+  color: StringFilterInput
+  workflow: ReviewWorkflowsWorkflowFiltersInput
+  createdAt: DateTimeFilterInput
+  updatedAt: DateTimeFilterInput
+  publishedAt: DateTimeFilterInput
+  and: [ReviewWorkflowsWorkflowStageFiltersInput]
+  or: [ReviewWorkflowsWorkflowStageFiltersInput]
+  not: ReviewWorkflowsWorkflowStageFiltersInput
+}
+
+input ReviewWorkflowsWorkflowStageInput {
+  name: String
+  color: String
+  workflow: ID
+  publishedAt: DateTime
+}
+
+type ReviewWorkflowsWorkflowStage {
+  documentId: ID!
+  name: String
+  color: String
+  workflow: ReviewWorkflowsWorkflow
+  createdAt: DateTime
+  updatedAt: DateTime
+  publishedAt: DateTime
+}
+
+type ReviewWorkflowsWorkflowStageEntityResponseCollection {
+  nodes: [ReviewWorkflowsWorkflowStage!]!
+  pageInfo: Pagination!
+}
+
+type ReviewWorkflowsWorkflowStageRelationResponseCollection {
+  nodes: [ReviewWorkflowsWorkflowStage!]!
+}
+
+input UsersPermissionsPermissionFiltersInput {
+  documentId: IDFilterInput
+  action: StringFilterInput
+  role: UsersPermissionsRoleFiltersInput
+  createdAt: DateTimeFilterInput
+  updatedAt: DateTimeFilterInput
+  publishedAt: DateTimeFilterInput
+  and: [UsersPermissionsPermissionFiltersInput]
+  or: [UsersPermissionsPermissionFiltersInput]
+  not: UsersPermissionsPermissionFiltersInput
+}
+
+type UsersPermissionsPermission {
+  documentId: ID!
+  action: String!
+  role: UsersPermissionsRole
+  createdAt: DateTime
+  updatedAt: DateTime
+  publishedAt: DateTime
+}
+
+type UsersPermissionsPermissionRelationResponseCollection {
+  nodes: [UsersPermissionsPermission!]!
+}
+
+input UsersPermissionsRoleFiltersInput {
+  documentId: IDFilterInput
+  name: StringFilterInput
+  description: StringFilterInput
+  type: StringFilterInput
+  permissions: UsersPermissionsPermissionFiltersInput
+  users: UsersPermissionsUserFiltersInput
+  createdAt: DateTimeFilterInput
+  updatedAt: DateTimeFilterInput
+  publishedAt: DateTimeFilterInput
+  and: [UsersPermissionsRoleFiltersInput]
+  or: [UsersPermissionsRoleFiltersInput]
+  not: UsersPermissionsRoleFiltersInput
+}
+
+input UsersPermissionsRoleInput {
+  name: String
+  description: String
+  type: String
+  permissions: [ID]
+  users: [ID]
+  publishedAt: DateTime
+}
+
+type UsersPermissionsRole {
+  documentId: ID!
+  name: String!
+  description: String
+  type: String
+  permissions_connection(filters: UsersPermissionsPermissionFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): UsersPermissionsPermissionRelationResponseCollection
+  permissions(filters: UsersPermissionsPermissionFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [UsersPermissionsPermission]!
+  users_connection(filters: UsersPermissionsUserFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): UsersPermissionsUserRelationResponseCollection
+  users(filters: UsersPermissionsUserFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [UsersPermissionsUser]!
+  createdAt: DateTime
+  updatedAt: DateTime
+  publishedAt: DateTime
+}
+
+type UsersPermissionsRoleEntityResponseCollection {
+  nodes: [UsersPermissionsRole!]!
+  pageInfo: Pagination!
+}
+
+input UsersPermissionsUserFiltersInput {
+  documentId: IDFilterInput
+  username: StringFilterInput
+  email: StringFilterInput
+  provider: StringFilterInput
+  confirmed: BooleanFilterInput
+  blocked: BooleanFilterInput
+  role: UsersPermissionsRoleFiltersInput
+  createdAt: DateTimeFilterInput
+  updatedAt: DateTimeFilterInput
+  publishedAt: DateTimeFilterInput
+  and: [UsersPermissionsUserFiltersInput]
+  or: [UsersPermissionsUserFiltersInput]
+  not: UsersPermissionsUserFiltersInput
+}
+
+input UsersPermissionsUserInput {
+  username: String
+  email: String
+  provider: String
+  confirmed: Boolean
+  blocked: Boolean
+  role: ID
+  publishedAt: DateTime
+}
+
+type UsersPermissionsUser {
+  documentId: ID!
+  username: String!
+  email: String!
+  provider: String
+  confirmed: Boolean
+  blocked: Boolean
+  role: UsersPermissionsRole
+  createdAt: DateTime
+  updatedAt: DateTime
+  publishedAt: DateTime
+}
+
+type UsersPermissionsUserEntityResponse {
+  data: UsersPermissionsUser
+}
+
+type UsersPermissionsUserEntityResponseCollection {
+  nodes: [UsersPermissionsUser!]!
+  pageInfo: Pagination!
+}
+
+type UsersPermissionsUserRelationResponseCollection {
+  nodes: [UsersPermissionsUser!]!
+}
+
+input GlobalInput {
+  telegram: String
+  phone: String
+  email: String
+  PrimalBuilding: ComponentSharedAddressInput
+  ok: String
+  vk: String
+  youtube: String
+  rutube: String
+  serviceSchedule: [ComponentSharedScheduleInput]
+  taplink: String
+  whatsup: String
+  publishedAt: DateTime
+}
+
+type Global {
+  documentId: ID!
+  telegram: String!
+  phone: String!
+  email: String!
+  PrimalBuilding: ComponentSharedAddress!
+  ok: String!
+  vk: String!
+  youtube: String!
+  rutube: String!
+  serviceSchedule(filters: ComponentSharedScheduleFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentSharedSchedule]!
+  taplink: String!
+  whatsup: String!
+  createdAt: DateTime
+  updatedAt: DateTime
+  publishedAt: DateTime
+}
+
+input PageLandingFiltersInput {
+  documentId: IDFilterInput
+  About_us: ComponentContentBlocksInfoBlockFiltersInput
+  How_to_become_a_christian: ComponentContentBlocksInfoBlockFiltersInput
+  Events: ComponentContentBlocksEventFiltersInput
+  Hero_header: ComponentContentBlocksInfoBlockFiltersInput
+  createdAt: DateTimeFilterInput
+  updatedAt: DateTimeFilterInput
+  publishedAt: DateTimeFilterInput
+  and: [PageLandingFiltersInput]
+  or: [PageLandingFiltersInput]
+  not: PageLandingFiltersInput
+}
+
+input PageLandingInput {
+  About_us: ComponentContentBlocksInfoBlockInput
+  How_to_become_a_christian: ComponentContentBlocksInfoBlockInput
+  Events: [ComponentContentBlocksEventInput]
+  Hero_header: ComponentContentBlocksInfoBlockInput
+  publishedAt: DateTime
+}
+
+type PageLanding {
+  documentId: ID!
+  About_us: ComponentContentBlocksInfoBlock!
+  How_to_become_a_christian: ComponentContentBlocksInfoBlock!
+  Events(filters: ComponentContentBlocksEventFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentContentBlocksEvent]!
+  Hero_header: ComponentContentBlocksInfoBlock!
+  createdAt: DateTime
+  updatedAt: DateTime
+  publishedAt: DateTime
+}
+
+type PageLandingEntityResponseCollection {
+  nodes: [PageLanding!]!
+  pageInfo: Pagination!
+}
+
+input ServiceFiltersInput {
+  documentId: IDFilterInput
+  Header: ComponentServicesBlockHeaderFiltersInput
+  Landing_page_carousel_view: ComponentServicesBlockCarouselViewFiltersInput
+  createdAt: DateTimeFilterInput
+  updatedAt: DateTimeFilterInput
+  publishedAt: DateTimeFilterInput
+  and: [ServiceFiltersInput]
+  or: [ServiceFiltersInput]
+  not: ServiceFiltersInput
+}
+
+input ServiceInput {
+  Header: ComponentServicesBlockHeaderInput
+  Landing_page_carousel_view: ComponentServicesBlockCarouselViewInput
+  publishedAt: DateTime
+}
+
+type Service {
+  documentId: ID!
+  Header: ComponentServicesBlockHeader!
+  Landing_page_carousel_view: ComponentServicesBlockCarouselView
+  createdAt: DateTime
+  updatedAt: DateTime
+  publishedAt: DateTime
+}
+
+type ServiceEntityResponseCollection {
+  nodes: [Service!]!
+  pageInfo: Pagination!
+}
+
+union GenericMorph = ComponentSharedVkVideo | ComponentSharedSlider | ComponentSharedSeo | ComponentSharedSchedule | ComponentSharedRichText | ComponentSharedQuote | ComponentSharedMedia | ComponentSharedEmbeddedVideo | ComponentSharedButton | ComponentSharedAddress | ComponentServicesBlockHeader | ComponentServicesBlockCarouselView | ComponentContentBlocksInfoBlock | ComponentContentBlocksEvent | ComponentContentBlocksEventImage | UploadFile | I18NLocale | ReviewWorkflowsWorkflow | ReviewWorkflowsWorkflowStage | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser | Global | PageLanding | Service
 
 input FileInfoInput {
   name: String

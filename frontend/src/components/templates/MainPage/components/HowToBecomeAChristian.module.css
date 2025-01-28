@@ -12,6 +12,7 @@
   align-items: center;
   width: fit-content;
   gap: var(--spacing-l);
+  justify-content: center;
 }
 
 .card,

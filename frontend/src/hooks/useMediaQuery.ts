@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 type Sizes = typeof BREAKPOINTS[keyof typeof BREAKPOINTS][];
 
-export function useMediaQuery(queries: Sizes): boolean | null {
+export function useMediaQuery(queries: Sizes): boolean {
   const getInitialValue = () => {
     if (typeof window !== "undefined") {
       return queries.some(query => window.matchMedia(query).matches);

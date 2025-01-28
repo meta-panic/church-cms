@@ -1,0 +1,53 @@
+.eventCardContainer {
+  background-color: var(--brand-0);
+  position: relative;
+  display: flex;
+  flex-direction: column-reverse;
+  max-width: 990px;
+}
+
+.textContainer {
+  display: flex;
+  flex-direction: column;
+  padding: var(--spacing-l) var(--spacing-xl);
+  gap: var(--spacing-2xl);
+  flex: 1;
+}
+
+.textContainer.verticalCard {
+  flex: 1
+}
+
+.description {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-s);
+}
+
+.imageContainer {
+  position: relative;
+  display: flex;
+  height: 100%;
+  flex: 1 1;
+}
+
+.image {
+  position: relative !important;
+  height: 100%;
+  width: 100%;
+  color: transparent;
+}
+
+
+.date {
+  text-align: right;
+}
+
+.type {
+  color: var(--brand-500);
+}
+
+.additionaldetails .place>*,
+.additionaldetails .time>* {
+  display: inline-block;
+}

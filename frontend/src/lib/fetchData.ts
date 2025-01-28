@@ -18,7 +18,7 @@ const landingPageQuery = qs.stringify(
       },
       "Events": {
         populate: {
-          "Photo": {
+          "image": {
             populate: "*",
           },
         },

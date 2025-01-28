@@ -1,4 +1,3 @@
-"use client";
 import cx from "classnames";
 
 import { Card } from "@/components/molecules/Card/Card";
@@ -6,26 +5,24 @@ import { Maybe, ComponentSharedRichText, ComponentSharedButton } from "@/types";
 import Typography from "@/components/atoms/typography/Typography";
 import Button from "@/components/atoms/Button/Button";
 import RichTextRenderer from "@/components/molecules/RichTextRenderer/RichTextRenderer";
-import { useMediaQuery, BREAKPOINTS } from "@/hooks/useMediaQuery";
 import ClientOnly from "@/components/organisms/header/_components/ClientOnly";
-import { isNotMaybe } from "@/utils/notMaybe";
+import { hasValue } from "@/utils/notMaybe";
 import bibleImageSrc from "./bible.png";
 
 import styles from "./HowToBecomeAChristian.module.css";
+import { getContacts } from "../MainPage";
 
 
 interface HowToBecomeAChristianProps {
   title: string;
   description?: Maybe<Maybe<ComponentSharedRichText>[]>;
   button?: Maybe<ComponentSharedButton>;
-  phone: string,
-  telegram: string,
 }
 
 export const HowToBecomeAChristian: React.FC<HowToBecomeAChristianProps> = ({
-  title, description, button, phone, telegram,
+  title, description, button,
 }) => {
-  const isSmall = useMediaQuery([BREAKPOINTS.mobile, BREAKPOINTS.tabletMin]);
+  const contacts = getContacts();
 
   return (
     <div className={cx("darkBlock", styles.root)}>
@@ -43,19 +40,17 @@ export const HowToBecomeAChristian: React.FC<HowToBecomeAChristianProps> = ({
               return <RichTextRenderer key={text?.id} markdownText={text} />;
             })}
           </div>
-          {isNotMaybe(button)
-            && <ClientOnly>
-              <div className={styles.cta}>
-                <Button
-                  link={button.Button_link}
-                  text={button.Button_text}
-                  variant="ghost"
-                  on="onBrand"
-                  size="L"
-                  wide={!!isSmall}
-                />
-              </div>
-            </ClientOnly>
+          {hasValue(button)
+            &&
+            <div className={styles.cta}>
+              <Button
+                link={button.Button_link}
+                text={button.Button_text}
+                variant="ghost"
+                on="onBrand"
+                size="L"
+              />
+            </div>
           }
         </div>
 
@@ -65,8 +60,8 @@ export const HowToBecomeAChristian: React.FC<HowToBecomeAChristianProps> = ({
               imageSrc: bibleImageSrc,
               altText: "Билию в черной обложке держат руки",
             }}
-            phone={phone}
-            telegram={telegram}
+            phone={contacts?.phone}
+            telegram={contacts?.telegram}
           />
         </div>
 

@@ -44,6 +44,8 @@ export default async function App() {
           phone: contacts.phone,
           telegram: contacts.telegram,
         }}
+        contacts={contacts}
+        events={landingInfo.Events}
       />
 
     </>

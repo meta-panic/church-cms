@@ -518,6 +518,8 @@ export interface ApiGlobalGlobal extends Struct.SingleTypeSchema {
     rutube: Schema.Attribute.String & Schema.Attribute.Required;
     serviceSchedule: Schema.Attribute.Component<'shared.schedule', true> &
       Schema.Attribute.Required;
+    taplink: Schema.Attribute.String & Schema.Attribute.Required;
+    whatsup: Schema.Attribute.String & Schema.Attribute.Required;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;

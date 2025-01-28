@@ -17,6 +17,7 @@ import { HeaderType } from "./variants";
 import { BREAKPOINTS, useMediaQuery } from "@/hooks/useMediaQuery";
 import { Contacts } from "@/components/molecules/Contacts/Contacts";
 import WithMobileMenu from "../_components/WithMobileMenu";
+import { ContactsContext, ContactsContextType } from "../Header";
 
 
 interface MobileHeaderProps {
@@ -30,6 +31,7 @@ export const MobileHeader: React.FC<MobileHeaderProps> = ({
   const headerType = isPageScrolled ? "slim" : "presentation";
   const isTablet = useMediaQuery([BREAKPOINTS.tablet]);
   const showContacts = isTablet && headerType === "slim";
+  const contacts = React.useContext(ContactsContext) as ContactsContextType;
 
 
   return (
@@ -38,14 +40,11 @@ export const MobileHeader: React.FC<MobileHeaderProps> = ({
 
         {isPresentation(headerType) && <ChurchLogo className={cx(styles.churchLogo)} />}
 
-        {showContacts && <div className={cx(styles.contacts)} >
-          <Contacts
-            instagram={"https://www.instagram.com/"}
-            telegram={""}
-            vk={""}
-            youtube={""}
-            renderIcon={(logo) => (<div className={cx(styles.navItem)}>{logo}</div>)}
+        {showContacts && <div className={cx(styles.contacts)}>
+          {contacts && <Contacts {...contacts}
+            renderIcon={({ defaultIcon }) => (<div className={cx(styles.navItem)}>{defaultIcon}</div>)}
           />
+          }
         </div>}
 
         <Navigation

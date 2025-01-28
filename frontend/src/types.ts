@@ -49,31 +49,54 @@ export type BooleanFilterInput = {
 export type ComponentContentBlocksEvent = {
   __typename?: "ComponentContentBlocksEvent";
   Button?: Maybe<ComponentSharedButton>;
-  Date: Scalars["DateTime"]["output"];
-  Description: Scalars["JSON"]["output"];
-  Photo?: Maybe<ComponentSharedMedia>;
-  Title: Scalars["String"]["output"];
+  date: Scalars["DateTime"]["output"];
+  description: Scalars["String"]["output"];
   id: Scalars["ID"]["output"];
+  image: ComponentContentBlocksEventImage;
+  place: Scalars["String"]["output"];
+  title: Scalars["String"]["output"];
 };
 
 export type ComponentContentBlocksEventFiltersInput = {
   Button?: InputMaybe<ComponentSharedButtonFiltersInput>;
-  Date?: InputMaybe<DateTimeFilterInput>;
-  Description?: InputMaybe<JsonFilterInput>;
-  Photo?: InputMaybe<ComponentSharedMediaFiltersInput>;
-  Title?: InputMaybe<StringFilterInput>;
   and?: InputMaybe<Array<InputMaybe<ComponentContentBlocksEventFiltersInput>>>;
+  date?: InputMaybe<DateTimeFilterInput>;
+  description?: InputMaybe<StringFilterInput>;
+  image?: InputMaybe<ComponentContentBlocksEventImageFiltersInput>;
   not?: InputMaybe<ComponentContentBlocksEventFiltersInput>;
   or?: InputMaybe<Array<InputMaybe<ComponentContentBlocksEventFiltersInput>>>;
+  place?: InputMaybe<StringFilterInput>;
+  title?: InputMaybe<StringFilterInput>;
+};
+
+export type ComponentContentBlocksEventImage = {
+  __typename?: "ComponentContentBlocksEventImage";
+  eventImage: UploadFile;
+  id: Scalars["ID"]["output"];
+  isVertical?: Maybe<Scalars["Boolean"]["output"]>;
+};
+
+export type ComponentContentBlocksEventImageFiltersInput = {
+  and?: InputMaybe<Array<InputMaybe<ComponentContentBlocksEventImageFiltersInput>>>;
+  isVertical?: InputMaybe<BooleanFilterInput>;
+  not?: InputMaybe<ComponentContentBlocksEventImageFiltersInput>;
+  or?: InputMaybe<Array<InputMaybe<ComponentContentBlocksEventImageFiltersInput>>>;
+};
+
+export type ComponentContentBlocksEventImageInput = {
+  eventImage?: InputMaybe<Scalars["ID"]["input"]>;
+  id?: InputMaybe<Scalars["ID"]["input"]>;
+  isVertical?: InputMaybe<Scalars["Boolean"]["input"]>;
 };
 
 export type ComponentContentBlocksEventInput = {
   Button?: InputMaybe<ComponentSharedButtonInput>;
-  Date?: InputMaybe<Scalars["DateTime"]["input"]>;
-  Description?: InputMaybe<Scalars["JSON"]["input"]>;
-  Photo?: InputMaybe<ComponentSharedMediaInput>;
-  Title?: InputMaybe<Scalars["String"]["input"]>;
+  date?: InputMaybe<Scalars["DateTime"]["input"]>;
+  description?: InputMaybe<Scalars["String"]["input"]>;
   id?: InputMaybe<Scalars["ID"]["input"]>;
+  image?: InputMaybe<ComponentContentBlocksEventImageInput>;
+  place?: InputMaybe<Scalars["String"]["input"]>;
+  title?: InputMaybe<Scalars["String"]["input"]>;
 };
 
 export type ComponentContentBlocksInfoBlock = {
@@ -231,17 +254,6 @@ export type ComponentSharedMedia = {
   id: Scalars["ID"]["output"];
 };
 
-export type ComponentSharedMediaFiltersInput = {
-  and?: InputMaybe<Array<InputMaybe<ComponentSharedMediaFiltersInput>>>;
-  not?: InputMaybe<ComponentSharedMediaFiltersInput>;
-  or?: InputMaybe<Array<InputMaybe<ComponentSharedMediaFiltersInput>>>;
-};
-
-export type ComponentSharedMediaInput = {
-  file?: InputMaybe<Scalars["ID"]["input"]>;
-  id?: InputMaybe<Scalars["ID"]["input"]>;
-};
-
 export type ComponentSharedQuote = {
   __typename?: "ComponentSharedQuote";
   body?: Maybe<Scalars["String"]["output"]>;
@@ -382,7 +394,7 @@ export type FloatFilterInput = {
   startsWith?: InputMaybe<Scalars["Float"]["input"]>;
 };
 
-export type GenericMorph = ComponentContentBlocksEvent | ComponentContentBlocksInfoBlock | ComponentServicesBlockCarouselView | ComponentServicesBlockHeader | ComponentSharedAddress | ComponentSharedButton | ComponentSharedEmbeddedVideo | ComponentSharedMedia | ComponentSharedQuote | ComponentSharedRichText | ComponentSharedSchedule | ComponentSharedSeo | ComponentSharedSlider | ComponentSharedVkVideo | Global | I18NLocale | PageLanding | ReviewWorkflowsWorkflow | ReviewWorkflowsWorkflowStage | Service | UploadFile | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser;
+export type GenericMorph = ComponentContentBlocksEvent | ComponentContentBlocksEventImage | ComponentContentBlocksInfoBlock | ComponentServicesBlockCarouselView | ComponentServicesBlockHeader | ComponentSharedAddress | ComponentSharedButton | ComponentSharedEmbeddedVideo | ComponentSharedMedia | ComponentSharedQuote | ComponentSharedRichText | ComponentSharedSchedule | ComponentSharedSeo | ComponentSharedSlider | ComponentSharedVkVideo | Global | I18NLocale | PageLanding | ReviewWorkflowsWorkflow | ReviewWorkflowsWorkflowStage | Service | UploadFile | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser;
 
 export type Global = {
   __typename?: "Global";
@@ -395,9 +407,11 @@ export type Global = {
   publishedAt?: Maybe<Scalars["DateTime"]["output"]>;
   rutube: Scalars["String"]["output"];
   serviceSchedule: Array<Maybe<ComponentSharedSchedule>>;
+  taplink: Scalars["String"]["output"];
   telegram: Scalars["String"]["output"];
   updatedAt?: Maybe<Scalars["DateTime"]["output"]>;
   vk: Scalars["String"]["output"];
+  whatsup: Scalars["String"]["output"];
   youtube: Scalars["String"]["output"];
 };
 
@@ -416,8 +430,10 @@ export type GlobalInput = {
   publishedAt?: InputMaybe<Scalars["DateTime"]["input"]>;
   rutube?: InputMaybe<Scalars["String"]["input"]>;
   serviceSchedule?: InputMaybe<Array<InputMaybe<ComponentSharedScheduleInput>>>;
+  taplink?: InputMaybe<Scalars["String"]["input"]>;
   telegram?: InputMaybe<Scalars["String"]["input"]>;
   vk?: InputMaybe<Scalars["String"]["input"]>;
+  whatsup?: InputMaybe<Scalars["String"]["input"]>;
   youtube?: InputMaybe<Scalars["String"]["input"]>;
 };
 
@@ -1492,7 +1508,7 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 
 /** Mapping of union types */
 export type ResolversUnionTypes<_RefType extends Record<string, unknown>> = {
-  GenericMorph: (Omit<ComponentContentBlocksEvent, "Photo"> & { Photo?: Maybe<_RefType["ComponentSharedMedia"]> }) | (ComponentContentBlocksInfoBlock) | (Omit<ComponentServicesBlockCarouselView, "Carousel_service_image"> & { Carousel_service_image: _RefType["UploadFile"] }) | (ComponentServicesBlockHeader) | (ComponentSharedAddress) | (ComponentSharedButton) | (ComponentSharedEmbeddedVideo) | (Omit<ComponentSharedMedia, "file"> & { file?: Maybe<_RefType["UploadFile"]> }) | (ComponentSharedQuote) | (ComponentSharedRichText) | (ComponentSharedSchedule) | (Omit<ComponentSharedSeo, "shareImage"> & { shareImage?: Maybe<_RefType["UploadFile"]> }) | (Omit<ComponentSharedSlider, "files" | "files_connection"> & { files: Array<Maybe<_RefType["UploadFile"]>>, files_connection?: Maybe<_RefType["UploadFileRelationResponseCollection"]> }) | (Omit<ComponentSharedVkVideo, "thumbnail"> & { thumbnail?: Maybe<_RefType["UploadFile"]> }) | (Global) | (I18NLocale) | (Omit<PageLanding, "Events"> & { Events: Array<Maybe<_RefType["ComponentContentBlocksEvent"]>> }) | (ReviewWorkflowsWorkflow) | (ReviewWorkflowsWorkflowStage) | (Omit<Service, "Landing_page_carousel_view"> & { Landing_page_carousel_view?: Maybe<_RefType["ComponentServicesBlockCarouselView"]> }) | (Omit<UploadFile, "related"> & { related?: Maybe<Array<Maybe<_RefType["GenericMorph"]>>> }) | (UsersPermissionsPermission) | (UsersPermissionsRole) | (UsersPermissionsUser);
+  GenericMorph: (Omit<ComponentContentBlocksEvent, "image"> & { image: _RefType["ComponentContentBlocksEventImage"] }) | (Omit<ComponentContentBlocksEventImage, "eventImage"> & { eventImage: _RefType["UploadFile"] }) | (ComponentContentBlocksInfoBlock) | (Omit<ComponentServicesBlockCarouselView, "Carousel_service_image"> & { Carousel_service_image: _RefType["UploadFile"] }) | (ComponentServicesBlockHeader) | (ComponentSharedAddress) | (ComponentSharedButton) | (ComponentSharedEmbeddedVideo) | (Omit<ComponentSharedMedia, "file"> & { file?: Maybe<_RefType["UploadFile"]> }) | (ComponentSharedQuote) | (ComponentSharedRichText) | (ComponentSharedSchedule) | (Omit<ComponentSharedSeo, "shareImage"> & { shareImage?: Maybe<_RefType["UploadFile"]> }) | (Omit<ComponentSharedSlider, "files" | "files_connection"> & { files: Array<Maybe<_RefType["UploadFile"]>>, files_connection?: Maybe<_RefType["UploadFileRelationResponseCollection"]> }) | (Omit<ComponentSharedVkVideo, "thumbnail"> & { thumbnail?: Maybe<_RefType["UploadFile"]> }) | (Global) | (I18NLocale) | (Omit<PageLanding, "Events"> & { Events: Array<Maybe<_RefType["ComponentContentBlocksEvent"]>> }) | (ReviewWorkflowsWorkflow) | (ReviewWorkflowsWorkflowStage) | (Omit<Service, "Landing_page_carousel_view"> & { Landing_page_carousel_view?: Maybe<_RefType["ComponentServicesBlockCarouselView"]> }) | (Omit<UploadFile, "related"> & { related?: Maybe<Array<Maybe<_RefType["GenericMorph"]>>> }) | (UsersPermissionsPermission) | (UsersPermissionsRole) | (UsersPermissionsUser);
 };
 
 
@@ -1500,8 +1516,11 @@ export type ResolversUnionTypes<_RefType extends Record<string, unknown>> = {
 export type ResolversTypes = {
   Boolean: ResolverTypeWrapper<Scalars["Boolean"]["output"]>;
   BooleanFilterInput: BooleanFilterInput;
-  ComponentContentBlocksEvent: ResolverTypeWrapper<Omit<ComponentContentBlocksEvent, "Photo"> & { Photo?: Maybe<ResolversTypes["ComponentSharedMedia"]> }>;
+  ComponentContentBlocksEvent: ResolverTypeWrapper<Omit<ComponentContentBlocksEvent, "image"> & { image: ResolversTypes["ComponentContentBlocksEventImage"] }>;
   ComponentContentBlocksEventFiltersInput: ComponentContentBlocksEventFiltersInput;
+  ComponentContentBlocksEventImage: ResolverTypeWrapper<Omit<ComponentContentBlocksEventImage, "eventImage"> & { eventImage: ResolversTypes["UploadFile"] }>;
+  ComponentContentBlocksEventImageFiltersInput: ComponentContentBlocksEventImageFiltersInput;
+  ComponentContentBlocksEventImageInput: ComponentContentBlocksEventImageInput;
   ComponentContentBlocksEventInput: ComponentContentBlocksEventInput;
   ComponentContentBlocksInfoBlock: ResolverTypeWrapper<ComponentContentBlocksInfoBlock>;
   ComponentContentBlocksInfoBlockFiltersInput: ComponentContentBlocksInfoBlockFiltersInput;
@@ -1521,8 +1540,6 @@ export type ResolversTypes = {
   ComponentSharedEmbeddedVideoFiltersInput: ComponentSharedEmbeddedVideoFiltersInput;
   ComponentSharedEmbeddedVideoInput: ComponentSharedEmbeddedVideoInput;
   ComponentSharedMedia: ResolverTypeWrapper<Omit<ComponentSharedMedia, "file"> & { file?: Maybe<ResolversTypes["UploadFile"]> }>;
-  ComponentSharedMediaFiltersInput: ComponentSharedMediaFiltersInput;
-  ComponentSharedMediaInput: ComponentSharedMediaInput;
   ComponentSharedQuote: ResolverTypeWrapper<ComponentSharedQuote>;
   ComponentSharedRichText: ResolverTypeWrapper<ComponentSharedRichText>;
   ComponentSharedRichTextFiltersInput: ComponentSharedRichTextFiltersInput;
@@ -1607,8 +1624,11 @@ export type ResolversTypes = {
 export type ResolversParentTypes = {
   Boolean: Scalars["Boolean"]["output"];
   BooleanFilterInput: BooleanFilterInput;
-  ComponentContentBlocksEvent: Omit<ComponentContentBlocksEvent, "Photo"> & { Photo?: Maybe<ResolversParentTypes["ComponentSharedMedia"]> };
+  ComponentContentBlocksEvent: Omit<ComponentContentBlocksEvent, "image"> & { image: ResolversParentTypes["ComponentContentBlocksEventImage"] };
   ComponentContentBlocksEventFiltersInput: ComponentContentBlocksEventFiltersInput;
+  ComponentContentBlocksEventImage: Omit<ComponentContentBlocksEventImage, "eventImage"> & { eventImage: ResolversParentTypes["UploadFile"] };
+  ComponentContentBlocksEventImageFiltersInput: ComponentContentBlocksEventImageFiltersInput;
+  ComponentContentBlocksEventImageInput: ComponentContentBlocksEventImageInput;
   ComponentContentBlocksEventInput: ComponentContentBlocksEventInput;
   ComponentContentBlocksInfoBlock: ComponentContentBlocksInfoBlock;
   ComponentContentBlocksInfoBlockFiltersInput: ComponentContentBlocksInfoBlockFiltersInput;
@@ -1628,8 +1648,6 @@ export type ResolversParentTypes = {
   ComponentSharedEmbeddedVideoFiltersInput: ComponentSharedEmbeddedVideoFiltersInput;
   ComponentSharedEmbeddedVideoInput: ComponentSharedEmbeddedVideoInput;
   ComponentSharedMedia: Omit<ComponentSharedMedia, "file"> & { file?: Maybe<ResolversParentTypes["UploadFile"]> };
-  ComponentSharedMediaFiltersInput: ComponentSharedMediaFiltersInput;
-  ComponentSharedMediaInput: ComponentSharedMediaInput;
   ComponentSharedQuote: ComponentSharedQuote;
   ComponentSharedRichText: ComponentSharedRichText;
   ComponentSharedRichTextFiltersInput: ComponentSharedRichTextFiltersInput;
@@ -1711,11 +1729,19 @@ export type ResolversParentTypes = {
 
 export type ComponentContentBlocksEventResolvers<ContextType = any, ParentType extends ResolversParentTypes["ComponentContentBlocksEvent"] = ResolversParentTypes["ComponentContentBlocksEvent"]> = {
   Button?: Resolver<Maybe<ResolversTypes["ComponentSharedButton"]>, ParentType, ContextType>;
-  Date?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
-  Description?: Resolver<ResolversTypes["JSON"], ParentType, ContextType>;
-  Photo?: Resolver<Maybe<ResolversTypes["ComponentSharedMedia"]>, ParentType, ContextType>;
-  Title?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  date?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  description?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  image?: Resolver<ResolversTypes["ComponentContentBlocksEventImage"], ParentType, ContextType>;
+  place?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  title?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ComponentContentBlocksEventImageResolvers<ContextType = any, ParentType extends ResolversParentTypes["ComponentContentBlocksEventImage"] = ResolversParentTypes["ComponentContentBlocksEventImage"]> = {
+  eventImage?: Resolver<ResolversTypes["UploadFile"], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  isVertical?: Resolver<Maybe<ResolversTypes["Boolean"]>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -1822,7 +1848,7 @@ export type DeleteMutationResponseResolvers<ContextType = any, ParentType extend
 };
 
 export type GenericMorphResolvers<ContextType = any, ParentType extends ResolversParentTypes["GenericMorph"] = ResolversParentTypes["GenericMorph"]> = {
-  __resolveType: TypeResolveFn<"ComponentContentBlocksEvent" | "ComponentContentBlocksInfoBlock" | "ComponentServicesBlockCarouselView" | "ComponentServicesBlockHeader" | "ComponentSharedAddress" | "ComponentSharedButton" | "ComponentSharedEmbeddedVideo" | "ComponentSharedMedia" | "ComponentSharedQuote" | "ComponentSharedRichText" | "ComponentSharedSchedule" | "ComponentSharedSeo" | "ComponentSharedSlider" | "ComponentSharedVkVideo" | "Global" | "I18NLocale" | "PageLanding" | "ReviewWorkflowsWorkflow" | "ReviewWorkflowsWorkflowStage" | "Service" | "UploadFile" | "UsersPermissionsPermission" | "UsersPermissionsRole" | "UsersPermissionsUser", ParentType, ContextType>;
+  __resolveType: TypeResolveFn<"ComponentContentBlocksEvent" | "ComponentContentBlocksEventImage" | "ComponentContentBlocksInfoBlock" | "ComponentServicesBlockCarouselView" | "ComponentServicesBlockHeader" | "ComponentSharedAddress" | "ComponentSharedButton" | "ComponentSharedEmbeddedVideo" | "ComponentSharedMedia" | "ComponentSharedQuote" | "ComponentSharedRichText" | "ComponentSharedSchedule" | "ComponentSharedSeo" | "ComponentSharedSlider" | "ComponentSharedVkVideo" | "Global" | "I18NLocale" | "PageLanding" | "ReviewWorkflowsWorkflow" | "ReviewWorkflowsWorkflowStage" | "Service" | "UploadFile" | "UsersPermissionsPermission" | "UsersPermissionsRole" | "UsersPermissionsUser", ParentType, ContextType>;
 };
 
 export type GlobalResolvers<ContextType = any, ParentType extends ResolversParentTypes["Global"] = ResolversParentTypes["Global"]> = {
@@ -1835,9 +1861,11 @@ export type GlobalResolvers<ContextType = any, ParentType extends ResolversParen
   publishedAt?: Resolver<Maybe<ResolversTypes["DateTime"]>, ParentType, ContextType>;
   rutube?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   serviceSchedule?: Resolver<Array<Maybe<ResolversTypes["ComponentSharedSchedule"]>>, ParentType, ContextType, RequireFields<GlobalServiceScheduleArgs, "pagination" | "sort">>;
+  taplink?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   telegram?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   updatedAt?: Resolver<Maybe<ResolversTypes["DateTime"]>, ParentType, ContextType>;
   vk?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  whatsup?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   youtube?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
@@ -2150,6 +2178,7 @@ export type UsersPermissionsUserRelationResponseCollectionResolvers<ContextType 
 
 export type Resolvers<ContextType = any> = {
   ComponentContentBlocksEvent?: ComponentContentBlocksEventResolvers<ContextType>;
+  ComponentContentBlocksEventImage?: ComponentContentBlocksEventImageResolvers<ContextType>;
   ComponentContentBlocksInfoBlock?: ComponentContentBlocksInfoBlockResolvers<ContextType>;
   ComponentServicesBlockCarouselView?: ComponentServicesBlockCarouselViewResolvers<ContextType>;
   ComponentServicesBlockHeader?: ComponentServicesBlockHeaderResolvers<ContextType>;

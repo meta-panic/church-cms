@@ -25,6 +25,13 @@ export default async function RootLayout({
       <Header
         navItemsDesktop={navItemsDesktop}
         navItemsMobile={navItemsMobileAndTablet}
+        contacts={contactData && {
+          taplink: contactData.taplink,
+          telegram: contactData.taplink,
+          vk: contactData.taplink,
+          youtube: contactData.taplink,
+          whatsup: contactData.taplink,
+        }}
       />
 
       {children}

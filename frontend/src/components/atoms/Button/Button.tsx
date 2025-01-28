@@ -1,6 +1,9 @@
+"use client";
 import React from "react";
 import cx from "classnames";
 
+import { useMediaQuery, BREAKPOINTS } from "@/hooks/useMediaQuery";
+import ClientOnly from "@/components/organisms/header/_components/ClientOnly";
 import Typography from "../typography/Typography";
 
 import styles from "./Button.module.css";
@@ -17,7 +20,18 @@ interface ButtonProps {
   wide?: boolean;
 }
 
-const Button: React.FC<ButtonProps> = ({ link, text, isActive, wide, variant = "onBrand", size = "M", on, rounded = false }) => {
+const Button: React.FC<ButtonProps> = ({
+  link,
+  text,
+  isActive,
+  wide,
+  variant = "onBrand",
+  size = "M",
+  on,
+  rounded = false,
+}) => {
+  const isSmall = useMediaQuery([BREAKPOINTS.mobile, BREAKPOINTS.tabletMin]);
+
   const classNames = cx(
     styles.button,
     styles[`${variant}Variant`],
@@ -26,14 +40,16 @@ const Button: React.FC<ButtonProps> = ({ link, text, isActive, wide, variant = "
     {
       [styles.rounded]: rounded,
       [styles.active]: isActive,
-      [styles.wide]: wide,
+      [styles.wide]: wide ?? isSmall,
     },
   );
 
   return (
-    <a href={link} className={classNames}>
-      <Typography tag="body">{text}</Typography>
-    </a>
+    <ClientOnly>
+      <a href={link} className={classNames}>
+        <Typography tag="body">{text}</Typography>
+      </a>
+    </ClientOnly>
   );
 };
 

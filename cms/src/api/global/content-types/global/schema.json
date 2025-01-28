@@ -51,6 +51,14 @@
       "repeatable": true,
       "component": "shared.schedule",
       "required": true
+    },
+    "taplink": {
+      "type": "string",
+      "required": true
+    },
+    "whatsup": {
+      "type": "string",
+      "required": true
     }
   }
 }
