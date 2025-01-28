@@ -12,13 +12,12 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
   const contactData = await getContactsData();
-  console.log("contactData - ", contactData);
+
   return (
     <div>
 
-      {/* [for debbug] Hidden div with the current date and time */}
+      {/* [for debug] Hidden div with the current date and time */}
       <div style={{ display: "none" }}>
         {new Date().toString()}
       </div>
@@ -26,6 +25,13 @@ export default async function RootLayout({
       <Header
         navItemsDesktop={navItemsDesktop}
         navItemsMobile={navItemsMobileAndTablet}
+        contacts={contactData && {
+          taplink: contactData.taplink,
+          telegram: contactData.taplink,
+          vk: contactData.taplink,
+          youtube: contactData.taplink,
+          whatsup: contactData.taplink,
+        }}
       />
 
       {children}

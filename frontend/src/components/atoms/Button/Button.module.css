@@ -5,8 +5,9 @@
   text-decoration: none;
   cursor: pointer;
   transition: background-color 0.3s;
-  border-radius: var(--button-border-radious);
+  border-radius: var(--button-border-radios);
   width: fit-content;
+  user-select: none;
 }
 
 
@@ -19,7 +20,7 @@
 }
 
 .wide {
-  width: auto;
+  width: 100%;
 }
 
 /* States */

@@ -7,16 +7,12 @@
   },
   "options": {},
   "attributes": {
-    "Title": {
+    "title": {
       "type": "string",
       "required": true
     },
-    "Date": {
+    "date": {
       "type": "datetime",
-      "required": true
-    },
-    "Description": {
-      "type": "blocks",
       "required": true
     },
     "Button": {
@@ -24,10 +20,19 @@
       "repeatable": false,
       "component": "shared.button"
     },
-    "Photo": {
+    "image": {
       "type": "component",
       "repeatable": false,
-      "component": "shared.media"
+      "component": "content-blocks.event-image",
+      "required": true
+    },
+    "description": {
+      "type": "text",
+      "required": true
+    },
+    "place": {
+      "type": "string",
+      "required": true
     }
   }
 }

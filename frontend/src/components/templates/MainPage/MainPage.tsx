@@ -1,15 +1,21 @@
-"use client";
-import cx from "classnames";
+import React from "react";
 
 import { Hero } from "@/components/organisms/hero/Hero";
-import { AboutUs } from "@/components/organisms/aboutUs/AboutUs";
 import Section from "@/components/atoms/section/Section";
-import Typography from "@/components/atoms/typography/Typography";
-import { ComponentContentBlocksInfoBlock } from "@/types";
-import Button from "@/components/atoms/Button/Button";
-import { BREAKPOINTS, useMediaQuery } from "@/hooks/useMediaQuery";
-import ClientOnly from "@/components/organisms/header/_components/ClientOnly";
+import { AboutUs } from "./components/AboutUs";
+import { MainHeroContent } from "./components/MainHeroContent";
+import { HowToBecomeAChristian } from "./components/HowToBecomeAChristian";
 import srcBackgroundHeroImage from "/public/background.jpg";
+
+import type {
+  ComponentContentBlocksEvent,
+  Global as ContactInfo,
+  ComponentContentBlocksInfoBlock,
+  Maybe,
+} from "@/types";
+import { NoEventsStub } from "./components/NoEventsStub";
+import serverContext from "@/lib/serverContext";
+import { EventsSection } from "./components/EventsSection";
 
 import styles from "./MainPage.module.css";
 
@@ -17,50 +23,50 @@ import styles from "./MainPage.module.css";
 interface MainPageProps {
   heroData: ComponentContentBlocksInfoBlock;
   aboutUs: ComponentContentBlocksInfoBlock;
+  HTBChristian: {
+    blockInfo: ComponentContentBlocksInfoBlock,
+    phone: string,
+    telegram: string,
+  };
+  events: Maybe<ComponentContentBlocksEvent>[],
+  contacts: ContactInfo;
 }
 
+export const [getContacts, setContacts] = serverContext<ContactInfo | null>(null);
+
 export const MainPage: React.FC<MainPageProps> = ({
-  heroData, aboutUs,
+  heroData, aboutUs, HTBChristian, events, contacts,
 }) => {
-  const isMobile = useMediaQuery(BREAKPOINTS.mobile);
+  setContacts(contacts);
 
   return (
     <>
       <Hero
         src={srcBackgroundHeroImage}
         content={
-          <div className={cx("darkBlock", styles.heroContainer)}>
-            <div className={styles.hero}>
-              <div className={styles.text}><Typography tag="H1">{heroData.Title}</Typography></div>
-              <div>
-                {heroData.description?.map((description) => {
-                  return <div className={styles.text} key={description?.id}><Typography tag="body">{description?.body}</Typography><br /></div>;
-                })}
-              </div>
-              <ClientOnly>
-                <Button
-                  link="/internal-page"
-                  variant="ghost"
-                  text={heroData.Button?.Button_text || "Узнать больше"}
-                  on="onBrand"
-                  size="L"
-                  wide={!!isMobile}
-                />
-              </ClientOnly>
-            </div>
-          </div>
+          <MainHeroContent
+            title={heroData.Title || "Добро пожаловать в дом молитвы"}
+            description={heroData.description}
+            button={heroData.Button} />
         }
       />
-
 
       <Section>
         <AboutUs aboutUs={aboutUs} />
       </Section>
 
-      <Section className={styles.section}>
-        <div style={{ backgroundColor: "red", color: "green" }}>section-2</div>
+      <Section className={styles.howToBecomeAChristianContainer}>
+        <HowToBecomeAChristian
+          title={HTBChristian.blockInfo.Title || "Как стать христианином?"}
+          description={HTBChristian.blockInfo.description}
+          button={HTBChristian.blockInfo.Button}
+        />
+      </Section>
+
+      <Section className={styles.events}>
+        {events.length > 0 ? <EventsSection events={events} /> : <NoEventsStub />}
       </Section>
 
     </>
-  );;
+  );
 };
