@@ -3,10 +3,10 @@ import Image, { StaticImageData } from "next/image";
 
 import Typography from "@/components/atoms/typography/Typography";
 
-import styles from "./Card.module.css";
+import styles from "./InfoCardWithImage.module.css";
 
 
-interface CardProps {
+interface InfoCardWithImageProps {
   telegram?: string;
   phone?: string;
   image: {
@@ -15,7 +15,7 @@ interface CardProps {
   }
 }
 
-export const Card: React.FC<CardProps> = ({ telegram, phone, image }) => {
+export const InfoCardWithImage: React.FC<InfoCardWithImageProps> = ({ telegram, phone, image }) => {
 
   return (
     <div className={cx("lightBlock", styles.container)}>

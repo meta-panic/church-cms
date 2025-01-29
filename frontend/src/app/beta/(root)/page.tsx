@@ -27,7 +27,7 @@ export default async function App() {
     return null;
   }
 
-  const { landingInfo } = data;
+  const { landingInfo, divineServices } = data;
 
   return (
     <>
@@ -46,6 +46,7 @@ export default async function App() {
         }}
         contacts={contacts}
         events={landingInfo.Events}
+        divineServices={divineServices}
       />
 
     </>

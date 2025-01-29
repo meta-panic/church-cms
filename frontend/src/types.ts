@@ -135,63 +135,63 @@ export type ComponentContentBlocksInfoBlockInput = {
 
 export type ComponentServicesBlockCarouselView = {
   __typename?: "ComponentServicesBlockCarouselView";
-  Carousel_service_description: Scalars["String"]["output"];
-  Carousel_service_image: UploadFile;
-  Carousel_service_name: Scalars["String"]["output"];
+  carouselServiceDescription: Scalars["String"]["output"];
+  carouselServiceImage: UploadFile;
+  carouselServiceName: Scalars["String"]["output"];
   id: Scalars["ID"]["output"];
 };
 
 export type ComponentServicesBlockCarouselViewFiltersInput = {
-  Carousel_service_description?: InputMaybe<StringFilterInput>;
-  Carousel_service_name?: InputMaybe<StringFilterInput>;
   and?: InputMaybe<Array<InputMaybe<ComponentServicesBlockCarouselViewFiltersInput>>>;
+  carouselServiceDescription?: InputMaybe<StringFilterInput>;
+  carouselServiceName?: InputMaybe<StringFilterInput>;
   not?: InputMaybe<ComponentServicesBlockCarouselViewFiltersInput>;
   or?: InputMaybe<Array<InputMaybe<ComponentServicesBlockCarouselViewFiltersInput>>>;
 };
 
 export type ComponentServicesBlockCarouselViewInput = {
-  Carousel_service_description?: InputMaybe<Scalars["String"]["input"]>;
-  Carousel_service_image?: InputMaybe<Scalars["ID"]["input"]>;
-  Carousel_service_name?: InputMaybe<Scalars["String"]["input"]>;
+  carouselServiceDescription?: InputMaybe<Scalars["String"]["input"]>;
+  carouselServiceImage?: InputMaybe<Scalars["ID"]["input"]>;
+  carouselServiceName?: InputMaybe<Scalars["String"]["input"]>;
   id?: InputMaybe<Scalars["ID"]["input"]>;
 };
 
 export type ComponentServicesBlockHeader = {
   __typename?: "ComponentServicesBlockHeader";
-  How_do_we_do?: Maybe<Array<Maybe<ComponentSharedRichText>>>;
   Title?: Maybe<Scalars["String"]["output"]>;
-  What_do_we_do?: Maybe<Array<Maybe<ComponentSharedRichText>>>;
+  howDoWeDo?: Maybe<Array<Maybe<ComponentSharedRichText>>>;
   id: Scalars["ID"]["output"];
+  whatDoWeDo?: Maybe<Array<Maybe<ComponentSharedRichText>>>;
 };
 
 
-export type ComponentServicesBlockHeaderHow_Do_We_DoArgs = {
+export type ComponentServicesBlockHeaderHowDoWeDoArgs = {
   filters?: InputMaybe<ComponentSharedRichTextFiltersInput>;
   pagination?: InputMaybe<PaginationArg>;
   sort?: InputMaybe<Array<InputMaybe<Scalars["String"]["input"]>>>;
 };
 
 
-export type ComponentServicesBlockHeaderWhat_Do_We_DoArgs = {
+export type ComponentServicesBlockHeaderWhatDoWeDoArgs = {
   filters?: InputMaybe<ComponentSharedRichTextFiltersInput>;
   pagination?: InputMaybe<PaginationArg>;
   sort?: InputMaybe<Array<InputMaybe<Scalars["String"]["input"]>>>;
 };
 
 export type ComponentServicesBlockHeaderFiltersInput = {
-  How_do_we_do?: InputMaybe<ComponentSharedRichTextFiltersInput>;
   Title?: InputMaybe<StringFilterInput>;
-  What_do_we_do?: InputMaybe<ComponentSharedRichTextFiltersInput>;
   and?: InputMaybe<Array<InputMaybe<ComponentServicesBlockHeaderFiltersInput>>>;
+  howDoWeDo?: InputMaybe<ComponentSharedRichTextFiltersInput>;
   not?: InputMaybe<ComponentServicesBlockHeaderFiltersInput>;
   or?: InputMaybe<Array<InputMaybe<ComponentServicesBlockHeaderFiltersInput>>>;
+  whatDoWeDo?: InputMaybe<ComponentSharedRichTextFiltersInput>;
 };
 
 export type ComponentServicesBlockHeaderInput = {
-  How_do_we_do?: InputMaybe<Array<InputMaybe<ComponentSharedRichTextInput>>>;
   Title?: InputMaybe<Scalars["String"]["input"]>;
-  What_do_we_do?: InputMaybe<Array<InputMaybe<ComponentSharedRichTextInput>>>;
+  howDoWeDo?: InputMaybe<Array<InputMaybe<ComponentSharedRichTextInput>>>;
   id?: InputMaybe<Scalars["ID"]["input"]>;
+  whatDoWeDo?: InputMaybe<Array<InputMaybe<ComponentSharedRichTextInput>>>;
 };
 
 export type ComponentSharedAddress = {
@@ -1112,11 +1112,12 @@ export type ReviewWorkflowsWorkflowStageRelationResponseCollection = {
 
 export type Service = {
   __typename?: "Service";
-  Header: ComponentServicesBlockHeader;
-  Landing_page_carousel_view?: Maybe<ComponentServicesBlockCarouselView>;
   createdAt?: Maybe<Scalars["DateTime"]["output"]>;
   documentId: Scalars["ID"]["output"];
+  hero: ComponentServicesBlockHeader;
+  landingCarouselView: ComponentServicesBlockCarouselView;
   publishedAt?: Maybe<Scalars["DateTime"]["output"]>;
+  slug: Scalars["String"]["output"];
   updatedAt?: Maybe<Scalars["DateTime"]["output"]>;
 };
 
@@ -1127,21 +1128,23 @@ export type ServiceEntityResponseCollection = {
 };
 
 export type ServiceFiltersInput = {
-  Header?: InputMaybe<ComponentServicesBlockHeaderFiltersInput>;
-  Landing_page_carousel_view?: InputMaybe<ComponentServicesBlockCarouselViewFiltersInput>;
   and?: InputMaybe<Array<InputMaybe<ServiceFiltersInput>>>;
   createdAt?: InputMaybe<DateTimeFilterInput>;
   documentId?: InputMaybe<IdFilterInput>;
+  hero?: InputMaybe<ComponentServicesBlockHeaderFiltersInput>;
+  landingCarouselView?: InputMaybe<ComponentServicesBlockCarouselViewFiltersInput>;
   not?: InputMaybe<ServiceFiltersInput>;
   or?: InputMaybe<Array<InputMaybe<ServiceFiltersInput>>>;
   publishedAt?: InputMaybe<DateTimeFilterInput>;
+  slug?: InputMaybe<StringFilterInput>;
   updatedAt?: InputMaybe<DateTimeFilterInput>;
 };
 
 export type ServiceInput = {
-  Header?: InputMaybe<ComponentServicesBlockHeaderInput>;
-  Landing_page_carousel_view?: InputMaybe<ComponentServicesBlockCarouselViewInput>;
+  hero?: InputMaybe<ComponentServicesBlockHeaderInput>;
+  landingCarouselView?: InputMaybe<ComponentServicesBlockCarouselViewInput>;
   publishedAt?: InputMaybe<Scalars["DateTime"]["input"]>;
+  slug?: InputMaybe<Scalars["String"]["input"]>;
 };
 
 export type StringFilterInput = {
@@ -1508,7 +1511,7 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 
 /** Mapping of union types */
 export type ResolversUnionTypes<_RefType extends Record<string, unknown>> = {
-  GenericMorph: (Omit<ComponentContentBlocksEvent, "image"> & { image: _RefType["ComponentContentBlocksEventImage"] }) | (Omit<ComponentContentBlocksEventImage, "eventImage"> & { eventImage: _RefType["UploadFile"] }) | (ComponentContentBlocksInfoBlock) | (Omit<ComponentServicesBlockCarouselView, "Carousel_service_image"> & { Carousel_service_image: _RefType["UploadFile"] }) | (ComponentServicesBlockHeader) | (ComponentSharedAddress) | (ComponentSharedButton) | (ComponentSharedEmbeddedVideo) | (Omit<ComponentSharedMedia, "file"> & { file?: Maybe<_RefType["UploadFile"]> }) | (ComponentSharedQuote) | (ComponentSharedRichText) | (ComponentSharedSchedule) | (Omit<ComponentSharedSeo, "shareImage"> & { shareImage?: Maybe<_RefType["UploadFile"]> }) | (Omit<ComponentSharedSlider, "files" | "files_connection"> & { files: Array<Maybe<_RefType["UploadFile"]>>, files_connection?: Maybe<_RefType["UploadFileRelationResponseCollection"]> }) | (Omit<ComponentSharedVkVideo, "thumbnail"> & { thumbnail?: Maybe<_RefType["UploadFile"]> }) | (Global) | (I18NLocale) | (Omit<PageLanding, "Events"> & { Events: Array<Maybe<_RefType["ComponentContentBlocksEvent"]>> }) | (ReviewWorkflowsWorkflow) | (ReviewWorkflowsWorkflowStage) | (Omit<Service, "Landing_page_carousel_view"> & { Landing_page_carousel_view?: Maybe<_RefType["ComponentServicesBlockCarouselView"]> }) | (Omit<UploadFile, "related"> & { related?: Maybe<Array<Maybe<_RefType["GenericMorph"]>>> }) | (UsersPermissionsPermission) | (UsersPermissionsRole) | (UsersPermissionsUser);
+  GenericMorph: (Omit<ComponentContentBlocksEvent, "image"> & { image: _RefType["ComponentContentBlocksEventImage"] }) | (Omit<ComponentContentBlocksEventImage, "eventImage"> & { eventImage: _RefType["UploadFile"] }) | (ComponentContentBlocksInfoBlock) | (Omit<ComponentServicesBlockCarouselView, "carouselServiceImage"> & { carouselServiceImage: _RefType["UploadFile"] }) | (ComponentServicesBlockHeader) | (ComponentSharedAddress) | (ComponentSharedButton) | (ComponentSharedEmbeddedVideo) | (Omit<ComponentSharedMedia, "file"> & { file?: Maybe<_RefType["UploadFile"]> }) | (ComponentSharedQuote) | (ComponentSharedRichText) | (ComponentSharedSchedule) | (Omit<ComponentSharedSeo, "shareImage"> & { shareImage?: Maybe<_RefType["UploadFile"]> }) | (Omit<ComponentSharedSlider, "files" | "files_connection"> & { files: Array<Maybe<_RefType["UploadFile"]>>, files_connection?: Maybe<_RefType["UploadFileRelationResponseCollection"]> }) | (Omit<ComponentSharedVkVideo, "thumbnail"> & { thumbnail?: Maybe<_RefType["UploadFile"]> }) | (Global) | (I18NLocale) | (Omit<PageLanding, "Events"> & { Events: Array<Maybe<_RefType["ComponentContentBlocksEvent"]>> }) | (ReviewWorkflowsWorkflow) | (ReviewWorkflowsWorkflowStage) | (Omit<Service, "landingCarouselView"> & { landingCarouselView: _RefType["ComponentServicesBlockCarouselView"] }) | (Omit<UploadFile, "related"> & { related?: Maybe<Array<Maybe<_RefType["GenericMorph"]>>> }) | (UsersPermissionsPermission) | (UsersPermissionsRole) | (UsersPermissionsUser);
 };
 
 
@@ -1525,7 +1528,7 @@ export type ResolversTypes = {
   ComponentContentBlocksInfoBlock: ResolverTypeWrapper<ComponentContentBlocksInfoBlock>;
   ComponentContentBlocksInfoBlockFiltersInput: ComponentContentBlocksInfoBlockFiltersInput;
   ComponentContentBlocksInfoBlockInput: ComponentContentBlocksInfoBlockInput;
-  ComponentServicesBlockCarouselView: ResolverTypeWrapper<Omit<ComponentServicesBlockCarouselView, "Carousel_service_image"> & { Carousel_service_image: ResolversTypes["UploadFile"] }>;
+  ComponentServicesBlockCarouselView: ResolverTypeWrapper<Omit<ComponentServicesBlockCarouselView, "carouselServiceImage"> & { carouselServiceImage: ResolversTypes["UploadFile"] }>;
   ComponentServicesBlockCarouselViewFiltersInput: ComponentServicesBlockCarouselViewFiltersInput;
   ComponentServicesBlockCarouselViewInput: ComponentServicesBlockCarouselViewInput;
   ComponentServicesBlockHeader: ResolverTypeWrapper<ComponentServicesBlockHeader>;
@@ -1586,7 +1589,7 @@ export type ResolversTypes = {
   ReviewWorkflowsWorkflowStageFiltersInput: ReviewWorkflowsWorkflowStageFiltersInput;
   ReviewWorkflowsWorkflowStageInput: ReviewWorkflowsWorkflowStageInput;
   ReviewWorkflowsWorkflowStageRelationResponseCollection: ResolverTypeWrapper<ReviewWorkflowsWorkflowStageRelationResponseCollection>;
-  Service: ResolverTypeWrapper<Omit<Service, "Landing_page_carousel_view"> & { Landing_page_carousel_view?: Maybe<ResolversTypes["ComponentServicesBlockCarouselView"]> }>;
+  Service: ResolverTypeWrapper<Omit<Service, "landingCarouselView"> & { landingCarouselView: ResolversTypes["ComponentServicesBlockCarouselView"] }>;
   ServiceEntityResponseCollection: ResolverTypeWrapper<Omit<ServiceEntityResponseCollection, "nodes"> & { nodes: Array<ResolversTypes["Service"]> }>;
   ServiceFiltersInput: ServiceFiltersInput;
   ServiceInput: ServiceInput;
@@ -1633,7 +1636,7 @@ export type ResolversParentTypes = {
   ComponentContentBlocksInfoBlock: ComponentContentBlocksInfoBlock;
   ComponentContentBlocksInfoBlockFiltersInput: ComponentContentBlocksInfoBlockFiltersInput;
   ComponentContentBlocksInfoBlockInput: ComponentContentBlocksInfoBlockInput;
-  ComponentServicesBlockCarouselView: Omit<ComponentServicesBlockCarouselView, "Carousel_service_image"> & { Carousel_service_image: ResolversParentTypes["UploadFile"] };
+  ComponentServicesBlockCarouselView: Omit<ComponentServicesBlockCarouselView, "carouselServiceImage"> & { carouselServiceImage: ResolversParentTypes["UploadFile"] };
   ComponentServicesBlockCarouselViewFiltersInput: ComponentServicesBlockCarouselViewFiltersInput;
   ComponentServicesBlockCarouselViewInput: ComponentServicesBlockCarouselViewInput;
   ComponentServicesBlockHeader: ComponentServicesBlockHeader;
@@ -1693,7 +1696,7 @@ export type ResolversParentTypes = {
   ReviewWorkflowsWorkflowStageFiltersInput: ReviewWorkflowsWorkflowStageFiltersInput;
   ReviewWorkflowsWorkflowStageInput: ReviewWorkflowsWorkflowStageInput;
   ReviewWorkflowsWorkflowStageRelationResponseCollection: ReviewWorkflowsWorkflowStageRelationResponseCollection;
-  Service: Omit<Service, "Landing_page_carousel_view"> & { Landing_page_carousel_view?: Maybe<ResolversParentTypes["ComponentServicesBlockCarouselView"]> };
+  Service: Omit<Service, "landingCarouselView"> & { landingCarouselView: ResolversParentTypes["ComponentServicesBlockCarouselView"] };
   ServiceEntityResponseCollection: Omit<ServiceEntityResponseCollection, "nodes"> & { nodes: Array<ResolversParentTypes["Service"]> };
   ServiceFiltersInput: ServiceFiltersInput;
   ServiceInput: ServiceInput;
@@ -1755,18 +1758,18 @@ export type ComponentContentBlocksInfoBlockResolvers<ContextType = any, ParentTy
 };
 
 export type ComponentServicesBlockCarouselViewResolvers<ContextType = any, ParentType extends ResolversParentTypes["ComponentServicesBlockCarouselView"] = ResolversParentTypes["ComponentServicesBlockCarouselView"]> = {
-  Carousel_service_description?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
-  Carousel_service_image?: Resolver<ResolversTypes["UploadFile"], ParentType, ContextType>;
-  Carousel_service_name?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  carouselServiceDescription?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  carouselServiceImage?: Resolver<ResolversTypes["UploadFile"], ParentType, ContextType>;
+  carouselServiceName?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type ComponentServicesBlockHeaderResolvers<ContextType = any, ParentType extends ResolversParentTypes["ComponentServicesBlockHeader"] = ResolversParentTypes["ComponentServicesBlockHeader"]> = {
-  How_do_we_do?: Resolver<Maybe<Array<Maybe<ResolversTypes["ComponentSharedRichText"]>>>, ParentType, ContextType, RequireFields<ComponentServicesBlockHeaderHow_Do_We_DoArgs, "pagination" | "sort">>;
   Title?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
-  What_do_we_do?: Resolver<Maybe<Array<Maybe<ResolversTypes["ComponentSharedRichText"]>>>, ParentType, ContextType, RequireFields<ComponentServicesBlockHeaderWhat_Do_We_DoArgs, "pagination" | "sort">>;
+  howDoWeDo?: Resolver<Maybe<Array<Maybe<ResolversTypes["ComponentSharedRichText"]>>>, ParentType, ContextType, RequireFields<ComponentServicesBlockHeaderHowDoWeDoArgs, "pagination" | "sort">>;
   id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  whatDoWeDo?: Resolver<Maybe<Array<Maybe<ResolversTypes["ComponentSharedRichText"]>>>, ParentType, ContextType, RequireFields<ComponentServicesBlockHeaderWhatDoWeDoArgs, "pagination" | "sort">>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -2017,11 +2020,12 @@ export type ReviewWorkflowsWorkflowStageRelationResponseCollectionResolvers<Cont
 };
 
 export type ServiceResolvers<ContextType = any, ParentType extends ResolversParentTypes["Service"] = ResolversParentTypes["Service"]> = {
-  Header?: Resolver<ResolversTypes["ComponentServicesBlockHeader"], ParentType, ContextType>;
-  Landing_page_carousel_view?: Resolver<Maybe<ResolversTypes["ComponentServicesBlockCarouselView"]>, ParentType, ContextType>;
   createdAt?: Resolver<Maybe<ResolversTypes["DateTime"]>, ParentType, ContextType>;
   documentId?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  hero?: Resolver<ResolversTypes["ComponentServicesBlockHeader"], ParentType, ContextType>;
+  landingCarouselView?: Resolver<ResolversTypes["ComponentServicesBlockCarouselView"], ParentType, ContextType>;
   publishedAt?: Resolver<Maybe<ResolversTypes["DateTime"]>, ParentType, ContextType>;
+  slug?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   updatedAt?: Resolver<Maybe<ResolversTypes["DateTime"]>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };

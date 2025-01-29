@@ -2,6 +2,8 @@ import "server-only";
 import qs from "qs";
 
 import { PageLanding, Service as DivineService, Global as ContactInfo } from "@/types";
+import { hasValue } from "@/utils/notMaybe";
+import { errors } from "@strapi/utils";
 
 
 const landingPageQuery = qs.stringify(
@@ -37,10 +39,10 @@ const divineServicesQuery = qs.stringify(
       page: 1,
     },
     populate: {
-      "Landing_page_carousel_view": {
+      landingCarouselView: {
         populate: "*",
       },
-      "Header": {
+      hero: {
         populate: "*",
       },
     },
@@ -66,7 +68,7 @@ const queryGlobal = qs.stringify(
 
 export async function getLandingPageData(): Promise<{
   landingInfo: PageLanding;
-  divineServices: Record<string, DivineService>;
+  divineServices: DivineService[];
 } | undefined> {
   const NEXT_PUBLIC_BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 
@@ -76,20 +78,25 @@ export async function getLandingPageData(): Promise<{
         .then((res) => res.json());
 
 
-    const divineServices: { data: Record<string, DivineService> } =
+    const divineServices: { data: DivineService[] } =
       await fetch(`http://${NEXT_PUBLIC_BACKEND_URL}/api/services?${divineServicesQuery}`)
         .then((res) => res.json());
 
-
     return {
       landingInfo: landingInfo.data[0],
-      divineServices: divineServices.data,
+      divineServices: divineServices.data
+        .filter<DivineService>((d): d is DivineService => !!d && hasValue(d)),
     };
-  } catch (err) {
+  } catch (err: unknown) {
     // eslint-disable-next-line no-console
     console.error("Fetch error is excepted during build time. If it is not, so...ops");
-    // eslint-disable-next-line no-console
-    console.error("Some error occurred during fetching data for a landing page - ", err);
+    if (err instanceof errors["ApplicationError"]) {
+      // eslint-disable-next-line no-console
+      console.error("Some error occurred during fetching data for a landing page - ", err.message);
+    } else {
+      // eslint-disable-next-line no-console
+      console.error("Some error occurred during fetching data for a landing page - ", err);
+    }
   }
 };
 

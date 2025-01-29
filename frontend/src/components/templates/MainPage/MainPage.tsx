@@ -12,12 +12,14 @@ import type {
   Global as ContactInfo,
   ComponentContentBlocksInfoBlock,
   Maybe,
+  Service as DivineService,
 } from "@/types";
 import { NoEventsStub } from "./components/NoEventsStub";
 import serverContext from "@/lib/serverContext";
 import { EventsSection } from "./components/EventsSection";
 
 import styles from "./MainPage.module.css";
+import { DivineServicesSection } from "./components/DivineServicesSection";
 
 
 interface MainPageProps {
@@ -30,12 +32,13 @@ interface MainPageProps {
   };
   events: Maybe<ComponentContentBlocksEvent>[],
   contacts: ContactInfo;
+  divineServices: DivineService[];
 }
 
 export const [getContacts, setContacts] = serverContext<ContactInfo | null>(null);
 
 export const MainPage: React.FC<MainPageProps> = ({
-  heroData, aboutUs, HTBChristian, events, contacts,
+  heroData, aboutUs, HTBChristian, events, contacts, divineServices,
 }) => {
   setContacts(contacts);
 
@@ -67,6 +70,9 @@ export const MainPage: React.FC<MainPageProps> = ({
         {events.length > 0 ? <EventsSection events={events} /> : <NoEventsStub />}
       </Section>
 
+      <Section className={styles.divineServicesContainer}>
+        <DivineServicesSection divineServices={divineServices} />
+      </Section>
     </>
   );
 };

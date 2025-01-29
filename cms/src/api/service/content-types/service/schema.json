@@ -12,16 +12,21 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "Header": {
+    "hero": {
       "type": "component",
       "repeatable": false,
       "component": "services-block.header",
       "required": true
     },
-    "Landing_page_carousel_view": {
+    "landingCarouselView": {
       "type": "component",
       "repeatable": false,
-      "component": "services-block.carousel-view"
+      "component": "services-block.carousel-view",
+      "required": true
+    },
+    "slug": {
+      "type": "uid",
+      "required": true
     }
   }
 }

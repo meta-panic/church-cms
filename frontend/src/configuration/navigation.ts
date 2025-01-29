@@ -20,6 +20,7 @@ export const EXISTING_URLS = [
   "/videos",
   "/beta", // it is a root
 ] as const;
+export type PublicServiceRoute = `/public-service/${string}`;
 
 export type ExistingUrls = typeof EXISTING_URLS[number];
 

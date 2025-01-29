@@ -14,7 +14,7 @@ const eslintConfig = [
     "next/core-web-vitals",
     "next/typescript",
     "plugin:@typescript-eslint/eslint-recommended",
-    //"plugin:jsx-a11y/recommended",
+    "plugin:jsx-a11y/recommended",
   ),
   {
     rules: {

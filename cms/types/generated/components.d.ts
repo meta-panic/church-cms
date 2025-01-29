@@ -134,11 +134,12 @@ export interface ServicesBlockHeader extends Struct.ComponentSchema {
   info: {
     displayName: 'Header';
     icon: 'wheelchair';
+    description: '';
   };
   attributes: {
     Title: Schema.Attribute.String;
-    What_do_we_do: Schema.Attribute.Component<'shared.rich-text', true>;
-    How_do_we_do: Schema.Attribute.Component<'shared.rich-text', true>;
+    whatDoWeDo: Schema.Attribute.Component<'shared.rich-text', true>;
+    howDoWeDo: Schema.Attribute.Component<'shared.rich-text', true>;
   };
 }
 
@@ -147,12 +148,13 @@ export interface ServicesBlockCarouselView extends Struct.ComponentSchema {
   info: {
     displayName: 'Carousel_view';
     icon: 'medium';
+    description: '';
   };
   attributes: {
-    Carousel_service_name: Schema.Attribute.String & Schema.Attribute.Required;
-    Carousel_service_image: Schema.Attribute.Media<'images' | 'files'> &
+    carouselServiceName: Schema.Attribute.String & Schema.Attribute.Required;
+    carouselServiceImage: Schema.Attribute.Media<'images' | 'files'> &
       Schema.Attribute.Required;
-    Carousel_service_description: Schema.Attribute.Text &
+    carouselServiceDescription: Schema.Attribute.Text &
       Schema.Attribute.Required;
   };
 }

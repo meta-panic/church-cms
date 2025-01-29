@@ -2,24 +2,25 @@
   "collectionName": "components_services_block_carousel_views",
   "info": {
     "displayName": "Carousel_view",
-    "icon": "medium"
+    "icon": "medium",
+    "description": ""
   },
   "options": {},
   "attributes": {
-    "Carousel_service_name": {
+    "carouselServiceName": {
       "type": "string",
       "required": true
     },
-    "Carousel_service_image": {
+    "carouselServiceImage": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
       "allowedTypes": [
         "images",
         "files"
-      ],
-      "type": "media",
-      "multiple": false,
-      "required": true
+      ]
     },
-    "Carousel_service_description": {
+    "carouselServiceDescription": {
       "type": "text",
       "required": true
     }
