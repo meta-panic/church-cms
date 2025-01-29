@@ -19,12 +19,6 @@
       "type": "component",
       "repeatable": false,
       "component": "shared.button"
-    },
-    "Video_link": {
-      "displayName": "Embedded_video",
-      "type": "component",
-      "repeatable": false,
-      "component": "shared.embedded-video"
     }
   }
 }

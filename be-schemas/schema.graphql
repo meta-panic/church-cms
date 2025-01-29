@@ -263,23 +263,37 @@ type ComponentSharedQuote {
   body: String
 }
 
+input ComponentSharedMediaFiltersInput {
+  and: [ComponentSharedMediaFiltersInput]
+  or: [ComponentSharedMediaFiltersInput]
+  not: ComponentSharedMediaFiltersInput
+}
+
+input ComponentSharedMediaInput {
+  id: ID
+  file: ID
+}
+
 type ComponentSharedMedia {
   id: ID!
   file: UploadFile
 }
 
-input ComponentSharedEmbeddedVideoFiltersInput {
-  and: [ComponentSharedEmbeddedVideoFiltersInput]
-  or: [ComponentSharedEmbeddedVideoFiltersInput]
-  not: ComponentSharedEmbeddedVideoFiltersInput
+input ComponentSharedEmbeddedVkVideoFiltersInput {
+  embeddedLink: StringFilterInput
+  and: [ComponentSharedEmbeddedVkVideoFiltersInput]
+  or: [ComponentSharedEmbeddedVkVideoFiltersInput]
+  not: ComponentSharedEmbeddedVkVideoFiltersInput
 }
 
-input ComponentSharedEmbeddedVideoInput {
+input ComponentSharedEmbeddedVkVideoInput {
   id: ID
+  embeddedLink: String
 }
 
-type ComponentSharedEmbeddedVideo {
+type ComponentSharedEmbeddedVkVideo {
   id: ID!
+  embeddedLink: String!
 }
 
 input ComponentSharedButtonFiltersInput {
@@ -323,6 +337,8 @@ input ComponentServicesBlockHeaderFiltersInput {
   Title: StringFilterInput
   whatDoWeDo: ComponentSharedRichTextFiltersInput
   howDoWeDo: ComponentSharedRichTextFiltersInput
+  headerPhoto: ComponentSharedMediaFiltersInput
+  headerVideo: ComponentSharedEmbeddedVkVideoFiltersInput
   and: [ComponentServicesBlockHeaderFiltersInput]
   or: [ComponentServicesBlockHeaderFiltersInput]
   not: ComponentServicesBlockHeaderFiltersInput
@@ -333,6 +349,8 @@ input ComponentServicesBlockHeaderInput {
   Title: String
   whatDoWeDo: [ComponentSharedRichTextInput]
   howDoWeDo: [ComponentSharedRichTextInput]
+  headerPhoto: ComponentSharedMediaInput
+  headerVideo: ComponentSharedEmbeddedVkVideoInput
 }
 
 type ComponentServicesBlockHeader {
@@ -340,6 +358,8 @@ type ComponentServicesBlockHeader {
   Title: String
   whatDoWeDo(filters: ComponentSharedRichTextFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentSharedRichText]
   howDoWeDo(filters: ComponentSharedRichTextFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentSharedRichText]
+  headerPhoto: ComponentSharedMedia
+  headerVideo: ComponentSharedEmbeddedVkVideo
 }
 
 input ComponentServicesBlockCarouselViewFiltersInput {
@@ -368,7 +388,6 @@ input ComponentContentBlocksInfoBlockFiltersInput {
   Title: StringFilterInput
   description: ComponentSharedRichTextFiltersInput
   Button: ComponentSharedButtonFiltersInput
-  Video_link: ComponentSharedEmbeddedVideoFiltersInput
   and: [ComponentContentBlocksInfoBlockFiltersInput]
   or: [ComponentContentBlocksInfoBlockFiltersInput]
   not: ComponentContentBlocksInfoBlockFiltersInput
@@ -379,7 +398,6 @@ input ComponentContentBlocksInfoBlockInput {
   Title: String
   description: [ComponentSharedRichTextInput]
   Button: ComponentSharedButtonInput
-  Video_link: ComponentSharedEmbeddedVideoInput
 }
 
 type ComponentContentBlocksInfoBlock {
@@ -387,7 +405,6 @@ type ComponentContentBlocksInfoBlock {
   Title: String
   description(filters: ComponentSharedRichTextFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentSharedRichText]
   Button: ComponentSharedButton
-  Video_link: ComponentSharedEmbeddedVideo
 }
 
 input ComponentContentBlocksEventFiltersInput {
@@ -823,7 +840,7 @@ type ServiceEntityResponseCollection {
   pageInfo: Pagination!
 }
 
-union GenericMorph = ComponentSharedVkVideo | ComponentSharedSlider | ComponentSharedSeo | ComponentSharedSchedule | ComponentSharedRichText | ComponentSharedQuote | ComponentSharedMedia | ComponentSharedEmbeddedVideo | ComponentSharedButton | ComponentSharedAddress | ComponentServicesBlockHeader | ComponentServicesBlockCarouselView | ComponentContentBlocksInfoBlock | ComponentContentBlocksEvent | ComponentContentBlocksEventImage | UploadFile | I18NLocale | ReviewWorkflowsWorkflow | ReviewWorkflowsWorkflowStage | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser | Global | PageLanding | Service
+union GenericMorph = ComponentSharedVkVideo | ComponentSharedSlider | ComponentSharedSeo | ComponentSharedSchedule | ComponentSharedRichText | ComponentSharedQuote | ComponentSharedMedia | ComponentSharedEmbeddedVkVideo | ComponentSharedButton | ComponentSharedAddress | ComponentServicesBlockHeader | ComponentServicesBlockCarouselView | ComponentContentBlocksInfoBlock | ComponentContentBlocksEvent | ComponentContentBlocksEventImage | UploadFile | I18NLocale | ReviewWorkflowsWorkflow | ReviewWorkflowsWorkflowStage | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser | Global | PageLanding | Service
 
 input FileInfoInput {
   name: String

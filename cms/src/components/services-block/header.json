@@ -19,6 +19,16 @@
       "type": "component",
       "repeatable": true,
       "component": "shared.rich-text"
+    },
+    "headerPhoto": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.media"
+    },
+    "headerVideo": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.embedded-vk-video"
     }
   }
 }

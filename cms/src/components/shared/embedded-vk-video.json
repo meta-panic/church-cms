@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_shared_embedded_vk_videos",
+  "info": {
+    "displayName": "EmbeddedVkVideo"
+  },
+  "options": {},
+  "attributes": {
+    "embeddedLink": {
+      "type": "string",
+      "required": true
+    }
+  }
+}
