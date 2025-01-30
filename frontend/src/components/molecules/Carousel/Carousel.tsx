@@ -46,7 +46,6 @@ const CarouselWrapper = forwardRef<CarouselRef, CarouselWrapperProps>(({ childre
   const nextSlide = () => {
 
     if (carouselRef.current) {
-      console.log(carouselRef.current?.state);
 
       carouselRef.current.next(1);
     }
@@ -71,10 +70,11 @@ const CarouselWrapper = forwardRef<CarouselRef, CarouselWrapperProps>(({ childre
       ref={carouselRef}
       infinite
       keyBoardControl
-      minimumTouchDrag={50}
+      minimumTouchDrag={10}
       partialVisible={isSmallScreen}
       centerMode={!isSmallScreen}
       swipeable
+      transitionDuration={1}
     >
       {children}
     </Carousel>
