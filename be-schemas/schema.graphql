@@ -746,6 +746,7 @@ input GlobalInput {
   serviceSchedule: [ComponentSharedScheduleInput]
   taplink: String
   whatsup: String
+  footerNote: [ComponentSharedRichTextInput]
   publishedAt: DateTime
 }
 
@@ -762,6 +763,7 @@ type Global {
   serviceSchedule(filters: ComponentSharedScheduleFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentSharedSchedule]!
   taplink: String!
   whatsup: String!
+  footerNote(filters: ComponentSharedRichTextFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentSharedRichText]!
   createdAt: DateTime
   updatedAt: DateTime
   publishedAt: DateTime

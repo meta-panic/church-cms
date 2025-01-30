@@ -1,0 +1,81 @@
+.footerContainer {
+  background-color: var(--common-dark-900);
+  color: var(--default-text);
+}
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-l);
+  padding: var(--spacing-2xl) 0;
+}
+
+.socialsContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.socialIcon {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  color: var(--default-text);
+  transition: all 0.2s ease-in-out;
+}
+
+.socialIcon:hover {
+  color: var(--hover-components-link-fg);
+}
+
+.separator {
+  background-color: var(--common-light-100);
+}
+
+.registrationContainer {
+  text-align: center;
+}
+
+.schedule {
+  display: flex;
+  align-items: inherit;
+  flex-direction: column;
+}
+
+.churchInfoContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  gap: var(--spacing-2xl);
+}
+
+.block {
+  display: flex;
+  gap: var(--spacing-x);
+  flex-direction: column;
+  align-items: center;
+}
+
+.address {
+  text-align: center;
+}
+
+@media screen and (min-width: 641px) {
+  .churchInfoContainer {
+    flex-direction: row;
+    gap: var(--spacing-x);
+    justify-content: space-between;
+  }
+
+  .churchInfoContainer> :first-child {
+    align-items: flex-start;
+  }
+
+  .churchInfoContainer> :last-child {
+    align-items: flex-end;
+  }
+
+  .address {
+    text-align: end;
+  }
+}

@@ -49,7 +49,7 @@
   --default-text: var(--common-dark-900);
   --default-components-link-fg: #547478;
   --hover-text: var(--common-dark-900);
-  --hover-components-link-fg: #4b5e60;
+  --hover-components-link-fg: rgba(75, 94, 96, 0.6);
   --active-text: var(--common-dark-900);
   --active-components-link-fg: #596e71;
   --hover-navigation-item: var(--accent-400);
@@ -59,8 +59,8 @@
   --default-text: var(--common-light-100);
   --default-components-link-fg: #f8f6f7;
   --hover-text: var(--common-light-100);
-  --hover-components-link-fg: #f8f6f7;
-  --active-text-ondark: var(--common-light-100);
+  --hover-components-link-fg: rgba(248, 246, 247, 0.7);
+  --active-text: var(--common-light-100);
   --active-components-link-fg: #f8f6f7;
   --hover-navigation-item: var(--accent-400);
 }

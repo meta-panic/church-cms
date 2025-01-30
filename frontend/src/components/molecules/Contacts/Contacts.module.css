@@ -3,3 +3,7 @@
   height: fit-content;
   gap: 4px;
 }
+
+.wide {
+  gap: var(--spacing-x)
+}

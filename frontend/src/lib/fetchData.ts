@@ -58,6 +58,12 @@ const queryGlobal = qs.stringify(
       "PrimalBuilding": {
         populate: "*",
       },
+      "serviceSchedule": {
+        populate: "*",
+      },
+      footerNote: {
+        populate: "*",
+      },
     },
   },
   {

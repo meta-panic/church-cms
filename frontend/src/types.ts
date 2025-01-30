@@ -419,6 +419,7 @@ export type Global = {
   createdAt?: Maybe<Scalars["DateTime"]["output"]>;
   documentId: Scalars["ID"]["output"];
   email: Scalars["String"]["output"];
+  footerNote: Array<Maybe<ComponentSharedRichText>>;
   ok: Scalars["String"]["output"];
   phone: Scalars["String"]["output"];
   publishedAt?: Maybe<Scalars["DateTime"]["output"]>;
@@ -433,6 +434,13 @@ export type Global = {
 };
 
 
+export type GlobalFooterNoteArgs = {
+  filters?: InputMaybe<ComponentSharedRichTextFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars["String"]["input"]>>>;
+};
+
+
 export type GlobalServiceScheduleArgs = {
   filters?: InputMaybe<ComponentSharedScheduleFiltersInput>;
   pagination?: InputMaybe<PaginationArg>;
@@ -442,6 +450,7 @@ export type GlobalServiceScheduleArgs = {
 export type GlobalInput = {
   PrimalBuilding?: InputMaybe<ComponentSharedAddressInput>;
   email?: InputMaybe<Scalars["String"]["input"]>;
+  footerNote?: InputMaybe<Array<InputMaybe<ComponentSharedRichTextInput>>>;
   ok?: InputMaybe<Scalars["String"]["input"]>;
   phone?: InputMaybe<Scalars["String"]["input"]>;
   publishedAt?: InputMaybe<Scalars["DateTime"]["input"]>;
@@ -1882,6 +1891,7 @@ export type GlobalResolvers<ContextType = any, ParentType extends ResolversParen
   createdAt?: Resolver<Maybe<ResolversTypes["DateTime"]>, ParentType, ContextType>;
   documentId?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
   email?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  footerNote?: Resolver<Array<Maybe<ResolversTypes["ComponentSharedRichText"]>>, ParentType, ContextType, RequireFields<GlobalFooterNoteArgs, "pagination" | "sort">>;
   ok?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   phone?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   publishedAt?: Resolver<Maybe<ResolversTypes["DateTime"]>, ParentType, ContextType>;
