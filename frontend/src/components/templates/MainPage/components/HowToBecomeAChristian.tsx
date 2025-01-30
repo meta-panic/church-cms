@@ -1,11 +1,10 @@
 import cx from "classnames";
 
-import { Card } from "@/components/molecules/Card/Card";
+import { InfoCardWithImage } from "@/components/molecules/InfoCardWithImage/Card";
 import { Maybe, ComponentSharedRichText, ComponentSharedButton } from "@/types";
 import Typography from "@/components/atoms/typography/Typography";
 import Button from "@/components/atoms/Button/Button";
 import RichTextRenderer from "@/components/molecules/RichTextRenderer/RichTextRenderer";
-import ClientOnly from "@/components/organisms/header/_components/ClientOnly";
 import { hasValue } from "@/utils/notMaybe";
 import bibleImageSrc from "./bible.png";
 
@@ -55,7 +54,7 @@ export const HowToBecomeAChristian: React.FC<HowToBecomeAChristianProps> = ({
         </div>
 
         <div className={styles.card}>
-          <Card
+          <InfoCardWithImage
             image={{
               imageSrc: bibleImageSrc,
               altText: "Билию в черной обложке держат руки",

@@ -84,18 +84,18 @@ export interface SharedMedia extends Struct.ComponentSchema {
     description: '';
   };
   attributes: {
-    file: Schema.Attribute.Media<'images' | 'files' | 'videos'>;
+    file: Schema.Attribute.Media<'images'>;
   };
 }
 
-export interface SharedEmbeddedVideo extends Struct.ComponentSchema {
-  collectionName: 'components_shared_embedded_videos';
+export interface SharedEmbeddedVkVideo extends Struct.ComponentSchema {
+  collectionName: 'components_shared_embedded_vk_videos';
   info: {
-    displayName: 'Embedded video';
-    icon: 'alien';
-    description: '';
+    displayName: 'EmbeddedVkVideo';
   };
-  attributes: {};
+  attributes: {
+    embeddedLink: Schema.Attribute.String & Schema.Attribute.Required;
+  };
 }
 
 export interface SharedButton extends Struct.ComponentSchema {
@@ -134,11 +134,14 @@ export interface ServicesBlockHeader extends Struct.ComponentSchema {
   info: {
     displayName: 'Header';
     icon: 'wheelchair';
+    description: '';
   };
   attributes: {
     Title: Schema.Attribute.String;
-    What_do_we_do: Schema.Attribute.Component<'shared.rich-text', true>;
-    How_do_we_do: Schema.Attribute.Component<'shared.rich-text', true>;
+    whatDoWeDo: Schema.Attribute.Component<'shared.rich-text', true>;
+    howDoWeDo: Schema.Attribute.Component<'shared.rich-text', true>;
+    headerPhoto: Schema.Attribute.Component<'shared.media', false>;
+    headerVideo: Schema.Attribute.Component<'shared.embedded-vk-video', false>;
   };
 }
 
@@ -147,12 +150,13 @@ export interface ServicesBlockCarouselView extends Struct.ComponentSchema {
   info: {
     displayName: 'Carousel_view';
     icon: 'medium';
+    description: '';
   };
   attributes: {
-    Carousel_service_name: Schema.Attribute.String & Schema.Attribute.Required;
-    Carousel_service_image: Schema.Attribute.Media<'images' | 'files'> &
+    carouselServiceName: Schema.Attribute.String & Schema.Attribute.Required;
+    carouselServiceImage: Schema.Attribute.Media<'images' | 'files'> &
       Schema.Attribute.Required;
-    Carousel_service_description: Schema.Attribute.Text &
+    carouselServiceDescription: Schema.Attribute.Text &
       Schema.Attribute.Required;
   };
 }
@@ -168,7 +172,6 @@ export interface ContentBlocksInfoBlock extends Struct.ComponentSchema {
     Title: Schema.Attribute.String;
     description: Schema.Attribute.Component<'shared.rich-text', true>;
     Button: Schema.Attribute.Component<'shared.button', false>;
-    Video_link: Schema.Attribute.Component<'shared.embedded-video', false>;
   };
 }
 
@@ -213,7 +216,7 @@ declare module '@strapi/strapi' {
       'shared.rich-text': SharedRichText;
       'shared.quote': SharedQuote;
       'shared.media': SharedMedia;
-      'shared.embedded-video': SharedEmbeddedVideo;
+      'shared.embedded-vk-video': SharedEmbeddedVkVideo;
       'shared.button': SharedButton;
       'shared.address': SharedAddress;
       'services-block.header': ServicesBlockHeader;

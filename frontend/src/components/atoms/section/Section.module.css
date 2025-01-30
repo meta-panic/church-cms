@@ -4,12 +4,19 @@
   width: 100vw;
 }
 
-/* tablet layout */
+/* tablet-min layout */
 @media screen and (min-width: 641px) {
   .section {
     padding-inline: 40px;
   }
 
+}
+
+/* tablet-max layout */
+@media screen and (min-width: 900px) {
+  .section {
+    padding-inline: 80px;
+  }
 }
 
 /* desktop layout */

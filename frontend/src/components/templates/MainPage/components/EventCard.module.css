@@ -3,7 +3,6 @@
   position: relative;
   display: flex;
   flex-direction: column-reverse;
-  max-width: 990px;
 }
 
 .textContainer {

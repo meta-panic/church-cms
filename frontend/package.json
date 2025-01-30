@@ -19,6 +19,7 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-markdown": "^9.0.3",
+    "react-multi-carousel": "^2.8.5",
     "sharp": "^0.33.5"
   },
   "devDependencies": {
@@ -28,6 +29,7 @@
     "@graphql-codegen/typescript-resolvers": "^4.4.1",
     "@playwright/test": "^1.49.1",
     "@strapi/types": "^5.8.0",
+    "@strapi/utils": "^5.8.1",
     "@svgr/webpack": "^8.1.0",
     "@types/node": "^20",
     "@types/qs": "^6.9.18",

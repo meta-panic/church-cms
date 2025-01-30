@@ -26,7 +26,7 @@ const Link: FC<PropsWithChildren<LinkProps> & { tag?: TypographyTag; }> = ({
   );
   if (!isExternal) {
     return (
-      <NextLink href={to} target={target || "_self"} >
+      <NextLink href={to} target={target || "_self"} className={styles.linkContainer}>
         <span className={classes}>{children}</span>
       </NextLink>
     );
@@ -38,6 +38,7 @@ const Link: FC<PropsWithChildren<LinkProps> & { tag?: TypographyTag; }> = ({
         href={to}
         target={target || "_blank"}
         rel="noopener noreferrer"
+        className={styles.linkContainer}
       >
         <span className={classes}>{children}</span>
       </a>

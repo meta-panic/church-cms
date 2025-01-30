@@ -590,12 +590,14 @@ export interface ApiServiceService extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    Header: Schema.Attribute.Component<'services-block.header', false> &
+    hero: Schema.Attribute.Component<'services-block.header', false> &
       Schema.Attribute.Required;
-    Landing_page_carousel_view: Schema.Attribute.Component<
+    landingCarouselView: Schema.Attribute.Component<
       'services-block.carousel-view',
       false
-    >;
+    > &
+      Schema.Attribute.Required;
+    slug: Schema.Attribute.UID & Schema.Attribute.Required;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
