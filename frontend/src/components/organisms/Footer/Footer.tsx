@@ -41,7 +41,7 @@ export const Footer: React.FC<FooterProps> = (
 
           <div className={cx(styles.socialsContainer)}>
             {contacts &&
-              <Contacts {...contacts} renderIcon={({ defaultIcon }) => (<div className={cx(styles.socialIcon)}>{defaultIcon}</div>)} />
+              <Contacts isWide {...contacts} renderIcon={({ defaultIcon }) => (<div className={cx(styles.socialIcon)}>{defaultIcon}</div>)} />
             }
           </div>
 

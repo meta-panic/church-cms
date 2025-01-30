@@ -49,7 +49,7 @@
   --default-text: var(--common-dark-900);
   --default-components-link-fg: #547478;
   --hover-text: var(--common-dark-900);
-  --hover-components-link-fg: rgba(75, 94, 96, 0.85);
+  --hover-components-link-fg: rgba(75, 94, 96, 0.6);
   --active-text: var(--common-dark-900);
   --active-components-link-fg: #596e71;
   --hover-navigation-item: var(--accent-400);

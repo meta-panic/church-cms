@@ -27,6 +27,7 @@ export const NoEventsStub: React.FC = () => {
       </div>
       <div className={styles.iconsContainer}>
         {contacts && <Contacts
+          isWide
           taplink={contacts.taplink}
           telegram={contacts.telegram}
           vk={contacts.vk}

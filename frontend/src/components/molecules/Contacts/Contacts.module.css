@@ -1,5 +1,9 @@
 .socials {
   display: flex;
   height: fit-content;
-  gap: var(--spacing-x);
+  gap: 4px;
+}
+
+.wide {
+  gap: var(--spacing-x)
 }
