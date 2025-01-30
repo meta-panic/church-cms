@@ -520,6 +520,8 @@ export interface ApiGlobalGlobal extends Struct.SingleTypeSchema {
       Schema.Attribute.Required;
     taplink: Schema.Attribute.String & Schema.Attribute.Required;
     whatsup: Schema.Attribute.String & Schema.Attribute.Required;
+    footerNote: Schema.Attribute.Component<'shared.rich-text', true> &
+      Schema.Attribute.Required;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;

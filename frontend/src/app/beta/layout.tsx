@@ -1,8 +1,7 @@
 import Header from "@/components/organisms/header";
-import cx from "classnames";
+import { Footer } from "@/components/organisms/Footer/Footer";
 
-import layoutStyles from "./layout.module.css";
-import Section from "@/components/atoms/section/Section";
+
 import { navItemsDesktop, navItemsMobileAndTablet } from "@/configuration/navigation";
 import { getContactsData } from "@/lib/fetchData";
 
@@ -36,13 +35,19 @@ export default async function RootLayout({
 
       {children}
 
-      <footer className={cx(layoutStyles.footer)}>
-        <Section>
-          <div style={{ backgroundColor: "gray" }}>
-            Footer content
-          </div>
-        </Section>
-      </footer>
+      <Footer
+        serviceSchedule={contactData?.serviceSchedule}
+        email={contactData?.email}
+        phone={contactData?.phone}
+        primalBuilding={contactData?.PrimalBuilding}
+        footerNote={contactData?.footerNote}
+        contacts={contactData && {
+          taplink: contactData.taplink,
+          telegram: contactData.telegram,
+          vk: contactData.vk,
+          youtube: contactData.youtube,
+          whatsup: contactData.whatsup,
+        }} />
 
     </div>
   );

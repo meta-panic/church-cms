@@ -1,5 +1,5 @@
 .socials {
   display: flex;
   height: fit-content;
-  gap: 4px;
+  gap: var(--spacing-x);
 }

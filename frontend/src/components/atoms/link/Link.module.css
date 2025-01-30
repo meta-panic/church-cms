@@ -28,9 +28,9 @@
 }
 
 .link:hover {
-  opacity: 0.7;
+  color: var(--hover-components-link-fg);
+  border-bottom: 1px solid var(--hover-components-link-fg);
 }
-
 
 
 
