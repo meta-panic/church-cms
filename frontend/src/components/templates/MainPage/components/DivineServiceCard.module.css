@@ -16,11 +16,12 @@
   .container {
     height: 600px;
   }
-}
 
-.container:hover {
-  transform: scale(1.02);
-  box-shadow: var(--shadow--l);
+  .container:hover {
+    transform: scale(1.02);
+    box-shadow: var(--shadow--l);
+  }
+
 }
 
 
