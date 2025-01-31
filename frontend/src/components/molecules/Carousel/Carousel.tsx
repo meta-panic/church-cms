@@ -1,11 +1,14 @@
 "use client";
-import React, { ReactNode, forwardRef, useEffect, useImperativeHandle, useRef } from "react";
+import React, { ReactNode, forwardRef, useImperativeHandle, useRef } from "react";
 import Carousel from "react-multi-carousel";
 import cx from "classnames";
 
+import { BREAKPOINTS, useMediaQuery } from "@/hooks/useMediaQuery";
+import useVerticalScrollPrevention from "@/hooks/useVerticalScrollPrevention";
+
 import "react-multi-carousel/lib/styles.css";
 import styles from "./Carousel.module.css";
-import { BREAKPOINTS, useMediaQuery } from "@/hooks/useMediaQuery";
+
 
 const responsive = {
   desktop: {
@@ -42,6 +45,7 @@ export interface CarouselRef {
 const CarouselWrapper = forwardRef<CarouselRef, CarouselWrapperProps>(({ children }, ref) => {
   const carouselRef = useRef<Carousel | null>(null);
   const isSmallScreen = useMediaQuery([BREAKPOINTS.mobile]);
+  const containerRef = useVerticalScrollPrevention<HTMLDivElement>();
 
   const nextSlide = () => {
     if (carouselRef.current) {
@@ -60,33 +64,8 @@ const CarouselWrapper = forwardRef<CarouselRef, CarouselWrapperProps>(({ childre
     prevSlide,
   }));
 
-  const containerRef = useRef<null | HTMLDivElement>(null);
-
-
-  useEffect(() => {
-    const current = containerRef.current;
-    if (containerRef.current) {
-      containerRef.current.addEventListener("touchstart", touchStart);
-      containerRef.current.addEventListener("touchmove", preventTouch, {
-        passive: false,
-      });
-    }
-
-    return () => {
-      if (current) {
-        current?.removeEventListener("touchstart", touchStart);
-        // https://github.com/akiran/react-slick/issues/1240#issuecomment-502099787
-        // @ts-expect-error it is some hack from github issues, I am too afraid to change something
-        current?.removeEventListener("touchmove", preventTouch, {
-          passive: false,
-        });
-      }
-    };
-  });
-
   return (
-    <div ref={containerRef} key={Math.random()}>
-      11
+    <div ref={containerRef}>
       <Carousel
         arrows={false}
         responsive={responsive}
@@ -123,24 +102,3 @@ export const Slide: React.FC<SlideProps> = ({ children, className }) => {
 
 export { CarouselWrapper as Carousel };
 
-
-
-let firstClientX: number = 0;
-let clientX: number = 0;
-const preventTouch = (e: TouchEvent) => {
-  const minValue = 5; // threshold
-
-  clientX = e.touches[0].clientX - firstClientX;
-
-  // Vertical scrolling does not work when you start swiping horizontally.
-  if (Math.abs(clientX) > minValue) {
-    e.preventDefault();
-    e.returnValue = false;
-
-    return false;
-  }
-};
-
-const touchStart = (e: TouchEvent) => {
-  firstClientX = e.touches[0].clientX;
-};
