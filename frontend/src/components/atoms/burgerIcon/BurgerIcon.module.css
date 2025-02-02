@@ -1,0 +1,42 @@
+.burger {
+  display: block;
+
+  width: 24px;
+  height: 20px;
+  cursor: pointer;
+  position: relative;
+}
+
+.burger-line {
+  height: 3px;
+
+  background-color: currentColor;
+  width: 100%;
+  backface-visibility: hidden;
+  position: absolute;
+  outline: 1px solid transparent;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.burger .line2 {
+  top: 8px;
+}
+
+.burger .line3 {
+  top: 16px;
+}
+
+/* First line animation */
+.burger.open .line1 {
+  transform: translateY(8px) rotate(45deg);
+}
+
+/* Second line animation */
+.burger.open .line2 {
+  opacity: 0;
+}
+
+/* Third line animation */
+.burger.open .line3 {
+  transform: translateY(-8px) rotate(-45deg);
+}

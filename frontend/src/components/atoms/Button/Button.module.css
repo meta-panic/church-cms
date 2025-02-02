@@ -1,0 +1,106 @@
+.button {
+  display: inline-block;
+  padding: var(--spacing-m) var(--spacing-l);
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  border-radius: var(--button-border-radios);
+  width: fit-content;
+  user-select: none;
+}
+
+
+.M {
+  padding: var(--spacing-xs) var(--spacing-s);
+}
+
+.rounded {
+  border-radius: 10px;
+}
+
+.wide {
+  width: 100%;
+}
+
+/* States */
+/*******************************/
+
+/* default state*/
+.button.onBrand.textVariant {
+  background-color: var(--common-transparent-0);
+  color: var(--common-dark-900);
+  border: none;
+}
+
+.button.onBrand.ghostVariant {
+  background-color: var(--common-transparent-0);
+  color: var(--common-light-100);
+  border: solid var(--button-border-size-default);
+  border-color: var(--common-light-100);
+}
+
+.button.onLight.ghostVariant {
+  background-color: var(--common-transparent-0);
+  color: var(--common-dark-900);
+  border: solid var(--button-border-size-default);
+  border-color: var(--common-dark-900);
+}
+
+.button.onLight.textVariant {
+  background-color: var(--common-transparent-0);
+  color: var(--common-dark-900);
+  border: none;
+}
+
+
+/* hover state*/
+.button.onBrand.textVariant:hover {
+  background-color: var(--common-dark-100);
+  color: var(--common-dark-900);
+
+}
+
+.button.onBrand.ghostVariant:hover {
+  background-color: var(--common-light-100);
+  color: var(--common-dark-900);
+
+}
+
+.button.onLight.ghostVariant:hover {
+  background-color: var(--common-dark-900);
+  color: var(--common-light-100);
+}
+
+.button.onLight.textVariant:hover {
+  background-color: var(--common-dark-100);
+  color: var(--common-dark-900);
+}
+
+
+/* active state*/
+.button.onBrand.textVariant.active {
+  background-color: var(--common-dark-300);
+  color: var(--common-dark-900);
+  border: none;
+}
+
+.button.onBrand.ghostVariant.active {
+  background-color: var(--common-transparent-0);
+  color: var(--common-light-100);
+  border: solid var(--button-border-size-active);
+  border-color: var(--common-light-100);
+}
+
+.button.onLight.ghostVariant.active {
+  background-color: var(--common-transparent-0);
+  color: var(--common-dark-900);
+  border: solid var(--button-border-size-active);
+  border-color: var(--common-dark-900);
+}
+
+.button.onLight.textVariant.active {
+  background-color: var(--common-dark-300);
+  color: var(--common-dark-900);
+  border: none;
+}

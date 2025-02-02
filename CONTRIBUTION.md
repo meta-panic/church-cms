@@ -7,7 +7,7 @@ Rules for commit messages and branch names to maintain consistency and readabili
 All branch names must follow a consistent pattern to clearly indicate their purpose.  Use the following prefixes:
 
 * **`feature/*`:** For new features.  Example: `feature/add-user-authentication`
-* **`test/*`:** For testung a hypothesis. Example: `test/will-it-work-or-wont`
+* **`test/*`:** For testing a hypothesis. Example: `test/will-it-work-or-wont`
 * **`fix/*`:** For bug fixes. Example: `fix/resolve-login-issue`
 * **`refactor/*`:** For rewrite/restructure your code. Example: `refactor/update-react-19`
 * **`build/*`:** For changes in build components like build tool, ci pipeline, dependencies. Example: `build/update-deploy-scripts`
@@ -58,7 +58,7 @@ Where:
 * `feat(auth): Add user authentication`
 * `fix(ui): Resolve button alignment issue`
 * `docs(readme): Update installation instructions`
-* `style: Fix formatting inconsistencies`
+* `style: Fix formatting inconsistencies and eslint fixes`
 * `refactor(database): Improve database query performance`
 * `test(api): Add unit tests for API endpoints`
 * `security(env): Mask sensitive information in dotenv file`

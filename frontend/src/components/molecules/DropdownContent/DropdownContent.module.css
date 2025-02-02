@@ -1,0 +1,29 @@
+.dropdownContainer {
+  background-color: var(--default-surface-light);
+  /* border: 1px solid #ccc; */
+  border-radius: 4px;
+  box-shadow: var(--shadow--l);
+  width: 200px;
+  z-index: 1000;
+  padding-top: var(--spacing-s);
+  padding-bottom: var(--spacing-s);
+}
+
+.dropdownList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.dropdownItem {
+  padding: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.dropdownItem:hover,
+.dropdownItem:focus,
+.dropdownItem:focus-within {
+  background-color: var(--brand-500);
+  color: var(--common-light-100);
+}

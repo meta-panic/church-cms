@@ -1,0 +1,34 @@
+.presentationHeaderWrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: absolute;
+  z-index: 10;
+  padding-top: 38px;
+}
+
+.slimHeaderWrapper {
+  background-color: var(--default-surface-light-transparent);
+  height: 42px;
+  align-items: center;
+  z-index: 20;
+  display: flex;
+}
+
+.sticky {
+  position: fixed;
+  top: 0;
+  padding-top: 0;
+  justify-content: center;
+  z-index: 30;
+}
+
+.contacts {
+  justify-content: center;
+  flex-direction: column;
+}
+
+
+.churchLogo {
+  color: var(--common-light-100);
+}

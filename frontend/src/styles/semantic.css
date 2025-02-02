@@ -4,9 +4,12 @@
   --default-components-button-outlined-fg: var(--common-light-100);
   --default-components-button-filled-fg: var(--common-light-100);
   --default-components-button-filled-bg: var(--brand-700);
+
   --default-surface-light: var(--common-light-100);
-  --default-surface-dark-1: var(--accent-800);
+  --default-surface-light-transparent: rgba(248, 246, 247, 0.85);
+  --default-surface-dark-1: var(--accent-700);
   --default-surface-dark-2: var(--brand-600);
+
   --default-components-cart-border: var(--common-dark-800);
 
   --default-text-brand: var(--brand-800);
@@ -19,12 +22,12 @@
   --hover-components-button-filled-fg: var(--common-light-100);
   --hover-components-button-filled-bg: var(--brand-900);
   --hover-surface-light: var(--common-light-100);
-  --hover-surface-dark-1: var(--accent-800);
+  --hover-surface-dark-1: var(--accent-700);
   --hover-surface-dark-2: var(--brand-500);
   --hover-components-cart-border: var(--common-dark-800);
 
   --hover-text-brand: var(--brand-800);
-
+  --hover-navigation-item: var(--accent-400);
 
   --active-components-button-outlined-br: var(--common-light-100);
 
@@ -33,18 +36,31 @@
   --active-components-button-filled-fg: var(--common-light-100);
   --active-components-button-filled-bg: var(--brand-900);
   --active-surface-light: var(--common-light-100);
-  --active-surface-dark-1: var(--accent-800);
+  --active-surface-dark-1: var(--accent-700);
   --active-surface-dark-2: var(--brand-500);
   --active-components-cart-border: var(--common-dark-800);
 
   --active-text-brand: var(--brand-800);
+}
 
 
-  /* light block default*/
+/* light block default*/
+.lightBlock {
   --default-text: var(--common-dark-900);
   --default-components-link-fg: #547478;
   --hover-text: var(--common-dark-900);
-  --hover-components-link-fg: #4b5e60;
-  --active-text-onlight: var(--common-dark-900);
+  --hover-components-link-fg: rgba(75, 94, 96, 0.6);
+  --active-text: var(--common-dark-900);
   --active-components-link-fg: #596e71;
+  --hover-navigation-item: var(--accent-400);
+}
+
+.darkBlock {
+  --default-text: var(--common-light-100);
+  --default-components-link-fg: #f8f6f7;
+  --hover-text: var(--common-light-100);
+  --hover-components-link-fg: rgba(248, 246, 247, 0.7);
+  --active-text: var(--common-light-100);
+  --active-components-link-fg: #f8f6f7;
+  --hover-navigation-item: var(--accent-400);
 }

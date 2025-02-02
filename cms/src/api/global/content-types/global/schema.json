@@ -17,15 +17,54 @@
       "required": true
     },
     "phone": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "email": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "PrimalBuilding": {
       "type": "component",
       "repeatable": false,
-      "component": "shared.address"
+      "component": "shared.address",
+      "required": true
+    },
+    "ok": {
+      "type": "string",
+      "required": true
+    },
+    "vk": {
+      "type": "string",
+      "required": true
+    },
+    "youtube": {
+      "type": "string",
+      "required": true
+    },
+    "rutube": {
+      "type": "string",
+      "required": true
+    },
+    "serviceSchedule": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.schedule",
+      "required": true
+    },
+    "taplink": {
+      "type": "string",
+      "required": true
+    },
+    "whatsup": {
+      "type": "string",
+      "required": true
+    },
+    "footerNote": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.rich-text",
+      "required": true
     }
   }
 }

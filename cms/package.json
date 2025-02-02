@@ -1,6 +1,6 @@
 {
   "name": "p",
-  "version": "1.0.0",
+  "version": "1.4.1",
   "private": true,
   "description": "A Strapi application",
   "scripts": {
@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@strapi/plugin-cloud": "5.1.0",
+    "@strapi/plugin-graphql": "^5.8.1",
     "@strapi/plugin-users-permissions": "5.1.0",
     "@strapi/strapi": "5.1.0",
     "cheerio": "^1.0.0",

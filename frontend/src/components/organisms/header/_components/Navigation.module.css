@@ -1,0 +1,19 @@
+.navigation {
+  display: flex;
+  flex-direction: row;
+  gap: var(--spacing-xs);
+  align-items: center;
+  user-select: none;
+}
+
+.navigationItem {
+  cursor: pointer;
+  text-shadow: inherit;
+  user-select: none;
+}
+
+@media (min-width: 1280px) {
+  .navigation {
+    gap: 16px;
+  }
+}

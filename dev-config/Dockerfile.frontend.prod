@@ -1,3 +1,5 @@
+ARG NEXT_PUBLIC_BACKEND_URL
+
 FROM node:18-alpine AS base
 
 # Install dependencies only when needed
@@ -8,11 +10,15 @@ WORKDIR /app
 
 # Install dependencies based on the preferred package manager
 COPY package.json package-lock.json* .npmrc* ./
-RUN npm ci
-
+RUN npm ci --include=optional sharp
 
 # Rebuild the source code only when needed
 FROM base AS builder
+
+# Copy environment variables to the build context
+ARG NEXT_PUBLIC_BACKEND_URL
+ENV NEXT_PUBLIC_BACKEND_URL=${NEXT_PUBLIC_BACKEND_URL}
+
 WORKDIR /app
 RUN apk add --no-cache bash # Install bash
 
@@ -23,6 +29,8 @@ COPY . .
 # Learn more here: https://nextjs.org/telemetry
 # Uncomment the following line in case you want to disable telemetry during the build.
 # ENV NEXT_TELEMETRY_DISABLED=1
+
+RUN npm install --os=linux --libc=musl --cpu=x64 sharp
 
 RUN npm run build
 

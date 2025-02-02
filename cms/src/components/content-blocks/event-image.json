@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_content_blocks_event_images",
+  "info": {
+    "displayName": "EventImage",
+    "icon": "alien"
+  },
+  "options": {},
+  "attributes": {
+    "isVertical": {
+      "type": "boolean"
+    },
+    "eventImage": {
+      "allowedTypes": [
+        "files",
+        "images"
+      ],
+      "type": "media",
+      "multiple": false,
+      "required": true
+    }
+  }
+}

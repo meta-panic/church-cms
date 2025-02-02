@@ -1,8 +1,15 @@
 services:
   frontend:
     tty: true
+    depends_on:
+      cms:
+        condition: service_healthy
+      db:
+        condition: service_healthy
     build:
       context: ../frontend
+      args:
+        - NEXT_PUBLIC_BACKEND_URL=${NEXT_PUBLIC_BACKEND_URL}
       dockerfile: ../dev-config/Dockerfile.frontend.prod
       tags:
         - b80ow4gcgs4k44g4ck4kgcow-cms:SHA_frontend_${SOURCE_COMMIT}
@@ -18,6 +25,9 @@ services:
       - strapi
   cms:
     tty: true
+    depends_on:
+      db:
+        condition: service_healthy
     build:
       context: ../cms
       dockerfile: ../dev-config/Dockerfile.cms

@@ -1,0 +1,37 @@
+.imageWrapper {
+  z-index: -1;
+  flex-direction: column;
+}
+
+@media (max-width: 400px) {
+  .heroImage {
+    filter: blur(1px);
+  }
+}
+
+@media (max-width: 350px) {
+  .heroImage {
+    filter: blur(2px);
+  }
+}
+
+.heroContent {
+  top: 86px;
+  height: calc(100vh - 86px);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.heroWrapper {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+
+.contentWrapper {
+  height: 100%;
+}

@@ -1,0 +1,13 @@
+.layoutContainer {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.header {
+  position: absolute;
+  top: 0;
+  padding-top: 38px;
+  z-index: 10;
+}

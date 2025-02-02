@@ -1,8 +1,8 @@
 .typography {
   margin: 0;
   padding: 0;
-  color: var(--default-text);
   font-feature-settings: 'lnum' 1;
+  text-shadow: inherit;
 }
 
 /* Headings */

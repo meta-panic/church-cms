@@ -2,22 +2,33 @@
   "collectionName": "components_services_block_headers",
   "info": {
     "displayName": "Header",
-    "icon": "wheelchair"
+    "icon": "wheelchair",
+    "description": ""
   },
   "options": {},
   "attributes": {
     "Title": {
       "type": "string"
     },
-    "What_do_we_do": {
+    "whatDoWeDo": {
       "type": "component",
       "repeatable": true,
       "component": "shared.rich-text"
     },
-    "How_do_we_do": {
+    "howDoWeDo": {
       "type": "component",
       "repeatable": true,
       "component": "shared.rich-text"
+    },
+    "headerPhoto": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.media"
+    },
+    "headerVideo": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.embedded-vk-video"
     }
   }
 }
