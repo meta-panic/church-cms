@@ -35,7 +35,7 @@ export const Footer: React.FC<FooterProps> = (
   const hasServiceSchedule = !!(serviceSchedule && serviceSchedule.length > 0 && hasValue(serviceSchedule));
 
   return (
-    <footer className={cx("darkBlock", styles.footerContainer)}>
+    <footer id="contacts" className={cx("darkBlock", styles.footerContainer)}>
       <Section>
         <div className={styles.footer}>
 

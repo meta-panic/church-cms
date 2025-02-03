@@ -8,7 +8,7 @@ import ChurchLogo from "../../../../../public/church-logo.svg";
 
 import { Navigation, DropdownItem, RegularItem } from "../_components/Navigation";
 import { Contacts } from "@/components/molecules/Contacts/Contacts";
-import { NavItemDesktop } from "@/configuration/navigation";
+import { ExistingAnchors, ExistingUrls, NavItemDesktop } from "@/configuration/navigation";
 import { useScroll } from "@/hooks/useScroll";
 
 import styles from "./DesktopHeader.module.css";
@@ -20,10 +20,11 @@ import { ContactsContext, ContactsContextType } from "../Header";
 
 interface DesktopHeaderProps {
   navItems: NavItemDesktop[];
+  handleNavigation: (href: ExistingUrls | ExistingAnchors) => void;
 }
 
 export const DesktopHeader: React.FC<DesktopHeaderProps> = ({
-  navItems,
+  navItems, handleNavigation,
 }) => {
   const isPageScrolled = useScroll({ threshold: 38 });
   const headerType = isPageScrolled ? "slim" : "presentation";
@@ -37,6 +38,7 @@ export const DesktopHeader: React.FC<DesktopHeaderProps> = ({
 
         <Navigation
           items={transformNavItems(headerType, navItems)}
+          handleNavigation={handleNavigation}
           renderItem={(text) => {
             return <Typography
               tag="body"

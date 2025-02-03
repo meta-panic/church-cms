@@ -3,7 +3,7 @@ import React from "react";
 
 import cx from "classnames";
 
-import { NavItemMobile } from "@/configuration/navigation";
+import { ExistingAnchors, ExistingUrls, NavItemMobile } from "@/configuration/navigation";
 import { useScroll } from "@/hooks/useScroll";
 
 import styles from "./MobileHeader.module.css";
@@ -22,10 +22,11 @@ import { ContactsContext, ContactsContextType } from "../Header";
 
 interface MobileHeaderProps {
   navItems: NavItemMobile[];
+  handleNavigation: (href: ExistingUrls | ExistingAnchors) => void;
 }
 
 export const MobileHeader: React.FC<MobileHeaderProps> = ({
-  navItems,
+  navItems, handleNavigation,
 }) => {
   const isPageScrolled = useScroll({ threshold: 38 });
   const headerType = isPageScrolled ? "slim" : "presentation";
@@ -49,6 +50,7 @@ export const MobileHeader: React.FC<MobileHeaderProps> = ({
 
         <Navigation
           items={transformNavItems(headerType, navItems)}
+          handleNavigation={handleNavigation}
           renderItem={(text) => {
             return <Typography
               tag="body"
@@ -60,6 +62,7 @@ export const MobileHeader: React.FC<MobileHeaderProps> = ({
 
         <WithMobileMenu
           items={navItems}
+          handleNavigation={handleNavigation}
           renderButtonComponent={({ isOpen }) => {
             return (
               <div className={

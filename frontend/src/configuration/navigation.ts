@@ -1,3 +1,5 @@
+import { root } from "@/utils/isRoot";
+
 export type NavItem = {
   href: ExistingUrls | ExistingAnchors;
   text: string;
@@ -18,13 +20,13 @@ export const EXISTING_URLS = [
   "/public-service",
   "/our-symbols",
   "/videos",
-  "/beta", // it is a root
+  root, // it is a root
 ] as const;
 export type PublicServiceRoute = `/public-service/${string}`;
 
 export type ExistingUrls = typeof EXISTING_URLS[number];
 
-export type ExistingAnchors = "#services" | "#footer";
+export type ExistingAnchors = `${typeof root}#services` | "#contacts";
 
 export const navItemsDesktop: NavItemDesktop[] = [
   {
@@ -35,8 +37,8 @@ export const navItemsDesktop: NavItemDesktop[] = [
   },
   { href: "/how-to-become-a-cristian", text: "Как стать христианином?", hideOnScroll: true },
   { href: "/public-service", text: "Проповеди" },
-  { href: "#services", text: "Служения" },
-  { href: "#footer", text: "Контакты" },
+  { href: `${root}#services`, text: "Служения" },
+  { href: "#contacts", text: "Контакты" },
 ];
 
 export const navItemsMobileAndTablet: NavItemMobile[] = [
@@ -46,6 +48,6 @@ export const navItemsMobileAndTablet: NavItemMobile[] = [
 
   // these navs are shown in popup
   { href: "/how-to-become-a-cristian", text: "Как стать христианином?", showInPopup: true },
-  { href: "#services", text: "Служения", showInPopup: true },
-  { href: "#footer", text: "Контакты", showInPopup: true },
+  { href: `${root}#services`, text: "Служения", showInPopup: true },
+  { href: "#contacts", text: "Контакты", showInPopup: true },
 ];

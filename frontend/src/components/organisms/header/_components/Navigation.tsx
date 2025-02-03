@@ -1,10 +1,11 @@
 "use client";
-import React, { useCallback } from "react";
-import { useRouter } from "next/navigation";
+import React from "react";
 import Link from "next/link";
 
 import { WithPopup } from "@/components/atoms/withPopup/WithPopup";
 import DropdownContent from "@/components/molecules/DropdownContent/DropdownContent";
+import { hasAnchor } from "@/utils/parseUrl";
+
 import type { ExistingUrls, ExistingAnchors } from "@/configuration/navigation";
 
 import styles from "./Navigation.module.css";
@@ -23,24 +24,14 @@ export interface DropdownItem {
 interface NavigationProps {
   items: (RegularItem | DropdownItem)[];
   renderItem: RenderProp<string>;
+  handleNavigation: (href: ExistingUrls | ExistingAnchors) => void;
 }
 
-export const Navigation: React.FC<NavigationProps> = ({ renderItem, items }) => {
-  const router = useRouter();
-
-  const handleNavigation = useCallback((href: ExistingUrls | ExistingAnchors) => {
-    if (href.startsWith("#")) {
-      // Handle anchor navigation
-      const element = document.querySelector(href);
-      element?.scrollIntoView({ behavior: "smooth" });
-    } else {
-      // Handle page navigation
-      router.push(href);
-    }
-  }, [router]);
-
+export const Navigation: React.FC<NavigationProps> = ({ renderItem, handleNavigation, items }) => {
   return (
     <nav className={styles.navigation}>
+
+
       {items.map((item) => {
         if (isDropdownItem(item)) {
           return (<li className={styles.navigationItem} key={item.text}>
@@ -55,6 +46,7 @@ export const Navigation: React.FC<NavigationProps> = ({ renderItem, items }) => 
                       onClick={() => handleNavigation(props.href)}
                       key={props.text}
                       className={styles.navigationItem}
+                      scroll={!hasAnchor(props.href)}
                     >
                       {props.text}
                     </Link>);
@@ -65,16 +57,21 @@ export const Navigation: React.FC<NavigationProps> = ({ renderItem, items }) => 
             </WithPopup>
           </li>);
         }
+
         if (isRegularItem(item)) {
           return (<Link
             key={item.href || item.text}
             href={item.href}
             className={styles.navigationItem}
+            onClick={() => handleNavigation(item.href)}
+            scroll={!hasAnchor(item.href)}
           >
             {renderItem(item.text)}
           </Link>);
         }
       })}
+
+
     </nav >
   );
 };

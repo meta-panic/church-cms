@@ -1,14 +1,23 @@
 "use client";
-import React from "react";
+import React, { useCallback } from "react";
 import cx from "classnames";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import { hasAnchor } from "@/utils/parseUrl";
 
-import type { NavItemDesktop, NavItemMobile } from "@/configuration/navigation";
+import { isRootPath } from "@/utils/isRoot";
+
 import { BREAKPOINTS, useMediaQuery } from "@/hooks/useMediaQuery";
 import { DesktopHeader } from "./variants/DesktopHeader";
 import { MobileHeader } from "./variants/MobileHeader";
 import ClientOnly from "./_components/ClientOnly";
-import { isRootPath } from "@/utils/isRoot";
+import useInitialAnchorScroll from "./_components/useInitialAnchorScroll";
+
+import type {
+  ExistingAnchors,
+  ExistingUrls,
+  NavItemDesktop,
+  NavItemMobile,
+} from "@/configuration/navigation";
 
 import styles from "./Header.module.css";
 
@@ -35,12 +44,34 @@ export const Header: React.FC<HeaderProps> = ({ navItemsDesktop, navItemsMobile,
   const isHomePage = isRootPath(pathname);
   const showDesktopVariant = isDesktop && isHomePage;
 
+  const router = useRouter();
+  useInitialAnchorScroll();
+  const handleNavigation = useCallback((href: ExistingUrls | ExistingAnchors) => {
+    if (!hasAnchor(href)) {
+      router.push(href);
+      return;
+    }
+    const anchor = href.split("#")[1];
+
+    const element = document.querySelector(`#${anchor}`);
+    if (element) {
+      requestAnimationFrame(() => {
+        element.scrollIntoView({ behavior: "smooth" });
+      });
+
+      // Different page: navigate to the new URL
+      requestAnimationFrame(() => {
+        router.push(href, { scroll: true });
+      });
+    }
+  }, [router]);
+
   return (
     <header className={cx(styles.headerWrapper)}>
       <ContactsContext.Provider value={contacts}>
         <ClientOnly>
-          {showDesktopVariant && <DesktopHeader navItems={navItemsDesktop} />}
-          {!showDesktopVariant && <MobileHeader navItems={navItemsMobile} />}
+          {showDesktopVariant && <DesktopHeader handleNavigation={handleNavigation} navItems={navItemsDesktop} />}
+          {!showDesktopVariant && <MobileHeader handleNavigation={handleNavigation} navItems={navItemsMobile} />}
         </ClientOnly>
       </ContactsContext.Provider>
     </header>

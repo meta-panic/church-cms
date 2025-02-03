@@ -44,9 +44,7 @@ const CarouselWrapper = forwardRef<CarouselRef, CarouselWrapperProps>(({ childre
   const isSmallScreen = useMediaQuery([BREAKPOINTS.mobile]);
 
   const nextSlide = () => {
-
     if (carouselRef.current) {
-
       carouselRef.current.next(1);
     }
   };
@@ -94,5 +92,6 @@ export const Slide: React.FC<SlideProps> = ({ children, className }) => {
     <div className={cx(className, styles.card)}>{children}</div>
   );
 };
+
 
 export { CarouselWrapper as Carousel };

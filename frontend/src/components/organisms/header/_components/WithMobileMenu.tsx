@@ -2,18 +2,25 @@
 import React, { ReactNode, useCallback, useEffect, useState } from "react";
 import MobileMenu from "./MobileMenu";
 import { RegularItem } from "../_components/Navigation";
+import { ExistingUrls, ExistingAnchors } from "@/configuration/navigation";
 
 interface MobileMenuHandlerProps {
   items: RegularItem[];
   renderButtonComponent: ({ isOpen, onToggle }: { isOpen: boolean; onToggle: () => void }) => ReactNode;
+  handleNavigation: (href: ExistingUrls | ExistingAnchors) => void;
 }
 
-const MobileMenuHandler: React.FC<MobileMenuHandlerProps> = ({ items, renderButtonComponent }) => {
+const MobileMenuHandler: React.FC<MobileMenuHandlerProps> = ({ items, renderButtonComponent, handleNavigation }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const handleToggleMenu = useCallback(() => {
     setIsMobileMenuOpen(prev => !prev);
   }, []);
+
+  const handleNavigationMenu = useCallback((item: RegularItem) => {
+    setIsMobileMenuOpen(prev => !prev);
+    handleNavigation(item.href);
+  }, [handleNavigation]);
 
   useEffect(() => {
     if (isMobileMenuOpen) {
@@ -52,6 +59,7 @@ const MobileMenuHandler: React.FC<MobileMenuHandlerProps> = ({ items, renderButt
       {isMobileMenuOpen && <MobileMenu
         items={items}
         onClose={handleToggleMenu}
+        onClick={handleNavigationMenu}
         isOpen={isMobileMenuOpen}
       />}
     </>

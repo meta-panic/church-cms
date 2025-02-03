@@ -58,8 +58,10 @@ export const EventCard: React.FC<EventCardProps> = ({ event, type }) => {
           {imagePath && <Image
             id={event.date}
             src={imagePath}
-            fill
-            alt="event"
+            loading="lazy"
+            width={event.image.isVertical ? 450 : 600}
+            height={event.image.isVertical ? 600 : 450}
+            alt={`Фото с ${type === "past" ? "прошедшего" : "будущего"} мероприятия`}
             className={styles.image}
           />}
         </div>
@@ -98,5 +100,5 @@ function parseDate(date: string): { month: string, day: string, time: string } {
 
 
 function getTypeofEvent(type: "future" | "past"): string {
-  return type === "past" ? "ПРОШЕДНЕЕ СОБЫТИЕ" : "ГРЯДУЩИЕ СОБЫТИЕ";
+  return type === "past" ? "ПРОШЕДШЕЕ СОБЫТИЕ" : "ГРЯДУЩИЕ СОБЫТИЕ";
 }
