@@ -40,11 +40,22 @@
   border-color: var(--common-light-100);
 }
 
+.button.onBrand.defaultVariant {
+  background-color: var(--accent-300);
+  color: var(--common-light-100);
+}
+
 .button.onLight.ghostVariant {
   background-color: var(--common-transparent-0);
   color: var(--common-dark-900);
   border: solid var(--button-border-size-default);
   border-color: var(--common-dark-900);
+}
+
+.button.onLight.defaultVariant {
+  background-color: var(--accent-300);
+  color: var(--common-light-100);
+  border: none;
 }
 
 .button.onLight.textVariant {
@@ -58,7 +69,12 @@
 .button.onBrand.textVariant:hover {
   background-color: var(--common-dark-100);
   color: var(--common-dark-900);
+}
 
+.button.onBrand.defaultVariant:hover {
+  background-color: var(--accent-500);
+  color: var(--common-light-100);
+  border: none;
 }
 
 .button.onBrand.ghostVariant:hover {
@@ -69,6 +85,11 @@
 
 .button.onLight.ghostVariant:hover {
   background-color: var(--common-dark-900);
+  color: var(--common-light-100);
+}
+
+.button.onLight.defaultVariant:hover {
+  background-color: var(--accent-500);
   color: var(--common-light-100);
 }
 
@@ -92,6 +113,13 @@
   border-color: var(--common-light-100);
 }
 
+.button.onBrand.defaultVariant.active {
+  background-color: var(--accent-500);
+  color: var(--common-light-100);
+  border: solid var(--button-border-size-active);
+  border-color: var(--accent-600);
+}
+
 .button.onLight.ghostVariant.active {
   background-color: var(--common-transparent-0);
   color: var(--common-dark-900);
@@ -99,8 +127,44 @@
   border-color: var(--common-dark-900);
 }
 
+.button.onLight.defaultVariant.active {
+  background-color: var(--accent-500);
+  color: var(--common-light-100);
+  border: solid var(--button-border-size-active);
+  border-color: var(--accent-600);
+}
+
 .button.onLight.textVariant.active {
   background-color: var(--common-dark-300);
   color: var(--common-dark-900);
   border: none;
+}
+
+
+/* ...for skeleton 💀... */
+
+.skeleton {
+  background: #eee;
+  animation: pulse 0.9s ease-in-out infinite;
+  pointer-events: none;
+  min-height: 40px;
+}
+
+.skeleton {
+  color: transparent;
+}
+
+
+@keyframes pulse {
+  0% {
+    opacity: 0.6;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0.6;
+  }
 }

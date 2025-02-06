@@ -3,7 +3,6 @@ import cx from "classnames";
 
 import { BREAKPOINTS, useMediaQuery } from "@/hooks/useMediaQuery";
 import Typography from "@/components/atoms/typography/Typography";
-import ClientOnly from "@/components/organisms/header/_components/ClientOnly";
 import { ComponentSharedButton, ComponentSharedRichText, Maybe } from "@/types";
 import Button from "@/components/atoms/Button/Button";
 
@@ -36,16 +35,15 @@ export const MainHeroContent: React.FC<MainHeroContentProps> = ({
               </div>;
             })}
           </div>
-          {button && <ClientOnly>
+          {button &&
             <Button
-              link="/internal-page"
+              link={button.Button_link}
               variant="ghost"
               text={button.Button_text || "Узнать больше"}
               on="onBrand"
               size="L"
               wide={!!isMobile}
             />
-          </ClientOnly>
           }
         </div>
       </div>

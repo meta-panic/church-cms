@@ -1,10 +1,8 @@
 "use client";
 import React, { useCallback } from "react";
 import cx from "classnames";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { hasAnchor } from "@/utils/parseUrl";
-
-import { isRootPath } from "@/utils/isRoot";
 
 import { BREAKPOINTS, useMediaQuery } from "@/hooks/useMediaQuery";
 import { DesktopHeader } from "./variants/DesktopHeader";
@@ -40,9 +38,7 @@ interface HeaderProps {
 
 export const Header: React.FC<HeaderProps> = ({ navItemsDesktop, navItemsMobile, contacts }) => {
   const isDesktop = useMediaQuery([BREAKPOINTS.desktop]);
-  const pathname = usePathname();
-  const isHomePage = isRootPath(pathname);
-  const showDesktopVariant = isDesktop && isHomePage;
+  const showDesktopVariant = isDesktop;
 
   const router = useRouter();
   useInitialAnchorScroll();
@@ -58,20 +54,24 @@ export const Header: React.FC<HeaderProps> = ({ navItemsDesktop, navItemsMobile,
       requestAnimationFrame(() => {
         element.scrollIntoView({ behavior: "smooth" });
       });
-
-      // Different page: navigate to the new URL
-      requestAnimationFrame(() => {
-        router.push(href, { scroll: true });
-      });
+    } else {
+      router.push(href);
     }
+
   }, [router]);
 
   return (
     <header className={cx(styles.headerWrapper)}>
       <ContactsContext.Provider value={contacts}>
         <ClientOnly>
-          {showDesktopVariant && <DesktopHeader handleNavigation={handleNavigation} navItems={navItemsDesktop} />}
-          {!showDesktopVariant && <MobileHeader handleNavigation={handleNavigation} navItems={navItemsMobile} />}
+          {showDesktopVariant && <DesktopHeader
+            handleNavigation={handleNavigation}
+            navItems={navItemsDesktop}
+          />}
+          {!showDesktopVariant && <MobileHeader
+            handleNavigation={handleNavigation}
+            navItems={navItemsMobile}
+          />}
         </ClientOnly>
       </ContactsContext.Provider>
     </header>
