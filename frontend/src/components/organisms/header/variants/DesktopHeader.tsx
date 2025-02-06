@@ -9,7 +9,6 @@ import ChurchLogo from "../../../../../public/church-logo.svg";
 import { Navigation, DropdownItem, RegularItem } from "../_components/Navigation";
 import { Contacts } from "@/components/molecules/Contacts/Contacts";
 import { ExistingAnchors, ExistingUrls, NavItemDesktop } from "@/configuration/navigation";
-import { useScroll } from "@/hooks/useScroll";
 
 import styles from "./DesktopHeader.module.css";
 import { HeaderStyleWrapper } from "../_components/HeaderStyleWrapper";
@@ -26,13 +25,11 @@ interface DesktopHeaderProps {
 export const DesktopHeader: React.FC<DesktopHeaderProps> = ({
   navItems, handleNavigation,
 }) => {
-  const isPageScrolled = useScroll({ threshold: 38 });
-  const headerType = isPageScrolled ? "slim" : "presentation";
   const contacts = React.useContext(ContactsContext) as ContactsContextType;
 
   return (
-    <HeaderStyleWrapper headerType={headerType}>
-      <div className={cx(styles.headerContent)}>
+    <HeaderStyleWrapper renderChildren={(headerType) => {
+      return <div className={cx(styles.headerContent)}>
 
         {isPresentation(headerType) && <ChurchLogo className={cx(styles.churchLogo)} />}
 
@@ -56,7 +53,9 @@ export const DesktopHeader: React.FC<DesktopHeaderProps> = ({
           }
         </div>
 
-      </div>
+      </div>;
+    }}>
+
     </HeaderStyleWrapper>
   );
 };

@@ -4,7 +4,6 @@ import React from "react";
 import cx from "classnames";
 
 import { ExistingAnchors, ExistingUrls, NavItemMobile } from "@/configuration/navigation";
-import { useScroll } from "@/hooks/useScroll";
 
 import styles from "./MobileHeader.module.css";
 import { BurgerButton } from "@/components/molecules/BurgerButton/BurgerButton";
@@ -28,16 +27,14 @@ interface MobileHeaderProps {
 export const MobileHeader: React.FC<MobileHeaderProps> = ({
   navItems, handleNavigation,
 }) => {
-  const isPageScrolled = useScroll({ threshold: 38 });
-  const headerType = isPageScrolled ? "slim" : "presentation";
   const isTablet = useMediaQuery([BREAKPOINTS.tablet]);
-  const showContacts = isTablet && headerType === "slim";
   const contacts = React.useContext(ContactsContext) as ContactsContextType;
 
-
   return (
-    <HeaderStyleWrapper headerType={headerType}>
-      <div className={cx(styles.headerContent)}>
+    <HeaderStyleWrapper renderChildren={(headerType) => {
+      const showContacts = isTablet && headerType === "slim";
+
+      return <div className={cx(styles.headerContent)}>
 
         {isPresentation(headerType) && <ChurchLogo className={cx(styles.churchLogo)} />}
 
@@ -78,8 +75,8 @@ export const MobileHeader: React.FC<MobileHeaderProps> = ({
           }}
         />
 
-      </div>
-    </HeaderStyleWrapper>
+      </div>;
+    }} />
   );
 };
 

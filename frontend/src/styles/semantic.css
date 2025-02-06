@@ -6,7 +6,7 @@
   --default-components-button-filled-bg: var(--brand-700);
 
   --default-surface-light: var(--common-light-100);
-  --default-surface-light-transparent: rgba(248, 246, 247, 0.85);
+  --default-surface-light-transparent: rgba(248, 246, 247, 0.90);
   --default-surface-dark-1: var(--accent-700);
   --default-surface-dark-2: var(--brand-600);
 
@@ -27,7 +27,6 @@
   --hover-components-cart-border: var(--common-dark-800);
 
   --hover-text-brand: var(--brand-800);
-  --hover-navigation-item: var(--accent-400);
 
   --active-components-button-outlined-br: var(--common-light-100);
 

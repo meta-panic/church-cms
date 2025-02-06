@@ -12,6 +12,13 @@
   user-select: none;
 }
 
+
+@media (min-width: 641px) {
+  .navigation {
+    gap: 16px;
+  }
+}
+
 @media (min-width: 1280px) {
   .navigation {
     gap: 16px;
