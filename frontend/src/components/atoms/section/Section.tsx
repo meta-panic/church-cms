@@ -8,7 +8,8 @@ import styles from "./Section.module.css";
 interface SectionProps {
   children: React.ReactNode;
   className?: string;
-  id?: ExistingAnchors extends `#${infer R}` ? R : never;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  id?: ExistingAnchors extends `${infer S}#${infer Anchor}` ? Anchor : never;
 }
 
 const Section: FC<SectionProps> = ({
