@@ -7,11 +7,10 @@ FROM node:18-alpine
 WORKDIR /app
 
 # Install bash and curl
-RUN apk add --no-cache bash curl
+RUN apk add --no-cache bash
 
 # Install dependencies based on the preferred package manager
 COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* .npmrc* ./
-RUN npm install -g @usebruno/cli@1.38.1
 
 RUN npm ci --include=optional sharp
 
@@ -23,9 +22,7 @@ COPY src ./src
 COPY public ./public
 COPY next.config.ts .
 COPY tsconfig.json .
-COPY tests ./tests
 COPY run.sh ./
-COPY run-tests.sh ./
 
 # Next.js collects completely anonymous telemetry data about general usage. Learn more here: https://nextjs.org/telemetry
 # Uncomment the following line to disable telemetry at run time
@@ -36,7 +33,11 @@ COPY run-tests.sh ./
 # Start Next.js in development mode based on the preferred package manager
 
 RUN chmod +x ./run.sh
-RUN chmod +x ./run-tests.sh
 
 # Start Next.js in development mode after running tests
-CMD bash -c "./run-tests.sh docker & ./run.sh"
+CMD \
+  if [ -f yarn.lock ]; then yarn dev; \
+  elif [ -f package-lock.json ]; then npm run dev; \
+  elif [ -f pnpm-lock.yaml ]; then pnpm dev; \
+  else npm run dev; \
+  fi

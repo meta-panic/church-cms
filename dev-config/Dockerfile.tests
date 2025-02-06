@@ -1,0 +1,31 @@
+FROM node:18
+
+WORKDIR /tests
+
+# For temp files e.g. test-reports
+RUN mkdir -p /tests/tmp
+
+COPY package*.json ./
+
+RUN echo "ls -la"
+RUN ls -la /tests
+RUN echo "COPY . ."
+COPY . .
+
+# Add a step to remove node_modules if it was accidentally copied
+RUN echo "rm -rf node_*****modules"
+RUN rm -rf node_modules
+
+RUN echo "ls -la"
+RUN ls -la /tests
+RUN npm ci
+
+RUN npm install -g @usebruno/cli@1.38.3
+# install only chrome for now to reduce image size
+RUN npx npx playwright install --only-shell --with-deps chromium
+
+RUN echo "ls -la"
+RUN ls -la /tests
+
+RUN bash -c "chmod +x run-tests.sh;"
+CMD bash -c "./run-tests.sh docker"

@@ -8,8 +8,6 @@
     "start": "next start",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
-    "bru-local": "cd tests/bruno-frontend-collection/ && bru run --env local-environment",
-    "bru-prod": "cd tests/bruno-frontend-collection/ && bru run --env prod-environment",
     "gen:be-types": "graphql-codegen"
   },
   "dependencies": {
@@ -27,7 +25,6 @@
     "@graphql-codegen/cli": "^5.0.3",
     "@graphql-codegen/typescript": "^4.1.2",
     "@graphql-codegen/typescript-resolvers": "^4.4.1",
-    "@playwright/test": "^1.49.1",
     "@strapi/types": "^5.8.0",
     "@strapi/utils": "^5.8.1",
     "@svgr/webpack": "^8.1.0",
