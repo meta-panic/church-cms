@@ -3,9 +3,12 @@ import React, { ReactNode, forwardRef, useImperativeHandle, useRef } from "react
 import Carousel from "react-multi-carousel";
 import cx from "classnames";
 
+import { BREAKPOINTS, useMediaQuery } from "@/hooks/useMediaQuery";
+import useVerticalScrollPrevention from "@/hooks/useVerticalScrollPrevention";
+
 import "react-multi-carousel/lib/styles.css";
 import styles from "./Carousel.module.css";
-import { BREAKPOINTS, useMediaQuery } from "@/hooks/useMediaQuery";
+
 
 const responsive = {
   desktop: {
@@ -42,6 +45,7 @@ export interface CarouselRef {
 const CarouselWrapper = forwardRef<CarouselRef, CarouselWrapperProps>(({ children }, ref) => {
   const carouselRef = useRef<Carousel | null>(null);
   const isSmallScreen = useMediaQuery([BREAKPOINTS.mobile]);
+  const containerRef = useVerticalScrollPrevention<HTMLDivElement>();
 
   const nextSlide = () => {
     if (carouselRef.current) {
@@ -55,27 +59,30 @@ const CarouselWrapper = forwardRef<CarouselRef, CarouselWrapperProps>(({ childre
     }
   };
 
-  // Expose methods to parent via ref
   useImperativeHandle(ref, () => ({
     nextSlide,
     prevSlide,
   }));
 
   return (
-    <Carousel
-      arrows={false}
-      responsive={responsive}
-      ref={carouselRef}
-      infinite
-      keyBoardControl
-      minimumTouchDrag={10}
-      partialVisible={isSmallScreen}
-      centerMode={!isSmallScreen}
-      swipeable
-      transitionDuration={1}
-    >
-      {children}
-    </Carousel>
+    <div ref={containerRef}>
+      <Carousel
+        arrows={false}
+        responsive={responsive}
+        ref={carouselRef}
+        infinite
+        keyBoardControl
+        minimumTouchDrag={20}
+        partialVisible={isSmallScreen}
+        centerMode={!isSmallScreen}
+        customTransition="transform 500ms linear"
+        transitionDuration={500}
+        swipeable
+      >
+        {children}
+      </Carousel>
+    </div>
+
   );
 });
 
@@ -95,3 +102,4 @@ export const Slide: React.FC<SlideProps> = ({ children, className }) => {
 
 
 export { CarouselWrapper as Carousel };
+
