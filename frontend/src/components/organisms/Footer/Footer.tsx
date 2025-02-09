@@ -55,8 +55,8 @@ export const Footer: React.FC<FooterProps> = (
                   </div>
                   : null
               }
-              {phone && <Typography tag="body">Тел | {phone}</Typography>}
-              {email && <Typography tag="body">Почта | {email}</Typography>}
+              {phone ? <Typography tag="body">Тел | {phone}</Typography> : null}
+              {email ? <Typography tag="body">Почта | {email}</Typography> : null}
             </div>
 
             <div className={cx(styles.block)}>
