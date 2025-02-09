@@ -4,19 +4,18 @@ import Typography from "../typography/Typography";
 
 type ButtonSkeletonProps = {
   size: "L" | "M";
-  wide?: boolean;
   rounded?: boolean;
   text: string;
 }
 
-const ButtonSkeleton: React.FC<ButtonSkeletonProps> = ({ size, text, wide, rounded }) => {
+const ButtonSkeleton: React.FC<ButtonSkeletonProps> = ({ size, text, rounded }) => {
   const classNames = cx(
     styles.button,
     styles.skeleton,
     styles[size],
     {
       [styles.rounded]: rounded,
-      [styles.wide]: wide,
+      [styles.wide]: false,
     },
   );
 

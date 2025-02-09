@@ -28,7 +28,7 @@ export async function generateStaticParams() {
     if (err instanceof HttpError) {
       console.error(`[/public-services] Fetch error is excepted during build time. If it is not, so...ops. Code - ${err.status}; Error - ${err.message}`);
     } else {
-      console.error(`[/public-services] Error during fetching data for the public services pages - ${err}`);
+      console.error(`[/public-services] Error is excepted during build time. If it is not, so...ops - ${err}`);
     }
 
     return [];

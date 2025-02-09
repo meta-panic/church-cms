@@ -1,4 +1,4 @@
-.setFullHeight:not(:has(.fullHeightHero)) {
+.setFullHeight {
   display: flex;
   flex-direction: column;
   min-height: 110vh;
