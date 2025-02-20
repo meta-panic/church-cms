@@ -2,6 +2,7 @@ import cx from "classnames";
 import Image, { StaticImageData } from "next/image";
 
 import Typography from "@/components/atoms/typography/Typography";
+import Link from "@/components/atoms/link/Link";
 
 import styles from "./InfoCardWithImage.module.css";
 
@@ -16,6 +17,9 @@ interface InfoCardWithImageProps {
 }
 
 export const InfoCardWithImage: React.FC<InfoCardWithImageProps> = ({ telegram, phone, image }) => {
+  const TelegramLink = () => telegram && <Link isExternal to={telegram}  >
+    Наш телеграм
+  </Link>;
 
   return (
     <div className={cx("lightBlock", styles.container)}>
@@ -44,10 +48,11 @@ export const InfoCardWithImage: React.FC<InfoCardWithImageProps> = ({ telegram, 
           </Typography>
           <Typography tag="body" className={styles.contact}>
             {
-              phone && telegram
-                ? `${phone} | ${telegram}`
-                : `${phone || telegram || ""}`
+              phone
+                ? `${phone} | `
+                : null
             }
+            < TelegramLink />
           </Typography>
         </div>
       </div>

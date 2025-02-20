@@ -29,7 +29,7 @@ const ralewayItalic = localFont({
 });
 const ralewaySemiBold = localFont({
   weight: "500",
-  variable: "--font-raleway-semobold",
+  variable: "--font-raleway-semibold",
   src: "../../public/fonts/Raleway-semi-bold.ttf",
   display: "swap",
 });
