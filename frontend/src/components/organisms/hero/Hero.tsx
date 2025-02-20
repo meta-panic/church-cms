@@ -1,24 +1,33 @@
+"use client";
 import React, { JSX } from "react";
 import Image, { StaticImageData } from "next/image";
 
-import styles from "./Hero.module.css";
 import Section from "@/components/atoms/section/Section";
+
+import cx from "classnames";
+
+import styles from "./Hero.module.css";
+import "./Hero.css";
+
 
 interface HeroProps {
   src: StaticImageData;
   content: JSX.Element;
+  blurDataURL?: string;
 }
 
-export const Hero: React.FC<HeroProps> = ({ src, content }) => {
+export const Hero: React.FC<HeroProps> = ({ src, content, blurDataURL }) => {
   return (
-    <div className={styles.heroWrapper}>
+    <div className={cx("fullHeightHero", styles.heroWrapper)}>
       <div className={styles.imageWrapper}>
         <Image
           id="hero church background"
           priority
+          blurDataURL={blurDataURL}
           loading="eager"
           placeholder="blur"
           src={src}
+          quality={100}
           layout="fill"
           objectFit="cover"
           objectPosition="center"
@@ -26,7 +35,8 @@ export const Hero: React.FC<HeroProps> = ({ src, content }) => {
           style={{
             objectPosition: "50% 60%",
           }}
-          className={styles.heroImage}
+          className={cx(styles.heroImage, styles.transition, "heroImage-opacity")}
+          onLoadingComplete={(image: HTMLImageElement) => image.classList.remove("heroImage-opacity")}
         />
       </div>
       <div className={styles.heroContent}>

@@ -30,8 +30,15 @@
   position: relative;
   width: 100vw;
   height: 100vh;
+  background-color: var(--accent-500);
 }
 
 .contentWrapper {
   height: 100%;
+}
+
+.transition {
+  transition-property: opacity;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 550ms;
 }

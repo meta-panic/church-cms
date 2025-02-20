@@ -1,1 +1,3 @@
-export const isRootPath = (pathname: string) => pathname === "/beta";
+export const isRootPath = (pathname: string) => pathname === root;
+
+export const root = "/beta";

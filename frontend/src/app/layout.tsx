@@ -1,10 +1,13 @@
 import localFont from "next/font/local";
 
+import "./layout.css";
+
 import "../styles/reset.css";
 import "../styles/colours.css";
 import "../styles/semantic.css";
 import "../styles/sizes.css";
 import "../styles/globals.css";
+
 
 const bebas = localFont({
   weight: "500",
@@ -26,7 +29,7 @@ const ralewayItalic = localFont({
 });
 const ralewaySemiBold = localFont({
   weight: "500",
-  variable: "--font-raleway-semobold",
+  variable: "--font-raleway-semibold",
   src: "../../public/fonts/Raleway-semi-bold.ttf",
   display: "swap",
 });
@@ -37,14 +40,16 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
   return (
     <html lang="ru">
       <body
         className={`${bebas.variable} ${ralewayRegular.variable} ${ralewayItalic.variable} ${ralewaySemiBold.variable} lightBlock`}
       >
+
         {children}
+
       </body>
-    </html>
+    </html >
   );
 }
+

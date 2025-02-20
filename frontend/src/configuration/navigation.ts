@@ -1,3 +1,5 @@
+import { root } from "@/utils/isRoot";
+
 export type NavItem = {
   href: ExistingUrls | ExistingAnchors;
   text: string;
@@ -14,17 +16,17 @@ export type NavItemMobile = NavItem & {
 
 export const EXISTING_URLS = [
   "/history",
-  "/how-to-become-a-cristian",
+  "/how-to-become-a-christian",
   "/public-service",
   "/our-symbols",
   "/videos",
-  "/beta", // it is a root
+  root, // it is a root
 ] as const;
 export type PublicServiceRoute = `/public-service/${string}`;
 
 export type ExistingUrls = typeof EXISTING_URLS[number];
 
-export type ExistingAnchors = "#services" | "#footer";
+export type ExistingAnchors = `${typeof root}#services` | "#contacts";
 
 export const navItemsDesktop: NavItemDesktop[] = [
   {
@@ -33,10 +35,10 @@ export const navItemsDesktop: NavItemDesktop[] = [
       { href: "/our-symbols", text: "Во что мы верим" },
     ],
   },
-  { href: "/how-to-become-a-cristian", text: "Как стать христианином?", hideOnScroll: true },
-  { href: "/public-service", text: "Проповеди" },
-  { href: "#services", text: "Служения" },
-  { href: "#footer", text: "Контакты" },
+  { href: "/how-to-become-a-christian", text: "Как стать христианином?", hideOnScroll: true },
+  { href: "/videos", text: "Проповеди" },
+  { href: `${root}#services`, text: "Служения" },
+  { href: "#contacts", text: "Контакты" },
 ];
 
 export const navItemsMobileAndTablet: NavItemMobile[] = [
@@ -45,7 +47,7 @@ export const navItemsMobileAndTablet: NavItemMobile[] = [
   { href: "/videos", text: "Проповеди", showInPopup: false },
 
   // these navs are shown in popup
-  { href: "/how-to-become-a-cristian", text: "Как стать христианином?", showInPopup: true },
-  { href: "#services", text: "Служения", showInPopup: true },
-  { href: "#footer", text: "Контакты", showInPopup: true },
+  { href: "/how-to-become-a-christian", text: "Как стать христианином?", showInPopup: true },
+  { href: `${root}#services`, text: "Служения", showInPopup: true },
+  { href: "#contacts", text: "Контакты", showInPopup: true },
 ];

@@ -1,10 +1,10 @@
 .divineServicesContainer {
   display: flex;
   padding: var(--spacing-3xl) 0;
-  justify-content: center;
   flex-direction: column;
   gap: var(--spacing-2xl);
   color: var(--default-text);
+  min-height: 600px;
 }
 
 .sectionHeader {

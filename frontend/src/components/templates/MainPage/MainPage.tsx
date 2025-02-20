@@ -70,7 +70,7 @@ export const MainPage: React.FC<MainPageProps> = ({
         {events.length > 0 ? <EventsSection events={events} /> : <NoEventsStub />}
       </Section>
 
-      <Section className={styles.divineServicesContainer}>
+      <Section id="services" className={styles.divineServicesContainer}>
         <DivineServicesSection divineServices={divineServices} />
       </Section>
     </>

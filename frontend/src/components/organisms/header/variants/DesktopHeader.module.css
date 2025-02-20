@@ -13,7 +13,7 @@
 }
 
 .navItem:hover {
-  color: var(--hover-navigation-item);
+  color: var(--hover-components-link-fg);
 }
 
 .churchLogo {

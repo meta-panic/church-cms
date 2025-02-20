@@ -2,9 +2,10 @@ import { useState, useEffect } from "react";
 
 interface ClientOnlyProps {
   children: React.ReactNode;
+  fallback?: React.ReactNode;
 }
 
-const ClientOnly: React.FC<ClientOnlyProps> = ({ children }) => {
+const ClientOnly: React.FC<ClientOnlyProps> = ({ children, fallback }) => {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
@@ -12,7 +13,7 @@ const ClientOnly: React.FC<ClientOnlyProps> = ({ children }) => {
   }, []);
 
   if (!isMounted) {
-    return null;
+    return fallback || null;
   }
 
   return <>{children}</>;

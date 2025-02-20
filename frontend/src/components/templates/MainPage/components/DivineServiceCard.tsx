@@ -1,6 +1,6 @@
 import React from "react";
 import cx from "classnames";
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 
 import Typography from "@/components/atoms/typography/Typography";
 import Link from "@/components/atoms/link/Link";
@@ -14,7 +14,7 @@ interface DivineServiceCardProps {
   title: string;
   description: string;
   image: {
-    imageSrc: string;
+    imageSrc: string | StaticImageData;
     altText?: string;
   },
   href: PublicServiceRoute;

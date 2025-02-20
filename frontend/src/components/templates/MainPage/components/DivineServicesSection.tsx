@@ -57,6 +57,7 @@ export const DivineServicesSection: React.FC<DivineServicesSectionProps> = ({
           </Slide>;
         })}
       </Carousel>
+
     </div >
   );
 };
@@ -65,7 +66,6 @@ function getSlugPath(slug: string): PublicServiceRoute {
   const href: PublicServiceRoute = `/public-service/${slug}`;
   return href;
 }
-
 
 const ButtonGroup = (
   { handleNextSlide, handlePrevSlide }: { handlePrevSlide: () => void, handleNextSlide: () => void },
@@ -100,4 +100,3 @@ const ButtonGroup = (
     />
   </div>;
 };
-

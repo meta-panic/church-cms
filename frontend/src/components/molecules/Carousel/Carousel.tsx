@@ -100,5 +100,6 @@ export const Slide: React.FC<SlideProps> = ({ children, className }) => {
   );
 };
 
+
 export { CarouselWrapper as Carousel };
 
