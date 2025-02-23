@@ -769,6 +769,25 @@ type Global {
   publishedAt: DateTime
 }
 
+input OurSymbolsInput {
+  Hero: ComponentContentBlocksInfoBlockInput
+  TheMainSymbol: ComponentContentBlocksInfoBlockInput
+  Theses: ComponentContentBlocksInfoBlockInput
+  AdditionalInfoLink: ComponentSharedButtonInput
+  publishedAt: DateTime
+}
+
+type OurSymbols {
+  documentId: ID!
+  Hero: ComponentContentBlocksInfoBlock
+  TheMainSymbol: ComponentContentBlocksInfoBlock
+  Theses: ComponentContentBlocksInfoBlock
+  AdditionalInfoLink: ComponentSharedButton
+  createdAt: DateTime
+  updatedAt: DateTime
+  publishedAt: DateTime
+}
+
 input PageLandingFiltersInput {
   documentId: IDFilterInput
   About_us: ComponentContentBlocksInfoBlockFiltersInput
@@ -842,7 +861,7 @@ type ServiceEntityResponseCollection {
   pageInfo: Pagination!
 }
 
-union GenericMorph = ComponentSharedVkVideo | ComponentSharedSlider | ComponentSharedSeo | ComponentSharedSchedule | ComponentSharedRichText | ComponentSharedQuote | ComponentSharedMedia | ComponentSharedEmbeddedVkVideo | ComponentSharedButton | ComponentSharedAddress | ComponentServicesBlockHeader | ComponentServicesBlockCarouselView | ComponentContentBlocksInfoBlock | ComponentContentBlocksEvent | ComponentContentBlocksEventImage | UploadFile | I18NLocale | ReviewWorkflowsWorkflow | ReviewWorkflowsWorkflowStage | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser | Global | PageLanding | Service
+union GenericMorph = ComponentSharedVkVideo | ComponentSharedSlider | ComponentSharedSeo | ComponentSharedSchedule | ComponentSharedRichText | ComponentSharedQuote | ComponentSharedMedia | ComponentSharedEmbeddedVkVideo | ComponentSharedButton | ComponentSharedAddress | ComponentServicesBlockHeader | ComponentServicesBlockCarouselView | ComponentContentBlocksInfoBlock | ComponentContentBlocksEvent | ComponentContentBlocksEventImage | UploadFile | I18NLocale | ReviewWorkflowsWorkflow | ReviewWorkflowsWorkflowStage | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser | Global | OurSymbols | PageLanding | Service
 
 input FileInfoInput {
   name: String
@@ -926,6 +945,7 @@ type Query {
   usersPermissionsUsers_connection(filters: UsersPermissionsUserFiltersInput, pagination: PaginationArg = {}, sort: [String] = [], status: PublicationStatus = PUBLISHED): UsersPermissionsUserEntityResponseCollection
   usersPermissionsUsers(filters: UsersPermissionsUserFiltersInput, pagination: PaginationArg = {}, sort: [String] = [], status: PublicationStatus = PUBLISHED): [UsersPermissionsUser]!
   global(status: PublicationStatus = PUBLISHED): Global
+  ourSymbols(status: PublicationStatus = PUBLISHED): OurSymbols
   pageLanding(documentId: ID!, status: PublicationStatus = PUBLISHED): PageLanding
   pageLandings_connection(filters: PageLandingFiltersInput, pagination: PaginationArg = {}, sort: [String] = [], status: PublicationStatus = PUBLISHED): PageLandingEntityResponseCollection
   pageLandings(filters: PageLandingFiltersInput, pagination: PaginationArg = {}, sort: [String] = [], status: PublicationStatus = PUBLISHED): [PageLanding]!
@@ -944,6 +964,8 @@ type Mutation {
   deleteReviewWorkflowsWorkflowStage(documentId: ID!): DeleteMutationResponse
   updateGlobal(status: PublicationStatus = PUBLISHED, data: GlobalInput!): Global
   deleteGlobal: DeleteMutationResponse
+  updateOurSymbols(status: PublicationStatus = PUBLISHED, data: OurSymbolsInput!): OurSymbols
+  deleteOurSymbols: DeleteMutationResponse
   createPageLanding(status: PublicationStatus = PUBLISHED, data: PageLandingInput!): PageLanding
   updatePageLanding(documentId: ID!, status: PublicationStatus = PUBLISHED, data: PageLandingInput!): PageLanding
   deletePageLanding(documentId: ID!): DeleteMutationResponse

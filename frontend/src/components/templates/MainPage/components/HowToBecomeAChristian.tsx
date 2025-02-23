@@ -43,6 +43,7 @@ export const HowToBecomeAChristian: React.FC<HowToBecomeAChristianProps> = ({
             &&
             <div className={styles.cta}>
               <Button
+                isExternal={button.isExternal}
                 link={button.Button_link}
                 text={button.Button_text}
                 variant="ghost"

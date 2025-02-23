@@ -538,6 +538,41 @@ export interface ApiGlobalGlobal extends Struct.SingleTypeSchema {
   };
 }
 
+export interface ApiOurSymbolsOurSymbols extends Struct.SingleTypeSchema {
+  collectionName: 'our_symbolses';
+  info: {
+    singularName: 'our-symbols';
+    pluralName: 'our-symbolses';
+    displayName: 'OurSymbols';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Hero: Schema.Attribute.Component<'content-blocks.info-block', false>;
+    TheMainSymbol: Schema.Attribute.Component<
+      'content-blocks.info-block',
+      false
+    >;
+    Theses: Schema.Attribute.Component<'content-blocks.info-block', false>;
+    AdditionalInfoLink: Schema.Attribute.Component<'shared.button', false>;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::our-symbols.our-symbols'
+    > &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiPageLandingPageLanding extends Struct.CollectionTypeSchema {
   collectionName: 'page_landings';
   info: {
@@ -999,6 +1034,7 @@ declare module '@strapi/strapi' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'api::global.global': ApiGlobalGlobal;
+      'api::our-symbols.our-symbols': ApiOurSymbolsOurSymbols;
       'api::page-landing.page-landing': ApiPageLandingPageLanding;
       'api::service.service': ApiServiceService;
       'admin::permission': AdminPermission;

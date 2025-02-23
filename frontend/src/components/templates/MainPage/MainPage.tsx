@@ -3,7 +3,7 @@ import React from "react";
 import { Hero } from "@/components/organisms/hero/Hero";
 import Section from "@/components/atoms/section/Section";
 import { AboutUs } from "./components/AboutUs";
-import { MainHeroContent } from "./components/MainHeroContent";
+import { HeroContent } from "../../organisms/hero/components/HeroContent";
 import { HowToBecomeAChristian } from "./components/HowToBecomeAChristian";
 import srcBackgroundHeroImage from "/public/background.jpg";
 
@@ -47,7 +47,7 @@ export const MainPage: React.FC<MainPageProps> = ({
       <Hero
         src={srcBackgroundHeroImage}
         content={
-          <MainHeroContent
+          <HeroContent
             title={heroData.Title || "Добро пожаловать в дом молитвы"}
             description={heroData.description}
             button={heroData.Button} />

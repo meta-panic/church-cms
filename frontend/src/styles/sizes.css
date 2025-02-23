@@ -1,6 +1,9 @@
 /* Mobile-specific variables */
 :root {
   --current-size: "mobile";
+
+  --max-text-column: 100%;
+
   --card-border-radios: 8px;
   --popup-border-radios: 4px;
   --button-border-radios: 4px;
@@ -35,10 +38,13 @@
 }
 
 
-/* Tabler-specific variables */
+/* Tablet-specific variables */
 @media (min-width: 641px) {
   :root {
     --current-size: "tablet";
+
+    --max-text-column: 700px;
+
     --card-border-radios: 8px;
     --popup-border-radios: 4px;
     --button-border-radios: 4px;
@@ -74,6 +80,9 @@
 @media (min-width: 1280px) {
   :root {
     --current-size: "desktop";
+
+    --max-text-column: 700px;
+
     --card-border-radios: 8px;
     --popup-border-radios: 4px;
     --button-border-radios: 4px;
