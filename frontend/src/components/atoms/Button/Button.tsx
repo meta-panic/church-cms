@@ -18,7 +18,7 @@ type ButtonProps = {
   isActive?: boolean;
   rounded?: boolean;
   wide?: boolean;
-} & ({ link: string; onClick?: never; } | { link?: never; onClick: () => void })
+} & ({ link: string; isExternal: boolean; onClick?: never; } | { link?: never; isExternal?: never; onClick: () => void })
 
 // Create a client-side only button component
 const ButtonContent: React.FC<ButtonProps> = ({
@@ -31,6 +31,7 @@ const ButtonContent: React.FC<ButtonProps> = ({
   on,
   onClick,
   rounded,
+  isExternal,
 }) => {
   const isSmall = useMediaQuery([BREAKPOINTS.mobile, BREAKPOINTS.tabletMin]);
 
@@ -54,11 +55,22 @@ const ButtonContent: React.FC<ButtonProps> = ({
     );
   }
 
-  return (
-    <a href={link} className={classNames}>
-      <Typography tag="body">{text}</Typography>
-    </a>
-  );
+  if (!isExternal) {
+    return (
+      <a href={link} target={"_self"} className={classNames}>
+        <Typography tag="body">{text}</Typography>
+      </a>
+    );
+  }
+
+  if (isExternal) {
+    return (
+      <a target={"_blank"}
+        rel="noopener noreferrer" href={link} className={classNames}>
+        <Typography tag="body">{text}</Typography>
+      </a>
+    );
+  };
 };
 
 // Main button component that handles client/server rendering
@@ -71,3 +83,4 @@ const Button: React.FC<ButtonProps> = (props) => {
 };
 
 export default Button;
+

@@ -1,0 +1,15 @@
+.moreInfoContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--spacing-2xl) 0;
+}
+
+.moreInfo {
+  display: flex;
+  align-items: center;
+  max-width: var(--max-text-column);
+  flex-direction: column;
+  gap: var(--spacing-l);
+  text-align: center;
+}

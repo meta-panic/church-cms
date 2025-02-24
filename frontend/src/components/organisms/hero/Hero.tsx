@@ -12,7 +12,7 @@ import "./Hero.css";
 
 interface HeroProps {
   src: StaticImageData;
-  content: JSX.Element;
+  content?: JSX.Element | null;
   blurDataURL?: string;
 }
 

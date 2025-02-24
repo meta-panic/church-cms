@@ -43,8 +43,8 @@ const Link: FC<PropsWithChildren<LinkProps> & { tag?: TypographyTag; }> = ({
         className={styles.linkContainer}
       >
         <span className={classes}>
-          {children}&nbsp;
-          <ExternalIcon className={styles.externalIcon} />
+          <span>{children}&nbsp;</span>
+          <span><ExternalIcon className={styles.externalIcon} /></span>
         </span>
       </a>
     );

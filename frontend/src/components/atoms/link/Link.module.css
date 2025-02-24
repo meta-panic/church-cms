@@ -1,5 +1,6 @@
 .linkContainer {
   width: fit-content;
+  vertical-align: text-bottom;
 }
 
 .externalIcon {
@@ -32,7 +33,7 @@
 
 
 .link {
-  display: inline-flex;
+  display: inline;
   border-bottom: 1px solid var(--default-components-link-fg);
   transition: all .3s ease-in-out;
   align-items: center;

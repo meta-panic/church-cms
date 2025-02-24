@@ -411,7 +411,7 @@ export type FloatFilterInput = {
   startsWith?: InputMaybe<Scalars["Float"]["input"]>;
 };
 
-export type GenericMorph = ComponentContentBlocksEvent | ComponentContentBlocksEventImage | ComponentContentBlocksInfoBlock | ComponentServicesBlockCarouselView | ComponentServicesBlockHeader | ComponentSharedAddress | ComponentSharedButton | ComponentSharedEmbeddedVkVideo | ComponentSharedMedia | ComponentSharedQuote | ComponentSharedRichText | ComponentSharedSchedule | ComponentSharedSeo | ComponentSharedSlider | ComponentSharedVkVideo | Global | I18NLocale | PageLanding | ReviewWorkflowsWorkflow | ReviewWorkflowsWorkflowStage | Service | UploadFile | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser;
+export type GenericMorph = ComponentContentBlocksEvent | ComponentContentBlocksEventImage | ComponentContentBlocksInfoBlock | ComponentServicesBlockCarouselView | ComponentServicesBlockHeader | ComponentSharedAddress | ComponentSharedButton | ComponentSharedEmbeddedVkVideo | ComponentSharedMedia | ComponentSharedQuote | ComponentSharedRichText | ComponentSharedSchedule | ComponentSharedSeo | ComponentSharedSlider | ComponentSharedVkVideo | Global | I18NLocale | OurSymbols | PageLanding | ReviewWorkflowsWorkflow | ReviewWorkflowsWorkflowStage | Service | UploadFile | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser;
 
 export type Global = {
   __typename?: "Global";
@@ -579,6 +579,7 @@ export type Mutation = {
   /** Create a new user */
   createUsersPermissionsUser: UsersPermissionsUserEntityResponse;
   deleteGlobal?: Maybe<DeleteMutationResponse>;
+  deleteOurSymbols?: Maybe<DeleteMutationResponse>;
   deletePageLanding?: Maybe<DeleteMutationResponse>;
   deleteReviewWorkflowsWorkflow?: Maybe<DeleteMutationResponse>;
   deleteReviewWorkflowsWorkflowStage?: Maybe<DeleteMutationResponse>;
@@ -598,6 +599,7 @@ export type Mutation = {
   /** Reset user password. Confirm with a code (resetToken from forgotPassword) */
   resetPassword?: Maybe<UsersPermissionsLoginPayload>;
   updateGlobal?: Maybe<Global>;
+  updateOurSymbols?: Maybe<OurSymbols>;
   updatePageLanding?: Maybe<PageLanding>;
   updateReviewWorkflowsWorkflow?: Maybe<ReviewWorkflowsWorkflow>;
   updateReviewWorkflowsWorkflowStage?: Maybe<ReviewWorkflowsWorkflowStage>;
@@ -719,6 +721,12 @@ export type MutationUpdateGlobalArgs = {
 };
 
 
+export type MutationUpdateOurSymbolsArgs = {
+  data: OurSymbolsInput;
+  status?: InputMaybe<PublicationStatus>;
+};
+
+
 export type MutationUpdatePageLandingArgs = {
   data: PageLandingInput;
   documentId: Scalars["ID"]["input"];
@@ -762,6 +770,26 @@ export type MutationUpdateUsersPermissionsRoleArgs = {
 export type MutationUpdateUsersPermissionsUserArgs = {
   data: UsersPermissionsUserInput;
   id: Scalars["ID"]["input"];
+};
+
+export type OurSymbols = {
+  __typename?: "OurSymbols";
+  AdditionalInfoLink?: Maybe<ComponentSharedButton>;
+  Hero?: Maybe<ComponentContentBlocksInfoBlock>;
+  TheMainSymbol?: Maybe<ComponentContentBlocksInfoBlock>;
+  Theses?: Maybe<ComponentContentBlocksInfoBlock>;
+  createdAt?: Maybe<Scalars["DateTime"]["output"]>;
+  documentId: Scalars["ID"]["output"];
+  publishedAt?: Maybe<Scalars["DateTime"]["output"]>;
+  updatedAt?: Maybe<Scalars["DateTime"]["output"]>;
+};
+
+export type OurSymbolsInput = {
+  AdditionalInfoLink?: InputMaybe<ComponentSharedButtonInput>;
+  Hero?: InputMaybe<ComponentContentBlocksInfoBlockInput>;
+  TheMainSymbol?: InputMaybe<ComponentContentBlocksInfoBlockInput>;
+  Theses?: InputMaybe<ComponentContentBlocksInfoBlockInput>;
+  publishedAt?: InputMaybe<Scalars["DateTime"]["input"]>;
 };
 
 export type PageLanding = {
@@ -838,6 +866,7 @@ export type Query = {
   i18NLocales: Array<Maybe<I18NLocale>>;
   i18NLocales_connection?: Maybe<I18NLocaleEntityResponseCollection>;
   me?: Maybe<UsersPermissionsMe>;
+  ourSymbols?: Maybe<OurSymbols>;
   pageLanding?: Maybe<PageLanding>;
   pageLandings: Array<Maybe<PageLanding>>;
   pageLandings_connection?: Maybe<PageLandingEntityResponseCollection>;
@@ -885,6 +914,11 @@ export type QueryI18NLocales_ConnectionArgs = {
   filters?: InputMaybe<I18NLocaleFiltersInput>;
   pagination?: InputMaybe<PaginationArg>;
   sort?: InputMaybe<Array<InputMaybe<Scalars["String"]["input"]>>>;
+  status?: InputMaybe<PublicationStatus>;
+};
+
+
+export type QueryOurSymbolsArgs = {
   status?: InputMaybe<PublicationStatus>;
 };
 
@@ -1537,7 +1571,7 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 
 /** Mapping of union types */
 export type ResolversUnionTypes<_RefType extends Record<string, unknown>> = {
-  GenericMorph: (Omit<ComponentContentBlocksEvent, "image"> & { image: _RefType["ComponentContentBlocksEventImage"] }) | (Omit<ComponentContentBlocksEventImage, "eventImage"> & { eventImage: _RefType["UploadFile"] }) | (ComponentContentBlocksInfoBlock) | (Omit<ComponentServicesBlockCarouselView, "carouselServiceImage"> & { carouselServiceImage: _RefType["UploadFile"] }) | (Omit<ComponentServicesBlockHeader, "headerPhoto"> & { headerPhoto?: Maybe<_RefType["ComponentSharedMedia"]> }) | (ComponentSharedAddress) | (ComponentSharedButton) | (ComponentSharedEmbeddedVkVideo) | (Omit<ComponentSharedMedia, "file"> & { file?: Maybe<_RefType["UploadFile"]> }) | (ComponentSharedQuote) | (ComponentSharedRichText) | (ComponentSharedSchedule) | (Omit<ComponentSharedSeo, "shareImage"> & { shareImage?: Maybe<_RefType["UploadFile"]> }) | (Omit<ComponentSharedSlider, "files" | "files_connection"> & { files: Array<Maybe<_RefType["UploadFile"]>>, files_connection?: Maybe<_RefType["UploadFileRelationResponseCollection"]> }) | (Omit<ComponentSharedVkVideo, "thumbnail"> & { thumbnail?: Maybe<_RefType["UploadFile"]> }) | (Global) | (I18NLocale) | (Omit<PageLanding, "Events"> & { Events: Array<Maybe<_RefType["ComponentContentBlocksEvent"]>> }) | (ReviewWorkflowsWorkflow) | (ReviewWorkflowsWorkflowStage) | (Omit<Service, "hero" | "landingCarouselView"> & { hero: _RefType["ComponentServicesBlockHeader"], landingCarouselView: _RefType["ComponentServicesBlockCarouselView"] }) | (Omit<UploadFile, "related"> & { related?: Maybe<Array<Maybe<_RefType["GenericMorph"]>>> }) | (UsersPermissionsPermission) | (UsersPermissionsRole) | (UsersPermissionsUser);
+  GenericMorph: (Omit<ComponentContentBlocksEvent, "image"> & { image: _RefType["ComponentContentBlocksEventImage"] }) | (Omit<ComponentContentBlocksEventImage, "eventImage"> & { eventImage: _RefType["UploadFile"] }) | (ComponentContentBlocksInfoBlock) | (Omit<ComponentServicesBlockCarouselView, "carouselServiceImage"> & { carouselServiceImage: _RefType["UploadFile"] }) | (Omit<ComponentServicesBlockHeader, "headerPhoto"> & { headerPhoto?: Maybe<_RefType["ComponentSharedMedia"]> }) | (ComponentSharedAddress) | (ComponentSharedButton) | (ComponentSharedEmbeddedVkVideo) | (Omit<ComponentSharedMedia, "file"> & { file?: Maybe<_RefType["UploadFile"]> }) | (ComponentSharedQuote) | (ComponentSharedRichText) | (ComponentSharedSchedule) | (Omit<ComponentSharedSeo, "shareImage"> & { shareImage?: Maybe<_RefType["UploadFile"]> }) | (Omit<ComponentSharedSlider, "files" | "files_connection"> & { files: Array<Maybe<_RefType["UploadFile"]>>, files_connection?: Maybe<_RefType["UploadFileRelationResponseCollection"]> }) | (Omit<ComponentSharedVkVideo, "thumbnail"> & { thumbnail?: Maybe<_RefType["UploadFile"]> }) | (Global) | (I18NLocale) | (OurSymbols) | (Omit<PageLanding, "Events"> & { Events: Array<Maybe<_RefType["ComponentContentBlocksEvent"]>> }) | (ReviewWorkflowsWorkflow) | (ReviewWorkflowsWorkflowStage) | (Omit<Service, "hero" | "landingCarouselView"> & { hero: _RefType["ComponentServicesBlockHeader"], landingCarouselView: _RefType["ComponentServicesBlockCarouselView"] }) | (Omit<UploadFile, "related"> & { related?: Maybe<Array<Maybe<_RefType["GenericMorph"]>>> }) | (UsersPermissionsPermission) | (UsersPermissionsRole) | (UsersPermissionsUser);
 };
 
 
@@ -1600,6 +1634,8 @@ export type ResolversTypes = {
   JSON: ResolverTypeWrapper<Scalars["JSON"]["output"]>;
   JSONFilterInput: JsonFilterInput;
   Mutation: ResolverTypeWrapper<{}>;
+  OurSymbols: ResolverTypeWrapper<OurSymbols>;
+  OurSymbolsInput: OurSymbolsInput;
   PageLanding: ResolverTypeWrapper<Omit<PageLanding, "Events"> & { Events: Array<Maybe<ResolversTypes["ComponentContentBlocksEvent"]>> }>;
   PageLandingEntityResponseCollection: ResolverTypeWrapper<Omit<PageLandingEntityResponseCollection, "nodes"> & { nodes: Array<ResolversTypes["PageLanding"]> }>;
   PageLandingFiltersInput: PageLandingFiltersInput;
@@ -1710,6 +1746,8 @@ export type ResolversParentTypes = {
   JSON: Scalars["JSON"]["output"];
   JSONFilterInput: JsonFilterInput;
   Mutation: {};
+  OurSymbols: OurSymbols;
+  OurSymbolsInput: OurSymbolsInput;
   PageLanding: Omit<PageLanding, "Events"> & { Events: Array<Maybe<ResolversParentTypes["ComponentContentBlocksEvent"]>> };
   PageLandingEntityResponseCollection: Omit<PageLandingEntityResponseCollection, "nodes"> & { nodes: Array<ResolversParentTypes["PageLanding"]> };
   PageLandingFiltersInput: PageLandingFiltersInput;
@@ -1883,7 +1921,7 @@ export type DeleteMutationResponseResolvers<ContextType = any, ParentType extend
 };
 
 export type GenericMorphResolvers<ContextType = any, ParentType extends ResolversParentTypes["GenericMorph"] = ResolversParentTypes["GenericMorph"]> = {
-  __resolveType: TypeResolveFn<"ComponentContentBlocksEvent" | "ComponentContentBlocksEventImage" | "ComponentContentBlocksInfoBlock" | "ComponentServicesBlockCarouselView" | "ComponentServicesBlockHeader" | "ComponentSharedAddress" | "ComponentSharedButton" | "ComponentSharedEmbeddedVkVideo" | "ComponentSharedMedia" | "ComponentSharedQuote" | "ComponentSharedRichText" | "ComponentSharedSchedule" | "ComponentSharedSeo" | "ComponentSharedSlider" | "ComponentSharedVkVideo" | "Global" | "I18NLocale" | "PageLanding" | "ReviewWorkflowsWorkflow" | "ReviewWorkflowsWorkflowStage" | "Service" | "UploadFile" | "UsersPermissionsPermission" | "UsersPermissionsRole" | "UsersPermissionsUser", ParentType, ContextType>;
+  __resolveType: TypeResolveFn<"ComponentContentBlocksEvent" | "ComponentContentBlocksEventImage" | "ComponentContentBlocksInfoBlock" | "ComponentServicesBlockCarouselView" | "ComponentServicesBlockHeader" | "ComponentSharedAddress" | "ComponentSharedButton" | "ComponentSharedEmbeddedVkVideo" | "ComponentSharedMedia" | "ComponentSharedQuote" | "ComponentSharedRichText" | "ComponentSharedSchedule" | "ComponentSharedSeo" | "ComponentSharedSlider" | "ComponentSharedVkVideo" | "Global" | "I18NLocale" | "OurSymbols" | "PageLanding" | "ReviewWorkflowsWorkflow" | "ReviewWorkflowsWorkflowStage" | "Service" | "UploadFile" | "UsersPermissionsPermission" | "UsersPermissionsRole" | "UsersPermissionsUser", ParentType, ContextType>;
 };
 
 export type GlobalResolvers<ContextType = any, ParentType extends ResolversParentTypes["Global"] = ResolversParentTypes["Global"]> = {
@@ -1935,6 +1973,7 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   createUsersPermissionsRole?: Resolver<Maybe<ResolversTypes["UsersPermissionsCreateRolePayload"]>, ParentType, ContextType, RequireFields<MutationCreateUsersPermissionsRoleArgs, "data">>;
   createUsersPermissionsUser?: Resolver<ResolversTypes["UsersPermissionsUserEntityResponse"], ParentType, ContextType, RequireFields<MutationCreateUsersPermissionsUserArgs, "data">>;
   deleteGlobal?: Resolver<Maybe<ResolversTypes["DeleteMutationResponse"]>, ParentType, ContextType>;
+  deleteOurSymbols?: Resolver<Maybe<ResolversTypes["DeleteMutationResponse"]>, ParentType, ContextType>;
   deletePageLanding?: Resolver<Maybe<ResolversTypes["DeleteMutationResponse"]>, ParentType, ContextType, RequireFields<MutationDeletePageLandingArgs, "documentId">>;
   deleteReviewWorkflowsWorkflow?: Resolver<Maybe<ResolversTypes["DeleteMutationResponse"]>, ParentType, ContextType, RequireFields<MutationDeleteReviewWorkflowsWorkflowArgs, "documentId">>;
   deleteReviewWorkflowsWorkflowStage?: Resolver<Maybe<ResolversTypes["DeleteMutationResponse"]>, ParentType, ContextType, RequireFields<MutationDeleteReviewWorkflowsWorkflowStageArgs, "documentId">>;
@@ -1948,6 +1987,7 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   register?: Resolver<ResolversTypes["UsersPermissionsLoginPayload"], ParentType, ContextType, RequireFields<MutationRegisterArgs, "input">>;
   resetPassword?: Resolver<Maybe<ResolversTypes["UsersPermissionsLoginPayload"]>, ParentType, ContextType, RequireFields<MutationResetPasswordArgs, "code" | "password" | "passwordConfirmation">>;
   updateGlobal?: Resolver<Maybe<ResolversTypes["Global"]>, ParentType, ContextType, RequireFields<MutationUpdateGlobalArgs, "data" | "status">>;
+  updateOurSymbols?: Resolver<Maybe<ResolversTypes["OurSymbols"]>, ParentType, ContextType, RequireFields<MutationUpdateOurSymbolsArgs, "data" | "status">>;
   updatePageLanding?: Resolver<Maybe<ResolversTypes["PageLanding"]>, ParentType, ContextType, RequireFields<MutationUpdatePageLandingArgs, "data" | "documentId" | "status">>;
   updateReviewWorkflowsWorkflow?: Resolver<Maybe<ResolversTypes["ReviewWorkflowsWorkflow"]>, ParentType, ContextType, RequireFields<MutationUpdateReviewWorkflowsWorkflowArgs, "data" | "documentId" | "status">>;
   updateReviewWorkflowsWorkflowStage?: Resolver<Maybe<ResolversTypes["ReviewWorkflowsWorkflowStage"]>, ParentType, ContextType, RequireFields<MutationUpdateReviewWorkflowsWorkflowStageArgs, "data" | "documentId" | "status">>;
@@ -1955,6 +1995,18 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   updateUploadFile?: Resolver<ResolversTypes["UploadFile"], ParentType, ContextType, RequireFields<MutationUpdateUploadFileArgs, "id">>;
   updateUsersPermissionsRole?: Resolver<Maybe<ResolversTypes["UsersPermissionsUpdateRolePayload"]>, ParentType, ContextType, RequireFields<MutationUpdateUsersPermissionsRoleArgs, "data" | "id">>;
   updateUsersPermissionsUser?: Resolver<ResolversTypes["UsersPermissionsUserEntityResponse"], ParentType, ContextType, RequireFields<MutationUpdateUsersPermissionsUserArgs, "data" | "id">>;
+};
+
+export type OurSymbolsResolvers<ContextType = any, ParentType extends ResolversParentTypes["OurSymbols"] = ResolversParentTypes["OurSymbols"]> = {
+  AdditionalInfoLink?: Resolver<Maybe<ResolversTypes["ComponentSharedButton"]>, ParentType, ContextType>;
+  Hero?: Resolver<Maybe<ResolversTypes["ComponentContentBlocksInfoBlock"]>, ParentType, ContextType>;
+  TheMainSymbol?: Resolver<Maybe<ResolversTypes["ComponentContentBlocksInfoBlock"]>, ParentType, ContextType>;
+  Theses?: Resolver<Maybe<ResolversTypes["ComponentContentBlocksInfoBlock"]>, ParentType, ContextType>;
+  createdAt?: Resolver<Maybe<ResolversTypes["DateTime"]>, ParentType, ContextType>;
+  documentId?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  publishedAt?: Resolver<Maybe<ResolversTypes["DateTime"]>, ParentType, ContextType>;
+  updatedAt?: Resolver<Maybe<ResolversTypes["DateTime"]>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type PageLandingResolvers<ContextType = any, ParentType extends ResolversParentTypes["PageLanding"] = ResolversParentTypes["PageLanding"]> = {
@@ -1989,6 +2041,7 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   i18NLocales?: Resolver<Array<Maybe<ResolversTypes["I18NLocale"]>>, ParentType, ContextType, RequireFields<QueryI18NLocalesArgs, "pagination" | "sort" | "status">>;
   i18NLocales_connection?: Resolver<Maybe<ResolversTypes["I18NLocaleEntityResponseCollection"]>, ParentType, ContextType, RequireFields<QueryI18NLocales_ConnectionArgs, "pagination" | "sort" | "status">>;
   me?: Resolver<Maybe<ResolversTypes["UsersPermissionsMe"]>, ParentType, ContextType>;
+  ourSymbols?: Resolver<Maybe<ResolversTypes["OurSymbols"]>, ParentType, ContextType, RequireFields<QueryOurSymbolsArgs, "status">>;
   pageLanding?: Resolver<Maybe<ResolversTypes["PageLanding"]>, ParentType, ContextType, RequireFields<QueryPageLandingArgs, "documentId" | "status">>;
   pageLandings?: Resolver<Array<Maybe<ResolversTypes["PageLanding"]>>, ParentType, ContextType, RequireFields<QueryPageLandingsArgs, "pagination" | "sort" | "status">>;
   pageLandings_connection?: Resolver<Maybe<ResolversTypes["PageLandingEntityResponseCollection"]>, ParentType, ContextType, RequireFields<QueryPageLandings_ConnectionArgs, "pagination" | "sort" | "status">>;
@@ -2237,6 +2290,7 @@ export type Resolvers<ContextType = any> = {
   I18NLocaleEntityResponseCollection?: I18NLocaleEntityResponseCollectionResolvers<ContextType>;
   JSON?: GraphQLScalarType;
   Mutation?: MutationResolvers<ContextType>;
+  OurSymbols?: OurSymbolsResolvers<ContextType>;
   PageLanding?: PageLandingResolvers<ContextType>;
   PageLandingEntityResponseCollection?: PageLandingEntityResponseCollectionResolvers<ContextType>;
   Pagination?: PaginationResolvers<ContextType>;

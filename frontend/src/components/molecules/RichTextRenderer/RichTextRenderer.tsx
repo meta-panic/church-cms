@@ -1,10 +1,11 @@
-import { ReactElement, ReactNode } from "react";
+import { ReactNode } from "react";
 import ReactMarkdown from "react-markdown";
 
 import Link from "@/components/atoms/link/Link";
 import Typography from "@/components/atoms/typography/Typography";
 import { ComponentSharedRichText } from "@/types";
 
+import styles from "./BlockStyles.module.css";
 
 const RichTextRenderer = ({ markdownText }: { markdownText: ComponentSharedRichText }) => {
   const renderers = {
@@ -13,20 +14,28 @@ const RichTextRenderer = ({ markdownText }: { markdownText: ComponentSharedRichT
         <Link to={props.href} isExternal>{props.children}</Link>
       );
     },
-    heading: ({ level, children }: { level: number, children: ReactElement }) => {
-      const tagMap: Record<number, "H1" | "H2" | "H3"> = {
-        1: "H1",
-        2: "H2",
-        3: "H3",
-      };
-      const tag = tagMap[level] || "body";
-      return <Typography tag={tag}>{children}</Typography>;
+    h1: (props: React.HTMLProps<HTMLHeadingElement>) => { // Updated type
+      const { children } = props; // Extract children from props
+
+      return <Typography tag={"H1"}>{children}</Typography>;
+    },
+    h2: (props: React.HTMLProps<HTMLHeadingElement>) => { // Updated type
+      const { children } = props; // Extract children from props
+
+      return <Typography tag={"H2"}>{children}</Typography>;
+    },
+    h3: (props: React.HTMLProps<HTMLHeadingElement>) => { // Updated type
+      const { children } = props; // Extract children from props
+
+      return <Typography tag={"H3"}>{children}</Typography>;
     },
     p: (props: { children?: ReactNode | string }) => {
       return <Typography tag="body">{props?.children}</Typography>;
     },
+    blockquote: (props: { children?: ReactNode | string }) => {
+      return <div className={styles.blockquoteContainer}><Typography className={styles.blockquote} tag="body">{props?.children}</Typography></div>;
+    },
   };
-
   return (
     <ReactMarkdown components={renderers}>{markdownText.body}</ReactMarkdown>
   );
