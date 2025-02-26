@@ -52,6 +52,7 @@ export const MainPage: React.FC<MainPageProps> = ({
             description={heroData.description}
             button={heroData.Button} />
         }
+        imageStyles={styles.heroImage}
       />
 
       <Section>

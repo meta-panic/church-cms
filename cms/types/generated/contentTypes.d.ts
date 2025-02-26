@@ -538,6 +538,45 @@ export interface ApiGlobalGlobal extends Struct.SingleTypeSchema {
   };
 }
 
+export interface ApiHtBaChristianHtBaChristian extends Struct.SingleTypeSchema {
+  collectionName: 'ht_ba_christians';
+  info: {
+    singularName: 'ht-ba-christian';
+    pluralName: 'ht-ba-christians';
+    displayName: 'HTBaChristian';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    hero: Schema.Attribute.Component<'content-blocks.info-block', false> &
+      Schema.Attribute.Required;
+    presentationVideo: Schema.Attribute.Component<
+      'shared.embedded-vk-video',
+      false
+    > &
+      Schema.Attribute.Required;
+    content: Schema.Attribute.DynamicZone<
+      ['shared.rich-text', 'htbachristian-block.pray-example']
+    > &
+      Schema.Attribute.Required;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::ht-ba-christian.ht-ba-christian'
+    > &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiOurSymbolsOurSymbols extends Struct.SingleTypeSchema {
   collectionName: 'our_symbolses';
   info: {
@@ -1034,6 +1073,7 @@ declare module '@strapi/strapi' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'api::global.global': ApiGlobalGlobal;
+      'api::ht-ba-christian.ht-ba-christian': ApiHtBaChristianHtBaChristian;
       'api::our-symbols.our-symbols': ApiOurSymbolsOurSymbols;
       'api::page-landing.page-landing': ApiPageLandingPageLanding;
       'api::service.service': ApiServiceService;

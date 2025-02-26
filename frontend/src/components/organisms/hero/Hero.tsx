@@ -14,9 +14,10 @@ interface HeroProps {
   src: StaticImageData;
   content?: JSX.Element | null;
   blurDataURL?: string;
+  imageStyles?: string;
 }
 
-export const Hero: React.FC<HeroProps> = ({ src, content, blurDataURL }) => {
+export const Hero: React.FC<HeroProps> = ({ src, content, blurDataURL, imageStyles }) => {
   return (
     <div className={cx("fullHeightHero", styles.heroWrapper)}>
       <div className={styles.imageWrapper}>
@@ -32,10 +33,7 @@ export const Hero: React.FC<HeroProps> = ({ src, content, blurDataURL }) => {
           objectFit="cover"
           objectPosition="center"
           alt="Церковь с крестом на крыше на фоне ночного звездного неба"
-          style={{
-            objectPosition: "50% 60%",
-          }}
-          className={cx(styles.heroImage, styles.transition, "heroImage-opacity")}
+          className={cx(imageStyles, styles.transition, "heroImage-opacity")}
           onLoadingComplete={(image: HTMLImageElement) => image.classList.remove("heroImage-opacity")}
         />
       </div>

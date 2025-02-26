@@ -1,0 +1,36 @@
+{
+  "kind": "singleType",
+  "collectionName": "ht_ba_christians",
+  "info": {
+    "singularName": "ht-ba-christian",
+    "pluralName": "ht-ba-christians",
+    "displayName": "HTBaChristian",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "hero": {
+      "type": "component",
+      "repeatable": false,
+      "component": "content-blocks.info-block",
+      "required": true
+    },
+    "presentationVideo": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.embedded-vk-video",
+      "required": true
+    },
+    "content": {
+      "type": "dynamiczone",
+      "components": [
+        "shared.rich-text",
+        "htbachristian-block.pray-example"
+      ],
+      "required": true
+    }
+  }
+}

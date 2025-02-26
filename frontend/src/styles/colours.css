@@ -42,7 +42,7 @@
   --common-transparent-900: rgba(255, 255, 255, 0.9);
   /* 90% opacity */
 
-
+  --common-dark-1000: #000;
   --common-dark-900: #3d444a;
   --common-dark-800: #5f646a;
   --common-dark-700: #6d7175;

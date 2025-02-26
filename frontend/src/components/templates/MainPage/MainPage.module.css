@@ -5,3 +5,19 @@
 .divineServicesContainer {
   background-color: var(--default-surface-dark-2);
 }
+
+.heroImage {
+  object-position: 50% 60%,
+}
+
+@media (max-width: 400px) {
+  .heroImage {
+    filter: blur(1px);
+  }
+}
+
+@media (max-width: 350px) {
+  .heroImage {
+    filter: blur(2px);
+  }
+}
