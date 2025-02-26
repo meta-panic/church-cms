@@ -35,6 +35,9 @@ const RichTextRenderer = ({ markdownText }: { markdownText: ComponentSharedRichT
     blockquote: (props: { children?: ReactNode | string }) => {
       return <div className={styles.blockquoteContainer}><Typography className={styles.blockquote} tag="body">{props?.children}</Typography></div>;
     },
+    li: (props: { children?: ReactNode | string }) => {
+      return <span className={styles.listItem}><Typography tag="body">{props?.children}</Typography></span>;
+    },
   };
   return (
     <ReactMarkdown components={renderers}>{markdownText.body}</ReactMarkdown>

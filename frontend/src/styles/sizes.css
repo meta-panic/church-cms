@@ -5,6 +5,7 @@
   --max-text-column: 100%;
 
   --card-border-radios: 8px;
+  --block-border-radios: 4px;
   --popup-border-radios: 4px;
   --button-border-radios: 4px;
   --button-border-size-default: 2px;
@@ -46,6 +47,7 @@
     --max-text-column: 700px;
 
     --card-border-radios: 8px;
+    --block-border-radios: 4px;
     --popup-border-radios: 4px;
     --button-border-radios: 4px;
     --font-font-size-h1-font-size: 48px;
@@ -84,6 +86,7 @@
     --max-text-column: 700px;
 
     --card-border-radios: 8px;
+    --block-border-radios: 4px;
     --popup-border-radios: 4px;
     --button-border-radios: 4px;
     --font-font-size-h1-font-size: 54px;
