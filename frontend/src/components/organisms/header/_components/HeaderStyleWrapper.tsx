@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import Section from "@/components/atoms/section/Section";
 import { useScroll } from "@/hooks/useScroll";
 import { isRootPath } from "@/utils/isRoot";
-import { cssVars } from "@/utils/CssVars";
+import { getCssVars } from "@/utils/CssVars";
 
 import type { HeaderType } from "../variants/variants";
 
@@ -20,7 +20,7 @@ interface HeaderStyleWrapperProps {
 export const HeaderStyleWrapper: React.FC<HeaderStyleWrapperProps> = ({
   renderChildren,
 }) => {
-  const headerHeight = cssVars.getVarNumber("--header-height--slim", 42);
+  const headerHeight = getCssVars()?.getVarNumber("--header-height--slim", 42) || 42;
   const isPageScrolled = useScroll({ threshold: headerHeight });
   const headerType = calcHeaderType(isPageScrolled, usePathname());
 

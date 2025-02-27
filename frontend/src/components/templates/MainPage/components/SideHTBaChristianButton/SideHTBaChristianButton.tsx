@@ -5,7 +5,7 @@ import { useCallback, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 import Typography from "@/components/atoms/typography/Typography";
-import { cssVars } from "@/utils/CssVars";
+import { getCssVars } from "@/utils/CssVars";
 
 import { useMediaQuery, BREAKPOINTS } from "@/hooks/useMediaQuery";
 import { ExistingUrls } from "@/configuration/navigation";
@@ -43,7 +43,7 @@ export const SideHTBaChristianButton: React.FC<SideHTBaChristianButtonProps> =
       };
 
       const checkScroll = () => {
-        const viewportHeight = cssVars.getVarNumber("--header-height--slim", 42);
+        const viewportHeight = getCssVars()?.getVarNumber("--header-height--slim", 42) || 42;
         const scrollPosition = window.scrollY;
 
         if (scrollPosition >= viewportHeight) {
