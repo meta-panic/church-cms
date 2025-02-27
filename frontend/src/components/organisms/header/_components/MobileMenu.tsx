@@ -2,10 +2,13 @@
 import React from "react";
 import cx from "classnames";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 import { hasAnchor } from "@/utils/parseUrl";
-import { RegularItem } from "../_components/Navigation";
 import Typography from "@/components/atoms/typography/Typography";
+import { isRootPath, root } from "@/utils/isRoot";
+
+import { RegularItem } from "../_components/Navigation";
 
 import styles from "./MobileMenu.module.css";
 
@@ -17,6 +20,10 @@ interface MobileMenuProps {
 }
 
 const MobileMenu: React.FC<MobileMenuProps> = ({ items, isOpen, onClose, onClick }) => {
+
+  const toMainItem: RegularItem = { href: root, text: "Главная" };
+  const menuItems = isRootPath(usePathname()) ? [...items] : [toMainItem, ...items];
+
   return (
     <div className={cx(styles.mobileMenu, { [styles.open]: isOpen })}>
       <div className={styles.overlay} onClick={onClose} onKeyDown={(e) => {
@@ -32,7 +39,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ items, isOpen, onClose, onClick
 
       <nav className={styles.menuContent}>
         <ul>
-          {items.map((item) => (
+          {menuItems.map((item) => (
             <li key={item.href}>
               <Link
                 onClick={() => onClick(item)}
