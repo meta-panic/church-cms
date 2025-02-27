@@ -18,8 +18,10 @@ import { NoEventsStub } from "./components/NoEventsStub";
 import serverContext from "@/lib/serverContext";
 import { EventsSection } from "./components/EventsSection";
 
-import styles from "./MainPage.module.css";
 import { DivineServicesSection } from "./components/DivineServicesSection";
+import { SideHTBaChristianButton } from "@/components/templates/MainPage/components/SideHTBaChristianButton/SideHTBaChristianButton";
+
+import styles from "./MainPage.module.css";
 
 
 interface MainPageProps {
@@ -58,6 +60,8 @@ export const MainPage: React.FC<MainPageProps> = ({
       <Section>
         <AboutUs aboutUs={aboutUs} />
       </Section>
+
+      <SideHTBaChristianButton text={"Как стать христианином"} />
 
       <Section className={styles.howToBecomeAChristianContainer}>
         <HowToBecomeAChristian

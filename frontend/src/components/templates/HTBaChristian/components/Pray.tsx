@@ -21,9 +21,9 @@ export const Pray: React.FC<PrayProps> = ({
       <div className={cx(styles.text)}>
         <Typography tag="body" bold>{title}</Typography>
         <Typography tag="body">{prayText}</Typography>
+        <div className={styles.separator}><Separator /></div>
       </div>
 
-      <div className={styles.separator}><Separator /></div>
     </div>
   );
 };

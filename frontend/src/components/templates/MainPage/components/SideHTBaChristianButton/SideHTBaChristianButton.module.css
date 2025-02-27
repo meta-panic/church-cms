@@ -1,0 +1,24 @@
+.container {
+  position: fixed;
+  text-transform: uppercase;
+  backdrop-filter: blur(10px);
+  background-color: var(--common-transparent-800);
+
+  width: auto;
+  height: min-content;
+  padding: var(--spacing-xs) 2px var(--spacing-xs) var(--spacing-xs);
+  right: 0;
+  box-shadow: var(--shadow--l);
+
+  border-top-left-radius: var(--button-border-radios);
+  border-bottom-left-radius: var(--button-border-radios);
+
+  writing-mode: sideways-lr;
+  user-select: none;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.container:hover {
+  cursor: pointer;
+  background-color: var(--common-transparent-900);
+}

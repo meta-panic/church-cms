@@ -10,6 +10,7 @@
   color: var(--default-text);
   display: flex;
   z-index: 101;
+  transition: all 0.2s ease-in-out;
 }
 
 .burgerWrapper:hover {
