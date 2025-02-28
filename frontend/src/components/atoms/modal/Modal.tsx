@@ -4,6 +4,8 @@ import { createPortal } from "react-dom";
 import FocusLock from "react-focus-lock";
 import cx from "classnames";
 
+import { useOuterClick } from "@/hooks/useOuterClick";
+
 import CrossIcon from "./cross.svg";
 
 import styles from "./Modal.module.css";
@@ -19,11 +21,12 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children, classNa
   const modalRef = useRef<HTMLDivElement>(null);
   const [isClosing, setIsClosing] = useState(false);
 
-
   const handleClose = useCallback(() => {
     setIsClosing(true);
     setTimeout(onClose, 300);
   }, [onClose]);
+
+  useOuterClick<HTMLDivElement>(modalRef, handleClose);
 
   const handleEscape = useCallback((event: React.KeyboardEvent) => {
     if (event.key === "Escape") {
