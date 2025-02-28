@@ -35,7 +35,7 @@ export const HeroContent: React.FC<heroContentProps> = ({
 
   return (
     <div className={cx("darkBlock", styles.heroContainer)}>
-      <Section className={styles.page}>
+      <div className={styles.page}>
 
         <div className={styles.textWrapper}>
           <Typography tag="H1">{title}</Typography>
@@ -53,7 +53,7 @@ export const HeroContent: React.FC<heroContentProps> = ({
             <iframe
               title="video-popup"
               width="100%"
-              height="560"
+              height="90%"
               src={videoLink.embeddedLink}
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
@@ -61,7 +61,7 @@ export const HeroContent: React.FC<heroContentProps> = ({
           </Modal>}
         </div>
 
-      </Section>
+      </div>
     </div>
   );
 };
