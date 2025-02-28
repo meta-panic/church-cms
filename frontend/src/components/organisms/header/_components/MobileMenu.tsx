@@ -38,7 +38,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ items, isOpen, onClose, onClick
       />
 
       <nav className={styles.menuContent}>
-        <ul>
+        <ul className={styles.menuList}>
           {menuItems.map((item) => (
             <li key={item.href}>
               <Link
@@ -52,7 +52,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ items, isOpen, onClose, onClick
               </Link>
             </li>
           ))}
-          <li className={styles.item}><Typography tag="H2">†</Typography></li>
+          <li className={cx(styles.decorativeItem, styles.item)}><Typography tag="H2">†</Typography></li>
         </ul>
       </nav>
 

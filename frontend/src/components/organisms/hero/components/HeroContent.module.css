@@ -4,16 +4,16 @@
   justify-content: flex-start;
   height: 100%;
   overflow: hidden;
-  padding-top: var(--spacing-3xl);
+  padding: var(--spacing-2xl) 0;
 }
-
-
 
 .hero {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-2xl);
+  gap: var(--spacing-m);
   width: 100%;
+  height: 100%;
+  justify-content: start;
 }
 
 .text>* {
@@ -21,14 +21,14 @@
 }
 
 /* tablet layout */
-@media screen and (min-width: 641px) {
+@media (max-width: 899px) and (orientation: portrait),
+(max-height: 899px) and (orientation: landscape) {
   .heroContainer {
     align-items: center;
-    padding-top: 0;
   }
 
   .hero {
-    width: 50%;
+    width: 100%;
   }
 
   .text {
@@ -45,9 +45,24 @@
 
   .hero {
     width: 40%;
+    justify-content: center;
   }
 
   .text {
     text-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  }
+}
+
+@media (max-width: 899px) and (orientation: portrait),
+(max-height: 899px) and (orientation: landscape) {
+  .hero {
+    width: 50%;
+  }
+}
+
+@media (max-width: 640px) and (orientation: portrait),
+(max-height: 640px) and (orientation: landscape) {
+  .hero {
+    width: 100%;
   }
 }

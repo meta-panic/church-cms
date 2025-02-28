@@ -3,10 +3,9 @@
   flex-direction: column;
 }
 
-
 .heroContent {
-  top: 86px;
-  height: calc(100vh - 86px);
+  padding-top: var(--header-height--slim);
+  height: 100%;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -15,16 +14,34 @@
 }
 
 
+.presentationHeader {
+  padding-top: var(--header-height--presentation);
+  height: 100%;
+}
+
 .heroWrapper {
   position: relative;
   width: 100vw;
-  height: 100vh;
   background-color: var(--common-dark-700);
+
+  height: fit-content;
 }
 
 .contentWrapper {
-  height: 100%;
+  align-items: start;
 }
+
+@media (min-width: 1280px) {
+  .fullHeight {
+    height: 100vh;
+  }
+
+  .contentWrapper {
+    align-items: center;
+  }
+}
+
+
 
 .transition {
   transition-property: opacity;

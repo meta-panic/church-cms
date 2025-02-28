@@ -36,9 +36,11 @@ export const HTBaChristian: React.FC<HTBaChristianProps> = ({
     <>
 
       <HeroComponent
+        fullHeight={false}
         src={srcBackgroundHeroImage}
         content={<HeroContent  {...hero} />}
         imageStyles={styles.imageStyling}
+        imageAlt="Церковь с крестом на крыше на фоне ночного звездного неба"
       />
 
       <Section className={styles.pageContentWrapper}>

@@ -35,6 +35,13 @@
   align-items: center;
 }
 
+.menuList {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .item {
   user-select: none;
   text-align: center;
@@ -43,9 +50,19 @@
 
 .menuItem {
   display: block;
-  padding: 10px 0;
+  padding: var(--spacing-xs) 0;
 }
 
 .menuItem:hover {
   background-color: var(--common-dark-0);
+}
+
+@media (max-height: 600px) and (orientation: landscape) {
+  .decorativeItem {
+    display: none;
+  }
+
+  .menuItem {
+    padding: 0;
+  }
 }

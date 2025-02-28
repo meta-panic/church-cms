@@ -54,6 +54,7 @@ export const MainPage: React.FC<MainPageProps> = ({
             description={heroData.description}
             button={heroData.Button} />
         }
+        imageAlt="Церковь с крестом на крыше на фоне ночного звездного неба"
         imageStyles={styles.heroImage}
       />
 

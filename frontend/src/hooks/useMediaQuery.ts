@@ -40,9 +40,9 @@ export function useMediaQuery(queries: Sizes): boolean {
 
 
 export const BREAKPOINTS = {
-  mobile: "(max-width: 640px)",
-  tablet: "(min-width: 641px) and (max-width: 1279px)",
-  tabletMin: "(min-width: 641px) and (max-width: 899px)",
-  tabletMax: "(min-width: 900px) and (max-width: 1279px)",
+  mobile: "(max-width: 640px) and (orientation: portrait),(max-height: 640px) and (orientation: landscape)",
+  tablet: "(min-width: 641px) and (orientation: portrait),(min-height: 641px) and (orientation: landscape)",
+  tabletMin: "(min-width: 641px) and (max-width: 899px) and (orientation: portrait),(min-height: 641px) and (max-height: 899px) and (orientation: landscape)",
+  tabletMax: "(min-width: 900px) and (max-width: 1279px) and (orientation: portrait),(min-height: 900px) and (max-height: 1279px) and (orientation: landscape)",
   desktop: "(min-width: 1280px)",
 } as const;

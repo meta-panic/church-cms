@@ -26,7 +26,9 @@ export const OurSymbolsPage: React.FC<OurSymbolsPageProps> = ({
     <>
 
       <HeroComponent
+        fullHeight={true}
         src={srcBackgroundHeroImage}
+        imageAlt="Ночное звездное небо"
         content={hero && <HeroContent
           title={hero.Title || "Во что мы верим"}
           description={hero?.description}
