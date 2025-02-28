@@ -42,9 +42,13 @@ const Link: FC<PropsWithChildren<LinkProps> & { tag?: TypographyTag; }> = ({
         rel="noopener noreferrer"
         className={styles.linkContainer}
       >
-        <span className={classes}>
-          <span>{children}&nbsp;</span>
-          <span><ExternalIcon className={styles.externalIcon} /></span>
+        <span style={{ whiteSpace: "nowrap" }} className={classes}>
+          <span style={{ whiteSpace: "break-spaces" }}>
+            {children}
+            <span style={{ whiteSpace: "nowrap" }}>
+              &nbsp;<ExternalIcon className={styles.externalIcon} />
+            </span>
+          </span>
         </span>
       </a>
     );
