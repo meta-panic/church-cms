@@ -75,8 +75,8 @@ const CarouselWrapper = forwardRef<CarouselRef, CarouselWrapperProps>(({ childre
         minimumTouchDrag={20}
         partialVisible={isSmallScreen}
         centerMode={!isSmallScreen}
-        customTransition="transform 500ms linear"
-        transitionDuration={500}
+        customTransition="transform 100ms linear"
+        transitionDuration={100}
         swipeable
       >
         {children}
