@@ -12,12 +12,10 @@ import { ExistingUrls } from "@/configuration/navigation";
 import styles from "./SideHTBaChristianButton.module.css";
 
 
-interface SideHTBaChristianButtonProps {
-  text: string;
-}
 
-export const SideHTBaChristianButton: React.FC<SideHTBaChristianButtonProps> =
-  ({ text }) => {
+
+export const SideHTBaChristianButton: React.FC =
+  () => {
     const mainControls = useAnimation();
 
     const router = useRouter();
@@ -55,8 +53,8 @@ export const SideHTBaChristianButton: React.FC<SideHTBaChristianButtonProps> =
     return (
       <motion.div
         variants={{
-          hidden: { opacity: 0, top: "100%" },
-          visible: { opacity: 1, top: "60%" },
+          hidden: { opacity: 0, bottom: "calc(0% - env(safe-area-inset-bottom))" },
+          visible: { opacity: 1, bottom: "calc(10vh + env(safe-area-inset-bottom))" },
         }}
         initial="hidden"
         animate={mainControls}
@@ -64,7 +62,8 @@ export const SideHTBaChristianButton: React.FC<SideHTBaChristianButtonProps> =
         className={cx(styles.container)}
         onClick={handleNavigation}
       >
-        <Typography tag="body-mini">{text}</Typography>
+        <Typography tag="body-mini">{"Как стать"}</Typography>
+        <Typography tag="body-mini">{"Христианином"}</Typography>
       </motion.div>
     );
   };

@@ -62,7 +62,7 @@ export const MainPage: React.FC<MainPageProps> = ({
         <AboutUs aboutUs={aboutUs} />
       </Section>
 
-      <SideHTBaChristianButton text={"Как стать христианином"} />
+      <SideHTBaChristianButton />
 
       <Section className={styles.howToBecomeAChristianContainer}>
         <HowToBecomeAChristian

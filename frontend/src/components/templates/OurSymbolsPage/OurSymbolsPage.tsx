@@ -1,6 +1,7 @@
 import React from "react";
 
 import { Hero as HeroComponent } from "@/components/organisms/hero/Hero";
+import { SideHTBaChristianButton } from "../MainPage/components/SideHTBaChristianButton/SideHTBaChristianButton";
 import { HeroContent } from "../../organisms/hero/components/HeroContent";
 import { Doctrine } from "./components/Doctrine";
 import { Theses } from "./components/Theses";
@@ -34,6 +35,8 @@ export const OurSymbolsPage: React.FC<OurSymbolsPageProps> = ({
           description={hero?.description}
         />}
       />
+
+      <SideHTBaChristianButton />
 
       <Doctrine title={mainSymbol?.Title || "Никео-Цареградский символ веры"} description={mainSymbol?.description} />
       <Theses title={theses?.Title || "Знаменитые 5 тезисов протестантизма:"} theses={theses?.description} />

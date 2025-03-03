@@ -5,14 +5,15 @@
 
   width: auto;
   height: min-content;
-  padding: var(--spacing-xs) 2px var(--spacing-xs) var(--spacing-xs);
+  padding: var(--spacing-xs) var(--spacing-xs) 2px var(--spacing-xs);
   right: 0;
   box-shadow: var(--shadow--l);
 
   border-top-left-radius: var(--button-border-radios);
-  border-bottom-left-radius: var(--button-border-radios);
+  border-top-right-radius: var(--button-border-radios);
 
-  writing-mode: sideways-lr;
+  transform: rotate(-90deg) translateX(100%);
+  transform-origin: bottom right;
   user-select: none;
 
   font-weight: 700;
