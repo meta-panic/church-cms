@@ -1,8 +1,7 @@
 "use client";
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import cx from "classnames";
 
-import Section from "@/components/atoms/section/Section";
 import Typography from "@/components/atoms/typography/Typography";
 import RichTextRenderer from "@/components/molecules/RichTextRenderer/RichTextRenderer";
 import { PlayButton } from "@/components/atoms/PlayButton/PlayButton";
@@ -26,12 +25,19 @@ export const HeroContent: React.FC<heroContentProps> = ({
   title, description, videoLink,
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [hasModalBeenOpened, setHasModalBeenOpened] = useState(false);
 
   const closeModal = useCallback(() => {
     setIsModalOpen(() => {
       return false;
     });
   }, []);
+
+  useEffect(() => {
+    if (isModalOpen) {
+      setHasModalBeenOpened(true);
+    }
+  }, [isModalOpen]);
 
   return (
     <div className={cx("darkBlock", styles.heroContainer)}>
@@ -48,14 +54,26 @@ export const HeroContent: React.FC<heroContentProps> = ({
         </div>
 
         <div className={styles.videoWrapper}>
-          <PlayButton id="play-button" onClick={() => setIsModalOpen((isModalOpen) => !isModalOpen)} />
+          <PlayButton id="play-button" onClick={() => {
+            setIsModalOpen((isModalOpen) => !isModalOpen);
+          }
+          } />
+          {!hasModalBeenOpened && <iframe
+            title="video-popup"
+            width="100%"
+            height="90%"
+            style={{ display: " none" }}
+            src={videoLink.embeddedLink}
+            allow="encrypted-media; fullscreen; picture-in-picture;"
+            allowFullScreen
+          />}
           {isModalOpen && <Modal isOpen={isModalOpen} onClose={closeModal}>
             <iframe
               title="video-popup"
               width="100%"
               height="90%"
               src={videoLink.embeddedLink}
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allow="autoplay; encrypted-media; fullscreen; picture-in-picture;"
               allowFullScreen
             />
           </Modal>}

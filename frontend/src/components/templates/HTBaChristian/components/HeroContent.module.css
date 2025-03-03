@@ -5,6 +5,7 @@
   align-items: center;
   padding: var(--spacing-xl) 0;
   height: fit-content;
+  min-height: 70vh;
 }
 
 .videoWrapper {

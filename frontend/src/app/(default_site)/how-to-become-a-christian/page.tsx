@@ -19,14 +19,12 @@ export default async function App() {
   } catch (err: unknown) {
     if (err instanceof HttpError) {
     } else if (err instanceof Error) {
-      return <DefaultError errorMessage={err.message} />;
+      return new Error(err.message);
     }
-
-    return <DefaultError errorMessage={"Неизвестная ошибка"} />;
   }
 
   if (!responce || !responce.data) {
-    return <DefaultError errorMessage={"Данные временно недоступны"} />;
+    return new Error("Данные временно недоступны");
   }
 
   return <HTBaChristian

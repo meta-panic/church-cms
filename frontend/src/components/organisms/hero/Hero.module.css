@@ -25,6 +25,7 @@
   background-color: var(--common-dark-700);
 
   height: fit-content;
+  min-height: 70vh;
 }
 
 .contentWrapper {

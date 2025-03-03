@@ -56,7 +56,7 @@ export const SideHTBaChristianButton: React.FC<SideHTBaChristianButtonProps> =
       <motion.div
         variants={{
           hidden: { opacity: 0, top: "100%" },
-          visible: { opacity: 1, top: "70%" },
+          visible: { opacity: 1, top: "60%" },
         }}
         initial="hidden"
         animate={mainControls}
