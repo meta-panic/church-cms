@@ -7,7 +7,6 @@ import { useRouter } from "next/navigation";
 import Typography from "@/components/atoms/typography/Typography";
 import { getCssVars } from "@/utils/CssVars";
 
-import { useMediaQuery, BREAKPOINTS } from "@/hooks/useMediaQuery";
 import { ExistingUrls } from "@/configuration/navigation";
 
 import styles from "./SideHTBaChristianButton.module.css";
@@ -19,8 +18,6 @@ interface SideHTBaChristianButtonProps {
 
 export const SideHTBaChristianButton: React.FC<SideHTBaChristianButtonProps> =
   ({ text }) => {
-    const isSmall = useMediaQuery([BREAKPOINTS.mobile, BREAKPOINTS.tabletMin]);
-
     const mainControls = useAnimation();
 
     const router = useRouter();
@@ -31,9 +28,6 @@ export const SideHTBaChristianButton: React.FC<SideHTBaChristianButtonProps> =
     }, [router]);
 
     useEffect(() => {
-      if (isSmall) {
-        return () => { };
-      }
       const debounce = (func: () => void, wait: number) => {
         let timeout: NodeJS.Timeout | null = null;
         return () => {
@@ -56,11 +50,7 @@ export const SideHTBaChristianButton: React.FC<SideHTBaChristianButtonProps> =
       const debouncedCheckScroll = debounce(checkScroll, 100);
       window.addEventListener("scroll", debouncedCheckScroll);
       return () => window.removeEventListener("scroll", debouncedCheckScroll);
-    }, [isSmall, mainControls]);
-
-    if (isSmall) {
-      return null;
-    }
+    }, [mainControls]);
 
     return (
       <motion.div
@@ -70,7 +60,7 @@ export const SideHTBaChristianButton: React.FC<SideHTBaChristianButtonProps> =
         }}
         initial="hidden"
         animate={mainControls}
-        transition={{ type: "spring", stiffness: 250, damping: 20, mass: 1, duration: 0.3 }}
+        transition={{ stiffness: 250, damping: 12, mass: 1, duration: 0.3 }}
         className={cx(styles.container)}
         onClick={handleNavigation}
       >

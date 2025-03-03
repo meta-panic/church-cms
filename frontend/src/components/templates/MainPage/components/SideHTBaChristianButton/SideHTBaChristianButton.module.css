@@ -1,8 +1,7 @@
 .container {
   position: fixed;
   text-transform: uppercase;
-  backdrop-filter: blur(10px);
-  background-color: var(--common-transparent-800);
+  background-color: var(--common-transparent-900);
 
   width: auto;
   height: min-content;
@@ -15,10 +14,13 @@
 
   writing-mode: sideways-lr;
   user-select: none;
-  transition: background-color 0.2s ease-in-out;
+
+  font-weight: 700;
+  z-index: 1000;
+  transition: all 0.2s ease-in-out;
 }
 
 .container:hover {
   cursor: pointer;
-  background-color: var(--common-transparent-900);
+  color: var(--accent-900);
 }
