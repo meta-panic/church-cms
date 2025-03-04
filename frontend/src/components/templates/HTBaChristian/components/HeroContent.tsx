@@ -1,11 +1,10 @@
 "use client";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useState } from "react";
 import cx from "classnames";
 
 import Typography from "@/components/atoms/typography/Typography";
 import RichTextRenderer from "@/components/molecules/RichTextRenderer/RichTextRenderer";
 import { PlayButton } from "@/components/atoms/PlayButton/PlayButton";
-import { Modal } from "@/components/atoms/modal/Modal";
 
 import type {
   ComponentContentBlocksInfoBlock,
@@ -24,20 +23,11 @@ interface heroContentProps {
 export const HeroContent: React.FC<heroContentProps> = ({
   title, description, videoLink,
 }) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const closeModal = useCallback(() => {
-    setIsModalOpen(() => {
-      return false;
-    });
-
-  }, []);
-
+  const [isVideoHidden, setIsVideoHidden] = useState(true);
 
   return (
     <div className={cx("darkBlock", styles.heroContainer)}>
-      <div className={styles.page}>
-
+      <div className={cx(styles.page, { [styles.pageExpanded]: !isVideoHidden })}>
         <div className={styles.textWrapper}>
           <Typography tag="H1">{title}</Typography>
           {description?.map(text => {
@@ -49,32 +39,23 @@ export const HeroContent: React.FC<heroContentProps> = ({
         </div>
 
         <div className={styles.videoWrapper}>
-          <PlayButton id="play-button" onClick={() => {
-            setIsModalOpen((isModalOpen) => !isModalOpen);
-          }
-          } />
-          {!isModalOpen && <iframe
-            title="cache-video"
-            width="100%"
-            height="90%"
-            style={{ display: "none" }}
-            src={videoLink.embeddedLink}
-            allow="encrypted-media; fullscreen; picture-in-picture;"
-            allowFullScreen
-          />}
+          <div className={cx({ [styles.show]: isVideoHidden, [styles.hide]: !isVideoHidden })}>
+            <PlayButton id="play-button" onClick={() => {
+              setIsVideoHidden((isVideoHidden) => !isVideoHidden);
+            }} />
+          </div>
 
-          {isModalOpen && <Modal isOpen={isModalOpen} onClose={closeModal}>
+          <div style={{ animationDelay: "0.35s" }} className={cx(styles.video, { [styles.show]: !isVideoHidden, [styles.hide]: isVideoHidden })}>
             <iframe
               title="video-popup"
               width="100%"
-              height="90%"
-              src={`${videoLink.embeddedLink}&autoplay=1`}
-              allow="autoplay; encrypted-media; fullscreen; picture-in-picture;"
+              height="100%"
+              src={`${videoLink.embeddedLink}&autoplay=0`}
+              allow="encrypted-media; fullscreen; picture-in-picture;"
               allowFullScreen
             />
-          </Modal>}
+          </div>
         </div>
-
       </div>
     </div>
   );
