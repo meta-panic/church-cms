@@ -42,6 +42,8 @@ export default async function RootLayout({
 }>) {
   return (
     <html lang="ru">
+      <link rel="preconnect" href="https://vk.com" />
+
       <body
         className={`${bebas.variable} ${ralewayRegular.variable} ${ralewayItalic.variable} ${ralewaySemiBold.variable} lightBlock`}
       >

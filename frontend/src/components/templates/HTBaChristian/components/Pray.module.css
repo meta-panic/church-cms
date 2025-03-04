@@ -1,0 +1,26 @@
+.prayContainer {
+  background: var(--brand-0);
+  padding: var(--spacing-m) var(--spacing-l);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-s);
+}
+
+.separator {
+  background-color: var(--default-components-cart-border);
+  width: 60px;
+}
+
+.text {
+  align-items: start;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+@media screen and (min-width: 641px) {
+  .text {
+    align-items: center;
+  }
+}

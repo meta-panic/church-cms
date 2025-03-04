@@ -1,0 +1,24 @@
+.imageStyling {
+  object-position: 50% 60% !important;
+}
+
+.pageContentWrapper {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.pageContent {
+  padding: var(--spacing-2xl) 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2xl);
+  max-width: var(--max-text-column);
+  align-items: center;
+}
+
+.passsage {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-x);
+}

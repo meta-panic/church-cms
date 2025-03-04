@@ -18,8 +18,10 @@ import { NoEventsStub } from "./components/NoEventsStub";
 import serverContext from "@/lib/serverContext";
 import { EventsSection } from "./components/EventsSection";
 
-import styles from "./MainPage.module.css";
 import { DivineServicesSection } from "./components/DivineServicesSection";
+import { SideHTBaChristianButton } from "@/components/templates/MainPage/components/SideHTBaChristianButton/SideHTBaChristianButton";
+
+import styles from "./MainPage.module.css";
 
 
 interface MainPageProps {
@@ -52,11 +54,15 @@ export const MainPage: React.FC<MainPageProps> = ({
             description={heroData.description}
             button={heroData.Button} />
         }
+        imageAlt="Церковь с крестом на крыше на фоне ночного звездного неба"
+        imageStyles={styles.heroImage}
       />
 
       <Section>
         <AboutUs aboutUs={aboutUs} />
       </Section>
+
+      <SideHTBaChristianButton />
 
       <Section className={styles.howToBecomeAChristianContainer}>
         <HowToBecomeAChristian

@@ -6,7 +6,7 @@
   min-height: 100vh;
   width: fit-content;
   margin: 0 auto;
-  max-width: 50vw;
+  align-items: center;
 }
 
 .error {

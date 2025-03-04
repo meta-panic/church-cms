@@ -6,11 +6,11 @@
   --default-components-button-filled-bg: var(--brand-700);
 
   --default-surface-light: var(--common-light-100);
-  --default-surface-light-transparent: rgba(248, 246, 247, 0.90);
+  --default-surface-light-transparent: rgba(255, 255, 255, 0.85);
   --default-surface-dark-1: var(--accent-700);
   --default-surface-dark-2: var(--brand-600);
 
-  --default-components-cart-border: var(--common-dark-800);
+  --default-components-cart-border: var(--common-dark-400);
 
   --default-text-brand: var(--brand-800);
 

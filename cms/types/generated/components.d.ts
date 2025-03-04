@@ -161,6 +161,18 @@ export interface ServicesBlockCarouselView extends Struct.ComponentSchema {
   };
 }
 
+export interface HtbachristianBlockPrayExample extends Struct.ComponentSchema {
+  collectionName: 'components_htbachristian_block_pray_examples';
+  info: {
+    displayName: 'prayExample';
+    description: '';
+  };
+  attributes: {
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+    prayText: Schema.Attribute.Text & Schema.Attribute.Required;
+  };
+}
+
 export interface ContentBlocksInfoBlock extends Struct.ComponentSchema {
   collectionName: 'components_content_blocks_info_blocks';
   info: {
@@ -221,6 +233,7 @@ declare module '@strapi/strapi' {
       'shared.address': SharedAddress;
       'services-block.header': ServicesBlockHeader;
       'services-block.carousel-view': ServicesBlockCarouselView;
+      'htbachristian-block.pray-example': HtbachristianBlockPrayExample;
       'content-blocks.info-block': ContentBlocksInfoBlock;
       'content-blocks.event': ContentBlocksEvent;
       'content-blocks.event-image': ContentBlocksEventImage;

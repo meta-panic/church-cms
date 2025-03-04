@@ -1,0 +1,23 @@
+.playButton {
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  width: 80px;
+  height: 80px;
+  color: white;
+  transition: all 0.2s ease;
+  border-radius: 50%;
+  background: var(--common-transparent-600);
+}
+
+.playButton:hover {
+  transform: scale(1.1);
+  color: var(--common-dark-500);
+
+  background: var(--common-transparent-900);
+}
+
+.playButton svg {
+  width: 50%;
+  height: 50%;
+}

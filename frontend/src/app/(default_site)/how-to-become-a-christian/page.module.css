@@ -3,4 +3,5 @@
   position: relative;
   padding-bottom: var(--header-height--slim);
   flex: 1;
+  flex-direction: column;
 }

@@ -10,10 +10,17 @@
   color: var(--default-text);
   display: flex;
   z-index: 101;
+  transition: all 0.2s ease-in-out;
 }
 
-.burgerWrapper:hover {
-  color: var(--hover-components-link-fg);
+.burgerWrapper>* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+@media(hover:hover) and (pointer: fine) {
+  .burgerWrapper:hover {
+    color: var(--hover-components-link-fg);
+  }
 }
 
 .burgerOverlay {
@@ -30,8 +37,12 @@
   text-wrap: nowrap;
 }
 
-.navItem:hover {
-  color: var(--hover-components-link-fg);
+
+
+@media(hover:hover) and (pointer: fine) {
+  .navItem:hover {
+    color: var(--hover-components-link-fg);
+  }
 }
 
 .contacts {

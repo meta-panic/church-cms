@@ -1,51 +1,61 @@
-/* Mobile-specific variables */
 :root {
-  --current-size: "mobile";
-
-  --max-text-column: 100%;
-
-  --card-border-radios: 8px;
-  --popup-border-radios: 4px;
-  --button-border-radios: 4px;
   --button-border-size-default: 2px;
-  --button-border-size-active: 4px;
+}
 
-  --font-font-size-h1-font-size: 36px;
-  --font-font-size-h2-font-size: 32px;
-  --font-font-size-h3-font-size: 24px;
-  --font-line-heigh-h1: 48px;
-  --font-line-heigh-h2: 40px;
-  --font-line-heigh-h3: 30px;
-  --font-line-heigh-body: 22px;
-  --font-line-heigh-button: 20px;
-  --font-font-size-body-font-size: 18px;
-  --font-font-size-button-font-size: 16px;
-  --spacing-xs: 6px;
-  --spacing-x: 10px;
-  --spacing-s: 14px;
-  --spacing-m: 16px;
-  --spacing-l: 20px;
-  --spacing-xl: 24px;
-  --spacing-2xl: 32px;
-  --spacing-3xl: 40px;
-  --button-min-width: 150px;
-  --max-text-column-width: 300px;
-  --button-max-width: 350px;
-  --spacing-4xl: 48px;
-  --font-line-heigh-header: 20px;
-  --font-font-size-body-mini-font-size: 12px;
-  --font-line-heigh-body-mini: 16px;
+/* Mobile-specific variables */
+@media (max-width: 640px) and (orientation: portrait),
+(max-height: 640px) and (orientation: landscape) {
+  :root {
+    --current-size: "mobile";
+
+    --max-text-column: 100%;
+
+    --card-border-radios: 8px;
+    --block-border-radios: 4px;
+    --popup-border-radios: 4px;
+    --button-border-radios: 4px;
+
+    --button-border-size-active: 4px;
+
+    --font-font-size-h1-font-size: 36px;
+    --font-font-size-h2-font-size: 32px;
+    --font-font-size-h3-font-size: 24px;
+    --font-line-heigh-h1: 48px;
+    --font-line-heigh-h2: 40px;
+    --font-line-heigh-h3: 30px;
+    --font-line-heigh-body: 22px;
+    --font-line-heigh-button: 20px;
+    --font-font-size-body-font-size: 18px;
+    --font-font-size-button-font-size: 16px;
+    --spacing-xs: 6px;
+    --spacing-x: 10px;
+    --spacing-s: 14px;
+    --spacing-m: 16px;
+    --spacing-l: 20px;
+    --spacing-xl: 24px;
+    --spacing-2xl: 32px;
+    --spacing-3xl: 40px;
+    --button-min-width: 150px;
+    --max-text-column-width: 300px;
+    --button-max-width: 350px;
+    --spacing-4xl: 48px;
+    --font-line-heigh-header: 20px;
+    --font-font-size-body-mini-font-size: 12px;
+    --font-line-heigh-body-mini: 16px;
+  }
 }
 
 
 /* Tablet-specific variables */
-@media (min-width: 641px) {
+@media (min-width: 641px) and (orientation: portrait),
+(min-height: 641px) and (orientation: landscape) {
   :root {
     --current-size: "tablet";
 
     --max-text-column: 700px;
 
     --card-border-radios: 8px;
+    --block-border-radios: 4px;
     --popup-border-radios: 4px;
     --button-border-radios: 4px;
     --font-font-size-h1-font-size: 48px;
@@ -84,6 +94,7 @@
     --max-text-column: 700px;
 
     --card-border-radios: 8px;
+    --block-border-radios: 4px;
     --popup-border-radios: 4px;
     --button-border-radios: 4px;
     --font-font-size-h1-font-size: 54px;
