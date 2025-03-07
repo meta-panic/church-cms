@@ -1,6 +1,7 @@
 export const dynamic = "force-static";
 
 import qs from "qs";
+import { Metadata } from "next";
 
 import { HttpError } from "@/app/types/Errors";
 import DefaultError from "@/components/molecules/CustomErrorBoundaries/DefaultError/DefaultError";
@@ -8,6 +9,14 @@ import { OurSymbolsPage } from "@/components/templates/OurSymbolsPage/OurSymbols
 import { fetchPageInfo } from "@/utils/fetch";
 
 import type { OurSymbols } from "@/types";
+
+export const metadata: Metadata = {
+  title: "Во что мы верим | Церковь «Дом молитвы»",
+  icons: {
+    icon: { url: "/favicon.png" },
+  },
+};
+
 
 export default async function App() {
   let responce: { data: OurSymbols } | undefined;

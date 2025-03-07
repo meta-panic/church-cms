@@ -11,7 +11,14 @@ import DefaultError from "@/components/molecules/CustomErrorBoundaries/DefaultEr
 import type { History as HistoryType } from "@/types";
 
 import styles from "./page.module.css";
+import { Metadata } from "next";
 
+export const metadata: Metadata = {
+  title: "История поместной церкви г. Невинномысска",
+  icons: {
+    icon: { url: "/favicon.png" },
+  },
+};
 
 export default async function App() {
   let responce: { data: HistoryType } | undefined;

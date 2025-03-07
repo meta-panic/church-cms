@@ -1,6 +1,7 @@
 export const dynamic = "force-static";
 
 import qs from "qs";
+import { Metadata } from "next";
 
 import { HttpError } from "@/app/types/Errors";
 import { HTBaChristian } from "@/components/templates/HTBaChristian/HTBaChristian";
@@ -9,8 +10,16 @@ import { fetchPageInfo } from "@/utils/fetch";
 
 import { HtBaChristian } from "@/types";
 
-export default async function App() {
+export const metadata: Metadata = {
+  title: "Как стать христианином | Церковь «Дом молитвы»",
+  description: "Как стать христианином?",
+  icons: {
+    icon: { url: "/favicon.png" },
+  },
+};
 
+
+export default async function App() {
   let responce: { data: HtBaChristian } | undefined;
 
   try {
