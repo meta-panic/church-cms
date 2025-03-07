@@ -17,6 +17,7 @@ export type Scalars = {
   Float: { input: number; output: number; }
   /** A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar. */
   DateTime: { input: any; output: any; }
+  HistoryContentDynamicZoneInput: { input: any; output: any; }
   HtBaChristianContentDynamicZoneInput: { input: any; output: any; }
   /** The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf). */
   JSON: { input: any; output: any; }
@@ -129,6 +130,28 @@ export type ComponentContentBlocksInfoBlockInput = {
   Title?: InputMaybe<Scalars["String"]["input"]>;
   description?: InputMaybe<Array<InputMaybe<ComponentSharedRichTextInput>>>;
   id?: InputMaybe<Scalars["ID"]["input"]>;
+};
+
+export type ComponentHistoryGallery = {
+  __typename?: "ComponentHistoryGallery";
+  id: Scalars["ID"]["output"];
+  photos: Array<Maybe<UploadFile>>;
+  photos_connection?: Maybe<UploadFileRelationResponseCollection>;
+  title?: Maybe<Scalars["String"]["output"]>;
+};
+
+
+export type ComponentHistoryGalleryPhotosArgs = {
+  filters?: InputMaybe<UploadFileFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars["String"]["input"]>>>;
+};
+
+
+export type ComponentHistoryGalleryPhotos_ConnectionArgs = {
+  filters?: InputMaybe<UploadFileFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars["String"]["input"]>>>;
 };
 
 export type ComponentHtbachristianBlockPrayExample = {
@@ -264,17 +287,20 @@ export type ComponentSharedEmbeddedVkVideoInput = {
 
 export type ComponentSharedMedia = {
   __typename?: "ComponentSharedMedia";
-  file?: Maybe<UploadFile>;
+  description?: Maybe<Scalars["String"]["output"]>;
+  file: UploadFile;
   id: Scalars["ID"]["output"];
 };
 
 export type ComponentSharedMediaFiltersInput = {
   and?: InputMaybe<Array<InputMaybe<ComponentSharedMediaFiltersInput>>>;
+  description?: InputMaybe<StringFilterInput>;
   not?: InputMaybe<ComponentSharedMediaFiltersInput>;
   or?: InputMaybe<Array<InputMaybe<ComponentSharedMediaFiltersInput>>>;
 };
 
 export type ComponentSharedMediaInput = {
+  description?: InputMaybe<Scalars["String"]["input"]>;
   file?: InputMaybe<Scalars["ID"]["input"]>;
   id?: InputMaybe<Scalars["ID"]["input"]>;
 };
@@ -425,7 +451,7 @@ export type FloatFilterInput = {
   startsWith?: InputMaybe<Scalars["Float"]["input"]>;
 };
 
-export type GenericMorph = ComponentContentBlocksEvent | ComponentContentBlocksEventImage | ComponentContentBlocksInfoBlock | ComponentHtbachristianBlockPrayExample | ComponentServicesBlockCarouselView | ComponentServicesBlockHeader | ComponentSharedAddress | ComponentSharedButton | ComponentSharedEmbeddedVkVideo | ComponentSharedMedia | ComponentSharedQuote | ComponentSharedRichText | ComponentSharedSchedule | ComponentSharedSeo | ComponentSharedSlider | ComponentSharedVkVideo | Global | HtBaChristian | I18NLocale | OurSymbols | PageLanding | ReviewWorkflowsWorkflow | ReviewWorkflowsWorkflowStage | Service | UploadFile | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser;
+export type GenericMorph = ComponentContentBlocksEvent | ComponentContentBlocksEventImage | ComponentContentBlocksInfoBlock | ComponentHistoryGallery | ComponentHtbachristianBlockPrayExample | ComponentServicesBlockCarouselView | ComponentServicesBlockHeader | ComponentSharedAddress | ComponentSharedButton | ComponentSharedEmbeddedVkVideo | ComponentSharedMedia | ComponentSharedQuote | ComponentSharedRichText | ComponentSharedSchedule | ComponentSharedSeo | ComponentSharedSlider | ComponentSharedVkVideo | Global | History | HtBaChristian | I18NLocale | OurSymbols | PageLanding | ReviewWorkflowsWorkflow | ReviewWorkflowsWorkflowStage | Service | UploadFile | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser;
 
 export type Global = {
   __typename?: "Global";
@@ -475,6 +501,22 @@ export type GlobalInput = {
   vk?: InputMaybe<Scalars["String"]["input"]>;
   whatsup?: InputMaybe<Scalars["String"]["input"]>;
   youtube?: InputMaybe<Scalars["String"]["input"]>;
+};
+
+export type History = {
+  __typename?: "History";
+  content?: Maybe<Array<Maybe<HistoryContentDynamicZone>>>;
+  createdAt?: Maybe<Scalars["DateTime"]["output"]>;
+  documentId: Scalars["ID"]["output"];
+  publishedAt?: Maybe<Scalars["DateTime"]["output"]>;
+  updatedAt?: Maybe<Scalars["DateTime"]["output"]>;
+};
+
+export type HistoryContentDynamicZone = ComponentHistoryGallery | ComponentSharedRichText | Error;
+
+export type HistoryInput = {
+  content?: InputMaybe<Array<Scalars["HistoryContentDynamicZoneInput"]["input"]>>;
+  publishedAt?: InputMaybe<Scalars["DateTime"]["input"]>;
 };
 
 export type HtBaChristian = {
@@ -613,6 +655,7 @@ export type Mutation = {
   /** Create a new user */
   createUsersPermissionsUser: UsersPermissionsUserEntityResponse;
   deleteGlobal?: Maybe<DeleteMutationResponse>;
+  deleteHistory?: Maybe<DeleteMutationResponse>;
   deleteHtBaChristian?: Maybe<DeleteMutationResponse>;
   deleteOurSymbols?: Maybe<DeleteMutationResponse>;
   deletePageLanding?: Maybe<DeleteMutationResponse>;
@@ -634,6 +677,7 @@ export type Mutation = {
   /** Reset user password. Confirm with a code (resetToken from forgotPassword) */
   resetPassword?: Maybe<UsersPermissionsLoginPayload>;
   updateGlobal?: Maybe<Global>;
+  updateHistory?: Maybe<History>;
   updateHtBaChristian?: Maybe<HtBaChristian>;
   updateOurSymbols?: Maybe<OurSymbols>;
   updatePageLanding?: Maybe<PageLanding>;
@@ -753,6 +797,12 @@ export type MutationResetPasswordArgs = {
 
 export type MutationUpdateGlobalArgs = {
   data: GlobalInput;
+  status?: InputMaybe<PublicationStatus>;
+};
+
+
+export type MutationUpdateHistoryArgs = {
+  data: HistoryInput;
   status?: InputMaybe<PublicationStatus>;
 };
 
@@ -904,6 +954,7 @@ export enum PublicationStatus {
 export type Query = {
   __typename?: "Query";
   global?: Maybe<Global>;
+  history?: Maybe<History>;
   htBaChristian?: Maybe<HtBaChristian>;
   i18NLocale?: Maybe<I18NLocale>;
   i18NLocales: Array<Maybe<I18NLocale>>;
@@ -935,6 +986,11 @@ export type Query = {
 
 
 export type QueryGlobalArgs = {
+  status?: InputMaybe<PublicationStatus>;
+};
+
+
+export type QueryHistoryArgs = {
   status?: InputMaybe<PublicationStatus>;
 };
 
@@ -1619,7 +1675,8 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 
 /** Mapping of union types */
 export type ResolversUnionTypes<_RefType extends Record<string, unknown>> = {
-  GenericMorph: (Omit<ComponentContentBlocksEvent, "image"> & { image: _RefType["ComponentContentBlocksEventImage"] }) | (Omit<ComponentContentBlocksEventImage, "eventImage"> & { eventImage: _RefType["UploadFile"] }) | (ComponentContentBlocksInfoBlock) | (ComponentHtbachristianBlockPrayExample) | (Omit<ComponentServicesBlockCarouselView, "carouselServiceImage"> & { carouselServiceImage: _RefType["UploadFile"] }) | (Omit<ComponentServicesBlockHeader, "headerPhoto"> & { headerPhoto?: Maybe<_RefType["ComponentSharedMedia"]> }) | (ComponentSharedAddress) | (ComponentSharedButton) | (ComponentSharedEmbeddedVkVideo) | (Omit<ComponentSharedMedia, "file"> & { file?: Maybe<_RefType["UploadFile"]> }) | (ComponentSharedQuote) | (ComponentSharedRichText) | (ComponentSharedSchedule) | (Omit<ComponentSharedSeo, "shareImage"> & { shareImage?: Maybe<_RefType["UploadFile"]> }) | (Omit<ComponentSharedSlider, "files" | "files_connection"> & { files: Array<Maybe<_RefType["UploadFile"]>>, files_connection?: Maybe<_RefType["UploadFileRelationResponseCollection"]> }) | (Omit<ComponentSharedVkVideo, "thumbnail"> & { thumbnail?: Maybe<_RefType["UploadFile"]> }) | (Global) | (Omit<HtBaChristian, "content"> & { content: Array<Maybe<_RefType["HtBaChristianContentDynamicZone"]>> }) | (I18NLocale) | (OurSymbols) | (Omit<PageLanding, "Events"> & { Events: Array<Maybe<_RefType["ComponentContentBlocksEvent"]>> }) | (ReviewWorkflowsWorkflow) | (ReviewWorkflowsWorkflowStage) | (Omit<Service, "hero" | "landingCarouselView"> & { hero: _RefType["ComponentServicesBlockHeader"], landingCarouselView: _RefType["ComponentServicesBlockCarouselView"] }) | (Omit<UploadFile, "related"> & { related?: Maybe<Array<Maybe<_RefType["GenericMorph"]>>> }) | (UsersPermissionsPermission) | (UsersPermissionsRole) | (UsersPermissionsUser);
+  GenericMorph: (Omit<ComponentContentBlocksEvent, "image"> & { image: _RefType["ComponentContentBlocksEventImage"] }) | (Omit<ComponentContentBlocksEventImage, "eventImage"> & { eventImage: _RefType["UploadFile"] }) | (ComponentContentBlocksInfoBlock) | (Omit<ComponentHistoryGallery, "photos" | "photos_connection"> & { photos: Array<Maybe<_RefType["UploadFile"]>>, photos_connection?: Maybe<_RefType["UploadFileRelationResponseCollection"]> }) | (ComponentHtbachristianBlockPrayExample) | (Omit<ComponentServicesBlockCarouselView, "carouselServiceImage"> & { carouselServiceImage: _RefType["UploadFile"] }) | (Omit<ComponentServicesBlockHeader, "headerPhoto"> & { headerPhoto?: Maybe<_RefType["ComponentSharedMedia"]> }) | (ComponentSharedAddress) | (ComponentSharedButton) | (ComponentSharedEmbeddedVkVideo) | (Omit<ComponentSharedMedia, "file"> & { file: _RefType["UploadFile"] }) | (ComponentSharedQuote) | (ComponentSharedRichText) | (ComponentSharedSchedule) | (Omit<ComponentSharedSeo, "shareImage"> & { shareImage?: Maybe<_RefType["UploadFile"]> }) | (Omit<ComponentSharedSlider, "files" | "files_connection"> & { files: Array<Maybe<_RefType["UploadFile"]>>, files_connection?: Maybe<_RefType["UploadFileRelationResponseCollection"]> }) | (Omit<ComponentSharedVkVideo, "thumbnail"> & { thumbnail?: Maybe<_RefType["UploadFile"]> }) | (Global) | (Omit<History, "content"> & { content?: Maybe<Array<Maybe<_RefType["HistoryContentDynamicZone"]>>> }) | (Omit<HtBaChristian, "content"> & { content: Array<Maybe<_RefType["HtBaChristianContentDynamicZone"]>> }) | (I18NLocale) | (OurSymbols) | (Omit<PageLanding, "Events"> & { Events: Array<Maybe<_RefType["ComponentContentBlocksEvent"]>> }) | (ReviewWorkflowsWorkflow) | (ReviewWorkflowsWorkflowStage) | (Omit<Service, "hero" | "landingCarouselView"> & { hero: _RefType["ComponentServicesBlockHeader"], landingCarouselView: _RefType["ComponentServicesBlockCarouselView"] }) | (Omit<UploadFile, "related"> & { related?: Maybe<Array<Maybe<_RefType["GenericMorph"]>>> }) | (UsersPermissionsPermission) | (UsersPermissionsRole) | (UsersPermissionsUser);
+  HistoryContentDynamicZone: (Omit<ComponentHistoryGallery, "photos" | "photos_connection"> & { photos: Array<Maybe<_RefType["UploadFile"]>>, photos_connection?: Maybe<_RefType["UploadFileRelationResponseCollection"]> }) | (ComponentSharedRichText) | (Error);
   HtBaChristianContentDynamicZone: (ComponentHtbachristianBlockPrayExample) | (ComponentSharedRichText) | (Error);
 };
 
@@ -1637,6 +1694,7 @@ export type ResolversTypes = {
   ComponentContentBlocksInfoBlock: ResolverTypeWrapper<ComponentContentBlocksInfoBlock>;
   ComponentContentBlocksInfoBlockFiltersInput: ComponentContentBlocksInfoBlockFiltersInput;
   ComponentContentBlocksInfoBlockInput: ComponentContentBlocksInfoBlockInput;
+  ComponentHistoryGallery: ResolverTypeWrapper<Omit<ComponentHistoryGallery, "photos" | "photos_connection"> & { photos: Array<Maybe<ResolversTypes["UploadFile"]>>, photos_connection?: Maybe<ResolversTypes["UploadFileRelationResponseCollection"]> }>;
   ComponentHtbachristianBlockPrayExample: ResolverTypeWrapper<ComponentHtbachristianBlockPrayExample>;
   ComponentServicesBlockCarouselView: ResolverTypeWrapper<Omit<ComponentServicesBlockCarouselView, "carouselServiceImage"> & { carouselServiceImage: ResolversTypes["UploadFile"] }>;
   ComponentServicesBlockCarouselViewFiltersInput: ComponentServicesBlockCarouselViewFiltersInput;
@@ -1652,7 +1710,7 @@ export type ResolversTypes = {
   ComponentSharedEmbeddedVkVideo: ResolverTypeWrapper<ComponentSharedEmbeddedVkVideo>;
   ComponentSharedEmbeddedVkVideoFiltersInput: ComponentSharedEmbeddedVkVideoFiltersInput;
   ComponentSharedEmbeddedVkVideoInput: ComponentSharedEmbeddedVkVideoInput;
-  ComponentSharedMedia: ResolverTypeWrapper<Omit<ComponentSharedMedia, "file"> & { file?: Maybe<ResolversTypes["UploadFile"]> }>;
+  ComponentSharedMedia: ResolverTypeWrapper<Omit<ComponentSharedMedia, "file"> & { file: ResolversTypes["UploadFile"] }>;
   ComponentSharedMediaFiltersInput: ComponentSharedMediaFiltersInput;
   ComponentSharedMediaInput: ComponentSharedMediaInput;
   ComponentSharedQuote: ResolverTypeWrapper<ComponentSharedQuote>;
@@ -1675,6 +1733,10 @@ export type ResolversTypes = {
   GenericMorph: ResolverTypeWrapper<ResolversUnionTypes<ResolversTypes>["GenericMorph"]>;
   Global: ResolverTypeWrapper<Global>;
   GlobalInput: GlobalInput;
+  History: ResolverTypeWrapper<Omit<History, "content"> & { content?: Maybe<Array<Maybe<ResolversTypes["HistoryContentDynamicZone"]>>> }>;
+  HistoryContentDynamicZone: ResolverTypeWrapper<ResolversUnionTypes<ResolversTypes>["HistoryContentDynamicZone"]>;
+  HistoryContentDynamicZoneInput: ResolverTypeWrapper<Scalars["HistoryContentDynamicZoneInput"]["output"]>;
+  HistoryInput: HistoryInput;
   HtBaChristian: ResolverTypeWrapper<Omit<HtBaChristian, "content"> & { content: Array<Maybe<ResolversTypes["HtBaChristianContentDynamicZone"]>> }>;
   HtBaChristianContentDynamicZone: ResolverTypeWrapper<ResolversUnionTypes<ResolversTypes>["HtBaChristianContentDynamicZone"]>;
   HtBaChristianContentDynamicZoneInput: ResolverTypeWrapper<Scalars["HtBaChristianContentDynamicZoneInput"]["output"]>;
@@ -1755,6 +1817,7 @@ export type ResolversParentTypes = {
   ComponentContentBlocksInfoBlock: ComponentContentBlocksInfoBlock;
   ComponentContentBlocksInfoBlockFiltersInput: ComponentContentBlocksInfoBlockFiltersInput;
   ComponentContentBlocksInfoBlockInput: ComponentContentBlocksInfoBlockInput;
+  ComponentHistoryGallery: Omit<ComponentHistoryGallery, "photos" | "photos_connection"> & { photos: Array<Maybe<ResolversParentTypes["UploadFile"]>>, photos_connection?: Maybe<ResolversParentTypes["UploadFileRelationResponseCollection"]> };
   ComponentHtbachristianBlockPrayExample: ComponentHtbachristianBlockPrayExample;
   ComponentServicesBlockCarouselView: Omit<ComponentServicesBlockCarouselView, "carouselServiceImage"> & { carouselServiceImage: ResolversParentTypes["UploadFile"] };
   ComponentServicesBlockCarouselViewFiltersInput: ComponentServicesBlockCarouselViewFiltersInput;
@@ -1770,7 +1833,7 @@ export type ResolversParentTypes = {
   ComponentSharedEmbeddedVkVideo: ComponentSharedEmbeddedVkVideo;
   ComponentSharedEmbeddedVkVideoFiltersInput: ComponentSharedEmbeddedVkVideoFiltersInput;
   ComponentSharedEmbeddedVkVideoInput: ComponentSharedEmbeddedVkVideoInput;
-  ComponentSharedMedia: Omit<ComponentSharedMedia, "file"> & { file?: Maybe<ResolversParentTypes["UploadFile"]> };
+  ComponentSharedMedia: Omit<ComponentSharedMedia, "file"> & { file: ResolversParentTypes["UploadFile"] };
   ComponentSharedMediaFiltersInput: ComponentSharedMediaFiltersInput;
   ComponentSharedMediaInput: ComponentSharedMediaInput;
   ComponentSharedQuote: ComponentSharedQuote;
@@ -1793,6 +1856,10 @@ export type ResolversParentTypes = {
   GenericMorph: ResolversUnionTypes<ResolversParentTypes>["GenericMorph"];
   Global: Global;
   GlobalInput: GlobalInput;
+  History: Omit<History, "content"> & { content?: Maybe<Array<Maybe<ResolversParentTypes["HistoryContentDynamicZone"]>>> };
+  HistoryContentDynamicZone: ResolversUnionTypes<ResolversParentTypes>["HistoryContentDynamicZone"];
+  HistoryContentDynamicZoneInput: Scalars["HistoryContentDynamicZoneInput"]["output"];
+  HistoryInput: HistoryInput;
   HtBaChristian: Omit<HtBaChristian, "content"> & { content: Array<Maybe<ResolversParentTypes["HtBaChristianContentDynamicZone"]>> };
   HtBaChristianContentDynamicZone: ResolversUnionTypes<ResolversParentTypes>["HtBaChristianContentDynamicZone"];
   HtBaChristianContentDynamicZoneInput: Scalars["HtBaChristianContentDynamicZoneInput"]["output"];
@@ -1885,6 +1952,14 @@ export type ComponentContentBlocksInfoBlockResolvers<ContextType = any, ParentTy
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type ComponentHistoryGalleryResolvers<ContextType = any, ParentType extends ResolversParentTypes["ComponentHistoryGallery"] = ResolversParentTypes["ComponentHistoryGallery"]> = {
+  id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  photos?: Resolver<Array<Maybe<ResolversTypes["UploadFile"]>>, ParentType, ContextType, RequireFields<ComponentHistoryGalleryPhotosArgs, "pagination" | "sort">>;
+  photos_connection?: Resolver<Maybe<ResolversTypes["UploadFileRelationResponseCollection"]>, ParentType, ContextType, RequireFields<ComponentHistoryGalleryPhotos_ConnectionArgs, "pagination" | "sort">>;
+  title?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type ComponentHtbachristianBlockPrayExampleResolvers<ContextType = any, ParentType extends ResolversParentTypes["ComponentHtbachristianBlockPrayExample"] = ResolversParentTypes["ComponentHtbachristianBlockPrayExample"]> = {
   id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
   prayText?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
@@ -1933,7 +2008,8 @@ export type ComponentSharedEmbeddedVkVideoResolvers<ContextType = any, ParentTyp
 };
 
 export type ComponentSharedMediaResolvers<ContextType = any, ParentType extends ResolversParentTypes["ComponentSharedMedia"] = ResolversParentTypes["ComponentSharedMedia"]> = {
-  file?: Resolver<Maybe<ResolversTypes["UploadFile"]>, ParentType, ContextType>;
+  description?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  file?: Resolver<ResolversTypes["UploadFile"], ParentType, ContextType>;
   id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
@@ -1995,7 +2071,7 @@ export type ErrorResolvers<ContextType = any, ParentType extends ResolversParent
 };
 
 export type GenericMorphResolvers<ContextType = any, ParentType extends ResolversParentTypes["GenericMorph"] = ResolversParentTypes["GenericMorph"]> = {
-  __resolveType: TypeResolveFn<"ComponentContentBlocksEvent" | "ComponentContentBlocksEventImage" | "ComponentContentBlocksInfoBlock" | "ComponentHtbachristianBlockPrayExample" | "ComponentServicesBlockCarouselView" | "ComponentServicesBlockHeader" | "ComponentSharedAddress" | "ComponentSharedButton" | "ComponentSharedEmbeddedVkVideo" | "ComponentSharedMedia" | "ComponentSharedQuote" | "ComponentSharedRichText" | "ComponentSharedSchedule" | "ComponentSharedSeo" | "ComponentSharedSlider" | "ComponentSharedVkVideo" | "Global" | "HtBaChristian" | "I18NLocale" | "OurSymbols" | "PageLanding" | "ReviewWorkflowsWorkflow" | "ReviewWorkflowsWorkflowStage" | "Service" | "UploadFile" | "UsersPermissionsPermission" | "UsersPermissionsRole" | "UsersPermissionsUser", ParentType, ContextType>;
+  __resolveType: TypeResolveFn<"ComponentContentBlocksEvent" | "ComponentContentBlocksEventImage" | "ComponentContentBlocksInfoBlock" | "ComponentHistoryGallery" | "ComponentHtbachristianBlockPrayExample" | "ComponentServicesBlockCarouselView" | "ComponentServicesBlockHeader" | "ComponentSharedAddress" | "ComponentSharedButton" | "ComponentSharedEmbeddedVkVideo" | "ComponentSharedMedia" | "ComponentSharedQuote" | "ComponentSharedRichText" | "ComponentSharedSchedule" | "ComponentSharedSeo" | "ComponentSharedSlider" | "ComponentSharedVkVideo" | "Global" | "History" | "HtBaChristian" | "I18NLocale" | "OurSymbols" | "PageLanding" | "ReviewWorkflowsWorkflow" | "ReviewWorkflowsWorkflowStage" | "Service" | "UploadFile" | "UsersPermissionsPermission" | "UsersPermissionsRole" | "UsersPermissionsUser", ParentType, ContextType>;
 };
 
 export type GlobalResolvers<ContextType = any, ParentType extends ResolversParentTypes["Global"] = ResolversParentTypes["Global"]> = {
@@ -2017,6 +2093,23 @@ export type GlobalResolvers<ContextType = any, ParentType extends ResolversParen
   youtube?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
+
+export type HistoryResolvers<ContextType = any, ParentType extends ResolversParentTypes["History"] = ResolversParentTypes["History"]> = {
+  content?: Resolver<Maybe<Array<Maybe<ResolversTypes["HistoryContentDynamicZone"]>>>, ParentType, ContextType>;
+  createdAt?: Resolver<Maybe<ResolversTypes["DateTime"]>, ParentType, ContextType>;
+  documentId?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  publishedAt?: Resolver<Maybe<ResolversTypes["DateTime"]>, ParentType, ContextType>;
+  updatedAt?: Resolver<Maybe<ResolversTypes["DateTime"]>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type HistoryContentDynamicZoneResolvers<ContextType = any, ParentType extends ResolversParentTypes["HistoryContentDynamicZone"] = ResolversParentTypes["HistoryContentDynamicZone"]> = {
+  __resolveType: TypeResolveFn<"ComponentHistoryGallery" | "ComponentSharedRichText" | "Error", ParentType, ContextType>;
+};
+
+export interface HistoryContentDynamicZoneInputScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes["HistoryContentDynamicZoneInput"], any> {
+  name: "HistoryContentDynamicZoneInput";
+}
 
 export type HtBaChristianResolvers<ContextType = any, ParentType extends ResolversParentTypes["HtBaChristian"] = ResolversParentTypes["HtBaChristian"]> = {
   content?: Resolver<Array<Maybe<ResolversTypes["HtBaChristianContentDynamicZone"]>>, ParentType, ContextType>;
@@ -2066,6 +2159,7 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   createUsersPermissionsRole?: Resolver<Maybe<ResolversTypes["UsersPermissionsCreateRolePayload"]>, ParentType, ContextType, RequireFields<MutationCreateUsersPermissionsRoleArgs, "data">>;
   createUsersPermissionsUser?: Resolver<ResolversTypes["UsersPermissionsUserEntityResponse"], ParentType, ContextType, RequireFields<MutationCreateUsersPermissionsUserArgs, "data">>;
   deleteGlobal?: Resolver<Maybe<ResolversTypes["DeleteMutationResponse"]>, ParentType, ContextType>;
+  deleteHistory?: Resolver<Maybe<ResolversTypes["DeleteMutationResponse"]>, ParentType, ContextType>;
   deleteHtBaChristian?: Resolver<Maybe<ResolversTypes["DeleteMutationResponse"]>, ParentType, ContextType>;
   deleteOurSymbols?: Resolver<Maybe<ResolversTypes["DeleteMutationResponse"]>, ParentType, ContextType>;
   deletePageLanding?: Resolver<Maybe<ResolversTypes["DeleteMutationResponse"]>, ParentType, ContextType, RequireFields<MutationDeletePageLandingArgs, "documentId">>;
@@ -2081,6 +2175,7 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   register?: Resolver<ResolversTypes["UsersPermissionsLoginPayload"], ParentType, ContextType, RequireFields<MutationRegisterArgs, "input">>;
   resetPassword?: Resolver<Maybe<ResolversTypes["UsersPermissionsLoginPayload"]>, ParentType, ContextType, RequireFields<MutationResetPasswordArgs, "code" | "password" | "passwordConfirmation">>;
   updateGlobal?: Resolver<Maybe<ResolversTypes["Global"]>, ParentType, ContextType, RequireFields<MutationUpdateGlobalArgs, "data" | "status">>;
+  updateHistory?: Resolver<Maybe<ResolversTypes["History"]>, ParentType, ContextType, RequireFields<MutationUpdateHistoryArgs, "data" | "status">>;
   updateHtBaChristian?: Resolver<Maybe<ResolversTypes["HtBaChristian"]>, ParentType, ContextType, RequireFields<MutationUpdateHtBaChristianArgs, "data" | "status">>;
   updateOurSymbols?: Resolver<Maybe<ResolversTypes["OurSymbols"]>, ParentType, ContextType, RequireFields<MutationUpdateOurSymbolsArgs, "data" | "status">>;
   updatePageLanding?: Resolver<Maybe<ResolversTypes["PageLanding"]>, ParentType, ContextType, RequireFields<MutationUpdatePageLandingArgs, "data" | "documentId" | "status">>;
@@ -2132,6 +2227,7 @@ export type PaginationResolvers<ContextType = any, ParentType extends ResolversP
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes["Query"] = ResolversParentTypes["Query"]> = {
   global?: Resolver<Maybe<ResolversTypes["Global"]>, ParentType, ContextType, RequireFields<QueryGlobalArgs, "status">>;
+  history?: Resolver<Maybe<ResolversTypes["History"]>, ParentType, ContextType, RequireFields<QueryHistoryArgs, "status">>;
   htBaChristian?: Resolver<Maybe<ResolversTypes["HtBaChristian"]>, ParentType, ContextType, RequireFields<QueryHtBaChristianArgs, "status">>;
   i18NLocale?: Resolver<Maybe<ResolversTypes["I18NLocale"]>, ParentType, ContextType, RequireFields<QueryI18NLocaleArgs, "documentId" | "status">>;
   i18NLocales?: Resolver<Array<Maybe<ResolversTypes["I18NLocale"]>>, ParentType, ContextType, RequireFields<QueryI18NLocalesArgs, "pagination" | "sort" | "status">>;
@@ -2366,6 +2462,7 @@ export type Resolvers<ContextType = any> = {
   ComponentContentBlocksEvent?: ComponentContentBlocksEventResolvers<ContextType>;
   ComponentContentBlocksEventImage?: ComponentContentBlocksEventImageResolvers<ContextType>;
   ComponentContentBlocksInfoBlock?: ComponentContentBlocksInfoBlockResolvers<ContextType>;
+  ComponentHistoryGallery?: ComponentHistoryGalleryResolvers<ContextType>;
   ComponentHtbachristianBlockPrayExample?: ComponentHtbachristianBlockPrayExampleResolvers<ContextType>;
   ComponentServicesBlockCarouselView?: ComponentServicesBlockCarouselViewResolvers<ContextType>;
   ComponentServicesBlockHeader?: ComponentServicesBlockHeaderResolvers<ContextType>;
@@ -2384,6 +2481,9 @@ export type Resolvers<ContextType = any> = {
   Error?: ErrorResolvers<ContextType>;
   GenericMorph?: GenericMorphResolvers<ContextType>;
   Global?: GlobalResolvers<ContextType>;
+  History?: HistoryResolvers<ContextType>;
+  HistoryContentDynamicZone?: HistoryContentDynamicZoneResolvers<ContextType>;
+  HistoryContentDynamicZoneInput?: GraphQLScalarType;
   HtBaChristian?: HtBaChristianResolvers<ContextType>;
   HtBaChristianContentDynamicZone?: HtBaChristianContentDynamicZoneResolvers<ContextType>;
   HtBaChristianContentDynamicZoneInput?: GraphQLScalarType;

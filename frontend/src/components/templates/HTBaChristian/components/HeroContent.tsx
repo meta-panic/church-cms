@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import cx from "classnames";
+import { motion } from "framer-motion";
 
 import Typography from "@/components/atoms/typography/Typography";
 import RichTextRenderer from "@/components/molecules/RichTextRenderer/RichTextRenderer";
@@ -45,16 +46,37 @@ export const HeroContent: React.FC<heroContentProps> = ({
             }} />
           </div>
 
-          <div style={{ animationDelay: "0.35s" }} className={cx(styles.video, { [styles.show]: !isVideoHidden, [styles.hide]: isVideoHidden })}>
-            <iframe
-              title="video-popup"
-              width="100%"
-              height="100%"
-              src={`${videoLink.embeddedLink}&autoplay=0`}
-              allow="encrypted-media; fullscreen; picture-in-picture;"
-              allowFullScreen
-            />
-          </div>
+          <motion.div
+            initial={{ opacity: 0, display: "none" }}
+            animate={{
+              opacity: isVideoHidden ? 0 : 1,
+              display: isVideoHidden ? "none" : "block",
+            }}
+            transition={{ duration: 0.35 }}
+            className={styles.video}
+          >
+            {!isVideoHidden && (
+              <>
+                <div style={{ display: "block" }} className={styles.videoLoader}>
+                  <Typography tag="H3">Загрузка видео...</Typography>
+                </div>
+                <iframe
+                  title="video-popup"
+                  width="100%"
+                  height="100%"
+                  src={`${videoLink.embeddedLink}&autoplay=0`}
+                  allow="encrypted-media; fullscreen; picture-in-picture;"
+                  allowFullScreen
+                  onLoad={(e) => {
+                    const loader = e.currentTarget.previousElementSibling as HTMLElement;
+                    if (loader) {
+                      loader.style.display = "none";
+                    }
+                  }}
+                />
+              </>
+            )}
+          </motion.div>
         </div>
       </div>
     </div>

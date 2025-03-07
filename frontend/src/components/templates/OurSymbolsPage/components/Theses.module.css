@@ -11,5 +11,5 @@
   display: flex;
   max-width: var(--max-text-column);
   flex-direction: column;
-  gap: var(--spacing-2xl);
+  gap: var(--spacing-m);
 }

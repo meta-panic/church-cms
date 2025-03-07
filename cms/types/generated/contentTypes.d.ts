@@ -538,6 +538,37 @@ export interface ApiGlobalGlobal extends Struct.SingleTypeSchema {
   };
 }
 
+export interface ApiHistoryHistory extends Struct.SingleTypeSchema {
+  collectionName: 'histories';
+  info: {
+    singularName: 'history';
+    pluralName: 'histories';
+    displayName: 'History';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    content: Schema.Attribute.DynamicZone<
+      ['shared.rich-text', 'history.gallery']
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::history.history'
+    > &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiHtBaChristianHtBaChristian extends Struct.SingleTypeSchema {
   collectionName: 'ht_ba_christians';
   info: {
@@ -1073,6 +1104,7 @@ declare module '@strapi/strapi' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'api::global.global': ApiGlobalGlobal;
+      'api::history.history': ApiHistoryHistory;
       'api::ht-ba-christian.ht-ba-christian': ApiHtBaChristianHtBaChristian;
       'api::our-symbols.our-symbols': ApiOurSymbolsOurSymbols;
       'api::page-landing.page-landing': ApiPageLandingPageLanding;
