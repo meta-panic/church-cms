@@ -42,7 +42,7 @@ const GridGallery: React.FC<GridGalleryProps> = ({ images }) => {
 
         open={lightboxOpen}
         close={() => setLightboxOpen(false)}
-        slides={images.map((i) => ({ ...i, title: i.caption }))}
+        slides={images.map((i) => ({ ...i, description: i.caption }))}
         index={currentIndex}
         render={{ slide: NextJsImage }}
         plugins={[Captions]}
