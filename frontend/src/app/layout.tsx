@@ -9,6 +9,7 @@ import "../styles/sizes.css";
 import "../styles/globals.css";
 
 
+
 const bebas = localFont({
   weight: "500",
   variable: "--font-bebas-regular",

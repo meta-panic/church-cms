@@ -1,0 +1,39 @@
+.imageStyling {
+  object-position: 50% 60% !important;
+}
+
+.pageContentWrapper {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.pageContent {
+  padding: var(--spacing-2xl) 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+  align-items: center;
+}
+
+@media (min-width: 1279px) and (orientation: portrait),
+(min-height: 1279px) and (orientation: landscape) {
+  .pageContent {
+    width: 100%;
+  }
+}
+
+.galleryWrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-x);
+}
+
+.passageWrapper {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: var(--spacing-x);
+  max-width: var(--max-text-column);
+}

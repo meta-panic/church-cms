@@ -3,8 +3,8 @@ import { Metadata } from "next";
 import { MainPage } from "@/components/templates/MainPage/MainPage";
 import { getContactsData, getLandingPageData } from "../../../lib/fetchData";
 import { PageLanding, Service as DivineService, Global as ContactInfo } from "@/types";
-import DefaultError from "@/components/molecules/CustomErrorBoundaries/DefaultError/DefaultError";
 import { HttpError } from "@/app/types/Errors";
+import DefaultError from "@/components/molecules/CustomErrorBoundaries/DefaultError/DefaultError";
 
 export const metadata: Metadata = {
   title: "Дом молитвы",
@@ -27,10 +27,10 @@ export default async function App() {
     contacts = await getContactsData();
   } catch (err: unknown) {
     if (err instanceof HttpError) {
+      return <DefaultError errorMessage={err.message} />;
     } else if (err instanceof Error) {
       return <DefaultError errorMessage={err.message} />;
     }
-
     return <DefaultError errorMessage={"Неизвестная ошибка"} />;
   }
 

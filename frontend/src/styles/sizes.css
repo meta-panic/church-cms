@@ -27,6 +27,7 @@
     --font-line-heigh-button: 20px;
     --font-font-size-body-font-size: 18px;
     --font-font-size-button-font-size: 16px;
+    --spacing-xxs: 4px;
     --spacing-xs: 6px;
     --spacing-x: 10px;
     --spacing-s: 14px;
@@ -68,6 +69,7 @@
     --font-line-heigh-button: 22px;
     --font-font-size-body-font-size: 20px;
     --font-font-size-button-font-size: 18px;
+    --spacing-xxs: 4px;
     --spacing-xs: 8px;
     --spacing-x: 12px;
     --spacing-s: 16px;
@@ -107,6 +109,7 @@
     --font-line-heigh-button: 20px;
     --font-font-size-body-font-size: 22px;
     --font-font-size-button-font-size: 20px;
+    --spacing-xxs: 6px;
     --spacing-xs: 8px;
     --spacing-x: 12px;
     --spacing-s: 16px;

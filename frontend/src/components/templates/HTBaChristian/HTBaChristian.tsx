@@ -51,7 +51,7 @@ export const HTBaChristian: React.FC<HTBaChristianProps> = ({
             }
 
             if (isRichTextBlock(block)) {
-              return <div key={block.id} className={styles.passsage}>
+              return <div key={block.id} className={styles.passage}>
                 <RichTextRenderer key={block.id} markdownText={block} />
               </div>;
             }

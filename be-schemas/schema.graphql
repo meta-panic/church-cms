@@ -269,6 +269,7 @@ type ComponentSharedQuote {
 }
 
 input ComponentSharedMediaFiltersInput {
+  description: StringFilterInput
   and: [ComponentSharedMediaFiltersInput]
   or: [ComponentSharedMediaFiltersInput]
   not: ComponentSharedMediaFiltersInput
@@ -277,11 +278,13 @@ input ComponentSharedMediaFiltersInput {
 input ComponentSharedMediaInput {
   id: ID
   file: ID
+  description: String
 }
 
 type ComponentSharedMedia {
   id: ID!
-  file: UploadFile
+  file: UploadFile!
+  description: String
 }
 
 input ComponentSharedEmbeddedVkVideoFiltersInput {
@@ -393,6 +396,13 @@ type ComponentHtbachristianBlockPrayExample {
   id: ID!
   title: String!
   prayText: String!
+}
+
+type ComponentHistoryGallery {
+  id: ID!
+  photos_connection(filters: UploadFileFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): UploadFileRelationResponseCollection
+  photos(filters: UploadFileFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [UploadFile]!
+  title: String
 }
 
 input ComponentContentBlocksInfoBlockFiltersInput {
@@ -780,6 +790,23 @@ type Global {
   publishedAt: DateTime
 }
 
+union HistoryContentDynamicZone = ComponentSharedRichText | ComponentHistoryGallery | Error
+
+scalar HistoryContentDynamicZoneInput
+
+input HistoryInput {
+  content: [HistoryContentDynamicZoneInput!]
+  publishedAt: DateTime
+}
+
+type History {
+  documentId: ID!
+  content: [HistoryContentDynamicZone]
+  createdAt: DateTime
+  updatedAt: DateTime
+  publishedAt: DateTime
+}
+
 union HtBaChristianContentDynamicZone = ComponentSharedRichText | ComponentHtbachristianBlockPrayExample | Error
 
 scalar HtBaChristianContentDynamicZoneInput
@@ -893,7 +920,7 @@ type ServiceEntityResponseCollection {
   pageInfo: Pagination!
 }
 
-union GenericMorph = ComponentSharedVkVideo | ComponentSharedSlider | ComponentSharedSeo | ComponentSharedSchedule | ComponentSharedRichText | ComponentSharedQuote | ComponentSharedMedia | ComponentSharedEmbeddedVkVideo | ComponentSharedButton | ComponentSharedAddress | ComponentServicesBlockHeader | ComponentServicesBlockCarouselView | ComponentHtbachristianBlockPrayExample | ComponentContentBlocksInfoBlock | ComponentContentBlocksEvent | ComponentContentBlocksEventImage | UploadFile | I18NLocale | ReviewWorkflowsWorkflow | ReviewWorkflowsWorkflowStage | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser | Global | HtBaChristian | OurSymbols | PageLanding | Service
+union GenericMorph = ComponentSharedVkVideo | ComponentSharedSlider | ComponentSharedSeo | ComponentSharedSchedule | ComponentSharedRichText | ComponentSharedQuote | ComponentSharedMedia | ComponentSharedEmbeddedVkVideo | ComponentSharedButton | ComponentSharedAddress | ComponentServicesBlockHeader | ComponentServicesBlockCarouselView | ComponentHtbachristianBlockPrayExample | ComponentHistoryGallery | ComponentContentBlocksInfoBlock | ComponentContentBlocksEvent | ComponentContentBlocksEventImage | UploadFile | I18NLocale | ReviewWorkflowsWorkflow | ReviewWorkflowsWorkflowStage | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser | Global | History | HtBaChristian | OurSymbols | PageLanding | Service
 
 input FileInfoInput {
   name: String
@@ -977,6 +1004,7 @@ type Query {
   usersPermissionsUsers_connection(filters: UsersPermissionsUserFiltersInput, pagination: PaginationArg = {}, sort: [String] = [], status: PublicationStatus = PUBLISHED): UsersPermissionsUserEntityResponseCollection
   usersPermissionsUsers(filters: UsersPermissionsUserFiltersInput, pagination: PaginationArg = {}, sort: [String] = [], status: PublicationStatus = PUBLISHED): [UsersPermissionsUser]!
   global(status: PublicationStatus = PUBLISHED): Global
+  history(status: PublicationStatus = PUBLISHED): History
   htBaChristian(status: PublicationStatus = PUBLISHED): HtBaChristian
   ourSymbols(status: PublicationStatus = PUBLISHED): OurSymbols
   pageLanding(documentId: ID!, status: PublicationStatus = PUBLISHED): PageLanding
@@ -997,6 +1025,8 @@ type Mutation {
   deleteReviewWorkflowsWorkflowStage(documentId: ID!): DeleteMutationResponse
   updateGlobal(status: PublicationStatus = PUBLISHED, data: GlobalInput!): Global
   deleteGlobal: DeleteMutationResponse
+  updateHistory(status: PublicationStatus = PUBLISHED, data: HistoryInput!): History
+  deleteHistory: DeleteMutationResponse
   updateHtBaChristian(status: PublicationStatus = PUBLISHED, data: HtBaChristianInput!): HtBaChristian
   deleteHtBaChristian: DeleteMutationResponse
   updateOurSymbols(status: PublicationStatus = PUBLISHED, data: OurSymbolsInput!): OurSymbols

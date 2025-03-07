@@ -84,7 +84,8 @@ export interface SharedMedia extends Struct.ComponentSchema {
     description: '';
   };
   attributes: {
-    file: Schema.Attribute.Media<'images'>;
+    file: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+    description: Schema.Attribute.String;
   };
 }
 
@@ -173,6 +174,21 @@ export interface HtbachristianBlockPrayExample extends Struct.ComponentSchema {
   };
 }
 
+export interface HistoryGallery extends Struct.ComponentSchema {
+  collectionName: 'components_history_galleries';
+  info: {
+    displayName: 'gallery';
+    description: '';
+  };
+  attributes: {
+    photos: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios',
+      true
+    >;
+    title: Schema.Attribute.String;
+  };
+}
+
 export interface ContentBlocksInfoBlock extends Struct.ComponentSchema {
   collectionName: 'components_content_blocks_info_blocks';
   info: {
@@ -234,6 +250,7 @@ declare module '@strapi/strapi' {
       'services-block.header': ServicesBlockHeader;
       'services-block.carousel-view': ServicesBlockCarouselView;
       'htbachristian-block.pray-example': HtbachristianBlockPrayExample;
+      'history.gallery': HistoryGallery;
       'content-blocks.info-block': ContentBlocksInfoBlock;
       'content-blocks.event': ContentBlocksEvent;
       'content-blocks.event-image': ContentBlocksEventImage;
