@@ -17,3 +17,14 @@
   transform: translateX(-10px);
   pointer-events: none;
 }
+
+.menuButtonLabel>* {
+  letter-spacing: -2px;
+}
+
+
+@media (min-width: 641px) {
+  .menuButtonLabel>* {
+    letter-spacing: -1px;
+  }
+}
