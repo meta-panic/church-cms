@@ -3,7 +3,6 @@ import React from "react";
 import { Hero } from "@/components/organisms/hero/Hero";
 import Section from "@/components/atoms/section/Section";
 import { AboutUs } from "./components/AboutUs";
-import { HeroContent } from "../../organisms/hero/components/HeroContent";
 import { HowToBecomeAChristian } from "./components/HowToBecomeAChristian";
 import srcBackgroundHeroImage from "/public/background.jpg";
 
@@ -19,9 +18,10 @@ import serverContext from "@/lib/serverContext";
 import { EventsSection } from "./components/EventsSection";
 
 import { DivineServicesSection } from "./components/DivineServicesSection";
-import { SideHTBaChristianButton } from "@/components/templates/MainPage/components/SideHTBaChristianButton/SideHTBaChristianButton";
+import { SideHTBaChristianButton } from "@/components/organisms/SideHTBaChristianButton/SideHTBaChristianButton";
 
 import styles from "./MainPage.module.css";
+import { HeroContent } from "./components/HeroContent/HeroContent";
 
 
 interface MainPageProps {
@@ -50,7 +50,6 @@ export const MainPage: React.FC<MainPageProps> = ({
         src={srcBackgroundHeroImage}
         content={
           <HeroContent
-            title={heroData.Title || "Добро пожаловать в дом молитвы"}
             description={heroData.description}
             button={heroData.Button} />
         }

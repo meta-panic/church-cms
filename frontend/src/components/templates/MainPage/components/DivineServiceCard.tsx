@@ -3,7 +3,7 @@ import cx from "classnames";
 import Image, { StaticImageData } from "next/image";
 
 import Typography from "@/components/atoms/typography/Typography";
-import Link from "@/components/atoms/link/Link";
+import Link from "@/components/molecules/Link/Link";
 
 import type { PublicServiceRoute } from "@/configuration/navigation";
 
@@ -47,7 +47,7 @@ export const DivineServiceCard: React.FC<DivineServiceCardProps> = ({
 
         <div className={styles.textContainer}>
           <div className={styles.title}>
-            <Typography tag="H3">
+            <Typography tag="body" overideFont={{ fontFamily: "headlines", fontWeight: "extra-bold" }}>
               {title}
             </Typography>
           </div>

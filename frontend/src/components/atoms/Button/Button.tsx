@@ -50,7 +50,7 @@ const ButtonContent: React.FC<ButtonProps> = ({
   if (onClick) {
     return (
       <button onClick={onClick} className={classNames}>
-        <Typography tag="body">{text}</Typography>
+        <Typography tag="body" overideFont={{ fontWeight: "semi-bold" }}>{text}</Typography>
       </button>
     );
   }
@@ -58,7 +58,7 @@ const ButtonContent: React.FC<ButtonProps> = ({
   if (!isExternal) {
     return (
       <a href={link} target={"_self"} className={classNames}>
-        <Typography tag="body">{text}</Typography>
+        <Typography tag="body" overideFont={{ fontWeight: "semi-bold" }}>{text}</Typography>
       </a>
     );
   }
@@ -67,7 +67,7 @@ const ButtonContent: React.FC<ButtonProps> = ({
     return (
       <a target={"_blank"}
         rel="noopener noreferrer" href={link} className={classNames}>
-        <Typography tag="body">{text}</Typography>
+        <Typography overideFont={{ fontWeight: "semi-bold" }} tag="body">{text}</Typography>
       </a>
     );
   };

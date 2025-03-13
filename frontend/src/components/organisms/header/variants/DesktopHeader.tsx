@@ -39,11 +39,13 @@ export const DesktopHeader: React.FC<DesktopHeaderProps> = ({
           renderItem={(text) => {
             return <Typography
               tag="body"
+              overideFont={{ fontFamily: "headlines", fontWeight: "semi-bold" }}
               className={styles.navItem}
             >
               {text}
             </Typography>;
-          }} />
+          }}
+        />
 
         <div className={cx(styles.contacts)}>
           {contacts &&

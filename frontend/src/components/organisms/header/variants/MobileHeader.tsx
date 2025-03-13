@@ -28,6 +28,7 @@ export const MobileHeader: React.FC<MobileHeaderProps> = ({
   navItems, handleNavigation,
 }) => {
   const isTablet = useMediaQuery([BREAKPOINTS.tablet]);
+
   const contacts = React.useContext(ContactsContext) as ContactsContextType;
 
   return (
@@ -51,6 +52,7 @@ export const MobileHeader: React.FC<MobileHeaderProps> = ({
           renderItem={(text) => {
             return <Typography
               tag="body"
+              overideFont={{ fontWeight: "semi-bold" }}
               className={styles.navItem}
             >
               {text}

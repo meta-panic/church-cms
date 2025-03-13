@@ -20,7 +20,7 @@ export const EventsSection: React.FC<EventsSectionProps> = ({ events }) => {
       {closestFutureEvent && (
         <div className={styles.event}>
           <div className={styles.eventType}>
-            <Typography tag="H2">Наши будущие мероприятия</Typography>
+            <Typography tag="H2" overideFont={{ fontWeight: "extra-bold" }}>Грядущие мероприятия</Typography>
           </div>
 
           <EventCard event={closestFutureEvent} type="future" />
@@ -30,10 +30,10 @@ export const EventsSection: React.FC<EventsSectionProps> = ({ events }) => {
       {closestPastEvent && (
         <div className={styles.event}>
           <div className={cx(styles.eventType, styles.past)}>
-            <Typography tag="H2">{
+            <Typography tag="H2" overideFont={{ fontWeight: "extra-bold" }}>{
               closestFutureEvent ?
-                "...А так же прошедшие события"
-                : "Наши прошедние мероприятия"}
+                "...А так же прошедшие"
+                : "Наши прошедшие мероприятия"}
             </Typography>
           </div>
 

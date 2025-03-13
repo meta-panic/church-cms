@@ -5,6 +5,7 @@ import Link from "next/link";
 import { WithPopup } from "@/components/atoms/withPopup/WithPopup";
 import DropdownContent from "@/components/molecules/DropdownContent/DropdownContent";
 import { hasAnchor } from "@/utils/parseUrl";
+import Typography from "@/components/atoms/typography/Typography";
 
 import type { ExistingUrls, ExistingAnchors } from "@/configuration/navigation";
 
@@ -48,7 +49,7 @@ export const Navigation: React.FC<NavigationProps> = ({ renderItem, handleNaviga
                       className={styles.navigationItem}
                       scroll={!hasAnchor(props.href)}
                     >
-                      {props.text}
+                      <Typography tag={"body"} overideFont={{ fontFamily: "headlines" }}>{props.text}</Typography>
                     </Link>);
                   }} />
               }

@@ -36,7 +36,7 @@ export const MoreInfo: React.FC<MoreInfoProps> = ({
               on="onLight"
               size="L"
               wide={isMobile}
-
+              rounded
             />
           }
         </div>

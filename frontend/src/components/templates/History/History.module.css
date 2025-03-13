@@ -9,18 +9,12 @@
 }
 
 .pageContent {
-  padding: var(--spacing-2xl) 0;
+  padding: var(--spacing-xl) 0;
+  padding-top: calc(var(--header-height--slim) + var(--spacing-xl));
   display: flex;
   flex-direction: column;
   gap: var(--spacing-2xl);
   align-items: center;
-}
-
-@media (min-width: 1279px) and (orientation: portrait),
-(min-height: 1279px) and (orientation: landscape) {
-  .pageContent {
-    width: 100%;
-  }
 }
 
 .galleryWrapper {
@@ -34,6 +28,12 @@
   display: flex;
   width: 100%;
   flex-direction: column;
-  gap: var(--spacing-x);
+  gap: var(--spacing-xs);
   max-width: var(--max-text-column);
+}
+
+@media (min-width: 1279px) {
+  .passageWrapper {
+    max-width: none;
+  }
 }

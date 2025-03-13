@@ -2,7 +2,7 @@ import cx from "classnames";
 import Image, { StaticImageData } from "next/image";
 
 import Typography from "@/components/atoms/typography/Typography";
-import Link from "@/components/atoms/link/Link";
+import Link from "@/components/molecules/Link/Link";
 
 import styles from "./InfoCardWithImage.module.css";
 
@@ -38,7 +38,7 @@ export const InfoCardWithImage: React.FC<InfoCardWithImageProps> = ({ telegram, 
 
       <div className={styles.textContainer}>
         <div className={styles.title}>
-          <Typography tag="H3">
+          <Typography tag="H3" overideFont={{ fontFamily: "headlines" }}>
             Хочешь изучать Библию?
           </Typography>
         </div>

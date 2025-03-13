@@ -10,6 +10,9 @@ import { fetchPageInfo } from "@/utils/fetch";
 
 import { HtBaChristian } from "@/types";
 
+import styles from "./page.module.css";
+
+
 export const metadata: Metadata = {
   title: "Как стать христианином | Церковь «Дом молитвы»",
   description: "Как стать христианином?",
@@ -38,15 +41,17 @@ export default async function App() {
     return <DefaultError errorMessage={"Данные временно недоступны"} />;
   }
 
-  return <HTBaChristian
-    hero={{
-      title: "Как стать христианином?",
-      description: [],
-      ...responce.data.hero,
-      videoLink: responce.data.presentationVideo,
-    }}
-    content={responce.data.content}
-  />;
+  return <div className={styles.pageContent}>
+    <HTBaChristian
+      hero={{
+        title: "Как стать христианином?",
+        description: [],
+        ...responce.data.hero,
+        videoLink: responce.data.presentationVideo,
+      }}
+      content={responce.data.content}
+    />
+  </div>;
 }
 
 

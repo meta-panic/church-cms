@@ -59,6 +59,7 @@ export default async function RootLayout({
         phone={contactData?.phone}
         primalBuilding={contactData?.PrimalBuilding}
         footerNote={contactData?.footerNote}
+        madeByLink={contactData.madeByLink}
         contacts={contactData && {
           taplink: contactData.taplink,
           telegram: contactData.telegram,

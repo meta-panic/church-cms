@@ -1,0 +1,26 @@
+.container {
+  position: fixed;
+  text-transform: uppercase;
+  background-color: var(--common-transparent-900);
+
+  width: auto;
+  height: min-content;
+  padding: var(--spacing-xs) var(--spacing-xs) 2px var(--spacing-xs);
+  right: 0;
+  box-shadow: var(--shadow--l);
+
+  border-top-left-radius: var(--button-border-radios);
+  border-top-right-radius: var(--button-border-radios);
+
+  transform: rotate(-90deg) translateX(100%);
+  transform-origin: bottom right;
+  user-select: none;
+
+  z-index: 29;
+  transition: all 0.2s ease-in-out;
+}
+
+.container:hover {
+  cursor: pointer;
+  color: var(--accent-900);
+}

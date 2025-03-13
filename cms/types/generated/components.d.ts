@@ -93,6 +93,7 @@ export interface SharedEmbeddedVkVideo extends Struct.ComponentSchema {
   collectionName: 'components_shared_embedded_vk_videos';
   info: {
     displayName: 'EmbeddedVkVideo';
+    description: '';
   };
   attributes: {
     embeddedLink: Schema.Attribute.String & Schema.Attribute.Required;
@@ -143,6 +144,10 @@ export interface ServicesBlockHeader extends Struct.ComponentSchema {
     howDoWeDo: Schema.Attribute.Component<'shared.rich-text', true>;
     headerPhoto: Schema.Attribute.Component<'shared.media', false>;
     headerVideo: Schema.Attribute.Component<'shared.embedded-vk-video', false>;
+    shortServiceDescription: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 120;
+      }>;
   };
 }
 

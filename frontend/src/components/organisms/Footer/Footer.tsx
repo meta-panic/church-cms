@@ -1,8 +1,11 @@
+"use client";
 import React from "react";
 import cx from "classnames";
+import { usePathname } from "next/navigation";
 
 import { Contacts } from "@/components/molecules/Contacts/Contacts";
-
+import Link from "@/components/molecules/Link/Link";
+import { isRootPath } from "@/utils/isRoot";
 import Section from "@/components/atoms/section/Section";
 import Separator from "@/components/atoms/Separator/Separator";
 import Typography from "@/components/atoms/typography/Typography";
@@ -13,6 +16,7 @@ import type { ComponentSharedAddress, ComponentSharedRichText, ComponentSharedSc
 import ChurchLogo from "/public/church-logo.svg";
 import styles from "./Footer.module.css";
 
+
 interface FooterProps {
   contacts?: {
     taplink: string;
@@ -21,6 +25,7 @@ interface FooterProps {
     youtube: string;
     whatsup: string;
   };
+  madeByLink?: string;
   primalBuilding?: ComponentSharedAddress;
   phone?: string;
   email?: string;
@@ -29,7 +34,7 @@ interface FooterProps {
 }
 
 export const Footer: React.FC<FooterProps> = (
-  { contacts, primalBuilding, phone, email, serviceSchedule, footerNote },
+  { contacts, primalBuilding, phone, email, serviceSchedule, footerNote, madeByLink },
 ) => {
 
   const hasServiceSchedule = !!(serviceSchedule && serviceSchedule.length > 0 && hasValue(serviceSchedule));
@@ -69,17 +74,32 @@ export const Footer: React.FC<FooterProps> = (
 
           </div>
 
+
           <div key="separator" className={styles.separator}>
             <Separator />
           </div>
 
           {
-            footerNote && <div className={cx(styles.registrationContainer)}>
-              {footerNote.map(note => <Typography key={note?.id} tag="body-mini">{note?.body}</Typography>)}
+            <div className={cx(styles.registrationContainer)}>
+              {footerNote &&
+                <div>{footerNote.map(note => <Typography key={note?.id} tag="body-mini">{note?.body}</Typography>)}
+                </div>
+              }
+              {madeByLink && <Typography className={styles.websiteCredits} tag="body-mini">
+                Сделано с 💕 by <Link isExternal tag="body-mini" to={madeByLink}>@paniculas</Link>
+              </Typography>}
             </div>
           }
 
+          {isRootPath(usePathname()) &&
+            <div className={cx(styles.creditsContainer)}>
+              <Typography tag="body-mini">
+                Фото: <Link isExternal tag="body-mini" to={"https://commons.wikimedia.org/wiki/File:New_Finland_Church_From_Distance.jpg"}>New Finland Church From Distance</Link>, автор Powerbump, лицензия CC BY-SA 4.0
+              </Typography>
+            </div>
+          }
         </div>
+
       </Section>
     </footer>
   );

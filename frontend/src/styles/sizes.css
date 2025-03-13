@@ -13,16 +13,16 @@
     --card-border-radios: 8px;
     --block-border-radios: 4px;
     --popup-border-radios: 4px;
-    --button-border-radios: 4px;
+    --button-border-radios: 2px;
 
     --button-border-size-active: 4px;
 
     --font-font-size-h1-font-size: 36px;
     --font-font-size-h2-font-size: 32px;
     --font-font-size-h3-font-size: 24px;
-    --font-line-heigh-h1: 48px;
-    --font-line-heigh-h2: 40px;
-    --font-line-heigh-h3: 30px;
+    --font-line-heigh-h1: 44px;
+    --font-line-heigh-h2: 38px;
+    --font-line-heigh-h3: 28px;
     --font-line-heigh-body: 22px;
     --font-line-heigh-button: 20px;
     --font-font-size-body-font-size: 18px;
@@ -42,7 +42,7 @@
     --spacing-4xl: 48px;
     --font-line-heigh-header: 20px;
     --font-font-size-body-mini-font-size: 12px;
-    --font-line-heigh-body-mini: 16px;
+    --font-line-heigh-body-mini: 14px;
   }
 }
 
@@ -58,13 +58,13 @@
     --card-border-radios: 8px;
     --block-border-radios: 4px;
     --popup-border-radios: 4px;
-    --button-border-radios: 4px;
+    --button-border-radios: 2px;
     --font-font-size-h1-font-size: 48px;
     --font-font-size-h2-font-size: 40px;
     --font-font-size-h3-font-size: 28px;
-    --font-line-heigh-h1: 60px;
-    --font-line-heigh-h2: 50px;
-    --font-line-heigh-h3: 36px;
+    --font-line-heigh-h1: 58px;
+    --font-line-heigh-h2: 48px;
+    --font-line-heigh-h3: 33px;
     --font-line-heigh-body: 24px;
     --font-line-heigh-button: 22px;
     --font-font-size-body-font-size: 20px;
@@ -84,7 +84,7 @@
     --spacing-4xl: 64px;
     --font-line-heigh-header: 22px;
     --font-font-size-body-mini-font-size: 14px;
-    --font-line-heigh-body-mini: 18px;
+    --font-line-heigh-body-mini: 17px;
   }
 }
 
@@ -98,12 +98,12 @@
     --card-border-radios: 8px;
     --block-border-radios: 4px;
     --popup-border-radios: 4px;
-    --button-border-radios: 4px;
+    --button-border-radios: 2px;
     --font-font-size-h1-font-size: 54px;
     --font-font-size-h2-font-size: 50px;
     --font-font-size-h3-font-size: 32px;
-    --font-line-heigh-h1: 60px;
-    --font-line-heigh-h2: 56px;
+    --font-line-heigh-h1: 64px;
+    --font-line-heigh-h2: 60px;
     --font-line-heigh-h3: 38px;
     --font-line-heigh-body: 28px;
     --font-line-heigh-button: 20px;
@@ -124,6 +124,6 @@
     --spacing-4xl: 96px;
     --font-line-heigh-header: 24px;
     --font-font-size-body-mini-font-size: 16px;
-    --font-line-heigh-body-mini: 20px;
+    --font-line-heigh-body-mini: 18px;
   }
 }

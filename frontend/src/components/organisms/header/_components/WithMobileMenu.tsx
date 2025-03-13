@@ -36,7 +36,7 @@ const MobileMenuHandler: React.FC<MobileMenuHandlerProps> = ({ items, renderButt
 
   return (
     <>
-      <div className="burgerWrapper">
+      <div style={{ display: "flex", alignItems: "center" }}>
         <div
           tabIndex={0}
           role="button"
@@ -55,13 +55,14 @@ const MobileMenuHandler: React.FC<MobileMenuHandlerProps> = ({ items, renderButt
             { isOpen: isMobileMenuOpen, onToggle: handleToggleMenu },
           )}
         </div>
-      </div>
+      </div >
       {isMobileMenuOpen && <MobileMenu
         items={items}
         onClose={handleToggleMenu}
         onClick={handleNavigationMenu}
         isOpen={isMobileMenuOpen}
-      />}
+      />
+      }
     </>
   );
 };

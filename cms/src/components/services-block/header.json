@@ -29,6 +29,11 @@
       "type": "component",
       "repeatable": false,
       "component": "shared.embedded-vk-video"
+    },
+    "shortServiceDescription": {
+      "type": "string",
+      "required": false,
+      "maxLength": 120
     }
   }
 }

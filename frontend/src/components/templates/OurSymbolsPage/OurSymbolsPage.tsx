@@ -1,15 +1,14 @@
+"use client";
 import React from "react";
 
-import { Hero as HeroComponent } from "@/components/organisms/hero/Hero";
-import { SideHTBaChristianButton } from "../MainPage/components/SideHTBaChristianButton/SideHTBaChristianButton";
-import { HeroContent } from "../../organisms/hero/components/HeroContent";
+import { SideHTBaChristianButton } from "../../organisms/SideHTBaChristianButton/SideHTBaChristianButton";
 import { Doctrine } from "./components/Doctrine";
 import { Theses } from "./components/Theses";
 import { MoreInfo } from "./components/MoreInfo";
 
 import type { Maybe, ComponentContentBlocksInfoBlock, ComponentSharedButton } from "@/types";
 
-import srcBackgroundHeroImage from "./MilkyWay.png";
+import { Hero } from "./components/Hero";
 
 
 interface OurSymbolsPageProps {
@@ -26,14 +25,9 @@ export const OurSymbolsPage: React.FC<OurSymbolsPageProps> = ({
   return (
     <>
 
-      <HeroComponent
-        fullHeight={true}
-        src={srcBackgroundHeroImage}
-        imageAlt="Ночное звездное небо"
-        content={hero && <HeroContent
-          title={hero.Title || "Во что мы верим"}
-          description={hero?.description}
-        />}
+      <Hero
+        title={hero?.Title || "Во что мы верим"}
+        description={hero?.description}
       />
 
       <SideHTBaChristianButton />

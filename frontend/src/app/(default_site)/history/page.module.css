@@ -1,6 +1,3 @@
 .pageContent {
-  top: var(--header-height--slim);
-  position: relative;
-  padding-bottom: var(--header-height--slim);
   flex: 1;
 }

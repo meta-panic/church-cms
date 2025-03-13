@@ -1,14 +1,14 @@
 .eventCardContainer {
-  background-color: var(--brand-0);
   position: relative;
   display: flex;
   flex-direction: column-reverse;
+  height: 100%;
 }
 
 .textContainer {
   display: flex;
   flex-direction: column;
-  padding: var(--spacing-l) var(--spacing-xl);
+  padding-top: var(--spacing-s);
   gap: var(--spacing-2xl);
   flex: 1;
 }
@@ -37,16 +37,8 @@
   color: transparent;
 }
 
-
-.date {
-  text-align: right;
-}
-
-.type {
-  color: var(--brand-500);
-}
-
 .additionaldetails .place>*,
-.additionaldetails .time>* {
+.additionaldetails .time>*,
+.additionaldetails .date>* {
   display: inline-block;
 }

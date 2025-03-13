@@ -53,4 +53,5 @@
 
 .churchLogo {
   color: var(--common-light-100);
+  height: 50px;
 }
