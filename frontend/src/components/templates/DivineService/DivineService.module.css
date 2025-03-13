@@ -15,8 +15,14 @@
   text-align: center;
 }
 
-.kek {
+.heroContent {
   padding-top: calc(var(--header-height--slim) + var(--spacing-xl));
+}
+
+.pageBodyContainer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
 }
 
 .pageContent {
@@ -41,4 +47,10 @@
 .separator {
   background-color: var(--common-dark-400);
   margin: 0 auto;
+}
+
+.passageWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
 }

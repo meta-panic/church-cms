@@ -76,7 +76,7 @@ export const MasonryGrid: React.FC<MasonryGridProps> = ({
               <div className={styles.imageFrame}>
                 <Image
                   src={image.src}
-                  alt={image.caption || ""}
+                  alt={image.alternativeText || ""}
                   width={image.width}
                   height={image.height}
                   className={styles.image}
@@ -86,11 +86,6 @@ export const MasonryGrid: React.FC<MasonryGridProps> = ({
                   }}
                 />
               </div>
-              {image.caption && (
-                <div className={styles.caption}>
-                  <p>{image.caption}</p>
-                </div>
-              )}
             </div>
           </div>
         ))}

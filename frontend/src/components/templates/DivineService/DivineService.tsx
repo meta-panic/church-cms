@@ -53,7 +53,7 @@ export const DivineService: React.FC<DivineServiceProps> = ({
           imageStyles={styles.imageStyling} imageAlt={""}
         />
         : <Section>
-          <div className={cx(styles.kek, styles.pageContent)}>
+          <div className={cx(styles.heroContent, styles.pageContent)}>
             <Typography tag="H1">{hero.Title}</Typography>
             <Typography tag="body">{hero.shortServiceDescription}</Typography>
           </div>
@@ -66,7 +66,7 @@ export const DivineService: React.FC<DivineServiceProps> = ({
         </div>
 
 
-        {content && content?.length > 0 && <div className={styles.pageContent}>
+        {content && content?.length > 0 && <div className={cx(styles.pageContent, styles.pageBodyContainer)}>
           {content?.map(block => {
             if (!hasValue(block)) {
               return null;
