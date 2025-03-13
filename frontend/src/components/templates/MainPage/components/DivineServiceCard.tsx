@@ -29,7 +29,7 @@ export const DivineServiceCard: React.FC<DivineServiceCardProps> = ({
 }) => {
 
   return (
-    <div className={cx("lightBlock", styles.container)} >
+    <div tabIndex={-1} className={cx("lightBlock", styles.container)} >
 
       <div className={styles.imageContainer}>
         <div className={styles.image}>

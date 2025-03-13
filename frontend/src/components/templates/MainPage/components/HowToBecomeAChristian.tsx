@@ -49,6 +49,7 @@ export const HowToBecomeAChristian: React.FC<HowToBecomeAChristianProps> = ({
                 variant="ghost"
                 on="onBrand"
                 size="L"
+                rounded
               />
             </div>
           }

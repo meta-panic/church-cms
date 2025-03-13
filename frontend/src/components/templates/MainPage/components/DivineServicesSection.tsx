@@ -22,7 +22,7 @@ export interface DivineServicesSectionProps {
 export const DivineServicesSection: React.FC<DivineServicesSectionProps> = ({
   divineServices,
 }) => {
-  const carouselRef = useRef<{ nextSlide: () => void; prevSlide: () => void }>(null);
+  const carouselRef = useRef<{ nextSlide: () => void; prevSlide: () => void, goToSlide: (index: number) => void; }>(null);
 
   const handleNextSlide = useCallback(() => {
     carouselRef.current?.nextSlide();
@@ -30,6 +30,10 @@ export const DivineServicesSection: React.FC<DivineServicesSectionProps> = ({
 
   const handlePrevSlide = useCallback(() => {
     carouselRef.current?.prevSlide();
+  }, []);
+
+  const handleGoToSlide = useCallback((index: number) => {
+    carouselRef.current?.goToSlide(index);
   }, []);
 
   return (
@@ -40,13 +44,14 @@ export const DivineServicesSection: React.FC<DivineServicesSectionProps> = ({
         <ButtonGroup handleNextSlide={handleNextSlide} handlePrevSlide={handlePrevSlide} />
       </div>
 
-      <Carousel ref={carouselRef}>
-        {divineServices.map(({ landingCarouselView, slug }) => {
-          return <Slide key={landingCarouselView.id}>
+      <Carousel ref={carouselRef} totalItems={divineServices.length}>
+        {divineServices.map(({ landingCarouselView, slug }, index) => {
+          return <Slide key={landingCarouselView.id} onFocus={() => {
+            handleGoToSlide(index);
+          }}>
             <DivineServiceCard
               key={landingCarouselView.id}
               href={getSlugPath(slug)}
-
               title={landingCarouselView.carouselServiceName}
               description={landingCarouselView.carouselServiceDescription}
               image={{
