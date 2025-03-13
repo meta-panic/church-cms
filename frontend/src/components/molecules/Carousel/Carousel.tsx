@@ -135,15 +135,6 @@ const CustomDot = ({
       aria-label={`Slide ${index ? index + 1 : "unknown"}`}
       aria-current={active ? "true" : "false"}
       onClick={onClick}
-    >
-      {active &&
-        <span className={styles.dotContent}>
-          <Typography tag="body">
-            {typeof index === "number" ? index + 1 : null}
-          </Typography>
-
-        </span>
-      }
-    </button>
+    ><div className={styles.line}></div></button>
   );
 };

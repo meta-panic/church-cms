@@ -42,6 +42,7 @@ export const HeroContent: React.FC<HeroContentProps> = ({
             return <div className={styles.text} key={passage?.id}>
               <Typography
                 tag="H3"
+                overideFont={{ fontWeight: "thin" }}
               >
                 {passage.body}
               </Typography>

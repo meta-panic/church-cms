@@ -11,35 +11,45 @@
 }
 
 .dot {
-  width: 26px;
-  height: 26px;
-  opacity: 0.7;
-  border-radius: 17px;
+  width: 25px;
+  height: 40px;
   border: none;
-  background: var(--common-transparent-600);
-  font-weight: 600;
   transform-origin: right;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  background-color: var(--common-transparent-0);
 }
 
 .dot:hover {
-  background: #ddd;
+  .line {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+    background: var(--common-transparent-800);
+  }
 }
 
 .dot.active {
-  background: var(--common-transparent-900);
+  background-color: var(--common-transparent-0);
   font-weight: 600;
-  width: 40px;
-  opacity: 0.9;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 45px;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+  .line {
+    background: var(--common-transparent-900);
+  }
 }
 
 .dotContent {
   right: 0;
-  color: var(--default-text);
+}
+
+.line {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+  height: 4px;
+  width: 100%;
+  background: var(--common-transparent-600);
 }
