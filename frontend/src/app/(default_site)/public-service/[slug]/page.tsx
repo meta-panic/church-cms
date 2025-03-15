@@ -1,12 +1,12 @@
 export const dynamic = "force-static";
 import qs from "qs";
+import { Metadata } from "next";
 
-import Section from "@/components/atoms/section/Section";
-import Typography from "@/components/atoms/typography/Typography";
 import CustomError from "@/components/molecules/CustomErrorBoundaries/template/Error";
 import { HttpError } from "@/app/types/Errors";
+import { DivineService } from "@/components/templates/DivineService/DivineService";
 
-import { Service as DivineService } from "@/types";
+import { Service as DivineServiceType } from "@/types";
 
 import styles from "./page.module.css";
 
@@ -15,10 +15,18 @@ interface PageProps {
   params: Promise<{ slug: string }>;
 }
 
+export const metadata: Metadata = {
+  title: "Служения | Церковь «Дом молитвы»",
+  icons: {
+    icon: { url: "/favicon.png" },
+  },
+};
+
+
 export async function generateStaticParams() {
   try {
     const posts = await fetchDivineServices();
-    return posts.data.map((ds: DivineService) => ({
+    return posts.data.map((ds: DivineServiceType) => ({
       slug: ds.slug,
     }));
   } catch (err: unknown) {
@@ -37,7 +45,7 @@ export async function generateStaticParams() {
   }
 }
 
-async function fetchDivineServices(): Promise<{ data: DivineService[]; }> {
+async function fetchDivineServices(): Promise<{ data: DivineServiceType[]; }> {
   const NEXT_PUBLIC_BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 
   const response = await fetch(`http://${NEXT_PUBLIC_BACKEND_URL}/api/services?${divineServicesQuery}`, {
@@ -55,17 +63,16 @@ const Page = async ({ params }: PageProps) => {
   try {
     const services = await fetchDivineServices();
 
-    const currentService = services.data.find((ds: DivineService) => ds.slug === slug);
-    return <div className={styles.pageContent}>
-      {/* [for debug] Hidden div with the current date and time */}
-      <div style={{ display: "none" }}>
-        {new Date().toString()}
-      </div>
-      <Section>
-        <Typography tag="H1">{currentService?.hero.Title}</Typography>
+    const currentService = services.data.find((ds: DivineServiceType) => ds.slug === slug);
 
-        <div>Cтраница для {slug} служение</div>
-      </Section>
+    if (!currentService) {
+      return;
+    }
+
+    return <div className={styles.pageContent}>
+
+      <DivineService hero={currentService.hero} content={currentService.content} />
+
     </div>;
   } catch (err: unknown) {
     if (err instanceof HttpError) {
@@ -90,6 +97,9 @@ const divineServicesQuery = qs.stringify(
         populate: "*",
       },
       hero: {
+        populate: "*",
+      },
+      content: {
         populate: "*",
       },
     },

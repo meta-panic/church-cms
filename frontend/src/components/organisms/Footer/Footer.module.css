@@ -33,7 +33,20 @@
 
 .registrationContainer {
   text-align: center;
+  display: flex;
+  gap: var(--spacing-xs);
+  flex-direction: column;
 }
+
+.creditsContainer {
+  text-align: center;
+}
+
+.mainPhotoCreditsWrapper {
+  max-width: 50%;
+  text-align: center;
+}
+
 
 .schedule {
   display: flex;
@@ -60,6 +73,10 @@
   text-align: center;
 }
 
+.churchLogo {
+  height: 60px;
+}
+
 @media screen and (min-width: 641px) {
   .churchInfoContainer {
     flex-direction: row;
@@ -77,5 +94,9 @@
 
   .address {
     text-align: end;
+  }
+
+  .churchLogo {
+    height: 80px;
   }
 }

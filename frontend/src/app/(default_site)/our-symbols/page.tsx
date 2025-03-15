@@ -10,6 +10,8 @@ import { fetchPageInfo } from "@/utils/fetch";
 
 import type { OurSymbols } from "@/types";
 
+import styles from "./page.module.css";
+
 export const metadata: Metadata = {
   title: "Во что мы верим | Церковь «Дом молитвы»",
   icons: {
@@ -38,12 +40,14 @@ export default async function App() {
 
   const { Hero, TheMainSymbol, Theses, AdditionalInfoLink } = responce.data;
 
-  return <OurSymbolsPage
-    hero={Hero}
-    mainSymbol={TheMainSymbol}
-    theses={Theses}
-    findMoreInfoBlock={AdditionalInfoLink}
-  />;
+  return <div className={styles.pageContent}>
+    <OurSymbolsPage
+      hero={Hero}
+      mainSymbol={TheMainSymbol}
+      theses={Theses}
+      findMoreInfoBlock={AdditionalInfoLink}
+    />
+  </div>;
 }
 
 

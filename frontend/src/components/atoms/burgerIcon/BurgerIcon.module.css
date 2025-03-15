@@ -40,3 +40,9 @@
 .burger.open .line3 {
   transform: translateY(-8px) rotate(-45deg);
 }
+
+@media (min-width: 641px) {
+  .burger {
+    width: 27px;
+  }
+}

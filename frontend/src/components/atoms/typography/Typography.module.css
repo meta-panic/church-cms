@@ -5,57 +5,65 @@
   text-shadow: inherit;
 }
 
+
 /* Headings */
 .typography--h1 {
   font-size: var(--font-font-size-h1-font-size);
-  font-weight: 500;
   line-height: var(--font-line-heigh-h1);
-  font-family: var(--font-bebas-regular);
 }
 
 .typography--h2 {
   font-size: var(--font-font-size-h2-font-size);
-  font-weight: 500;
   line-height: var(--font-line-heigh-h2);
-  font-family: var(--font-bebas-regular);
 }
 
 .typography--h3 {
   font-size: var(--font-font-size-h3-font-size);
-  font-weight: 500;
   line-height: var(--font-line-heigh-h3);
-  font-family: var(--font-bebas-regular);
 }
+
 
 /* Body */
 .typography--body {
   font-size: var(--font-font-size-body-font-size);
   line-height: var(--font-line-heigh-body);
-  font-family: var(--font-raleway-regular);
 }
 
 .typography--body-mini {
   font-size: var(--font-font-size-body-mini-font-size);
   line-height: var(--font-line-heigh-body-mini);
-  font-family: var(--font-raleway-regular);
+}
+
+/* thickness */
+.typography--thin {
+  font-weight: 300;
+}
+
+.typography--regular {
+  font-weight: 400;
+}
+
+.typography--semi-bold {
+  font-weight: 500;
 }
 
 .typography--bold {
   font-weight: 600;
-  font-family: var(--font-raleway-semibold);
+}
+
+.typography--extra-bold {
+  font-weight: 700;
+}
+
+.typography--heavy-bold {
+  font-weight: 800;
 }
 
 
-/* Quotes */
-.typography--quote {
-  font-style: italic;
-  font-family: var(--font-raleway-italic);
+.font--headlines {
+  font-family: "Raleway";
 }
 
-/* Header */
-.typography--header {
-  font-size: var(--font-font-size-body-font-size);
-  font-weight: bold;
-  line-height: var(--font-line-heigh-header);
-  font-family: var(--font-raleway-regular);
+.font--body-text {
+  font-family: "Montserrat";
 }

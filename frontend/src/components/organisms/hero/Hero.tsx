@@ -11,15 +11,14 @@ import styles from "./Hero.module.css";
 import "./Hero.css";
 
 interface HeroProps {
-  src: StaticImageData;
+  src: StaticImageData | string;
   content?: JSX.Element | null;
   imageAlt: string;
   fullHeight?: boolean
-  blurDataURL?: string;
   imageStyles?: string;
 }
 
-export const Hero: React.FC<HeroProps> = ({ src, fullHeight = true, imageAlt, content, blurDataURL, imageStyles }) => {
+export const Hero: React.FC<HeroProps> = ({ src, fullHeight = true, imageAlt, content, imageStyles }) => {
 
   return (
     <div className={cx({ [styles.fullHeight]: fullHeight }, styles.heroWrapper)}>
@@ -27,15 +26,12 @@ export const Hero: React.FC<HeroProps> = ({ src, fullHeight = true, imageAlt, co
         <Image
           id="hero church background"
           priority
-          blurDataURL={blurDataURL}
-          loading="eager"
-          placeholder="blur"
           src={src}
           quality={100}
           layout="fill"
           objectFit="cover"
-          objectPosition="center"
           alt={imageAlt}
+          sizes="100vw"
           className={cx(imageStyles, styles.transition, "heroImage-opacity")}
           onLoadingComplete={(image: HTMLImageElement) => image.classList.remove("heroImage-opacity")}
         />

@@ -522,6 +522,7 @@ export interface ApiGlobalGlobal extends Struct.SingleTypeSchema {
     whatsup: Schema.Attribute.String & Schema.Attribute.Required;
     footerNote: Schema.Attribute.Component<'shared.rich-text', true> &
       Schema.Attribute.Required;
+    madeByLink: Schema.Attribute.String & Schema.Attribute.Required;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -705,6 +706,9 @@ export interface ApiServiceService extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Required;
     slug: Schema.Attribute.UID & Schema.Attribute.Required;
+    content: Schema.Attribute.DynamicZone<
+      ['history.gallery', 'shared.rich-text']
+    >;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;

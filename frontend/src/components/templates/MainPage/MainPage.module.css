@@ -7,36 +7,6 @@
 }
 
 .heroImage {
-  object-position: 25% 100% !important;
-}
-
-
-
-@media (mim-width: 1280px) {
-  .heroImage {
-    filter: brightness(1);
-  }
-}
-
-
-@media (max-width: 899px) and (orientation: portrait),
-(max-height: 899px) and (orientation: landscape) {
-  .heroImage {
-    filter: brightness(0.9);
-  }
-}
-
-
-@media (max-width: 400px) and (orientation: portrait),
-(max-height: 400px) and (orientation: landscape) {
-  .heroImage {
-    filter: brightness(0.85);
-  }
-}
-
-@media (max-width: 350px) and (orientation: portrait),
-(max-height: 350px) and (orientation: landscape) {
-  .heroImage {
-    filter: brightness(0.7);
-  }
+  object-position: 71% 100% !important;
+  filter: brightness(0.72);
 }

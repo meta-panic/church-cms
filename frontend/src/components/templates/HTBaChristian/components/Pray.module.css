@@ -7,11 +7,6 @@
   gap: var(--spacing-s);
 }
 
-.separator {
-  background-color: var(--default-components-cart-border);
-  width: 60px;
-}
-
 .text {
   align-items: start;
   display: flex;

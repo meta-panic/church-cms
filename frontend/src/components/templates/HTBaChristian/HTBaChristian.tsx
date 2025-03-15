@@ -3,7 +3,6 @@ import React from "react";
 import { Hero as HeroComponent } from "@/components/organisms/hero/Hero";
 import RichTextRenderer from "@/components/molecules/RichTextRenderer/RichTextRenderer";
 import Section from "@/components/atoms/section/Section";
-import { HeroContent } from "./components/HeroContent";
 import { Pray } from "./components/Pray";
 
 import type {
@@ -18,6 +17,8 @@ import type {
 import srcBackgroundHeroImage from "./Background.jpg";
 
 import styles from "./HTBaChristian.module.css";
+import { VideoContent } from "@/components/organisms/hero/contents/VideoContent/VideoContent";
+import Typography from "@/components/atoms/typography/Typography";
 
 interface HTBaChristianProps {
   hero: {
@@ -38,7 +39,9 @@ export const HTBaChristian: React.FC<HTBaChristianProps> = ({
       <HeroComponent
         fullHeight={false}
         src={srcBackgroundHeroImage}
-        content={<HeroContent  {...hero} />}
+        content={<VideoContent {...hero} >
+          {TextContentBlock(hero.title, hero.description)}
+        </VideoContent>}
         imageStyles={styles.imageStyling}
         imageAlt="Церковь с крестом на крыше на фоне ночного звездного неба"
       />
@@ -69,6 +72,7 @@ export const HTBaChristian: React.FC<HTBaChristianProps> = ({
 };
 
 
+
 export function isPrayExampleBlock(block: HtBaChristianContentDynamicZone): block is ComponentHtbachristianBlockPrayExample {
   return typeof (block as ComponentHtbachristianBlockPrayExample).prayText === "string" && typeof (block as ComponentHtbachristianBlockPrayExample).title === "string";
 }
@@ -76,3 +80,22 @@ export function isPrayExampleBlock(block: HtBaChristianContentDynamicZone): bloc
 export function isRichTextBlock(block: HtBaChristianContentDynamicZone): block is ComponentSharedRichText {
   return "body" in (block as ComponentSharedRichText) && typeof (block as ComponentSharedRichText).body === "string";
 }
+
+const TextContentBlock = (
+  title: ComponentContentBlocksInfoBlock["Title"],
+  description: ComponentContentBlocksInfoBlock["description"],
+): React.ReactNode => {
+  return <div className={styles.textWrapper}>
+    <Typography tag="H1" overideFont={{ fontFamily: "body-text", fontWeight: "heavy-bold" }}>{title}</Typography>
+    {description?.map(text => {
+      if (!text) {
+        return;
+      }
+      return <div key={text?.id}>
+        <Typography tag="body" overideFont={{ fontWeight: "semi-bold" }}>
+          {text.body}
+        </Typography>
+      </div>;
+    })}
+  </div>;
+};

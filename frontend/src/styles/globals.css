@@ -44,8 +44,10 @@ section {
 
 ::-moz-selection {
   background: var(--brand-400);
+  color: var(--common-light-100);
 }
 
 ::selection {
   background: var(--brand-400);
+  color: var(--common-light-100);
 }

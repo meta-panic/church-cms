@@ -1,5 +1,5 @@
 import { root } from "@/utils/isRoot";
-import Link from "@/components/atoms/link/Link";
+import Link from "@/components/molecules/Link/Link";
 import Typography from "@/components/atoms/typography/Typography";
 import CustomError from "../template/Error";
 

@@ -29,7 +29,7 @@ export const HowToBecomeAChristian: React.FC<HowToBecomeAChristianProps> = ({
 
         <div className={styles.content}>
           <div className={styles.title}>
-            <Typography tag="H1">{title}</Typography>
+            <Typography tag="H2">{title}</Typography>
           </div>
           <div className={styles.passages}>
             {description?.map(text => {
@@ -49,6 +49,7 @@ export const HowToBecomeAChristian: React.FC<HowToBecomeAChristianProps> = ({
                 variant="ghost"
                 on="onBrand"
                 size="L"
+                rounded
               />
             </div>
           }

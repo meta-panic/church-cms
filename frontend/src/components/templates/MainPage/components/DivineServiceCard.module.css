@@ -41,6 +41,7 @@
 
 .title {
   color: var(--accent-700);
+  text-transform: uppercase;
 }
 
 .cardBody {

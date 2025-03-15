@@ -4,7 +4,6 @@
 }
 
 .heroContent {
-  padding-top: var(--header-height--slim);
   height: 100%;
   position: relative;
   display: flex;
@@ -13,7 +12,6 @@
   justify-content: center;
   transition: all 0.35s ease-in-out;
 }
-
 
 .presentationHeader {
   padding-top: var(--header-height--presentation);
@@ -26,7 +24,7 @@
   background-color: var(--common-dark-700);
 
   height: fit-content;
-  min-height: 70vh;
+  min-height: 75vh;
   transition: all 0.35s ease-in-out;
 }
 

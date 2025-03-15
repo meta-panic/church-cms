@@ -21,6 +21,7 @@ export type Scalars = {
   HtBaChristianContentDynamicZoneInput: { input: any; output: any; }
   /** The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf). */
   JSON: { input: any; output: any; }
+  ServiceContentDynamicZoneInput: { input: any; output: any; }
 };
 
 export type BooleanFilterInput = {
@@ -191,6 +192,7 @@ export type ComponentServicesBlockHeader = {
   headerVideo?: Maybe<ComponentSharedEmbeddedVkVideo>;
   howDoWeDo?: Maybe<Array<Maybe<ComponentSharedRichText>>>;
   id: Scalars["ID"]["output"];
+  shortServiceDescription?: Maybe<Scalars["String"]["output"]>;
   whatDoWeDo?: Maybe<Array<Maybe<ComponentSharedRichText>>>;
 };
 
@@ -216,6 +218,7 @@ export type ComponentServicesBlockHeaderFiltersInput = {
   howDoWeDo?: InputMaybe<ComponentSharedRichTextFiltersInput>;
   not?: InputMaybe<ComponentServicesBlockHeaderFiltersInput>;
   or?: InputMaybe<Array<InputMaybe<ComponentServicesBlockHeaderFiltersInput>>>;
+  shortServiceDescription?: InputMaybe<StringFilterInput>;
   whatDoWeDo?: InputMaybe<ComponentSharedRichTextFiltersInput>;
 };
 
@@ -225,6 +228,7 @@ export type ComponentServicesBlockHeaderInput = {
   headerVideo?: InputMaybe<ComponentSharedEmbeddedVkVideoInput>;
   howDoWeDo?: InputMaybe<Array<InputMaybe<ComponentSharedRichTextInput>>>;
   id?: InputMaybe<Scalars["ID"]["input"]>;
+  shortServiceDescription?: InputMaybe<Scalars["String"]["input"]>;
   whatDoWeDo?: InputMaybe<Array<InputMaybe<ComponentSharedRichTextInput>>>;
 };
 
@@ -460,6 +464,7 @@ export type Global = {
   documentId: Scalars["ID"]["output"];
   email: Scalars["String"]["output"];
   footerNote: Array<Maybe<ComponentSharedRichText>>;
+  madeByLink: Scalars["String"]["output"];
   ok: Scalars["String"]["output"];
   phone: Scalars["String"]["output"];
   publishedAt?: Maybe<Scalars["DateTime"]["output"]>;
@@ -491,6 +496,7 @@ export type GlobalInput = {
   PrimalBuilding?: InputMaybe<ComponentSharedAddressInput>;
   email?: InputMaybe<Scalars["String"]["input"]>;
   footerNote?: InputMaybe<Array<InputMaybe<ComponentSharedRichTextInput>>>;
+  madeByLink?: InputMaybe<Scalars["String"]["input"]>;
   ok?: InputMaybe<Scalars["String"]["input"]>;
   phone?: InputMaybe<Scalars["String"]["input"]>;
   publishedAt?: InputMaybe<Scalars["DateTime"]["input"]>;
@@ -1276,6 +1282,7 @@ export type ReviewWorkflowsWorkflowStageRelationResponseCollection = {
 
 export type Service = {
   __typename?: "Service";
+  content?: Maybe<Array<Maybe<ServiceContentDynamicZone>>>;
   createdAt?: Maybe<Scalars["DateTime"]["output"]>;
   documentId: Scalars["ID"]["output"];
   hero: ComponentServicesBlockHeader;
@@ -1284,6 +1291,8 @@ export type Service = {
   slug: Scalars["String"]["output"];
   updatedAt?: Maybe<Scalars["DateTime"]["output"]>;
 };
+
+export type ServiceContentDynamicZone = ComponentHistoryGallery | ComponentSharedRichText | Error;
 
 export type ServiceEntityResponseCollection = {
   __typename?: "ServiceEntityResponseCollection";
@@ -1305,6 +1314,7 @@ export type ServiceFiltersInput = {
 };
 
 export type ServiceInput = {
+  content?: InputMaybe<Array<Scalars["ServiceContentDynamicZoneInput"]["input"]>>;
   hero?: InputMaybe<ComponentServicesBlockHeaderInput>;
   landingCarouselView?: InputMaybe<ComponentServicesBlockCarouselViewInput>;
   publishedAt?: InputMaybe<Scalars["DateTime"]["input"]>;
@@ -1675,9 +1685,10 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 
 /** Mapping of union types */
 export type ResolversUnionTypes<_RefType extends Record<string, unknown>> = {
-  GenericMorph: (Omit<ComponentContentBlocksEvent, "image"> & { image: _RefType["ComponentContentBlocksEventImage"] }) | (Omit<ComponentContentBlocksEventImage, "eventImage"> & { eventImage: _RefType["UploadFile"] }) | (ComponentContentBlocksInfoBlock) | (Omit<ComponentHistoryGallery, "photos" | "photos_connection"> & { photos: Array<Maybe<_RefType["UploadFile"]>>, photos_connection?: Maybe<_RefType["UploadFileRelationResponseCollection"]> }) | (ComponentHtbachristianBlockPrayExample) | (Omit<ComponentServicesBlockCarouselView, "carouselServiceImage"> & { carouselServiceImage: _RefType["UploadFile"] }) | (Omit<ComponentServicesBlockHeader, "headerPhoto"> & { headerPhoto?: Maybe<_RefType["ComponentSharedMedia"]> }) | (ComponentSharedAddress) | (ComponentSharedButton) | (ComponentSharedEmbeddedVkVideo) | (Omit<ComponentSharedMedia, "file"> & { file: _RefType["UploadFile"] }) | (ComponentSharedQuote) | (ComponentSharedRichText) | (ComponentSharedSchedule) | (Omit<ComponentSharedSeo, "shareImage"> & { shareImage?: Maybe<_RefType["UploadFile"]> }) | (Omit<ComponentSharedSlider, "files" | "files_connection"> & { files: Array<Maybe<_RefType["UploadFile"]>>, files_connection?: Maybe<_RefType["UploadFileRelationResponseCollection"]> }) | (Omit<ComponentSharedVkVideo, "thumbnail"> & { thumbnail?: Maybe<_RefType["UploadFile"]> }) | (Global) | (Omit<History, "content"> & { content?: Maybe<Array<Maybe<_RefType["HistoryContentDynamicZone"]>>> }) | (Omit<HtBaChristian, "content"> & { content: Array<Maybe<_RefType["HtBaChristianContentDynamicZone"]>> }) | (I18NLocale) | (OurSymbols) | (Omit<PageLanding, "Events"> & { Events: Array<Maybe<_RefType["ComponentContentBlocksEvent"]>> }) | (ReviewWorkflowsWorkflow) | (ReviewWorkflowsWorkflowStage) | (Omit<Service, "hero" | "landingCarouselView"> & { hero: _RefType["ComponentServicesBlockHeader"], landingCarouselView: _RefType["ComponentServicesBlockCarouselView"] }) | (Omit<UploadFile, "related"> & { related?: Maybe<Array<Maybe<_RefType["GenericMorph"]>>> }) | (UsersPermissionsPermission) | (UsersPermissionsRole) | (UsersPermissionsUser);
+  GenericMorph: (Omit<ComponentContentBlocksEvent, "image"> & { image: _RefType["ComponentContentBlocksEventImage"] }) | (Omit<ComponentContentBlocksEventImage, "eventImage"> & { eventImage: _RefType["UploadFile"] }) | (ComponentContentBlocksInfoBlock) | (Omit<ComponentHistoryGallery, "photos" | "photos_connection"> & { photos: Array<Maybe<_RefType["UploadFile"]>>, photos_connection?: Maybe<_RefType["UploadFileRelationResponseCollection"]> }) | (ComponentHtbachristianBlockPrayExample) | (Omit<ComponentServicesBlockCarouselView, "carouselServiceImage"> & { carouselServiceImage: _RefType["UploadFile"] }) | (Omit<ComponentServicesBlockHeader, "headerPhoto"> & { headerPhoto?: Maybe<_RefType["ComponentSharedMedia"]> }) | (ComponentSharedAddress) | (ComponentSharedButton) | (ComponentSharedEmbeddedVkVideo) | (Omit<ComponentSharedMedia, "file"> & { file: _RefType["UploadFile"] }) | (ComponentSharedQuote) | (ComponentSharedRichText) | (ComponentSharedSchedule) | (Omit<ComponentSharedSeo, "shareImage"> & { shareImage?: Maybe<_RefType["UploadFile"]> }) | (Omit<ComponentSharedSlider, "files" | "files_connection"> & { files: Array<Maybe<_RefType["UploadFile"]>>, files_connection?: Maybe<_RefType["UploadFileRelationResponseCollection"]> }) | (Omit<ComponentSharedVkVideo, "thumbnail"> & { thumbnail?: Maybe<_RefType["UploadFile"]> }) | (Global) | (Omit<History, "content"> & { content?: Maybe<Array<Maybe<_RefType["HistoryContentDynamicZone"]>>> }) | (Omit<HtBaChristian, "content"> & { content: Array<Maybe<_RefType["HtBaChristianContentDynamicZone"]>> }) | (I18NLocale) | (OurSymbols) | (Omit<PageLanding, "Events"> & { Events: Array<Maybe<_RefType["ComponentContentBlocksEvent"]>> }) | (ReviewWorkflowsWorkflow) | (ReviewWorkflowsWorkflowStage) | (Omit<Service, "content" | "hero" | "landingCarouselView"> & { content?: Maybe<Array<Maybe<_RefType["ServiceContentDynamicZone"]>>>, hero: _RefType["ComponentServicesBlockHeader"], landingCarouselView: _RefType["ComponentServicesBlockCarouselView"] }) | (Omit<UploadFile, "related"> & { related?: Maybe<Array<Maybe<_RefType["GenericMorph"]>>> }) | (UsersPermissionsPermission) | (UsersPermissionsRole) | (UsersPermissionsUser);
   HistoryContentDynamicZone: (Omit<ComponentHistoryGallery, "photos" | "photos_connection"> & { photos: Array<Maybe<_RefType["UploadFile"]>>, photos_connection?: Maybe<_RefType["UploadFileRelationResponseCollection"]> }) | (ComponentSharedRichText) | (Error);
   HtBaChristianContentDynamicZone: (ComponentHtbachristianBlockPrayExample) | (ComponentSharedRichText) | (Error);
+  ServiceContentDynamicZone: (Omit<ComponentHistoryGallery, "photos" | "photos_connection"> & { photos: Array<Maybe<_RefType["UploadFile"]>>, photos_connection?: Maybe<_RefType["UploadFileRelationResponseCollection"]> }) | (ComponentSharedRichText) | (Error);
 };
 
 
@@ -1770,7 +1781,9 @@ export type ResolversTypes = {
   ReviewWorkflowsWorkflowStageFiltersInput: ReviewWorkflowsWorkflowStageFiltersInput;
   ReviewWorkflowsWorkflowStageInput: ReviewWorkflowsWorkflowStageInput;
   ReviewWorkflowsWorkflowStageRelationResponseCollection: ResolverTypeWrapper<ReviewWorkflowsWorkflowStageRelationResponseCollection>;
-  Service: ResolverTypeWrapper<Omit<Service, "hero" | "landingCarouselView"> & { hero: ResolversTypes["ComponentServicesBlockHeader"], landingCarouselView: ResolversTypes["ComponentServicesBlockCarouselView"] }>;
+  Service: ResolverTypeWrapper<Omit<Service, "content" | "hero" | "landingCarouselView"> & { content?: Maybe<Array<Maybe<ResolversTypes["ServiceContentDynamicZone"]>>>, hero: ResolversTypes["ComponentServicesBlockHeader"], landingCarouselView: ResolversTypes["ComponentServicesBlockCarouselView"] }>;
+  ServiceContentDynamicZone: ResolverTypeWrapper<ResolversUnionTypes<ResolversTypes>["ServiceContentDynamicZone"]>;
+  ServiceContentDynamicZoneInput: ResolverTypeWrapper<Scalars["ServiceContentDynamicZoneInput"]["output"]>;
   ServiceEntityResponseCollection: ResolverTypeWrapper<Omit<ServiceEntityResponseCollection, "nodes"> & { nodes: Array<ResolversTypes["Service"]> }>;
   ServiceFiltersInput: ServiceFiltersInput;
   ServiceInput: ServiceInput;
@@ -1892,7 +1905,9 @@ export type ResolversParentTypes = {
   ReviewWorkflowsWorkflowStageFiltersInput: ReviewWorkflowsWorkflowStageFiltersInput;
   ReviewWorkflowsWorkflowStageInput: ReviewWorkflowsWorkflowStageInput;
   ReviewWorkflowsWorkflowStageRelationResponseCollection: ReviewWorkflowsWorkflowStageRelationResponseCollection;
-  Service: Omit<Service, "hero" | "landingCarouselView"> & { hero: ResolversParentTypes["ComponentServicesBlockHeader"], landingCarouselView: ResolversParentTypes["ComponentServicesBlockCarouselView"] };
+  Service: Omit<Service, "content" | "hero" | "landingCarouselView"> & { content?: Maybe<Array<Maybe<ResolversParentTypes["ServiceContentDynamicZone"]>>>, hero: ResolversParentTypes["ComponentServicesBlockHeader"], landingCarouselView: ResolversParentTypes["ComponentServicesBlockCarouselView"] };
+  ServiceContentDynamicZone: ResolversUnionTypes<ResolversParentTypes>["ServiceContentDynamicZone"];
+  ServiceContentDynamicZoneInput: Scalars["ServiceContentDynamicZoneInput"]["output"];
   ServiceEntityResponseCollection: Omit<ServiceEntityResponseCollection, "nodes"> & { nodes: Array<ResolversParentTypes["Service"]> };
   ServiceFiltersInput: ServiceFiltersInput;
   ServiceInput: ServiceInput;
@@ -1981,6 +1996,7 @@ export type ComponentServicesBlockHeaderResolvers<ContextType = any, ParentType 
   headerVideo?: Resolver<Maybe<ResolversTypes["ComponentSharedEmbeddedVkVideo"]>, ParentType, ContextType>;
   howDoWeDo?: Resolver<Maybe<Array<Maybe<ResolversTypes["ComponentSharedRichText"]>>>, ParentType, ContextType, RequireFields<ComponentServicesBlockHeaderHowDoWeDoArgs, "pagination" | "sort">>;
   id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  shortServiceDescription?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   whatDoWeDo?: Resolver<Maybe<Array<Maybe<ResolversTypes["ComponentSharedRichText"]>>>, ParentType, ContextType, RequireFields<ComponentServicesBlockHeaderWhatDoWeDoArgs, "pagination" | "sort">>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
@@ -2080,6 +2096,7 @@ export type GlobalResolvers<ContextType = any, ParentType extends ResolversParen
   documentId?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
   email?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   footerNote?: Resolver<Array<Maybe<ResolversTypes["ComponentSharedRichText"]>>, ParentType, ContextType, RequireFields<GlobalFooterNoteArgs, "pagination" | "sort">>;
+  madeByLink?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   ok?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   phone?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   publishedAt?: Resolver<Maybe<ResolversTypes["DateTime"]>, ParentType, ContextType>;
@@ -2298,6 +2315,7 @@ export type ReviewWorkflowsWorkflowStageRelationResponseCollectionResolvers<Cont
 };
 
 export type ServiceResolvers<ContextType = any, ParentType extends ResolversParentTypes["Service"] = ResolversParentTypes["Service"]> = {
+  content?: Resolver<Maybe<Array<Maybe<ResolversTypes["ServiceContentDynamicZone"]>>>, ParentType, ContextType>;
   createdAt?: Resolver<Maybe<ResolversTypes["DateTime"]>, ParentType, ContextType>;
   documentId?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
   hero?: Resolver<ResolversTypes["ComponentServicesBlockHeader"], ParentType, ContextType>;
@@ -2307,6 +2325,14 @@ export type ServiceResolvers<ContextType = any, ParentType extends ResolversPare
   updatedAt?: Resolver<Maybe<ResolversTypes["DateTime"]>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
+
+export type ServiceContentDynamicZoneResolvers<ContextType = any, ParentType extends ResolversParentTypes["ServiceContentDynamicZone"] = ResolversParentTypes["ServiceContentDynamicZone"]> = {
+  __resolveType: TypeResolveFn<"ComponentHistoryGallery" | "ComponentSharedRichText" | "Error", ParentType, ContextType>;
+};
+
+export interface ServiceContentDynamicZoneInputScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes["ServiceContentDynamicZoneInput"], any> {
+  name: "ServiceContentDynamicZoneInput";
+}
 
 export type ServiceEntityResponseCollectionResolvers<ContextType = any, ParentType extends ResolversParentTypes["ServiceEntityResponseCollection"] = ResolversParentTypes["ServiceEntityResponseCollection"]> = {
   nodes?: Resolver<Array<ResolversTypes["Service"]>, ParentType, ContextType>;
@@ -2502,6 +2528,8 @@ export type Resolvers<ContextType = any> = {
   ReviewWorkflowsWorkflowStageEntityResponseCollection?: ReviewWorkflowsWorkflowStageEntityResponseCollectionResolvers<ContextType>;
   ReviewWorkflowsWorkflowStageRelationResponseCollection?: ReviewWorkflowsWorkflowStageRelationResponseCollectionResolvers<ContextType>;
   Service?: ServiceResolvers<ContextType>;
+  ServiceContentDynamicZone?: ServiceContentDynamicZoneResolvers<ContextType>;
+  ServiceContentDynamicZoneInput?: GraphQLScalarType;
   ServiceEntityResponseCollection?: ServiceEntityResponseCollectionResolvers<ContextType>;
   UploadFile?: UploadFileResolvers<ContextType>;
   UploadFileEntityResponseCollection?: UploadFileEntityResponseCollectionResolvers<ContextType>;

@@ -65,6 +65,10 @@
       "repeatable": true,
       "component": "shared.rich-text",
       "required": true
+    },
+    "madeByLink": {
+      "type": "string",
+      "required": true
     }
   }
 }

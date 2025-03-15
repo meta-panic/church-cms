@@ -48,11 +48,11 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ items, isOpen, onClose, onClick
                 className={cx(styles.item, styles.menuItem)}
                 scroll={!hasAnchor(item.href)}
               >
-                <Typography tag="H2">{item.text}</Typography>
+                <Typography tag="H2" overideFont={{ fontFamily: "headlines", fontWeight: "semi-bold" }}>{item.text}</Typography>
               </Link>
             </li>
           ))}
-          <li className={cx(styles.decorativeItem, styles.item)}><Typography tag="H2">†</Typography></li>
+          <li className={cx(styles.decorativeItem, styles.item)}><Typography tag="H2" overideFont={{ fontWeight: "semi-bold" }}>†</Typography></li>
         </ul>
       </nav>
 

@@ -27,6 +27,13 @@
     "slug": {
       "type": "uid",
       "required": true
+    },
+    "content": {
+      "type": "dynamiczone",
+      "components": [
+        "history.gallery",
+        "shared.rich-text"
+      ]
     }
   }
 }

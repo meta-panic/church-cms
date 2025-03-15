@@ -4,7 +4,7 @@ import React from "react";
 import Section from "@/components/atoms/section/Section";
 import RichTextRenderer from "@/components/molecules/RichTextRenderer/RichTextRenderer";
 import { hasValue } from "@/utils/notMaybe";
-import Gallery from "@/components/organisms/Gallery/Gallery";
+import { GridGallery } from "@/components/organisms/Gallery/GridGallery";
 import Typography from "@/components/atoms/typography/Typography";
 
 import type {
@@ -47,7 +47,7 @@ export const History: React.FC<HistoryProps> = ({
 
             return <div key={block.id} className={styles.galleryWrapper}>
               {block?.title && <Typography tag="H3">{block.title}</Typography>}
-              <Gallery images={galleryImages} />
+              <GridGallery images={galleryImages} />
             </div>;
           }
 

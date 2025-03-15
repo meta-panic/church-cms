@@ -9,7 +9,7 @@
 .event {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-xs);
+  gap: var(--spacing-m);
   flex: 1;
 }
 
@@ -21,7 +21,7 @@
 }
 
 .eventType {
-  color: var(--accent-500);
+  color: var(--default-text);
 }
 
 .eventType.past {

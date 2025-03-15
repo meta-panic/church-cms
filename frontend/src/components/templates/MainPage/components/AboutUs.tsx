@@ -20,7 +20,7 @@ export const AboutUs: React.FC<AboutUsProps> = ({ aboutUs }) => {
   return (
     <div className={styles.aboutUsContainer}>
       <div>
-        <Typography tag="H1">{aboutUs.Title}</Typography>
+        <Typography tag="H2">{aboutUs.Title}</Typography>
       </div>
       <div className={styles.descriptionPassages}>
         {allButLast.map((description) => {

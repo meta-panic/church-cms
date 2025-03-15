@@ -3,7 +3,7 @@ import { usePathname } from "next/navigation";
 
 import CustomError from "@/components/molecules/CustomErrorBoundaries/template/Error";
 import { isRootPath, root } from "@/utils/isRoot";
-import Link from "@/components/atoms/link/Link";
+import Link from "@/components/molecules/Link/Link";
 import Typography from "@/components/atoms/typography/Typography";
 
 import styles from "./DefaultError.module.css";

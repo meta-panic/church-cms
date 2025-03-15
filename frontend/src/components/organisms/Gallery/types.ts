@@ -6,3 +6,8 @@ export interface ImageType {
   caption?: string;
   alternativeText?: string;
 }
+
+export interface GridRenderProps {
+  images: ImageType[];
+  handleImageClick: (index: number) => void;
+}

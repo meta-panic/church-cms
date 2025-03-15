@@ -36,7 +36,7 @@ export const navItemsDesktop: NavItemDesktop[] = [
     ],
   },
   { href: "/how-to-become-a-christian", text: "Как стать христианином?", hideOnScroll: true },
-  { href: "/videos", text: "Проповеди" },
+  // { href: "/videos", text: "Проповеди" },
   { href: `${root}#services`, text: "Служения" },
   { href: "#contacts", text: "Контакты" },
 ];
@@ -44,10 +44,10 @@ export const navItemsDesktop: NavItemDesktop[] = [
 export const navItemsMobileAndTablet: NavItemMobile[] = [
   { href: "/history", text: "История", showInPopup: false },
   { href: "/our-symbols", text: "О нас", showInPopup: false },
-  { href: "/videos", text: "Проповеди", showInPopup: false },
+  // { href: "/videos", text: "Проповеди", showInPopup: false }, comment out for next release 
+  { href: "#contacts", text: "Контакты", showInPopup: false },
 
   // these navs are shown in popup
   { href: "/how-to-become-a-christian", text: "Как стать христианином?", showInPopup: true },
   { href: `${root}#services`, text: "Служения", showInPopup: true },
-  { href: "#contacts", text: "Контакты", showInPopup: true },
 ];

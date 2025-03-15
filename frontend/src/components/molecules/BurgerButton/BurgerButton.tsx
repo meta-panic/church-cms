@@ -11,9 +11,10 @@ import styles from "./BurgerButton.module.css";
 interface BurgerButtonProps {
   isOpen: boolean;
   onToggle?: () => void;
+  hideTitle?: boolean;
 }
 
-export const BurgerButton: React.FC<BurgerButtonProps> = ({ isOpen, onToggle }) => {
+export const BurgerButton: React.FC<BurgerButtonProps> = ({ isOpen, onToggle, hideTitle = false }) => {
   return (
     <div
       role="button"
@@ -34,7 +35,11 @@ export const BurgerButton: React.FC<BurgerButtonProps> = ({ isOpen, onToggle }) 
         styles.menuButtonLabel,
         { [styles.hidden]: isOpen },
       )}>
-        <Typography tag="H3">МЕНЮ</Typography>
+        {!hideTitle &&
+          <Typography tag="H3" overideFont={{ fontWeight: "semi-bold" }}>
+            МЕНЮ
+          </Typography>
+        }
       </div>
 
       <BurgerIcon isOpen={isOpen} />

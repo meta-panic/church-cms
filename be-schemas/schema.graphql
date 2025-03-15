@@ -347,6 +347,7 @@ input ComponentServicesBlockHeaderFiltersInput {
   howDoWeDo: ComponentSharedRichTextFiltersInput
   headerPhoto: ComponentSharedMediaFiltersInput
   headerVideo: ComponentSharedEmbeddedVkVideoFiltersInput
+  shortServiceDescription: StringFilterInput
   and: [ComponentServicesBlockHeaderFiltersInput]
   or: [ComponentServicesBlockHeaderFiltersInput]
   not: ComponentServicesBlockHeaderFiltersInput
@@ -359,6 +360,7 @@ input ComponentServicesBlockHeaderInput {
   howDoWeDo: [ComponentSharedRichTextInput]
   headerPhoto: ComponentSharedMediaInput
   headerVideo: ComponentSharedEmbeddedVkVideoInput
+  shortServiceDescription: String
 }
 
 type ComponentServicesBlockHeader {
@@ -368,6 +370,7 @@ type ComponentServicesBlockHeader {
   howDoWeDo(filters: ComponentSharedRichTextFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentSharedRichText]
   headerPhoto: ComponentSharedMedia
   headerVideo: ComponentSharedEmbeddedVkVideo
+  shortServiceDescription: String
 }
 
 input ComponentServicesBlockCarouselViewFiltersInput {
@@ -768,6 +771,7 @@ input GlobalInput {
   taplink: String
   whatsup: String
   footerNote: [ComponentSharedRichTextInput]
+  madeByLink: String
   publishedAt: DateTime
 }
 
@@ -785,6 +789,7 @@ type Global {
   taplink: String!
   whatsup: String!
   footerNote(filters: ComponentSharedRichTextFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentSharedRichText]!
+  madeByLink: String!
   createdAt: DateTime
   updatedAt: DateTime
   publishedAt: DateTime
@@ -885,6 +890,10 @@ type PageLandingEntityResponseCollection {
   pageInfo: Pagination!
 }
 
+union ServiceContentDynamicZone = ComponentHistoryGallery | ComponentSharedRichText | Error
+
+scalar ServiceContentDynamicZoneInput
+
 input ServiceFiltersInput {
   documentId: IDFilterInput
   hero: ComponentServicesBlockHeaderFiltersInput
@@ -902,6 +911,7 @@ input ServiceInput {
   hero: ComponentServicesBlockHeaderInput
   landingCarouselView: ComponentServicesBlockCarouselViewInput
   slug: String
+  content: [ServiceContentDynamicZoneInput!]
   publishedAt: DateTime
 }
 
@@ -910,6 +920,7 @@ type Service {
   hero: ComponentServicesBlockHeader!
   landingCarouselView: ComponentServicesBlockCarouselView!
   slug: String!
+  content: [ServiceContentDynamicZone]
   createdAt: DateTime
   updatedAt: DateTime
   publishedAt: DateTime

@@ -1,7 +1,6 @@
 :root {
   --brand-100: #e6eaec;
   --brand-200: #c7d1d1;
-  --common-light-100: #f8f6f7;
   --brand-300: #abb5b8;
   --brand-400: #949fa1;
   --brand-500: #849193;
@@ -19,6 +18,7 @@
   --accent-800: #5a6e64;
   --accent-900: #486054;
 
+  --common-light-100: #f8f6f7;
   --common-light-0: #ffffff;
   --brand-0: #eeeeee;
 
