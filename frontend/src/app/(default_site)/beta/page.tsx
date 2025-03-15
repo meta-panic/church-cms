@@ -5,13 +5,12 @@ import { getContactsData, getLandingPageData } from "../../../lib/fetchData";
 import { PageLanding, Service as DivineService, Global as ContactInfo } from "@/types";
 import { HttpError } from "@/app/types/Errors";
 import DefaultError from "@/components/molecules/CustomErrorBoundaries/DefaultError/DefaultError";
+import { favSettings } from "@/app/faviconSettings";
 
 export const metadata: Metadata = {
   title: "Дом молитвы",
   description: "Церковь Евангельских христиан-баптистов",
-  icons: {
-    icon: { url: "/favicon.png" },
-  },
+  icons: favSettings,
 };
 
 

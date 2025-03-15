@@ -7,6 +7,7 @@ import { History } from "@/components/templates/History/History";
 import { HttpError } from "@/app/types/Errors";
 import { fetchPageInfo } from "@/utils/fetch";
 import DefaultError from "@/components/molecules/CustomErrorBoundaries/DefaultError/DefaultError";
+import { favSettings } from "@/app/faviconSettings";
 
 import type { History as HistoryType } from "@/types";
 
@@ -15,9 +16,7 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "История поместной церкви г. Невинномысска",
-  icons: {
-    icon: { url: "/favicon.png" },
-  },
+  icons: favSettings,
 };
 
 export default async function App() {
