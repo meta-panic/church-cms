@@ -2,8 +2,8 @@
 import React from "react";
 import cx from "classnames";
 
-import Typography from "@/components/atoms/typography/Typography";
 import BurgerIcon from "@/components/atoms/burgerIcon/BurgerIcon";
+import MenuTextIcon from "./MenuTextIcon.svg";
 
 import styles from "./BurgerButton.module.css";
 
@@ -36,9 +36,9 @@ export const BurgerButton: React.FC<BurgerButtonProps> = ({ isOpen, onToggle, hi
         { [styles.hidden]: isOpen },
       )}>
         {!hideTitle &&
-          <Typography tag="H3" overideFont={{ fontWeight: "semi-bold" }}>
-            МЕНЮ
-          </Typography>
+          <div className={styles.menuTextContainer}>
+            <MenuTextIcon />
+          </div>
         }
       </div>
 
@@ -46,4 +46,3 @@ export const BurgerButton: React.FC<BurgerButtonProps> = ({ isOpen, onToggle, hi
     </div>
   );
 };
-

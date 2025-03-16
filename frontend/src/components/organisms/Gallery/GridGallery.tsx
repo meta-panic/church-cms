@@ -13,7 +13,7 @@ export const GridGallery = ({ images }: { images: ImageType[] }) => (
   />
 );
 
-export const MasonryGallery = ({ images }: { images: ImageType[] }) => {
+export const MasonryGallery = ({ images, showCaption }: { images: ImageType[], showCaption?: boolean }) => {
   // sort the images to move square-like ones to the bottom
   // because it is the way "dense" property works for grid
   // see - https://www.w3.org/TR/css3-grid-layout/#grid-auto-flow-property
@@ -40,7 +40,7 @@ export const MasonryGallery = ({ images }: { images: ImageType[] }) => {
   return (
     <AbstractGallery
       images={sortedImages}
-      renderGrid={(props) => <MasonryGrid {...props} />}
+      renderGrid={(props) => <MasonryGrid {...props} showCaption={showCaption} />}
     />
   );
 };

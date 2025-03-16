@@ -3,6 +3,7 @@ import React, { useMemo } from "react";
 import Image from "next/image";
 
 import { useMediaQuery, BREAKPOINTS } from "@/hooks/useMediaQuery";
+import Typography from "@/components/atoms/typography/Typography";
 import ClientOnly from "../../../header/_components/ClientOnly";
 
 import type { ImageType } from "../../types";
@@ -14,11 +15,13 @@ import styles from "./MasonryGrid.module.css";
 interface MasonryGridProps {
   images: ImageType[];
   handleImageClick: (index: number) => void;
+  showCaption?: boolean;
 }
 
 export const MasonryGrid: React.FC<MasonryGridProps> = ({
   images,
   handleImageClick,
+  showCaption = false,
 }) => {
   const isSmallScreen = useMediaQuery([BREAKPOINTS.mobile]);
 
@@ -54,6 +57,13 @@ export const MasonryGrid: React.FC<MasonryGridProps> = ({
                 />
               </div>
             </div>
+
+            {showCaption && image.caption
+              && <Typography className={styles.caption} tag={"body"}>
+                {image.caption}
+              </Typography>
+            }
+
           </div>
         ))}
       </div>

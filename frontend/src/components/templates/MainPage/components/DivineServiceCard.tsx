@@ -47,20 +47,15 @@ export const DivineServiceCard: React.FC<DivineServiceCardProps> = ({
 
         <div className={styles.textContainer}>
           <div className={styles.title}>
-            <Typography tag="body" overideFont={{ fontFamily: "headlines", fontWeight: "extra-bold" }}>
+            <Link tag="body" to={href} isExternal={false} overideFont={{ fontFamily: "headlines", fontWeight: "extra-bold" }} >
               {title}
-            </Typography>
+            </Link>
           </div>
 
           <Typography tag="body">
             {description}
           </Typography>
         </div>
-
-        <Link tag="body" to={href} isExternal={false}>
-          Узнать больше
-        </Link>
-
       </div>
     </div >
   );

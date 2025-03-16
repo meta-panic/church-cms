@@ -86,7 +86,7 @@ export const DivineService: React.FC<DivineServiceProps> = ({
 
               return <div key={block.id} className={styles.galleryWrapper}>
                 {block?.title && <Typography tag="H2">{block.title}</Typography>}
-                <MasonryGallery images={galleryImages} />
+                <MasonryGallery images={galleryImages} showCaption={true} />
               </div>;
             }
 

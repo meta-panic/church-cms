@@ -268,19 +268,6 @@ type ComponentSharedQuote {
   body: String
 }
 
-input ComponentSharedMediaFiltersInput {
-  description: StringFilterInput
-  and: [ComponentSharedMediaFiltersInput]
-  or: [ComponentSharedMediaFiltersInput]
-  not: ComponentSharedMediaFiltersInput
-}
-
-input ComponentSharedMediaInput {
-  id: ID
-  file: ID
-  description: String
-}
-
 type ComponentSharedMedia {
   id: ID!
   file: UploadFile!
@@ -345,7 +332,6 @@ input ComponentServicesBlockHeaderFiltersInput {
   Title: StringFilterInput
   whatDoWeDo: ComponentSharedRichTextFiltersInput
   howDoWeDo: ComponentSharedRichTextFiltersInput
-  headerPhoto: ComponentSharedMediaFiltersInput
   headerVideo: ComponentSharedEmbeddedVkVideoFiltersInput
   shortServiceDescription: StringFilterInput
   and: [ComponentServicesBlockHeaderFiltersInput]
@@ -358,7 +344,6 @@ input ComponentServicesBlockHeaderInput {
   Title: String
   whatDoWeDo: [ComponentSharedRichTextInput]
   howDoWeDo: [ComponentSharedRichTextInput]
-  headerPhoto: ComponentSharedMediaInput
   headerVideo: ComponentSharedEmbeddedVkVideoInput
   shortServiceDescription: String
 }
@@ -368,7 +353,6 @@ type ComponentServicesBlockHeader {
   Title: String
   whatDoWeDo(filters: ComponentSharedRichTextFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentSharedRichText]
   howDoWeDo(filters: ComponentSharedRichTextFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentSharedRichText]
-  headerPhoto: ComponentSharedMedia
   headerVideo: ComponentSharedEmbeddedVkVideo
   shortServiceDescription: String
 }

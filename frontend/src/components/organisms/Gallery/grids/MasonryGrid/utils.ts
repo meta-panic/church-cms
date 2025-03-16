@@ -45,8 +45,16 @@ export const getGridStyle = (isSmallScreen: boolean, images: ImageType[]) => {
   const isEvenCount = spansCount % 2 === 0;
 
   return {
-    gridTemplateColumns: `repeat(${isEvenCount ? 2 : 3}, minmax(auto, 1fr))`,
+    gridTemplateColumns: `repeat(${columnCount(isEvenCount, images.length)}, minmax(auto, 1fr))`,
     gridAutoRows: "minmax(200px, auto)",
     gridAutoFlow: "dense",
   };
+};
+
+const columnCount = (isEvenCount: boolean, totalNumber: number) => {
+  if (totalNumber > 7) {
+    return 3;
+  }
+
+  return isEvenCount ? 2 : 3;
 };

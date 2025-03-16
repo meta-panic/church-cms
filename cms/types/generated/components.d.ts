@@ -142,7 +142,6 @@ export interface ServicesBlockHeader extends Struct.ComponentSchema {
     Title: Schema.Attribute.String;
     whatDoWeDo: Schema.Attribute.Component<'shared.rich-text', true>;
     howDoWeDo: Schema.Attribute.Component<'shared.rich-text', true>;
-    headerPhoto: Schema.Attribute.Component<'shared.media', false>;
     headerVideo: Schema.Attribute.Component<'shared.embedded-vk-video', false>;
     shortServiceDescription: Schema.Attribute.String &
       Schema.Attribute.SetMinMaxLength<{

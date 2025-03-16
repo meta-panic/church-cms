@@ -1,8 +1,9 @@
 import React, { FC, JSX } from "react";
 import classNames from "classnames";
 
+import { FontFamily, FontWeightType, TagStyle, TypographyTag } from "@/components/types";
+
 import styles from "./Typography.module.css";
-import { TypographyTag } from "@/components/types";
 
 
 export interface BaseTypographyProps {
@@ -48,12 +49,6 @@ const Typography: FC<TypographyProps> = ({
 
 export default Typography;
 
-type FontFamily = "headlines" | "body-text";
-type FontWeightType = "thin" | "regular" | "semi-bold" | "bold" | "extra-bold" | "heavy-bold";
-type TagStyle = {
-  fontFamily: FontFamily;
-  fontWeight: FontWeightType;
-}
 
 const tagMapStyle: Record<TypographyTag, TagStyle> = {
   H1: {

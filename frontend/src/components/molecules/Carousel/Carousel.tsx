@@ -5,7 +5,6 @@ import cx from "classnames";
 
 import { BREAKPOINTS, useMediaQuery } from "@/hooks/useMediaQuery";
 import useVerticalScrollPrevention from "@/hooks/useVerticalScrollPrevention";
-import Typography from "@/components/atoms/typography/Typography";
 
 import "react-multi-carousel/lib/styles.css";
 import "./Carousel.css";
