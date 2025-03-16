@@ -14,7 +14,7 @@ const CustomError: React.FC<CustomErrorProps> = ({
   errorMessage,
   footer,
 }) => {
-  return <div className={styles.errorWrapper}>
+  return <div className={styles.errorWrapper} data-error-boundary="true">
     <div className={styles.error}>
       <div className={styles.errorTextContainer}>
         <div className={styles.errorText}>
