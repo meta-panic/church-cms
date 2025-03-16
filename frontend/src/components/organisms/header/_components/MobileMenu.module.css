@@ -50,7 +50,7 @@
 
 .menuItem {
   display: block;
-  padding: var(--spacing-xs) 0;
+  padding: 10px 0;
 }
 
 .menuItem:hover {

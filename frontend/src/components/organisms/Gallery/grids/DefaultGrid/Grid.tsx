@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import { ImageType } from "../types";
+import { ImageType } from "../../types";
 
 import styles from "./Grid.module.css";
 
