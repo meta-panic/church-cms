@@ -44,10 +44,10 @@ export default async function RootLayout({
         navItemsMobile={navItemsMobileAndTablet}
         contacts={contactData && {
           taplink: contactData.taplink,
-          telegram: contactData.taplink,
-          vk: contactData.taplink,
-          youtube: contactData.taplink,
-          whatsup: contactData.taplink,
+          telegram: contactData.telegram,
+          vk: contactData.vk,
+          youtube: contactData.youtube,
+          whatsup: contactData.whatsup,
         }}
       />
 
