@@ -5,6 +5,7 @@ import cx from "classnames";
 
 import { BREAKPOINTS, useMediaQuery } from "@/hooks/useMediaQuery";
 import Typography from "@/components/atoms/typography/Typography";
+import Button from "@/components/atoms/Button/Button";
 
 import type { ComponentContentBlocksEvent } from "@/types";
 
@@ -52,7 +53,21 @@ export const EventCard: React.FC<EventCardProps> = ({ event, type, orientation =
               <Typography tag="body" overideFont={{ fontWeight: "extra-bold" }}>Дата:&nbsp;</Typography>
               <Typography tag="body">{date.day} {date.month}</Typography>
             </div>
+
           </div>
+
+          {event.Button &&
+            <Button
+              isExternal={event.Button?.isExternal}
+              link={event.Button?.Button_link}
+              variant="ghost"
+              text={event.Button?.Button_text || "Узнать больше"}
+              on="onLight"
+              size="M"
+              wide={false}
+              rounded
+            />
+          }
         </div>
       </div>
 
