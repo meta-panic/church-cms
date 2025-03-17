@@ -23,7 +23,3 @@
 .eventType {
   color: var(--default-text);
 }
-
-.eventType.past {
-  text-align: right;
-}

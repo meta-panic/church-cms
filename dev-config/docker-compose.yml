@@ -15,6 +15,12 @@ services:
         - b80ow4gcgs4k44g4ck4kgcow-cms:SHA_frontend_${SOURCE_COMMIT}
     ports:
       - "127.0.0.1:3000:3000" # use "3000:3000" for debug
+    healthcheck:
+      test: [ "CMD-SHELL", "curl -f http://localhost:3000/api/health || exit 1" ]
+      interval: 120s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
     environment:
       HOSTNAME: ${FRONTEND_HOSTNAME}
       NEXT_PUBLIC_BACKEND_URL: ${NEXT_PUBLIC_BACKEND_URL}

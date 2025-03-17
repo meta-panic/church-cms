@@ -4,12 +4,12 @@ import { Metadata } from "next";
 import Section from "@/components/atoms/section/Section";
 import Stub from "@/components/organisms/stub/Stub";
 
+import { favSettings } from "./faviconSettings";
+
 export const metadata: Metadata = {
   title: "Дом молитвы",
   description: "Церковь Евангельских христиан-баптистов",
-  icons: {
-    icon: { url: "/favicon.png" },
-  },
+  icons: favSettings,
 };
 
 

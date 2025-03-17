@@ -7,6 +7,7 @@ import { HttpError } from "@/app/types/Errors";
 import { HTBaChristian } from "@/components/templates/HTBaChristian/HTBaChristian";
 import DefaultError from "@/components/molecules/CustomErrorBoundaries/DefaultError/DefaultError";
 import { fetchPageInfo } from "@/utils/fetch";
+import { favSettings } from "@/app/faviconSettings";
 
 import { HtBaChristian } from "@/types";
 
@@ -16,9 +17,7 @@ import styles from "./page.module.css";
 export const metadata: Metadata = {
   title: "Как стать христианином | Церковь «Дом молитвы»",
   description: "Как стать христианином?",
-  icons: {
-    icon: { url: "/favicon.png" },
-  },
+  icons: favSettings,
 };
 
 

@@ -48,7 +48,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ items, isOpen, onClose, onClick
                 className={cx(styles.item, styles.menuItem)}
                 scroll={!hasAnchor(item.href)}
               >
-                <Typography tag="H2" overideFont={{ fontFamily: "headlines", fontWeight: "semi-bold" }}>{item.text}</Typography>
+                <Typography tag="H2" overideFont={{ fontFamily: "headlines", fontWeight: "bold" }}>{item.text}</Typography>
               </Link>
             </li>
           ))}

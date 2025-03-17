@@ -1,69 +1,42 @@
 "use client";
-import React from "react";
+import React, { useMemo } from "react";
 import Image from "next/image";
 
 import { useMediaQuery, BREAKPOINTS } from "@/hooks/useMediaQuery";
-import ClientOnly from "../../header/_components/ClientOnly";
+import Typography from "@/components/atoms/typography/Typography";
+import ClientOnly from "../../../header/_components/ClientOnly";
 
-import type { ImageType } from "../types";
+import type { ImageType } from "../../types";
+
+import { getGridStyle, getItemSpan } from "./utils";
 
 import styles from "./MasonryGrid.module.css";
 
 interface MasonryGridProps {
   images: ImageType[];
   handleImageClick: (index: number) => void;
+  showCaption?: boolean;
 }
 
 export const MasonryGrid: React.FC<MasonryGridProps> = ({
   images,
   handleImageClick,
+  showCaption = false,
 }) => {
   const isSmallScreen = useMediaQuery([BREAKPOINTS.mobile]);
 
-  const getGridStyle = () => {
-    if (isSmallScreen) return { gridTemplateColumns: "1fr" };
-
-    return {
-      gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
-      gridAutoRows: "minmax(200px, auto)",
-      gridAutoFlow: "dense",
-    };
-  };
-
-  const getItemSpan = (image: ImageType) => {
-    if (isSmallScreen) return {};
-
-    const aspectRatio = image.width / image.height;
-
-    if (aspectRatio > 1.3) {
-      return {
-        gridColumn: "span 2",
-        gridRow: "span 1",
-        aspectRatio: "2/1",
-      };
-    }
-
-    if (aspectRatio < 0.7) {
-      return {
-        gridColumn: "span 1",
-        gridRow: "span 2",
-        aspectRatio: "1/2",
-      };
-    }
-
-    return { aspectRatio: "1/1" };
-  };
+  const gridStyle = useMemo(() => getGridStyle(isSmallScreen, images), [isSmallScreen, images]);
 
 
   return (
     <ClientOnly fallback={null}>
-      <div role="grid" aria-label="Image Gallery" className={styles.masonry} style={getGridStyle()}>
+      <div role="grid" aria-label="Image Gallery" className={styles.masonry} style={gridStyle}>
         {images.map((image, index) => (
           <div
             key={`${image.src}-${index}`}
             className={styles.masonryItem}
             onClick={() => handleImageClick(index)}
-            style={getItemSpan(image)}
+            style={getItemSpan(image, isSmallScreen)}
             role="gridcell"
             tabIndex={0}
             onKeyDown={(e) => {
@@ -80,16 +53,21 @@ export const MasonryGrid: React.FC<MasonryGridProps> = ({
                   width={image.width}
                   height={image.height}
                   className={styles.image}
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  style={{
-                    aspectRatio: getItemSpan(image).aspectRatio,
-                  }}
+                  sizes="(max-width: 640px) 100vw, (max-width: 1279px) 50vw, 33vw"
                 />
               </div>
             </div>
+
+            {showCaption && image.caption
+              && <Typography className={styles.caption} tag={"body"}>
+                {image.caption}
+              </Typography>
+            }
+
           </div>
         ))}
       </div>
     </ClientOnly >
   );
-}; 
+};
+

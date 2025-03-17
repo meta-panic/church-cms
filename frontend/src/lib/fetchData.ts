@@ -23,6 +23,9 @@ const landingPageQuery = qs.stringify(
           "image": {
             populate: "*",
           },
+          "Button": {
+            populate: "*",
+          },
         },
       },
     },

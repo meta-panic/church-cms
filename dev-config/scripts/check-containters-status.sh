@@ -6,9 +6,13 @@ TELEGRAM_API="https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage"
 CMS_PREFIX="cms-b80ow4gcgs4k44g4ck4kgcow"
 DB_PREFIX="db-b80ow4gcgs4k44g4ck4kgcow"
 
+# Add frontend prefix
+FRONTEND_PREFIX="frontend-b80ow4gcgs4k44g4ck4kgcow"
+
 # Status file location
 STATUS_FILE_CMS="$(dirname "$0")/cms_status.txt"
 STATUS_FILE_DB="$(dirname "$0")/db_status.txt"
+STATUS_FILE_FRONTEND="$(dirname "$0")/frontend_status.txt"
 LOG_FILE="/home/rita/container_statuses/cron.log"
 
 LOG_FILE_LIMIT=$((1 * 1024 * 1024))  # Set to 1MB
@@ -91,6 +95,19 @@ save_db_status() {
     echo "$status" > "$STATUS_FILE_DB"
 }
 
+# Function to get frontend status
+get_frontend_status() {
+    if [ -f "$STATUS_FILE_FRONTEND" ]; then
+        cat "$STATUS_FILE_FRONTEND"
+    fi
+}
+
+# Function to save frontend status
+save_frontend_status() {
+    local status="$1"
+    echo "$status" > "$STATUS_FILE_FRONTEND"
+}
+
 # Function to check container status
 check_container() {
     local container_name="$1"
@@ -127,6 +144,9 @@ check_container() {
         "db")
             previous_status=$(get_db_status)
             ;;
+        "frontend")
+            previous_status=$(get_frontend_status)
+            ;;
     esac
     
     # Compare and notify if different
@@ -141,6 +161,10 @@ check_container() {
                 message="Database container status changed: <b>${previous_status}</b> → <b>${current_status}</b>"
                 save_db_status "$current_status"
                 ;;
+            "frontend")
+                message="Frontend container status changed: <b>${previous_status}</b> → <b>${current_status}</b>"
+                save_frontend_status "$current_status"
+                ;;
         esac
         send_telegram_notification "$message"
     else
@@ -150,6 +174,9 @@ check_container() {
                 ;;
             "db")
                 message="Database container status unchanged: <b>${current_status}</b>"
+                ;;
+            "frontend")
+                message="Frontend container status unchanged: <b>${current_status}</b>"
                 ;;
         esac
         echo "[$(date '+%Y-%m-%d %H:%M:%S')] $message"
@@ -183,5 +210,18 @@ else
     if [ "$(get_previous_status "${DB_PREFIX}")" != "stopped" ]; then
         send_telegram_notification "⚠️ Database container not found!"
         save_status "${DB_PREFIX}" "stopped"
+    fi
+fi
+
+# Add frontend container check
+FRONTEND_CONTAINER=$(docker ps --format '{{.Names}}' | grep "^${FRONTEND_PREFIX}")
+if [ -n "$FRONTEND_CONTAINER" ]; then
+    echo "Found Frontend container: $FRONTEND_CONTAINER"
+    check_container "$FRONTEND_CONTAINER" "frontend"
+else
+    echo "Frontend container not found"
+    if [ "$(get_frontend_status)" != "stopped" ]; then
+        send_telegram_notification "⚠️ Frontend container not found!"
+        save_frontend_status "stopped"
     fi
 fi

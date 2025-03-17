@@ -188,7 +188,6 @@ export type ComponentServicesBlockCarouselViewInput = {
 export type ComponentServicesBlockHeader = {
   __typename?: "ComponentServicesBlockHeader";
   Title?: Maybe<Scalars["String"]["output"]>;
-  headerPhoto?: Maybe<ComponentSharedMedia>;
   headerVideo?: Maybe<ComponentSharedEmbeddedVkVideo>;
   howDoWeDo?: Maybe<Array<Maybe<ComponentSharedRichText>>>;
   id: Scalars["ID"]["output"];
@@ -213,7 +212,6 @@ export type ComponentServicesBlockHeaderWhatDoWeDoArgs = {
 export type ComponentServicesBlockHeaderFiltersInput = {
   Title?: InputMaybe<StringFilterInput>;
   and?: InputMaybe<Array<InputMaybe<ComponentServicesBlockHeaderFiltersInput>>>;
-  headerPhoto?: InputMaybe<ComponentSharedMediaFiltersInput>;
   headerVideo?: InputMaybe<ComponentSharedEmbeddedVkVideoFiltersInput>;
   howDoWeDo?: InputMaybe<ComponentSharedRichTextFiltersInput>;
   not?: InputMaybe<ComponentServicesBlockHeaderFiltersInput>;
@@ -224,7 +222,6 @@ export type ComponentServicesBlockHeaderFiltersInput = {
 
 export type ComponentServicesBlockHeaderInput = {
   Title?: InputMaybe<Scalars["String"]["input"]>;
-  headerPhoto?: InputMaybe<ComponentSharedMediaInput>;
   headerVideo?: InputMaybe<ComponentSharedEmbeddedVkVideoInput>;
   howDoWeDo?: InputMaybe<Array<InputMaybe<ComponentSharedRichTextInput>>>;
   id?: InputMaybe<Scalars["ID"]["input"]>;
@@ -294,19 +291,6 @@ export type ComponentSharedMedia = {
   description?: Maybe<Scalars["String"]["output"]>;
   file: UploadFile;
   id: Scalars["ID"]["output"];
-};
-
-export type ComponentSharedMediaFiltersInput = {
-  and?: InputMaybe<Array<InputMaybe<ComponentSharedMediaFiltersInput>>>;
-  description?: InputMaybe<StringFilterInput>;
-  not?: InputMaybe<ComponentSharedMediaFiltersInput>;
-  or?: InputMaybe<Array<InputMaybe<ComponentSharedMediaFiltersInput>>>;
-};
-
-export type ComponentSharedMediaInput = {
-  description?: InputMaybe<Scalars["String"]["input"]>;
-  file?: InputMaybe<Scalars["ID"]["input"]>;
-  id?: InputMaybe<Scalars["ID"]["input"]>;
 };
 
 export type ComponentSharedQuote = {
@@ -1685,7 +1669,7 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 
 /** Mapping of union types */
 export type ResolversUnionTypes<_RefType extends Record<string, unknown>> = {
-  GenericMorph: (Omit<ComponentContentBlocksEvent, "image"> & { image: _RefType["ComponentContentBlocksEventImage"] }) | (Omit<ComponentContentBlocksEventImage, "eventImage"> & { eventImage: _RefType["UploadFile"] }) | (ComponentContentBlocksInfoBlock) | (Omit<ComponentHistoryGallery, "photos" | "photos_connection"> & { photos: Array<Maybe<_RefType["UploadFile"]>>, photos_connection?: Maybe<_RefType["UploadFileRelationResponseCollection"]> }) | (ComponentHtbachristianBlockPrayExample) | (Omit<ComponentServicesBlockCarouselView, "carouselServiceImage"> & { carouselServiceImage: _RefType["UploadFile"] }) | (Omit<ComponentServicesBlockHeader, "headerPhoto"> & { headerPhoto?: Maybe<_RefType["ComponentSharedMedia"]> }) | (ComponentSharedAddress) | (ComponentSharedButton) | (ComponentSharedEmbeddedVkVideo) | (Omit<ComponentSharedMedia, "file"> & { file: _RefType["UploadFile"] }) | (ComponentSharedQuote) | (ComponentSharedRichText) | (ComponentSharedSchedule) | (Omit<ComponentSharedSeo, "shareImage"> & { shareImage?: Maybe<_RefType["UploadFile"]> }) | (Omit<ComponentSharedSlider, "files" | "files_connection"> & { files: Array<Maybe<_RefType["UploadFile"]>>, files_connection?: Maybe<_RefType["UploadFileRelationResponseCollection"]> }) | (Omit<ComponentSharedVkVideo, "thumbnail"> & { thumbnail?: Maybe<_RefType["UploadFile"]> }) | (Global) | (Omit<History, "content"> & { content?: Maybe<Array<Maybe<_RefType["HistoryContentDynamicZone"]>>> }) | (Omit<HtBaChristian, "content"> & { content: Array<Maybe<_RefType["HtBaChristianContentDynamicZone"]>> }) | (I18NLocale) | (OurSymbols) | (Omit<PageLanding, "Events"> & { Events: Array<Maybe<_RefType["ComponentContentBlocksEvent"]>> }) | (ReviewWorkflowsWorkflow) | (ReviewWorkflowsWorkflowStage) | (Omit<Service, "content" | "hero" | "landingCarouselView"> & { content?: Maybe<Array<Maybe<_RefType["ServiceContentDynamicZone"]>>>, hero: _RefType["ComponentServicesBlockHeader"], landingCarouselView: _RefType["ComponentServicesBlockCarouselView"] }) | (Omit<UploadFile, "related"> & { related?: Maybe<Array<Maybe<_RefType["GenericMorph"]>>> }) | (UsersPermissionsPermission) | (UsersPermissionsRole) | (UsersPermissionsUser);
+  GenericMorph: (Omit<ComponentContentBlocksEvent, "image"> & { image: _RefType["ComponentContentBlocksEventImage"] }) | (Omit<ComponentContentBlocksEventImage, "eventImage"> & { eventImage: _RefType["UploadFile"] }) | (ComponentContentBlocksInfoBlock) | (Omit<ComponentHistoryGallery, "photos" | "photos_connection"> & { photos: Array<Maybe<_RefType["UploadFile"]>>, photos_connection?: Maybe<_RefType["UploadFileRelationResponseCollection"]> }) | (ComponentHtbachristianBlockPrayExample) | (Omit<ComponentServicesBlockCarouselView, "carouselServiceImage"> & { carouselServiceImage: _RefType["UploadFile"] }) | (ComponentServicesBlockHeader) | (ComponentSharedAddress) | (ComponentSharedButton) | (ComponentSharedEmbeddedVkVideo) | (Omit<ComponentSharedMedia, "file"> & { file: _RefType["UploadFile"] }) | (ComponentSharedQuote) | (ComponentSharedRichText) | (ComponentSharedSchedule) | (Omit<ComponentSharedSeo, "shareImage"> & { shareImage?: Maybe<_RefType["UploadFile"]> }) | (Omit<ComponentSharedSlider, "files" | "files_connection"> & { files: Array<Maybe<_RefType["UploadFile"]>>, files_connection?: Maybe<_RefType["UploadFileRelationResponseCollection"]> }) | (Omit<ComponentSharedVkVideo, "thumbnail"> & { thumbnail?: Maybe<_RefType["UploadFile"]> }) | (Global) | (Omit<History, "content"> & { content?: Maybe<Array<Maybe<_RefType["HistoryContentDynamicZone"]>>> }) | (Omit<HtBaChristian, "content"> & { content: Array<Maybe<_RefType["HtBaChristianContentDynamicZone"]>> }) | (I18NLocale) | (OurSymbols) | (Omit<PageLanding, "Events"> & { Events: Array<Maybe<_RefType["ComponentContentBlocksEvent"]>> }) | (ReviewWorkflowsWorkflow) | (ReviewWorkflowsWorkflowStage) | (Omit<Service, "content" | "landingCarouselView"> & { content?: Maybe<Array<Maybe<_RefType["ServiceContentDynamicZone"]>>>, landingCarouselView: _RefType["ComponentServicesBlockCarouselView"] }) | (Omit<UploadFile, "related"> & { related?: Maybe<Array<Maybe<_RefType["GenericMorph"]>>> }) | (UsersPermissionsPermission) | (UsersPermissionsRole) | (UsersPermissionsUser);
   HistoryContentDynamicZone: (Omit<ComponentHistoryGallery, "photos" | "photos_connection"> & { photos: Array<Maybe<_RefType["UploadFile"]>>, photos_connection?: Maybe<_RefType["UploadFileRelationResponseCollection"]> }) | (ComponentSharedRichText) | (Error);
   HtBaChristianContentDynamicZone: (ComponentHtbachristianBlockPrayExample) | (ComponentSharedRichText) | (Error);
   ServiceContentDynamicZone: (Omit<ComponentHistoryGallery, "photos" | "photos_connection"> & { photos: Array<Maybe<_RefType["UploadFile"]>>, photos_connection?: Maybe<_RefType["UploadFileRelationResponseCollection"]> }) | (ComponentSharedRichText) | (Error);
@@ -1710,7 +1694,7 @@ export type ResolversTypes = {
   ComponentServicesBlockCarouselView: ResolverTypeWrapper<Omit<ComponentServicesBlockCarouselView, "carouselServiceImage"> & { carouselServiceImage: ResolversTypes["UploadFile"] }>;
   ComponentServicesBlockCarouselViewFiltersInput: ComponentServicesBlockCarouselViewFiltersInput;
   ComponentServicesBlockCarouselViewInput: ComponentServicesBlockCarouselViewInput;
-  ComponentServicesBlockHeader: ResolverTypeWrapper<Omit<ComponentServicesBlockHeader, "headerPhoto"> & { headerPhoto?: Maybe<ResolversTypes["ComponentSharedMedia"]> }>;
+  ComponentServicesBlockHeader: ResolverTypeWrapper<ComponentServicesBlockHeader>;
   ComponentServicesBlockHeaderFiltersInput: ComponentServicesBlockHeaderFiltersInput;
   ComponentServicesBlockHeaderInput: ComponentServicesBlockHeaderInput;
   ComponentSharedAddress: ResolverTypeWrapper<ComponentSharedAddress>;
@@ -1722,8 +1706,6 @@ export type ResolversTypes = {
   ComponentSharedEmbeddedVkVideoFiltersInput: ComponentSharedEmbeddedVkVideoFiltersInput;
   ComponentSharedEmbeddedVkVideoInput: ComponentSharedEmbeddedVkVideoInput;
   ComponentSharedMedia: ResolverTypeWrapper<Omit<ComponentSharedMedia, "file"> & { file: ResolversTypes["UploadFile"] }>;
-  ComponentSharedMediaFiltersInput: ComponentSharedMediaFiltersInput;
-  ComponentSharedMediaInput: ComponentSharedMediaInput;
   ComponentSharedQuote: ResolverTypeWrapper<ComponentSharedQuote>;
   ComponentSharedRichText: ResolverTypeWrapper<ComponentSharedRichText>;
   ComponentSharedRichTextFiltersInput: ComponentSharedRichTextFiltersInput;
@@ -1781,7 +1763,7 @@ export type ResolversTypes = {
   ReviewWorkflowsWorkflowStageFiltersInput: ReviewWorkflowsWorkflowStageFiltersInput;
   ReviewWorkflowsWorkflowStageInput: ReviewWorkflowsWorkflowStageInput;
   ReviewWorkflowsWorkflowStageRelationResponseCollection: ResolverTypeWrapper<ReviewWorkflowsWorkflowStageRelationResponseCollection>;
-  Service: ResolverTypeWrapper<Omit<Service, "content" | "hero" | "landingCarouselView"> & { content?: Maybe<Array<Maybe<ResolversTypes["ServiceContentDynamicZone"]>>>, hero: ResolversTypes["ComponentServicesBlockHeader"], landingCarouselView: ResolversTypes["ComponentServicesBlockCarouselView"] }>;
+  Service: ResolverTypeWrapper<Omit<Service, "content" | "landingCarouselView"> & { content?: Maybe<Array<Maybe<ResolversTypes["ServiceContentDynamicZone"]>>>, landingCarouselView: ResolversTypes["ComponentServicesBlockCarouselView"] }>;
   ServiceContentDynamicZone: ResolverTypeWrapper<ResolversUnionTypes<ResolversTypes>["ServiceContentDynamicZone"]>;
   ServiceContentDynamicZoneInput: ResolverTypeWrapper<Scalars["ServiceContentDynamicZoneInput"]["output"]>;
   ServiceEntityResponseCollection: ResolverTypeWrapper<Omit<ServiceEntityResponseCollection, "nodes"> & { nodes: Array<ResolversTypes["Service"]> }>;
@@ -1835,7 +1817,7 @@ export type ResolversParentTypes = {
   ComponentServicesBlockCarouselView: Omit<ComponentServicesBlockCarouselView, "carouselServiceImage"> & { carouselServiceImage: ResolversParentTypes["UploadFile"] };
   ComponentServicesBlockCarouselViewFiltersInput: ComponentServicesBlockCarouselViewFiltersInput;
   ComponentServicesBlockCarouselViewInput: ComponentServicesBlockCarouselViewInput;
-  ComponentServicesBlockHeader: Omit<ComponentServicesBlockHeader, "headerPhoto"> & { headerPhoto?: Maybe<ResolversParentTypes["ComponentSharedMedia"]> };
+  ComponentServicesBlockHeader: ComponentServicesBlockHeader;
   ComponentServicesBlockHeaderFiltersInput: ComponentServicesBlockHeaderFiltersInput;
   ComponentServicesBlockHeaderInput: ComponentServicesBlockHeaderInput;
   ComponentSharedAddress: ComponentSharedAddress;
@@ -1847,8 +1829,6 @@ export type ResolversParentTypes = {
   ComponentSharedEmbeddedVkVideoFiltersInput: ComponentSharedEmbeddedVkVideoFiltersInput;
   ComponentSharedEmbeddedVkVideoInput: ComponentSharedEmbeddedVkVideoInput;
   ComponentSharedMedia: Omit<ComponentSharedMedia, "file"> & { file: ResolversParentTypes["UploadFile"] };
-  ComponentSharedMediaFiltersInput: ComponentSharedMediaFiltersInput;
-  ComponentSharedMediaInput: ComponentSharedMediaInput;
   ComponentSharedQuote: ComponentSharedQuote;
   ComponentSharedRichText: ComponentSharedRichText;
   ComponentSharedRichTextFiltersInput: ComponentSharedRichTextFiltersInput;
@@ -1905,7 +1885,7 @@ export type ResolversParentTypes = {
   ReviewWorkflowsWorkflowStageFiltersInput: ReviewWorkflowsWorkflowStageFiltersInput;
   ReviewWorkflowsWorkflowStageInput: ReviewWorkflowsWorkflowStageInput;
   ReviewWorkflowsWorkflowStageRelationResponseCollection: ReviewWorkflowsWorkflowStageRelationResponseCollection;
-  Service: Omit<Service, "content" | "hero" | "landingCarouselView"> & { content?: Maybe<Array<Maybe<ResolversParentTypes["ServiceContentDynamicZone"]>>>, hero: ResolversParentTypes["ComponentServicesBlockHeader"], landingCarouselView: ResolversParentTypes["ComponentServicesBlockCarouselView"] };
+  Service: Omit<Service, "content" | "landingCarouselView"> & { content?: Maybe<Array<Maybe<ResolversParentTypes["ServiceContentDynamicZone"]>>>, landingCarouselView: ResolversParentTypes["ComponentServicesBlockCarouselView"] };
   ServiceContentDynamicZone: ResolversUnionTypes<ResolversParentTypes>["ServiceContentDynamicZone"];
   ServiceContentDynamicZoneInput: Scalars["ServiceContentDynamicZoneInput"]["output"];
   ServiceEntityResponseCollection: Omit<ServiceEntityResponseCollection, "nodes"> & { nodes: Array<ResolversParentTypes["Service"]> };
@@ -1992,7 +1972,6 @@ export type ComponentServicesBlockCarouselViewResolvers<ContextType = any, Paren
 
 export type ComponentServicesBlockHeaderResolvers<ContextType = any, ParentType extends ResolversParentTypes["ComponentServicesBlockHeader"] = ResolversParentTypes["ComponentServicesBlockHeader"]> = {
   Title?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
-  headerPhoto?: Resolver<Maybe<ResolversTypes["ComponentSharedMedia"]>, ParentType, ContextType>;
   headerVideo?: Resolver<Maybe<ResolversTypes["ComponentSharedEmbeddedVkVideo"]>, ParentType, ContextType>;
   howDoWeDo?: Resolver<Maybe<Array<Maybe<ResolversTypes["ComponentSharedRichText"]>>>, ParentType, ContextType, RequireFields<ComponentServicesBlockHeaderHowDoWeDoArgs, "pagination" | "sort">>;
   id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;

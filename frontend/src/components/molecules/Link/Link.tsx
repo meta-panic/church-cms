@@ -2,7 +2,7 @@ import React, { FC, PropsWithChildren } from "react";
 import NextLink from "next/link";
 import classNames from "classnames";
 
-import { TypographyTag } from "@/components/types";
+import { FontFamily, FontWeightType, TypographyTag } from "@/components/types";
 import Typography from "@/components/atoms/typography/Typography";
 
 import ExternalIcon from "./ExternalLinkIcon.svg";
@@ -14,6 +14,10 @@ type LinkProps = {
   to: string;
   target?: string;
   isExternal: boolean;
+  overideFont?: {
+    fontFamily?: FontFamily;
+    fontWeight?: FontWeightType;
+  }
 };
 
 const Link: FC<PropsWithChildren<LinkProps> & { tag?: TypographyTag; }> = ({
@@ -22,6 +26,7 @@ const Link: FC<PropsWithChildren<LinkProps> & { tag?: TypographyTag; }> = ({
   target,
   children,
   tag = "body",
+  overideFont,
 }) => {
   const classes = classNames(
     styles.link,
@@ -30,7 +35,7 @@ const Link: FC<PropsWithChildren<LinkProps> & { tag?: TypographyTag; }> = ({
 
   if (!isExternal) {
     return (
-      <Typography className={styles.linkTypographyContainer} tag={tag}>
+      <Typography overideFont={overideFont} className={styles.linkTypographyContainer} tag={tag}>
         <NextLink href={to} target={target || "_self"} className={styles.linkContainer}>
           <span className={classes}>{children}</span>
         </NextLink>
@@ -41,7 +46,7 @@ const Link: FC<PropsWithChildren<LinkProps> & { tag?: TypographyTag; }> = ({
 
   if (isExternal) {
     return (
-      <Typography className={styles.linkTypographyContainer} tag={tag}>
+      <Typography overideFont={overideFont} className={styles.linkTypographyContainer} tag={tag}>
         <a
           href={to}
           target={target || "_blank"}

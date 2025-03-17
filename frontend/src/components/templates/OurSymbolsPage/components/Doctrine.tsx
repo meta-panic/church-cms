@@ -22,7 +22,9 @@ export const Doctrine: React.FC<DoctrineProps> = ({
   return (
     <div className={styles.doctrineContainer}>
       <Section className={styles.doctrine}>
-        <Typography tag="H2">{title}</Typography>
+        <div>
+          <Typography tag="H2">{title}</Typography>
+        </div>
         {description?.map((passage) => {
           if (!passage) {
             return;

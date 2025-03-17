@@ -9,7 +9,7 @@
   transition: opacity 0.3s ease, transform 0.3s ease;
   opacity: 1;
   transform: translateX(0);
-  margin-right: 2px;
+  margin-right: 4px;
 }
 
 .menuButtonLabel.hidden {
@@ -18,13 +18,7 @@
   pointer-events: none;
 }
 
-.menuButtonLabel>* {
-  letter-spacing: -2px;
-}
-
-
-@media (min-width: 641px) {
-  .menuButtonLabel>* {
-    letter-spacing: -1px;
-  }
+.menuTextContainer {
+  width: 58px;
+  height: 23px;
 }

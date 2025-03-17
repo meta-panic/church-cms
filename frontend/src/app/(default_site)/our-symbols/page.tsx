@@ -7,6 +7,7 @@ import { HttpError } from "@/app/types/Errors";
 import DefaultError from "@/components/molecules/CustomErrorBoundaries/DefaultError/DefaultError";
 import { OurSymbolsPage } from "@/components/templates/OurSymbolsPage/OurSymbolsPage";
 import { fetchPageInfo } from "@/utils/fetch";
+import { favSettings } from "@/app/faviconSettings";
 
 import type { OurSymbols } from "@/types";
 
@@ -14,9 +15,7 @@ import styles from "./page.module.css";
 
 export const metadata: Metadata = {
   title: "Во что мы верим | Церковь «Дом молитвы»",
-  icons: {
-    icon: { url: "/favicon.png" },
-  },
+  icons: favSettings,
 };
 
 

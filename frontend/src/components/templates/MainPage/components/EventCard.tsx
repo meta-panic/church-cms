@@ -1,11 +1,13 @@
 "use client";
+
 import Image from "next/image";
 import cx from "classnames";
 
-import { ComponentContentBlocksEvent } from "@/types";
 import { BREAKPOINTS, useMediaQuery } from "@/hooks/useMediaQuery";
-import ClientOnly from "@/components/organisms/header/_components/ClientOnly";
 import Typography from "@/components/atoms/typography/Typography";
+import Button from "@/components/atoms/Button/Button";
+
+import type { ComponentContentBlocksEvent } from "@/types";
 
 import styles from "./EventCard.module.css";
 
@@ -13,9 +15,10 @@ import styles from "./EventCard.module.css";
 type EventCardProps = {
   event: ComponentContentBlocksEvent;
   type: "future" | "past";
+  orientation?: "vertical" | "horizontal";
 }
 
-export const EventCard: React.FC<EventCardProps> = ({ event, type }) => {
+export const EventCard: React.FC<EventCardProps> = ({ event, type, orientation = "vertical" }) => {
   const isSmall = useMediaQuery([BREAKPOINTS.mobile, BREAKPOINTS.tabletMin]);
 
   const imageInfo = event.image.eventImage;
@@ -24,9 +27,12 @@ export const EventCard: React.FC<EventCardProps> = ({ event, type }) => {
   const date = parseDate(event.date);
 
   return (
-    <div className={styles.eventCardContainer}>
+    <div className={cx(styles.eventCardContainer, {
+      [styles.horizontalOrientation]: orientation === "horizontal",
+      [styles.verticalOrientation]: orientation === "vertical",
+    })}>
 
-      <div className={cx(styles.textContainer, { [styles.verticalCard]: event.image.isVertical })}>
+      <div className={cx(styles.textContainer)}>
         <div className={styles.description}>
           <div>
             <Typography tag="H3" overideFont={{ fontWeight: "extra-bold" }}>{event.title}</Typography>
@@ -47,24 +53,37 @@ export const EventCard: React.FC<EventCardProps> = ({ event, type }) => {
               <Typography tag="body" overideFont={{ fontWeight: "extra-bold" }}>Дата:&nbsp;</Typography>
               <Typography tag="body">{date.day} {date.month}</Typography>
             </div>
+
           </div>
+
+          {event.Button &&
+            <Button
+              isExternal={event.Button?.isExternal}
+              link={event.Button?.Button_link}
+              variant="ghost"
+              text={event.Button?.Button_text || "Узнать больше"}
+              on="onLight"
+              size="M"
+              wide={false}
+              rounded
+            />
+          }
         </div>
       </div>
 
-      <ClientOnly>
-        <div className={styles.imageContainer}>
-          {imagePath && <Image
-            id={event.date}
-            src={imagePath}
-            loading="lazy"
-            width={event.image.isVertical ? 450 : 600}
-            height={event.image.isVertical ? 600 : 450}
-            alt={`Фото с ${type === "past" ? "прошедшего" : "будущего"} мероприятия`}
-            className={styles.image}
-          />}
-        </div>
-      </ClientOnly>
-    </div >
+      <div className={styles.imageContainer}>
+        {imagePath && <Image
+          id={event.date}
+          src={imagePath}
+          objectFit={"cover"}
+          loading="lazy"
+          layout="fill"
+          alt={`Фото с ${type === "past" ? "прошедшего" : "будущего"} мероприятия`}
+          className={styles.image}
+        />}
+      </div>
+
+    </div>
   );
 };
 

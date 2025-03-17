@@ -5,6 +5,7 @@ import { Metadata } from "next";
 import CustomError from "@/components/molecules/CustomErrorBoundaries/template/Error";
 import { HttpError } from "@/app/types/Errors";
 import { DivineService } from "@/components/templates/DivineService/DivineService";
+import { favSettings } from "@/app/faviconSettings";
 
 import { Service as DivineServiceType } from "@/types";
 
@@ -17,9 +18,7 @@ interface PageProps {
 
 export const metadata: Metadata = {
   title: "Служения | Церковь «Дом молитвы»",
-  icons: {
-    icon: { url: "/favicon.png" },
-  },
+  icons: favSettings,
 };
 
 

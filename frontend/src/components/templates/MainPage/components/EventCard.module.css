@@ -1,20 +1,24 @@
 .eventCardContainer {
   position: relative;
   display: flex;
-  flex-direction: column-reverse;
   height: 100%;
+}
+
+.eventCardContainer.horizontalOrientation {
+  flex-direction: row-reverse;
+  gap: var(--spacing-s);
+}
+
+.eventCardContainer.verticalOrientation {
+  flex-direction: column-reverse;
+  gap: var(--spacing-s);
 }
 
 .textContainer {
   display: flex;
   flex-direction: column;
-  padding-top: var(--spacing-s);
   gap: var(--spacing-2xl);
   flex: 1;
-}
-
-.textContainer.verticalCard {
-  flex: 1
 }
 
 .description {
