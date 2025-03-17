@@ -3,3 +3,11 @@
   height: fit-content;
   gap: 4px;
 }
+
+.socials>* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.wide {
+  gap: var(--spacing-x)
+}

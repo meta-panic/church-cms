@@ -4,11 +4,12 @@
   align-items: center;
   position: absolute;
   z-index: 10;
-  padding-top: 38px;
+  padding-top: 26px;
 }
 
 .slimHeaderWrapper {
   background-color: var(--default-surface-light-transparent);
+  backdrop-filter: blur(15px);
   height: 42px;
   align-items: center;
   z-index: 20;

@@ -1,19 +1,30 @@
 "use client";
-import React, { JSX } from "react";
-
+import React from "react";
 import cx from "classnames";
+import { usePathname } from "next/navigation";
+
 import Section from "@/components/atoms/section/Section";
+import { useScroll } from "@/hooks/useScroll";
+import { isRootPath } from "@/utils/isRoot";
+import { getCssVars } from "@/utils/CssVars";
+
+import type { HeaderType } from "../variants/variants";
+
 import styles from "./HeaderStyleWrapper.module.css";
-import { HeaderType } from "../variants/variants";
 
 
 interface HeaderStyleWrapperProps {
-  headerType: HeaderType;
-  children: JSX.Element;
+  renderChildren: (headerType: HeaderType) => React.ReactNode;
 }
 
-export const HeaderStyleWrapper: React.FC<HeaderStyleWrapperProps> =
-  ({ headerType, children }) => (
+export const HeaderStyleWrapper: React.FC<HeaderStyleWrapperProps> = ({
+  renderChildren,
+}) => {
+  const headerHeight = getCssVars()?.getVarNumber("--header-height--slim", 42) || 42;
+  const isPageScrolled = useScroll({ threshold: headerHeight });
+  const headerType = calcHeaderType(isPageScrolled, usePathname());
+
+  return (
     <Section className={
       cx(
         {
@@ -22,6 +33,19 @@ export const HeaderStyleWrapper: React.FC<HeaderStyleWrapperProps> =
         },
         styles[`${headerType}HeaderWrapper`])
     }>
-      {children}
+      {renderChildren(headerType)}
     </Section >
   );
+};
+
+function calcHeaderType(isPageScrolled: boolean, pathname: string): HeaderType {
+  if (isPageScrolled) {
+    return "slim";
+  }
+
+  if (!isRootPath(pathname)) {
+    return "slim";
+  }
+
+  return "presentation";
+}

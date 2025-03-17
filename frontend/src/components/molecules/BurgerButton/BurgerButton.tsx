@@ -2,8 +2,8 @@
 import React from "react";
 import cx from "classnames";
 
-import Typography from "@/components/atoms/typography/Typography";
 import BurgerIcon from "@/components/atoms/burgerIcon/BurgerIcon";
+import MenuTextIcon from "./MenuTextIcon.svg";
 
 import styles from "./BurgerButton.module.css";
 
@@ -11,9 +11,10 @@ import styles from "./BurgerButton.module.css";
 interface BurgerButtonProps {
   isOpen: boolean;
   onToggle?: () => void;
+  hideTitle?: boolean;
 }
 
-export const BurgerButton: React.FC<BurgerButtonProps> = ({ isOpen, onToggle }) => {
+export const BurgerButton: React.FC<BurgerButtonProps> = ({ isOpen, onToggle, hideTitle = false }) => {
   return (
     <div
       role="button"
@@ -34,11 +35,14 @@ export const BurgerButton: React.FC<BurgerButtonProps> = ({ isOpen, onToggle }) 
         styles.menuButtonLabel,
         { [styles.hidden]: isOpen },
       )}>
-        <Typography tag="H3">МЕНЮ</Typography>
+        {!hideTitle &&
+          <div className={styles.menuTextContainer}>
+            <MenuTextIcon />
+          </div>
+        }
       </div>
 
       <BurgerIcon isOpen={isOpen} />
     </div>
   );
 };
-

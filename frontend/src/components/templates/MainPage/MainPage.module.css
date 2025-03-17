@@ -1,3 +1,12 @@
 .howToBecomeAChristianContainer {
   background-color: var(--default-surface-dark-1);
 }
+
+.divineServicesContainer {
+  background-color: var(--default-surface-dark-2);
+}
+
+.heroImage {
+  object-position: 71% 100% !important;
+  filter: brightness(0.72);
+}

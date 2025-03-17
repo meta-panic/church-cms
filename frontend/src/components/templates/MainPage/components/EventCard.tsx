@@ -1,11 +1,13 @@
 "use client";
+
 import Image from "next/image";
 import cx from "classnames";
 
-import { ComponentContentBlocksEvent } from "@/types";
 import { BREAKPOINTS, useMediaQuery } from "@/hooks/useMediaQuery";
-import ClientOnly from "@/components/organisms/header/_components/ClientOnly";
 import Typography from "@/components/atoms/typography/Typography";
+import Button from "@/components/atoms/Button/Button";
+
+import type { ComponentContentBlocksEvent } from "@/types";
 
 import styles from "./EventCard.module.css";
 
@@ -13,9 +15,10 @@ import styles from "./EventCard.module.css";
 type EventCardProps = {
   event: ComponentContentBlocksEvent;
   type: "future" | "past";
+  orientation?: "vertical" | "horizontal";
 }
 
-export const EventCard: React.FC<EventCardProps> = ({ event, type }) => {
+export const EventCard: React.FC<EventCardProps> = ({ event, type, orientation = "vertical" }) => {
   const isSmall = useMediaQuery([BREAKPOINTS.mobile, BREAKPOINTS.tabletMin]);
 
   const imageInfo = event.image.eventImage;
@@ -24,47 +27,63 @@ export const EventCard: React.FC<EventCardProps> = ({ event, type }) => {
   const date = parseDate(event.date);
 
   return (
-    <div className={styles.eventCardContainer}>
+    <div className={cx(styles.eventCardContainer, {
+      [styles.horizontalOrientation]: orientation === "horizontal",
+      [styles.verticalOrientation]: orientation === "vertical",
+    })}>
 
-      <div className={cx(styles.textContainer, { [styles.verticalCard]: event.image.isVertical })}>
-        <div className={styles.date}>
-          <Typography tag="H2">{date.day}</Typography>
-          <Typography tag="body">{date.month}</Typography>
-        </div>
+      <div className={cx(styles.textContainer)}>
         <div className={styles.description}>
           <div>
-            <div className={styles.type}>
-              <Typography tag="body" bold>{getTypeofEvent(type)}</Typography>
-            </div>
-            <Typography tag="H2">{event.title}</Typography>
+            <Typography tag="H3" overideFont={{ fontWeight: "extra-bold" }}>{event.title}</Typography>
             <Typography tag="body">{event.description}</Typography>
           </div>
           <div className={styles.additionaldetails}>
             <div className={styles.time}>
-              <Typography tag="body" bold>Время:&nbsp;</Typography>
-              <Typography tag="body">{date.time}</Typography>
+              <Typography tag="body" overideFont={{ fontWeight: "extra-bold" }}>Время:&nbsp;</Typography>
+              <Typography tag="body" >{date.time}</Typography>
             </div>
 
             <div className={styles.place}>
-              <Typography tag="body" bold>Место:&nbsp;</Typography>
+              <Typography tag="body" overideFont={{ fontWeight: "extra-bold" }}>Место:&nbsp;</Typography>
               <Typography tag="body">{event.place}</Typography>
             </div>
+
+            <div className={styles.date}>
+              <Typography tag="body" overideFont={{ fontWeight: "extra-bold" }}>Дата:&nbsp;</Typography>
+              <Typography tag="body">{date.day} {date.month}</Typography>
+            </div>
+
           </div>
+
+          {event.Button &&
+            <Button
+              isExternal={event.Button?.isExternal}
+              link={event.Button?.Button_link}
+              variant="ghost"
+              text={event.Button?.Button_text || "Узнать больше"}
+              on="onLight"
+              size="M"
+              wide={false}
+              rounded
+            />
+          }
         </div>
       </div>
 
-      <ClientOnly>
-        <div className={styles.imageContainer}>
-          {imagePath && <Image
-            id={event.date}
-            src={imagePath}
-            fill
-            alt="event"
-            className={styles.image}
-          />}
-        </div>
-      </ClientOnly>
-    </div >
+      <div className={styles.imageContainer}>
+        {imagePath && <Image
+          id={event.date}
+          src={imagePath}
+          objectFit={"cover"}
+          loading="lazy"
+          layout="fill"
+          alt={`Фото с ${type === "past" ? "прошедшего" : "будущего"} мероприятия`}
+          className={styles.image}
+        />}
+      </div>
+
+    </div>
   );
 };
 
@@ -72,18 +91,18 @@ function parseDate(date: string): { month: string, day: string, time: string } {
   const parsedDate = new Date(date);
 
   const monthNames = [
-    "Янв",
-    "Фев",
-    "Март",
-    "Апр",
-    "Май",
-    "Июн",
-    "Июл",
-    "Авг",
-    "Сен",
-    "Окт",
-    "Ноя",
-    "Дек",
+    "января",
+    "февраля",
+    "марта",
+    "апреля",
+    "мая",
+    "июню",
+    "июля",
+    "августа",
+    "сентября",
+    "октября",
+    "ноября",
+    "декабря",
   ];
 
   const month = monthNames[parsedDate.getUTCMonth()]; // Get the month abbreviation
@@ -96,7 +115,3 @@ function parseDate(date: string): { month: string, day: string, time: string } {
   return { month, day, time };
 }
 
-
-function getTypeofEvent(type: "future" | "past"): string {
-  return type === "past" ? "ПРОШЕДНЕЕ СОБЫТИЕ" : "ГРЯДУЩИЕ СОБЫТИЕ";
-}

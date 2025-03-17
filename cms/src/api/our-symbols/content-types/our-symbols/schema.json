@@ -1,0 +1,36 @@
+{
+  "kind": "singleType",
+  "collectionName": "our_symbolses",
+  "info": {
+    "singularName": "our-symbols",
+    "pluralName": "our-symbolses",
+    "displayName": "OurSymbols",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Hero": {
+      "type": "component",
+      "repeatable": false,
+      "component": "content-blocks.info-block"
+    },
+    "TheMainSymbol": {
+      "type": "component",
+      "repeatable": false,
+      "component": "content-blocks.info-block"
+    },
+    "Theses": {
+      "type": "component",
+      "repeatable": false,
+      "component": "content-blocks.info-block"
+    },
+    "AdditionalInfoLink": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.button"
+    }
+  }
+}

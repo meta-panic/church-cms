@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_shared_embedded_vk_videos",
+  "info": {
+    "displayName": "EmbeddedVkVideo",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "embeddedLink": {
+      "type": "string",
+      "required": true,
+      "regex": "^https:\\/\\/[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}(\\S*)?"
+    }
+  }
+}

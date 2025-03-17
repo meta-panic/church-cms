@@ -22,18 +22,39 @@ import { NextRequest } from "next/server";
  * // }
  */
 export async function GET(request: NextRequest) {
-  const path = request.nextUrl.searchParams.get("path");
+  const token = process.env.NEXT_REVALIDATION_TOKEN;
+  const authToken = request.headers.get("x-reval-token") || request.nextUrl.searchParams.get("token");
 
-  if (path) {
-    revalidatePath(path);
+  if (!token || token !== authToken) {
+    return Response.json(
+      {
+        revalidated: false,
+        now: Date.now(),
+        message: "Invalid or missing authorization token",
+      },
+      { status: 401 },
+    );
+  }
+
+  const paths = request.nextUrl.searchParams.getAll("path");
+
+  if (paths.length > 0) {
+    paths.forEach(path => revalidatePath(path));
+
     // eslint-disable-next-line no-console
-    console.info(`Path: "${path}" just got revalidated`);
-    return Response.json({ revalidated: true, now: Date.now() });
+    console.info(`Paths revalidated: ${paths.join(", ")}`);
+    return Response.json({
+      revalidated: true,
+      paths: paths,
+      now: Date.now(),
+      tokenValid: true,
+    });
   }
 
   return Response.json({
     revalidated: false,
     now: Date.now(),
-    message: "Missing path to revalidate",
+    message: "Missing paths to revalidate",
+    tokenValid: true,
   });
 }

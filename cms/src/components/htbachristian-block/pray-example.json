@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_htbachristian_block_pray_examples",
+  "info": {
+    "displayName": "prayExample",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "prayText": {
+      "type": "text",
+      "required": true
+    }
+  }
+}

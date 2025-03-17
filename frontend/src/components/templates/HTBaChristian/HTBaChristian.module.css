@@ -1,0 +1,34 @@
+.imageStyling {
+  object-position: 50% 60% !important;
+}
+
+.pageContentWrapper {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.pageContent {
+  padding: var(--spacing-2xl) 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2xl);
+  max-width: var(--max-text-column);
+  align-items: center;
+}
+
+.passage {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.textWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--spacing-l);
+  padding-top: var(--spacing-2xl);
+  padding-bottom: var(--spacing-2xl);
+}

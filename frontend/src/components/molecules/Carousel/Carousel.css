@@ -1,0 +1,8 @@
+.react-multi-carousel-dot-list {
+  position: relative;
+  margin: var(--spacing-xs) 0;
+  display: flex;
+  gap: var(--spacing-xxs);
+  align-items: center;
+  height: 26px;
+}

@@ -6,6 +6,7 @@
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.7);
   z-index: 100;
+  height: 100vh;
 }
 
 .overlay {
@@ -25,13 +26,20 @@
   right: 0;
   width: 100%;
   height: 100%;
-  background-color: var(--default-surface-light);
+  background-color: var(--common-light-0);
   padding: 20px;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.menuList {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .item {
@@ -47,4 +55,14 @@
 
 .menuItem:hover {
   background-color: var(--common-dark-0);
+}
+
+@media (max-height: 600px) and (orientation: landscape) {
+  .decorativeItem {
+    display: none;
+  }
+
+  .menuItem {
+    padding: 0;
+  }
 }

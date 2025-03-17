@@ -6,11 +6,11 @@
   --default-components-button-filled-bg: var(--brand-700);
 
   --default-surface-light: var(--common-light-100);
-  --default-surface-light-transparent: rgba(248, 246, 247, 0.85);
+  --default-surface-light-transparent: rgba(255, 255, 255, 0.85);
   --default-surface-dark-1: var(--accent-700);
   --default-surface-dark-2: var(--brand-600);
 
-  --default-components-cart-border: var(--common-dark-800);
+  --default-components-cart-border: var(--common-dark-400);
 
   --default-text-brand: var(--brand-800);
 
@@ -27,7 +27,6 @@
   --hover-components-cart-border: var(--common-dark-800);
 
   --hover-text-brand: var(--brand-800);
-  --hover-navigation-item: var(--accent-400);
 
   --active-components-button-outlined-br: var(--common-light-100);
 
@@ -49,7 +48,7 @@
   --default-text: var(--common-dark-900);
   --default-components-link-fg: #547478;
   --hover-text: var(--common-dark-900);
-  --hover-components-link-fg: #4b5e60;
+  --hover-components-link-fg: rgba(75, 94, 96, 0.6);
   --active-text: var(--common-dark-900);
   --active-components-link-fg: #596e71;
   --hover-navigation-item: var(--accent-400);
@@ -59,8 +58,8 @@
   --default-text: var(--common-light-100);
   --default-components-link-fg: #f8f6f7;
   --hover-text: var(--common-light-100);
-  --hover-components-link-fg: #f8f6f7;
-  --active-text-ondark: var(--common-light-100);
+  --hover-components-link-fg: rgba(248, 246, 247, 0.7);
+  --active-text: var(--common-light-100);
   --active-components-link-fg: #f8f6f7;
   --hover-navigation-item: var(--accent-400);
 }

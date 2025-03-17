@@ -4,12 +4,27 @@
   gap: var(--spacing-xs);
   align-items: center;
   user-select: none;
+  letter-spacing: -2px;
 }
 
 .navigationItem {
   cursor: pointer;
   text-shadow: inherit;
   user-select: none;
+}
+
+@media (min-width: 400px) {
+  .navigation {
+    letter-spacing: -1px;
+    gap: var(--spacing-s);
+  }
+}
+
+@media (min-width: 641px) {
+  .navigation {
+    letter-spacing: 0px;
+    gap: 16px;
+  }
 }
 
 @media (min-width: 1280px) {

@@ -1,0 +1,20 @@
+.passageWrapper {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-xss);
+  flex-direction: column;
+}
+
+.passage {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-xxs);
+  flex-direction: column;
+}
+
+.whatDoWeDoWrapper {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-m);
+  flex-direction: column;
+}

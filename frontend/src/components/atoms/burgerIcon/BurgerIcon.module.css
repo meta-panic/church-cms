@@ -2,7 +2,7 @@
   display: block;
 
   width: 24px;
-  height: 20px;
+  height: 19px;
   cursor: pointer;
   position: relative;
 }
@@ -39,4 +39,10 @@
 /* Third line animation */
 .burger.open .line3 {
   transform: translateY(-8px) rotate(-45deg);
+}
+
+@media (min-width: 641px) {
+  .burger {
+    width: 27px;
+  }
 }

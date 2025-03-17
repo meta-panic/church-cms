@@ -3,7 +3,6 @@ import React from "react";
 import { Hero } from "@/components/organisms/hero/Hero";
 import Section from "@/components/atoms/section/Section";
 import { AboutUs } from "./components/AboutUs";
-import { MainHeroContent } from "./components/MainHeroContent";
 import { HowToBecomeAChristian } from "./components/HowToBecomeAChristian";
 import srcBackgroundHeroImage from "/public/background.jpg";
 
@@ -12,12 +11,17 @@ import type {
   Global as ContactInfo,
   ComponentContentBlocksInfoBlock,
   Maybe,
+  Service as DivineService,
 } from "@/types";
 import { NoEventsStub } from "./components/NoEventsStub";
 import serverContext from "@/lib/serverContext";
 import { EventsSection } from "./components/EventsSection";
 
+import { DivineServicesSection } from "./components/DivineServicesSection";
+import { SideHTBaChristianButton } from "@/components/organisms/SideHTBaChristianButton/SideHTBaChristianButton";
+
 import styles from "./MainPage.module.css";
+import { HeroContent } from "./components/HeroContent/HeroContent";
 
 
 interface MainPageProps {
@@ -30,12 +34,13 @@ interface MainPageProps {
   };
   events: Maybe<ComponentContentBlocksEvent>[],
   contacts: ContactInfo;
+  divineServices: DivineService[];
 }
 
 export const [getContacts, setContacts] = serverContext<ContactInfo | null>(null);
 
 export const MainPage: React.FC<MainPageProps> = ({
-  heroData, aboutUs, HTBChristian, events, contacts,
+  heroData, aboutUs, HTBChristian, events, contacts, divineServices,
 }) => {
   setContacts(contacts);
 
@@ -44,16 +49,19 @@ export const MainPage: React.FC<MainPageProps> = ({
       <Hero
         src={srcBackgroundHeroImage}
         content={
-          <MainHeroContent
-            title={heroData.Title || "Добро пожаловать в дом молитвы"}
+          <HeroContent
             description={heroData.description}
             button={heroData.Button} />
         }
+        imageAlt="Церковь с крестом на крыше на фоне ночного звездного неба"
+        imageStyles={styles.heroImage}
       />
 
       <Section>
         <AboutUs aboutUs={aboutUs} />
       </Section>
+
+      <SideHTBaChristianButton />
 
       <Section className={styles.howToBecomeAChristianContainer}>
         <HowToBecomeAChristian
@@ -67,6 +75,9 @@ export const MainPage: React.FC<MainPageProps> = ({
         {events.length > 0 ? <EventsSection events={events} /> : <NoEventsStub />}
       </Section>
 
+      <Section id="services" className={styles.divineServicesContainer}>
+        <DivineServicesSection divineServices={divineServices} />
+      </Section>
     </>
   );
 };

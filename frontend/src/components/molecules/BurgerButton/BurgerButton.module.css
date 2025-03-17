@@ -9,11 +9,16 @@
   transition: opacity 0.3s ease, transform 0.3s ease;
   opacity: 1;
   transform: translateX(0);
-  margin-right: 2px;
+  margin-right: 4px;
 }
 
 .menuButtonLabel.hidden {
   opacity: 0;
   transform: translateX(-10px);
   pointer-events: none;
+}
+
+.menuTextContainer {
+  width: 58px;
+  height: 23px;
 }

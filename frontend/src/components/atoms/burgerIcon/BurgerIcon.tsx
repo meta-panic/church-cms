@@ -1,6 +1,9 @@
 import React from "react";
-import styles from "./BurgerIcon.module.css";
+
 import cx from "classnames";
+
+import styles from "./BurgerIcon.module.css";
+
 
 interface BurgerIconProps {
   isOpen: boolean;

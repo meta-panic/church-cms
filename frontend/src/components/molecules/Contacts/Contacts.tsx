@@ -1,5 +1,6 @@
 import React, { JSX } from "react";
-import styles from "./Contacts.module.css";
+import cx from "classnames";
+
 
 import TaplinkIcon from "../../../../public/icons/socials/taplink.svg";
 import TgIcon from "../../../../public/icons/socials/tg.svg";
@@ -7,6 +8,8 @@ import VkIcon from "../../../../public/icons/socials/vk.svg";
 import YoutubeIcon from "../../../../public/icons/socials/youtube.svg";
 import WhatsupIcon from "../../../../public/icons/socials/whatsup.svg";
 import { Socials } from "@/components/types";
+
+import styles from "./Contacts.module.css";
 
 
 type RenderProp<T> = (props: T) => React.ReactNode;
@@ -18,10 +21,11 @@ interface ContactsProps {
   vk: string;
   youtube: string;
   whatsup: string;
+  isWide?: boolean;
   renderIcon: RenderProp<{ defaultIcon: React.JSX.Element, socialName: Socials }>;
 }
 
-export const Contacts: React.FC<ContactsProps> = ({ taplink, telegram, vk, youtube, whatsup, renderIcon }) => {
+export const Contacts: React.FC<ContactsProps> = ({ taplink, telegram, vk, youtube, whatsup, renderIcon, isWide }) => {
   const socialLinks: { logo: JSX.Element, link: string, name: Socials }[] = [
     {
       logo: <TgIcon />,
@@ -51,7 +55,7 @@ export const Contacts: React.FC<ContactsProps> = ({ taplink, telegram, vk, youtu
   ];
 
   return (
-    <span className={styles.socials}>
+    <span className={cx(styles.socials, { [styles.wide]: !!isWide })}>
       {socialLinks.map((social) => (
         <a
           key={social.name}

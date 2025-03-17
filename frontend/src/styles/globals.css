@@ -36,12 +36,18 @@ section {
   --shadow--xl: 0px 15px 30px rgba(0, 0, 0, 0.3);
   --shadow--l: 0px 5px 20px rgba(0, 0, 0, 0.2);
   --shadow--m: 2px -2px 30px rgba(0, 0, 0, 0.08);
+
+
+  --header-height--slim: 42px;
+  --header-height--presentation: 86px;
 }
 
 ::-moz-selection {
   background: var(--brand-400);
+  color: var(--common-light-100);
 }
 
 ::selection {
   background: var(--brand-400);
+  color: var(--common-light-100);
 }

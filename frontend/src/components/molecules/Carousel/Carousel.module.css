@@ -1,0 +1,56 @@
+.card {
+  width: calc(100% - 20px);
+}
+
+.dotsContainer {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-s);
+  padding: 16px 0;
+  height: 26px;
+}
+
+.dot {
+  width: 25px;
+  height: 40px;
+  border: none;
+  transform-origin: right;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  background-color: var(--common-transparent-0);
+}
+
+.dot:hover {
+  .line {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+    background: var(--common-transparent-800);
+  }
+}
+
+.dot.active {
+  background-color: var(--common-transparent-0);
+  font-weight: 600;
+  width: 45px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+  .line {
+    background: var(--common-transparent-900);
+  }
+}
+
+.dotContent {
+  right: 0;
+}
+
+.line {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+  border-radius: 4px;
+  height: 4px;
+  width: 100%;
+  background: var(--common-transparent-600);
+}

@@ -2,6 +2,8 @@ import "server-only";
 import qs from "qs";
 
 import { PageLanding, Service as DivineService, Global as ContactInfo } from "@/types";
+import { hasValue } from "@/utils/notMaybe";
+import { HttpError } from "../app/types/Errors";
 
 
 const landingPageQuery = qs.stringify(
@@ -21,6 +23,9 @@ const landingPageQuery = qs.stringify(
           "image": {
             populate: "*",
           },
+          "Button": {
+            populate: "*",
+          },
         },
       },
     },
@@ -37,10 +42,10 @@ const divineServicesQuery = qs.stringify(
       page: 1,
     },
     populate: {
-      "Landing_page_carousel_view": {
+      landingCarouselView: {
         populate: "*",
       },
-      "Header": {
+      hero: {
         populate: "*",
       },
     },
@@ -56,6 +61,12 @@ const queryGlobal = qs.stringify(
       "PrimalBuilding": {
         populate: "*",
       },
+      "serviceSchedule": {
+        populate: "*",
+      },
+      footerNote: {
+        populate: "*",
+      },
     },
   },
   {
@@ -66,48 +77,85 @@ const queryGlobal = qs.stringify(
 
 export async function getLandingPageData(): Promise<{
   landingInfo: PageLanding;
-  divineServices: Record<string, DivineService>;
-} | undefined> {
+  divineServices: DivineService[];
+}> {
   const NEXT_PUBLIC_BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 
   try {
-    const landingInfo: { data: Record<string, PageLanding> } =
-      await fetch(`http://${NEXT_PUBLIC_BACKEND_URL}/api/page-landings?${landingPageQuery}`)
-        .then((res) => res.json());
+    const landingResponse =
+      await fetch(`http://${NEXT_PUBLIC_BACKEND_URL}/api/page-landings?${landingPageQuery}`);
 
+    if (!landingResponse.ok) {
+      throw new HttpError(
+        landingResponse.status,
+        landingResponse.statusText,
+      );
+    }
 
-    const divineServices: { data: Record<string, DivineService> } =
-      await fetch(`http://${NEXT_PUBLIC_BACKEND_URL}/api/services?${divineServicesQuery}`)
-        .then((res) => res.json());
+    const landingInfo: { data: Record<string, PageLanding> } = await landingResponse.json();
 
+    //
+
+    const divineServicesResponce =
+      await fetch(`http://${NEXT_PUBLIC_BACKEND_URL}/api/services?${divineServicesQuery}`);
+
+    if (!divineServicesResponce.ok) {
+      throw new HttpError(
+        divineServicesResponce.status,
+        divineServicesResponce.statusText,
+      );
+    }
+
+    const divineServices: { data: DivineService[] } = await divineServicesResponce.json();
 
     return {
       landingInfo: landingInfo.data[0],
-      divineServices: divineServices.data,
+      divineServices: divineServices.data
+        .filter<DivineService>((d): d is DivineService => !!d && hasValue(d)),
     };
-  } catch (err) {
-    // eslint-disable-next-line no-console
-    console.error("Fetch error is excepted during build time. If it is not, so...ops");
-    // eslint-disable-next-line no-console
-    console.error("Some error occurred during fetching data for a landing page - ", err);
+  } catch (err: unknown) {
+    /* eslint-disable no-console */
+
+    if (err instanceof HttpError) {
+      console.error(`Fetch error is excepted during build time. If it is not, so...ops. Code - ${err.status}; Error - ${err.message}`);
+    } else {
+      console.error(`Error during fetching data for the main page - ${err}`);
+    }
+    throw err;
+
+    /* eslint-enable no-console */
   }
 };
 
 
 
-export async function getContactsData(): Promise<ContactInfo | undefined> {
+export async function getContactsData(): Promise<ContactInfo> {
   const NEXT_PUBLIC_BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 
   try {
-    const response: { data: ContactInfo } =
-      await fetch(`http://${NEXT_PUBLIC_BACKEND_URL}/api/global?${queryGlobal}`)
-        .then((res) => res.json());
+    const response =
+      await fetch(`http://${NEXT_PUBLIC_BACKEND_URL}/api/global?${queryGlobal}`);
 
-    return response.data;
+    if (!response.ok) {
+      throw new HttpError(
+        response.status,
+        response.statusText,
+      );
+    }
+
+    const contacts: { data: ContactInfo } = await response.json();;
+
+    return contacts.data;
   } catch (err) {
-    // eslint-disable-next-line no-console
-    console.error("Fetch error is excepted during build time. If it is not, so...ops");
-    // eslint-disable-next-line no-console
-    console.error("Some error occurred during fetching contact data - ", err);
+    /* eslint-disable no-console */
+
+    if (err instanceof HttpError) {
+      console.error(`Fetch error is excepted during build time. If it is not, so...ops. Code - ${err.status}; Error - ${err.message}`);
+    } else {
+      console.error(`Error during fetching contacts data - ${err}`);
+    }
+    throw err;
+
+    /* eslint-enable no-console */
   }
 };

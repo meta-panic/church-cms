@@ -1,0 +1,36 @@
+.blockquoteContainer {
+  background-color: var(--brand-0);
+  padding: var(--spacing-s) var(--spacing-m);
+  border-radius: var(--block-border-radios);
+  margin-top: var(--spacing-xxs);
+  margin-bottom: var(--spacing-xxs);
+}
+
+.blockquote {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.strong {
+  display: inline;
+}
+
+.em {
+  display: inline;
+  font-style: italic;
+}
+
+.listItem {
+  display: flex;
+}
+
+span.listItem span.listItem::before {
+  content: "\00a0•\00a0";
+}
+
+.orderedList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}

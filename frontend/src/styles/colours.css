@@ -1,7 +1,6 @@
 :root {
   --brand-100: #e6eaec;
   --brand-200: #c7d1d1;
-  --common-light-100: #f8f6f7;
   --brand-300: #abb5b8;
   --brand-400: #949fa1;
   --brand-500: #849193;
@@ -19,6 +18,7 @@
   --accent-800: #5a6e64;
   --accent-900: #486054;
 
+  --common-light-100: #f8f6f7;
   --common-light-0: #ffffff;
   --brand-0: #eeeeee;
 
@@ -42,7 +42,7 @@
   --common-transparent-900: rgba(255, 255, 255, 0.9);
   /* 90% opacity */
 
-
+  --common-dark-1000: #000;
   --common-dark-900: #3d444a;
   --common-dark-800: #5f646a;
   --common-dark-700: #6d7175;

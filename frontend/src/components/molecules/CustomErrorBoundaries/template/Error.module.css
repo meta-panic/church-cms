@@ -1,0 +1,49 @@
+.errorWrapper {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: center;
+  min-height: 100vh;
+  width: fit-content;
+  margin: 0 auto;
+  align-items: center;
+}
+
+.error {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+}
+
+.errorTextContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.errorText {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.errorMessage {
+  color: var(--common-dark-500);
+}
+
+.info {
+  display: flex;
+  justify-content: center;
+}
+
+.separator {
+  border-left: 1px solid var(--common-dark-900);
+  height: 50px;
+  background-color: inherit;
+  margin: 0;
+}

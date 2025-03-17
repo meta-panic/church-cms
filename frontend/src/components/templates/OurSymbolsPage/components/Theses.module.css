@@ -1,0 +1,15 @@
+.thesesContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--spacing-3xl) 0;
+  background-color: var(--default-surface-dark-2);
+  color: var(--default-text);
+}
+
+.theses {
+  display: flex;
+  max-width: var(--max-text-column);
+  flex-direction: column;
+  gap: var(--spacing-m);
+}

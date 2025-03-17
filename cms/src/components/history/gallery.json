@@ -1,0 +1,24 @@
+{
+  "collectionName": "components_history_galleries",
+  "info": {
+    "displayName": "gallery",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "photos": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "title": {
+      "type": "string"
+    }
+  }
+}

@@ -1,8 +1,13 @@
+"use client";
+
 import cx from "classnames";
 
+import { useMediaQuery, BREAKPOINTS } from "@/hooks/useMediaQuery";
+import ClientOnly from "@/components/organisms/header/_components/ClientOnly";
 import Typography from "@/components/atoms/typography/Typography";
-import { Maybe, ComponentContentBlocksEvent } from "@/types";
 import { EventCard } from "./EventCard";
+
+import type { Maybe, ComponentContentBlocksEvent } from "@/types";
 
 import styles from "./EventsSection.module.css";
 
@@ -13,39 +18,53 @@ interface EventsSectionProps {
 
 export const EventsSection: React.FC<EventsSectionProps> = ({ events }) => {
   const { closestPastEvent, closestFutureEvent } = getClosestEvents(events);
+  const isSmall = useMediaQuery([BREAKPOINTS.mobile]);
+
+  const eventCount = calcEventsCount({ closestPastEvent, closestFutureEvent });
+
+  const cartOrientation = calcCartOrientation(isSmall, eventCount);
 
   return (
     <div className={styles.eventsContainer}>
 
-      {closestFutureEvent && (
-        <div className={styles.event}>
-          <div className={styles.eventType}>
-            <Typography tag="H2">Наши будущие мероприятия</Typography>
+      <ClientOnly fallback={null}>
+        {closestFutureEvent && (
+          <div className={styles.event}>
+            <div className={styles.eventType}>
+              <Typography tag="H2" overideFont={{ fontWeight: "extra-bold" }}>Грядущие мероприятия</Typography>
+            </div>
+
+            <EventCard event={closestFutureEvent} type="future" orientation={cartOrientation} />
           </div>
+        )}
 
-          <EventCard event={closestFutureEvent} type="future" />
-        </div>
-      )}
+        {closestPastEvent && (
+          <div className={styles.event}>
+            <div className={cx(styles.eventType, styles.past)}>
+              <Typography tag="H2" overideFont={{ fontWeight: "extra-bold" }}>{
+                closestFutureEvent ?
+                  "...А так же прошедшие"
+                  : "Наши прошедшие мероприятия"}
+              </Typography>
+            </div>
 
-      {closestPastEvent && (
-        <div className={styles.event}>
-          <div className={cx(styles.eventType, styles.past)}>
-            <Typography tag="H2">{
-              closestFutureEvent ?
-                "...А так же прошедшие события"
-                : "Наши прошедние мероприятия"}
-            </Typography>
+            <EventCard event={closestPastEvent} type="past" orientation={cartOrientation} />
           </div>
+        )}
 
-          <EventCard event={closestPastEvent} type="past" />
-        </div>
-      )}
+      </ClientOnly>
     </div>
 
   );
 };
 
-const getClosestEvents = (events: Maybe<ComponentContentBlocksEvent>[]) => {
+type Events = {
+  closestPastEvent?: ComponentContentBlocksEvent,
+  closestFutureEvent?: ComponentContentBlocksEvent
+};
+
+const getClosestEvents = (events: Maybe<ComponentContentBlocksEvent>[])
+  : Events => {
   const validEvents = events.filter((event): event is ComponentContentBlocksEvent => event !== null && event !== undefined);
 
   const currentDate = new Date();
@@ -63,3 +82,17 @@ const getClosestEvents = (events: Maybe<ComponentContentBlocksEvent>[]) => {
 
   return { closestPastEvent, closestFutureEvent };
 };
+
+
+const calcEventsCount = (events: Events): number => {
+  return Object.values(events).filter(value => value !== undefined).length;
+};
+
+const calcCartOrientation =
+  (isSmallScreen: boolean, cartCount: number): "vertical" | "horizontal" => {
+    if (isSmallScreen) {
+      return "vertical";
+    }
+
+    return cartCount < 2 ? "horizontal" : "vertical";
+  };

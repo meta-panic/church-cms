@@ -1,21 +1,24 @@
 .eventCardContainer {
-  background-color: var(--brand-0);
   position: relative;
   display: flex;
+  height: 100%;
+}
+
+.eventCardContainer.horizontalOrientation {
+  flex-direction: row-reverse;
+  gap: var(--spacing-s);
+}
+
+.eventCardContainer.verticalOrientation {
   flex-direction: column-reverse;
-  max-width: 990px;
+  gap: var(--spacing-s);
 }
 
 .textContainer {
   display: flex;
   flex-direction: column;
-  padding: var(--spacing-l) var(--spacing-xl);
   gap: var(--spacing-2xl);
   flex: 1;
-}
-
-.textContainer.verticalCard {
-  flex: 1
 }
 
 .description {
@@ -38,16 +41,8 @@
   color: transparent;
 }
 
-
-.date {
-  text-align: right;
-}
-
-.type {
-  color: var(--brand-500);
-}
-
 .additionaldetails .place>*,
-.additionaldetails .time>* {
+.additionaldetails .time>*,
+.additionaldetails .date>* {
   display: inline-block;
 }

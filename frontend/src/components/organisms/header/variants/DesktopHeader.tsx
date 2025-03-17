@@ -4,47 +4,52 @@ import React from "react";
 import Typography from "@/components/atoms/typography/Typography";
 
 import cx from "classnames";
-import ChurchLogo from "../../../../../public/church-logo.svg";
+import { usePathname } from "next/navigation";
 
+import { root, isRootPath } from "@/utils/isRoot";
 import { Navigation, DropdownItem, RegularItem } from "../_components/Navigation";
 import { Contacts } from "@/components/molecules/Contacts/Contacts";
-import { NavItemDesktop } from "@/configuration/navigation";
-import { useScroll } from "@/hooks/useScroll";
+import { ExistingAnchors, ExistingUrls, NavItemDesktop } from "@/configuration/navigation";
 
+import type { HeaderType } from "./variants";
+
+import { ContactsContext, ContactsContextType } from "../Header";
 import styles from "./DesktopHeader.module.css";
 import { HeaderStyleWrapper } from "../_components/HeaderStyleWrapper";
 import { isPresentation } from "./utils";
-import { HeaderType } from "./variants";
-import { ContactsContext, ContactsContextType } from "../Header";
+import ChurchLogo from "../../../../../public/church-logo.svg";
 
 
 interface DesktopHeaderProps {
   navItems: NavItemDesktop[];
+  handleNavigation: (href: ExistingUrls | ExistingAnchors) => void;
 }
 
 export const DesktopHeader: React.FC<DesktopHeaderProps> = ({
-  navItems,
+  navItems, handleNavigation,
 }) => {
-  const isPageScrolled = useScroll({ threshold: 38 });
-  const headerType = isPageScrolled ? "slim" : "presentation";
   const contacts = React.useContext(ContactsContext) as ContactsContextType;
 
+  const isRoot = isRootPath(usePathname());
   return (
-    <HeaderStyleWrapper headerType={headerType}>
-      <div className={cx(styles.headerContent)}>
+    <HeaderStyleWrapper renderChildren={(headerType) => {
+      return <div className={cx(styles.headerContent)}>
 
         {isPresentation(headerType) && <ChurchLogo className={cx(styles.churchLogo)} />}
 
         <Navigation
-          items={transformNavItems(headerType, navItems)}
+          items={transformNavItems(headerType, navItems, isRoot)}
+          handleNavigation={handleNavigation}
           renderItem={(text) => {
             return <Typography
               tag="body"
+              overideFont={{ fontFamily: "headlines", fontWeight: "semi-bold" }}
               className={styles.navItem}
             >
               {text}
             </Typography>;
-          }} />
+          }}
+        />
 
         <div className={cx(styles.contacts)}>
           {contacts &&
@@ -54,14 +59,17 @@ export const DesktopHeader: React.FC<DesktopHeaderProps> = ({
           }
         </div>
 
-      </div>
+      </div>;
+    }}>
+
     </HeaderStyleWrapper>
   );
 };
 
 const transformNavItems
-  = (headerType: HeaderType, navItems: NavItemDesktop[]): (RegularItem | DropdownItem)[] => {
-    return navItems.flatMap((item: NavItemDesktop) => {
+  = (headerType: HeaderType, navItems: NavItemDesktop[], isRoot: boolean): (RegularItem | DropdownItem)[] => {
+
+    const items = navItems.flatMap((item: NavItemDesktop) => {
       if (headerType === "slim" && item.hideOnScroll) {
         return [];
       }
@@ -90,4 +98,9 @@ const transformNavItems
         })),
       } as DropdownItem;
     });
+
+    const toMainItem: RegularItem = { href: root, text: "Главная" };
+    const menuItems = isRoot ? [...items] : [toMainItem, ...items];
+
+    return menuItems;
   };

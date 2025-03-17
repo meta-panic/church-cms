@@ -13,11 +13,12 @@
 }
 
 .navItem:hover {
-  color: var(--hover-navigation-item);
+  color: var(--hover-components-link-fg);
 }
 
 .churchLogo {
   color: var(--common-light-100);
+  height: 60px;
 }
 
 .contacts {

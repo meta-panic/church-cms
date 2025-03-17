@@ -10,10 +10,18 @@
   color: var(--default-text);
   display: flex;
   z-index: 101;
+  transition: all 0.2s ease-in-out;
+  align-items: center;
 }
 
-.burgerWrapper:hover {
-  color: var(--hover-navigation-item);
+.burgerWrapper>* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+@media(hover:hover) and (pointer: fine) {
+  .burgerWrapper:hover {
+    color: var(--hover-components-link-fg);
+  }
 }
 
 .burgerOverlay {
@@ -30,8 +38,12 @@
   text-wrap: nowrap;
 }
 
-.navItem:hover {
-  color: var(--hover-navigation-item);
+
+
+@media(hover:hover) and (pointer: fine) {
+  .navItem:hover {
+    color: var(--hover-components-link-fg);
+  }
 }
 
 .contacts {
@@ -41,4 +53,5 @@
 
 .churchLogo {
   color: var(--common-light-100);
+  height: 50px;
 }

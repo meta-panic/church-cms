@@ -520,6 +520,9 @@ export interface ApiGlobalGlobal extends Struct.SingleTypeSchema {
       Schema.Attribute.Required;
     taplink: Schema.Attribute.String & Schema.Attribute.Required;
     whatsup: Schema.Attribute.String & Schema.Attribute.Required;
+    footerNote: Schema.Attribute.Component<'shared.rich-text', true> &
+      Schema.Attribute.Required;
+    madeByLink: Schema.Attribute.String & Schema.Attribute.Required;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -531,6 +534,111 @@ export interface ApiGlobalGlobal extends Struct.SingleTypeSchema {
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::global.global'
+    > &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiHistoryHistory extends Struct.SingleTypeSchema {
+  collectionName: 'histories';
+  info: {
+    singularName: 'history';
+    pluralName: 'histories';
+    displayName: 'History';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    content: Schema.Attribute.DynamicZone<
+      ['shared.rich-text', 'history.gallery']
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::history.history'
+    > &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiHtBaChristianHtBaChristian extends Struct.SingleTypeSchema {
+  collectionName: 'ht_ba_christians';
+  info: {
+    singularName: 'ht-ba-christian';
+    pluralName: 'ht-ba-christians';
+    displayName: 'HTBaChristian';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    hero: Schema.Attribute.Component<'content-blocks.info-block', false> &
+      Schema.Attribute.Required;
+    presentationVideo: Schema.Attribute.Component<
+      'shared.embedded-vk-video',
+      false
+    > &
+      Schema.Attribute.Required;
+    content: Schema.Attribute.DynamicZone<
+      ['shared.rich-text', 'htbachristian-block.pray-example']
+    > &
+      Schema.Attribute.Required;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::ht-ba-christian.ht-ba-christian'
+    > &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiOurSymbolsOurSymbols extends Struct.SingleTypeSchema {
+  collectionName: 'our_symbolses';
+  info: {
+    singularName: 'our-symbols';
+    pluralName: 'our-symbolses';
+    displayName: 'OurSymbols';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Hero: Schema.Attribute.Component<'content-blocks.info-block', false>;
+    TheMainSymbol: Schema.Attribute.Component<
+      'content-blocks.info-block',
+      false
+    >;
+    Theses: Schema.Attribute.Component<'content-blocks.info-block', false>;
+    AdditionalInfoLink: Schema.Attribute.Component<'shared.button', false>;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::our-symbols.our-symbols'
     > &
       Schema.Attribute.Private;
   };
@@ -590,11 +698,16 @@ export interface ApiServiceService extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    Header: Schema.Attribute.Component<'services-block.header', false> &
+    hero: Schema.Attribute.Component<'services-block.header', false> &
       Schema.Attribute.Required;
-    Landing_page_carousel_view: Schema.Attribute.Component<
+    landingCarouselView: Schema.Attribute.Component<
       'services-block.carousel-view',
       false
+    > &
+      Schema.Attribute.Required;
+    slug: Schema.Attribute.UID & Schema.Attribute.Required;
+    content: Schema.Attribute.DynamicZone<
+      ['history.gallery', 'shared.rich-text']
     >;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
@@ -995,6 +1108,9 @@ declare module '@strapi/strapi' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'api::global.global': ApiGlobalGlobal;
+      'api::history.history': ApiHistoryHistory;
+      'api::ht-ba-christian.ht-ba-christian': ApiHtBaChristianHtBaChristian;
+      'api::our-symbols.our-symbols': ApiOurSymbolsOurSymbols;
       'api::page-landing.page-landing': ApiPageLandingPageLanding;
       'api::service.service': ApiServiceService;
       'admin::permission': AdminPermission;
