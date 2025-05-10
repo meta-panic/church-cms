@@ -8,6 +8,8 @@ export const PAGE_BASE_DATA = {
 type CustomFixtures = {
   page: Page;
   consoleErrors: string[];
+  cookieDomain: string;
+  strapiURL: string;
 };
 
 export const test = base.extend<CustomFixtures>({
@@ -39,7 +41,19 @@ export const test = base.extend<CustomFixtures>({
     });
 
     await use(page);
-  }
+  },
+
+  cookieDomain: async ({}, use, testInfo) => {
+    const projectName = testInfo.project.name;
+    const domain = projectName === 'local' ? 'localhost' : 'frontend';
+    await use(domain);
+  },
+
+  strapiURL: async ({}, use, testInfo) => {
+    const projectName = testInfo.project.name;
+    const url = projectName === 'local' ? 'http://localhost:1337' : 'http://cms:1337';
+    await use(url);
+  },
 });
 
 // Existing console errors check
