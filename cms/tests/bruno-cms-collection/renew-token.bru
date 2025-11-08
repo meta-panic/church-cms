@@ -1,0 +1,37 @@
+meta {
+  name: renew-token
+  type: http
+  seq: 7
+}
+
+post {
+  url: {{baseStrapiAdminUrl}}/admin/renew-token
+  body: json
+  auth: none
+}
+
+headers {
+  authorization: Bearer {{jwtToken}}
+  ~content-type: application/json
+  ~DNT: 1
+  ~Sec-GPC: 1
+  ~Sec-Fetch-Dest: empty
+  ~Sec-Fetch-Mode: cors
+  ~Sec-Fetch-Site: same-origin
+  ~Priority: u=4
+  ~User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:133.0) Gecko/20100101 Firefox/133.0
+  ~Accept: application/json
+}
+
+body:json {
+  {"token":"{{jwtToken}}"}
+}
+
+assert {
+  res.status: eq 200
+  res.body.data.token: isString 
+}
+
+script:post-response {
+  bru.setEnvVar('jwtToken', res.body.data.token)
+}
